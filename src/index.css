@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Figma 색상 팔레트 정의 필요 */
+  }
+
+  :root.dark {
+    /* 다크 모드 색상 팔레트 정의 필요 */
+  }
+}
