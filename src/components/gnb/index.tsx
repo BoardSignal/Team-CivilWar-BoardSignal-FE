@@ -6,7 +6,7 @@ export const GNB = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className='flex gap-4 border-t-[1px] border-gray-200 px-4 pb-2 pt-4'>
+    <div className='flex select-none gap-4 border-t-[1px] border-gray-200 px-4 pb-2 pt-4'>
       {GNBRoutes.map(({ name, path, icons }) => (
         <Link
           to={path}
