@@ -14,7 +14,7 @@
   "importOrder": ["^react", "^src/(.*)$", "<THIRD_PARTY_MODULES>"],
   "tailwindFunctions": ["clsx", "cn", "twmerge", "cva"],
   "plugins": [
-    "prettier-plugin-tailwindcss",
-    "@trivago/prettier-plugin-sort-imports"
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
   ]
 }
