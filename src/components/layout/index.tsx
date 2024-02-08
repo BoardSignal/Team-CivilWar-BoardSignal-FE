@@ -11,11 +11,11 @@ import { Introduction } from './Introduction';
  */
 export const ResponsiveLayoutWrapper = ({ children }: PropsWithChildren) => {
   return (
-    <div className='w-screen h-screen flex justify-center flex-row items-center gap-10'>
-      <div className='hidden sm:flex shrink'>
+    <div className='flex h-screen w-screen flex-row items-center justify-center gap-10'>
+      <div className='hidden shrink sm:flex'>
         <Introduction />
       </div>
-      <div className='h-screen w-full shadow-xl shrink-0 min-w-[350px] max-w-[450px]'>
+      <div className='h-screen w-full min-w-[350px] max-w-[450px] shrink-0 shadow-xl'>
         {children}
       </div>
     </div>
