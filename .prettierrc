@@ -11,7 +11,12 @@
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
   "embeddedLanguageFormatting": "auto",
-  "importOrder": ["^react", "^src/(.*)$", "<THIRD_PARTY_MODULES>"],
+  "importOrder": [
+    "^(react/(.*)$)|^(react$)",
+    "<THIRD_PARTY_MODULES>",
+    "^(@/(.*)$)",
+    "^[./]"
+  ],
   "tailwindFunctions": ["clsx", "cn", "twmerge", "cva"],
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
