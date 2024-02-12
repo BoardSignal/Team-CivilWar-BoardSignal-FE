@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import oauthKakao from '@/assets/oauth/oauth-kakao.png';
 import { API } from '@/utils/api';
+import { setCookie } from '@/utils/cookie';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -9,8 +10,8 @@ export const LoginPage = () => {
   const handleKakaoLogin = async () => {
     const response = await API.kakaoLogin();
     if (response.signed) {
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshTokenIndex);
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshTokenIndex);
     } else {
       navigate('/signIn');
     }
@@ -19,8 +20,8 @@ export const LoginPage = () => {
   const handleNaverLogin = async () => {
     const response = await API.naverLogin();
     if (response.signed) {
-      localStorage.setItem('accessToken', response.accessToken);
-      localStorage.setItem('refreshToken', response.refreshTokenIndex);
+      setCookie('accessToken', response.accessToken);
+      setCookie('refreshToken', response.refreshTokenIndex);
     } else {
       navigate('/signIn');
     }
