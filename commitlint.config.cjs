@@ -19,7 +19,7 @@ module.exports = {
       // 아래의 type만 사용 가능
       2,
       'always',
-      ['feat', 'fix', 'docs', 'refactor', 'chore'],
+      ['feat', 'fix', 'docs', 'refactor', 'chore', 'style'],
     ],
   },
 };

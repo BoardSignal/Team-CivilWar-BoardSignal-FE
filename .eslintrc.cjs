@@ -10,7 +10,13 @@ module.exports = {
   ],
   ignorePatterns: ['dist', 'vite.config.ts', '*.cjs', '*.mjs', '*.js'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'react', 'prettier', '@typescript-eslint'],
+  plugins: [
+    'react-refresh',
+    'react',
+    'prettier',
+    '@typescript-eslint',
+    'unused-imports',
+  ],
   settings: {
     react: {
       version: 'detect',
@@ -33,8 +39,6 @@ module.exports = {
     'no-var': 'error',
     'object-shorthand': 'error',
     'prefer-template': 'error',
-    'template-curly-spacing': 'error',
-    'space-infix-ops': 'error',
     eqeqeq: 'error',
     'prefer-arrow-callback': 'error',
     'no-plusplus': 'error',
@@ -53,15 +57,19 @@ module.exports = {
       {
         selector: 'interface',
         format: ['PascalCase'],
-        custom: {
-          regex: '^.*Props$',
-          match: true,
-        },
+      },
+      {
+        selector: 'typeAlias',
+        format: ['PascalCase'],
       },
       {
         selector: 'variable',
-        format: ['camelCase', 'PascalCase'],
+        format: ['PascalCase', 'camelCase', 'UPPER_CASE'],
+      },
+      {
+        selector: 'variable',
         types: ['function'],
+        format: ['PascalCase', 'camelCase'],
       },
       {
         selector: 'variable',
@@ -69,16 +77,8 @@ module.exports = {
         format: ['PascalCase'],
         prefix: ['is', 'has'],
       },
-      {
-        selector: 'variable',
-        modifiers: ['destructured'],
-        format: null,
-      },
-      {
-        format: ['PascalCase'],
-        selector: 'typeAlias',
-      },
     ],
+    'unused-imports/no-unused-imports': 'error',
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: 'const', next: 'return' },
