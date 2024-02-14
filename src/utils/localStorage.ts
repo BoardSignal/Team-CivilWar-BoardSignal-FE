@@ -1,8 +1,7 @@
 export const getLocalStorage = <T>(key: string, defaultValue: T): T => {
   try {
     const valueString = localStorage.getItem(key);
-    const value: T =
-      valueString !== null ? JSON.parse(valueString) : defaultValue;
+    const value: T = valueString ? JSON.parse(valueString) : defaultValue;
 
     return value;
   } catch (error) {

@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
+import { setLocalStorage } from '@/utils/localStorage';
+
 import { api } from './core';
 
 interface LoginResponse {
@@ -20,12 +22,9 @@ export const usePostKakaoLogin = () => {
   return useMutation({
     mutationFn: postKakaoLogin,
     onSuccess: data => {
-      localStorage.setItem('accessToken', data.accessToken);
-      if (!data.signed) {
-        navigate('/signIn');
-      } else {
-        navigate('/main');
-      }
+      setLocalStorage('accessToken', data.accessToken);
+      if (!data.signed) return navigate('/signIn');
+      navigate('/main');
     },
   });
 };

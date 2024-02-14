@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
+import { setLocalStorage } from '@/utils/localStorage';
+
 import { api } from './core';
 
 interface LoginResponse {
@@ -19,13 +21,9 @@ export const usePostNaverLogin = () => {
   return useMutation({
     mutationFn: postNaverLogin,
     onSuccess: data => {
-      localStorage.setItem('accessToken', data.accessToken);
-      if (!data.signed) {
-        navigate('/signIn');
-      } else {
-        localStorage.setItem('accessToken', data.accessToken);
-        navigate('/main');
-      }
+      setLocalStorage('accessToken', data.accessToken);
+      if (!data.signed) return navigate('/signIn');
+      navigate('/main');
     },
   });
 };
