@@ -1,14 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import api from './core';
+import { api } from './core';
 
 interface LoginResponse {
   accessToken: string;
   signed: boolean;
 }
 export const postNaverLogin = () => {
-  return api.post<LoginResponse>({ url: '/api/v1/auth/login/naver' });
+  return api.post<LoginResponse>({
+    url: '/api/v1/auth/login/naver',
+  });
 };
 
 export const usePostNaverLogin = () => {

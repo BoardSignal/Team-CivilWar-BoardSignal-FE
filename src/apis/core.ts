@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 
+import { getLocalStorage } from '@/utils/localStorage';
+
 const HTTP_METHODS = {
   GET: 'get',
   POST: 'post',
@@ -18,7 +20,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken: string = getLocalStorage('accessToken', '');
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -52,7 +54,7 @@ const createApiMethod =
       method: methodType,
     });
   };
-export default {
+export const api = {
   get: createApiMethod(axiosInstance, HTTP_METHODS.GET),
   post: createApiMethod(axiosInstance, HTTP_METHODS.POST),
   patch: createApiMethod(axiosInstance, HTTP_METHODS.PATCH),
