@@ -16,9 +16,32 @@ const axiosInstance: AxiosInstance = axios.create({
   },
 });
 
+axiosInstance.interceptors.request.use(
+  config => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken && config.headers) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  error => Promise.reject(error),
+);
+
 axiosInstance.interceptors.response.use(
   response => response.data,
-  error => Promise.reject(error),
+  async error => {
+    const { response, config } = error;
+    if (
+      response &&
+      response.status === 401 &&
+      response.data.message === 'Token expired'
+    ) {
+      /*
+       * TODO : accessToken 재발급 로직 추가 예정
+       */
+      return axios(config);
+    }
+  },
 );
 
 const createApiMethod =
