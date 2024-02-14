@@ -5,6 +5,17 @@
 @layer base {
   :root {
     /* Figma 색상 팔레트 정의 필요 */
+    --primary: #8b5cf6;
+    --primary-darken: #5b21b6;
+    --primary-lighten: #c4b5fd;
+    --primary-lighter: #ede9fe;
+    --accent-1: #333333;
+    --accent-2: #666666;
+    --accent-3: #999999;
+    --accent-4: #aaaaaa;
+    --accent-5: #cccccc;
+    --accent-6: #dddddd;
+    --accent-7: #f0f0f0;
   }
 
   :root.dark {
