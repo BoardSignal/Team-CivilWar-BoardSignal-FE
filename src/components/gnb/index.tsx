@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
+import Icon from '../Icon';
 import { GNBRoutes } from './routes';
 
 export const GNB = () => {
@@ -13,11 +14,11 @@ export const GNB = () => {
           key={path}
           className='flex flex-1 flex-col items-center gap-[2px]'
         >
-          <img
-            src={icons[pathname === path ? 'fill' : 'line']}
-            className='h-5 w-5 text-[#333]'
+          <Icon
+            id={icons[pathname === path ? 'fill' : 'line']}
+            className='h-5 w-5 text-gray-accent1'
           />
-          <div className='text-[10px] text-[#333]'>{name}</div>
+          <div className='text-[10px] text-gray-accent1'>{name}</div>
         </Link>
       ))}
     </div>
