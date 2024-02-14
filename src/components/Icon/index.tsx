@@ -9,7 +9,7 @@ interface IconProps extends Omit<ComponentProps<'svg'>, 'width' | 'height'> {
   size?: number;
 }
 
-const Icon = ({ id, size = 24, ...props }: IconProps) => {
+const Icon = ({ id, size = 20, ...props }: IconProps) => {
   return (
     <svg width={size} height={size} {...props}>
       <use href={`${IconSprite}#${id}`} />
