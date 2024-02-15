@@ -22,3 +22,20 @@
     /* 다크 모드 색상 팔레트 정의 필요 */
   }
 }
+
+@layer utilities {
+  @keyframes RippleEffect {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+      transform: translate(-50%, -50%) scale(var(--ripple-element-width));
+      opacity: 0;
+    }
+  }
+
+  .ripple-effect {
+    animation: RippleEffect 0.5s linear;
+  }
+}
