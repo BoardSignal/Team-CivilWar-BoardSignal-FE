@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Introduction } from './Introduction';
 
@@ -9,14 +9,14 @@ import { Introduction } from './Introduction';
  *
  * min width = 350px, max width = 450px로 지정해요.
  */
-export const ResponsiveLayoutWrapper = ({ children }: PropsWithChildren) => {
+export const ResponsiveLayoutWrapper = () => {
   return (
     <div className='flex h-screen w-screen flex-row items-center justify-center gap-10'>
       <div className='hidden shrink sm:flex'>
         <Introduction />
       </div>
       <div className='h-screen w-full min-w-[350px] max-w-[450px] shrink-0 shadow-xl'>
-        {children}
+        <Outlet />
       </div>
     </div>
   );

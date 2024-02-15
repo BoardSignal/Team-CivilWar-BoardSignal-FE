@@ -12,6 +12,22 @@ export const router = createBrowserRouter([
         path: '',
         element: <HomePage />,
       },
+      {
+        path: 'chat',
+        element: <HomePage />,
+      },
+      {
+        path: 'game-info',
+        element: <HomePage />,
+      },
+      {
+        path: 'notifications',
+        element: <HomePage />,
+      },
+      {
+        path: 'me',
+        element: <HomePage />,
+      },
     ],
   },
 ]);

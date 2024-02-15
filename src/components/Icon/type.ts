@@ -42,4 +42,8 @@ export type IconName =
   | 'user-fill'
   | 'user-line'
   | 'user-forbid-fill'
-  | 'vip-crown-fill';
+  | 'vip-crown-fill'
+  | 'chat-fill'
+  | 'chat-line'
+  | 'bell-fill'
+  | 'bell-line';
