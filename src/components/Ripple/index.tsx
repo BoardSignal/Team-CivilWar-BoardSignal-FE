@@ -4,8 +4,11 @@ import { cn } from '@/utils/cn';
 
 import RippleEffect from './RippleEffect';
 
-const RIPPLE_NORMAL_DURATION = 500;
-const RIPPLE_FAST_DURATION = 300;
+const RIPPLE_DURATION = {
+  FAST: 300,
+  NORMAL: 500,
+};
+
 const RIPPLE_DEFAULT_OFFSET = {
   elementWidth: 0,
   cursorLeft: 0,
@@ -54,7 +57,7 @@ const Ripple = ({ fast, className, children }: RippleProps) => {
       () => {
         setIsAnimating(false);
       },
-      fast ? RIPPLE_FAST_DURATION : RIPPLE_NORMAL_DURATION,
+      fast ? RIPPLE_DURATION.FAST : RIPPLE_DURATION.NORMAL,
     );
   };
 
