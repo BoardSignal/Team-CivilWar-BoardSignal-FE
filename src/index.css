@@ -26,16 +26,16 @@
 @layer utilities {
   @keyframes RippleEffect {
     0% {
-      transform: translate(-50%, -50%) scale(1);
+      transform: scale(0);
     }
 
     100% {
-      transform: translate(-50%, -50%) scale(var(--ripple-element-width));
+      transform: scale(var(--ripple-element-width));
       opacity: 0;
     }
   }
 
   .ripple-effect {
-    animation: RippleEffect 0.5s linear;
+    animation: RippleEffect 0.5s ease-out;
   }
 }
