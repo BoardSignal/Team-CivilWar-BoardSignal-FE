@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { reactRouterParameters } from 'storybook-addon-react-router-v6';
 
-import { GNB } from '@/components/gnb';
+import { GNB } from '@/components/GNB';
 
 const meta: Meta<typeof GNB> = {
   title: 'components/GNB',
