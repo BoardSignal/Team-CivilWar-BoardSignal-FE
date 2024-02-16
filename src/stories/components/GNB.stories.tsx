@@ -4,7 +4,7 @@ import { reactRouterParameters } from 'storybook-addon-react-router-v6';
 import { GNB } from '@/components/gnb';
 
 const meta: Meta<typeof GNB> = {
-  title: 'common/GNB',
+  title: 'components/GNB',
   tags: ['autodocs'],
   component: GNB,
   parameters: {
