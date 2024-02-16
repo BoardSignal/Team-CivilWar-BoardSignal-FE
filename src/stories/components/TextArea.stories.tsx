@@ -17,12 +17,4 @@ export const Default: Story = {
     label: 'label',
     textCountLimit: 0,
   },
-
-  render: args => {
-    return (
-      <>
-        <Textarea {...args} />
-      </>
-    );
-  },
 };
