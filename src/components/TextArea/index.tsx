@@ -2,15 +2,19 @@ import { ComponentProps } from 'react';
 
 interface TextareaProps extends ComponentProps<'textarea'> {
   label?: string;
-  limit?: number;
+  textCountLimit?: number;
 }
 
-const Textarea = ({ label, limit, ...props }: TextareaProps) => {
+const Textarea = ({
+  label,
+  textCountLimit: limit,
+  ...props
+}: TextareaProps) => {
   return (
     <div className='flex flex-col'>
-      <div className='flex items-center text-gray-700'>
+      <div className='flex items-center justify-between text-gray-700'>
         {label && (
-          <label style={{ marginRight: '260px' }}>
+          <label>
             {label}
             <span className='ml-0.5 text-red-500'>*</span>
           </label>
@@ -21,7 +25,7 @@ const Textarea = ({ label, limit, ...props }: TextareaProps) => {
       </div>
       <div className='relative'>
         <textarea
-          className='h-[180px] w-[358px] resize-none overscroll-contain rounded-lg border-2 border-gray-200 outline-none focus:border-violet-500'
+          className='h-[180px] w-full resize-none overscroll-contain rounded-lg border-2 border-gray-200 outline-none focus:border-violet-500'
           {...props}
         />
       </div>
