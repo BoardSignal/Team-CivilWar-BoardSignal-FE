@@ -8,8 +8,8 @@ const buttonCSS = cva('h-10 w-full rounded-lg', {
   variants: {
     variant: {
       primary: 'bg-primary text-white',
-      outline: 'border-[1px] border-gray-accent5 text-gray-accent3',
-      danger: 'border-[1px] border-red-500 text-red-500',
+      outline: 'border border-gray-accent5 text-gray-accent3',
+      danger: 'border border-red-500 text-red-500',
       inactive: 'cursor-not-allowed bg-gray-accent5 text-gray-accent3',
     },
   },
