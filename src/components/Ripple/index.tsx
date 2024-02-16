@@ -4,7 +4,8 @@ import { cn } from '@/utils/cn';
 
 import RippleEffect from './RippleEffect';
 
-const RIPPLE_DURATION = 500;
+const RIPPLE_NORMAL_DURATION = 500;
+const RIPPLE_FAST_DURATION = 300;
 const RIPPLE_DEFAULT_OFFSET = {
   elementWidth: 0,
   cursorLeft: 0,
@@ -23,14 +24,17 @@ const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
 
 interface RippleProps extends PropsWithChildren {
   className?: string;
+  fast?: boolean;
 }
 
 /**
  * Ripple 트랜지션을 렌더링하는 컨테이너 컴포넌트에요.
  *
  * div로 구현되기 때문에 일부 스타일을 Ripple에 적용해야 할 수 있어요.
+ *
+ * fast={true}로 설정하면 빠른 Ripple 효과를 렌더링할 수 있어요.
  */
-const Ripple = ({ className, children }: RippleProps) => {
+const Ripple = ({ fast, className, children }: RippleProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [offset, setOffset] = useState(RIPPLE_DEFAULT_OFFSET);
@@ -42,12 +46,16 @@ const Ripple = ({ className, children }: RippleProps) => {
 
     const element = ref.current;
     const offset = getOffset(e, element);
+
     setOffset(offset);
     setIsAnimating(true);
 
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, RIPPLE_DURATION);
+    setTimeout(
+      () => {
+        setIsAnimating(false);
+      },
+      fast ? RIPPLE_FAST_DURATION : RIPPLE_NORMAL_DURATION,
+    );
   };
 
   return (

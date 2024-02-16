@@ -38,4 +38,8 @@
   .ripple-effect {
     animation: RippleEffect 0.5s ease-out;
   }
+
+  .ripple-fast {
+    animation-duration: 0.3s;
+  }
 }
