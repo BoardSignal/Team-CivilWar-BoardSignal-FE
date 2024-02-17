@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ResponsiveLayoutWrapper } from './components/layout';
 import { HomePage } from './pages/HomePage';
-import LoginPage from './pages/LoginPage/LoginPage';
+import LoginPage from './pages/Login';
 
 export const router = createBrowserRouter([
   {

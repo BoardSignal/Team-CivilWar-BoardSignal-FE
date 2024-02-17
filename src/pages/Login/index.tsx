@@ -4,8 +4,8 @@ import { useKakaoLoginApi } from './hooks/useKakaoLoginApi';
 import { useNaverLoginApi } from './hooks/useNaverLoginApi';
 
 const LoginPage = () => {
-  const { login: kakaoLogin } = useKakaoLoginApi();
-  const { login: naverLogin } = useNaverLoginApi();
+  const { kakaoLogin } = useKakaoLoginApi();
+  const { naverLogin } = useNaverLoginApi();
 
   const handleKakaoLogin = () => {
     kakaoLogin();

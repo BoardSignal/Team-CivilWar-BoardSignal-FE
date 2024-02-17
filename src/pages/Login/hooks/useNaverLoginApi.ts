@@ -1,18 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 
-import { usePostKakaoLogin } from '@/apis/kakaoLogin';
+import { usePostNaverLogin } from '@/apis/naverLogin';
 
-export const useKakaoLoginApi = () => {
-  const api = usePostKakaoLogin();
+export const useNaverLoginApi = () => {
+  const api = usePostNaverLogin();
   const navigate = useNavigate();
 
   return {
-    login: async () => {
+    naverLogin: async () => {
       try {
         const { accessToken, isJoined } = await api();
         localStorage.setItem('accessToken', accessToken);
-        if (!isJoined) return navigate('/signIn');
-        navigate('/main');
+        return isJoined ? navigate('/main') : navigate('/signIn');
       } catch (error) {
         console.error(error);
       }
