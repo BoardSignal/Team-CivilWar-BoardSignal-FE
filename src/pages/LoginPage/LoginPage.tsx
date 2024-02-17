@@ -1,16 +1,18 @@
-import { usePostKakaoLogin } from '@/apis/kakaoLogin';
-import { usePostNaverLogin } from '@/apis/naverLogin';
 import oauthKakao from '@/assets/oauth-kakao.png';
 
+import { useKakaoLoginApi } from './hooks/useKakaoLoginApi';
+import { useNaverLoginApi } from './hooks/useNaverLoginApi';
+
 const LoginPage = () => {
-  const { mutate: mutateKakao } = usePostKakaoLogin();
-  const { mutate: mutateNaver } = usePostNaverLogin();
+  const { login: kakaoLogin } = useKakaoLoginApi();
+  const { login: naverLogin } = useNaverLoginApi();
+
   const handleKakaoLogin = () => {
-    mutateKakao();
+    kakaoLogin();
   };
 
   const handleNaverLogin = () => {
-    mutateNaver();
+    naverLogin();
   };
 
   return (

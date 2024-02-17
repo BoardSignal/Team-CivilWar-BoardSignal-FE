@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 
-import { getLocalStorage } from '@/utils/localStorage';
-
 const HTTP_METHODS = {
   GET: 'get',
   POST: 'post',
@@ -10,9 +8,13 @@ const HTTP_METHODS = {
   PATCH: 'patch',
 } as const;
 
+const HTTP_STATUS_UNAUTHORIZED = 401;
+const TOKEN_EXPIRED_MESSAGE = 'Token expired';
+const TIME_OUT = 5000;
+
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  timeout: 10000,
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: TIME_OUT,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -20,7 +22,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   config => {
-    const accessToken: string = getLocalStorage('accessToken', '');
+    const accessToken = localStorage.getItem('accessToken');
     if (accessToken && config.headers) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -35,12 +37,9 @@ axiosInstance.interceptors.response.use(
     const { response, config } = error;
     if (
       response &&
-      response.status === 401 &&
-      response.data.message === 'Token expired'
+      response.status === HTTP_STATUS_UNAUTHORIZED &&
+      response.data.message === TOKEN_EXPIRED_MESSAGE
     ) {
-      /*
-       * TODO : accessToken 재발급 로직 추가 예정
-       */
       return axios(config);
     }
   },
