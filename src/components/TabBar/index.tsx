@@ -30,7 +30,7 @@ const Container = ({ children: rawChildren }: PropsWithChildren) => {
   const rightChildren = children.slice(1, 1);
 
   return (
-    <div className='flex justify-between p-2'>
+    <div className='flex justify-between p-2 text-gray-accent1'>
       {leftChildren}
       {rightChildren}
     </div>
@@ -80,6 +80,12 @@ const SettingsButton = (props: HTMLButtonProps) => (
   </button>
 );
 
+const SearchButton = (props: HTMLButtonProps) => (
+  <button {...props}>
+    <Icon id='search-line' />
+  </button>
+);
+
 const TabBar = {
   Container,
   Left,
@@ -89,6 +95,7 @@ const TabBar = {
   ChatButton,
   ShareButton,
   SettingsButton,
+  SearchButton,
 };
 
 export default TabBar;
