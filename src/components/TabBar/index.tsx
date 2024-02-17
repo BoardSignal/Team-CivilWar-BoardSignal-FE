@@ -25,9 +25,7 @@ import Icon from '../Icon';
  * </TabBar.Container>
  */
 const Container = ({ children: rawChildren }: PropsWithChildren) => {
-  const children = React.Children.toArray(rawChildren);
-  const leftChildren = children.slice(0, 1);
-  const rightChildren = children.slice(1, 1);
+  const [leftChildren, rightChildren] = React.Children.toArray(rawChildren);
 
   return (
     <div className='flex justify-between p-2 text-gray-accent1'>
