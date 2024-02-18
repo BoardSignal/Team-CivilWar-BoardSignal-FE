@@ -1,4 +1,4 @@
-import { GNB } from '@/components/gnb';
+import { GNB } from '@/components/GNB';
 
 export const HomePage = () => {
   return (
