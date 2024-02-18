@@ -10,11 +10,11 @@ const LoginPage = () => {
   return (
     <>
       <h1>Login Page</h1>
-      <div className='absolute bottom-[10px] mx-10 flex flex-col items-center justify-center'>
-        <button className='my-2 h-full w-full' onClick={naverLogin}>
+      <div className='absolute bottom-[10px] mx-10 flex flex-col items-center justify-center gap-[10px]'>
+        <button className='h-full w-full' onClick={naverLogin}>
           <img src={kakaoLoginButtonImage} alt='kakao' />
         </button>
-        <button onClick={kakaoLogin} className='my-2 h-full w-full'>
+        <button onClick={kakaoLogin} className='h-full w-full'>
           <img
             src={kakaoLoginButtonImage}
             alt='naver'
