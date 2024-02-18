@@ -18,6 +18,9 @@ const buttonCSS = cva(
         inactive: 'cursor-not-allowed bg-gray-accent5 text-gray-accent3',
       },
     },
+    defaultVariants: {
+      variant: 'ghost',
+    },
   },
 );
 

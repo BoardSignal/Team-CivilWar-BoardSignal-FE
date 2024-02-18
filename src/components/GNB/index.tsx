@@ -11,10 +11,7 @@ export const GNB = () => {
     <div className='flex select-none border-t border-gray-200'>
       {GNBRoutes.map(({ name, path, icons }) => (
         <Link to={path} key={path} className='flex-1'>
-          <Button
-            variant='ghost'
-            className='flex h-fit flex-col items-center gap-0.5 pb-2 pt-4'
-          >
+          <Button className='flex h-fit flex-col items-center gap-0.5 pb-2 pt-4'>
             <Icon
               id={icons[pathname === path ? 'fill' : 'line']}
               className='h-5 w-5 text-gray-accent1'
