@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef, useState } from 'react';
+import React, { ComponentProps, useRef, useState } from 'react';
 
 import { cn } from '@/utils/cn';
 
@@ -25,8 +25,7 @@ const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
   };
 };
 
-interface RippleProps extends PropsWithChildren {
-  className?: string;
+interface RippleProps extends ComponentProps<'div'> {
   fast?: boolean;
 }
 
@@ -37,7 +36,13 @@ interface RippleProps extends PropsWithChildren {
  *
  * fast={true}로 설정하면 빠른 Ripple 효과를 렌더링할 수 있어요.
  */
-const Ripple = ({ fast, className, children }: RippleProps) => {
+const Ripple = ({
+  fast,
+  className,
+  onClick,
+  children,
+  ...props
+}: RippleProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [offset, setOffset] = useState(RIPPLE_DEFAULT_OFFSET);
@@ -45,6 +50,10 @@ const Ripple = ({ fast, className, children }: RippleProps) => {
   const showRipple = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) {
       return;
+    }
+
+    if (onClick) {
+      onClick(e);
     }
 
     const element = ref.current;
@@ -66,6 +75,7 @@ const Ripple = ({ fast, className, children }: RippleProps) => {
       className={cn('relative overflow-hidden', className)}
       ref={ref}
       onClick={showRipple}
+      {...props}
     >
       {isAnimating && <RippleEffect {...offset} />}
       {children}
