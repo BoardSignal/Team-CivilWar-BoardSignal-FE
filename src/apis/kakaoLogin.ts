@@ -9,7 +9,7 @@ interface LoginResponse {
 
 const postKakaoLogin = () => {
   return api.post<LoginResponse>({
-    url: '/api/v1/auth/login/kakao',
+    url: '/auth/login/kakao',
   });
 };
 

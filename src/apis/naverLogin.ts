@@ -8,7 +8,7 @@ interface LoginResponse {
 }
 export const postNaverLogin = () => {
   return api.post<LoginResponse>({
-    url: '/api/v1/auth/login/naver',
+    url: '/auth/login/naver',
   });
 };
 
