@@ -1,13 +1,13 @@
-import { ComponentProps } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 
-interface TextareaProps extends ComponentProps<'textarea'> {
+interface TextareaProps extends ComponentPropsWithoutRef<'textarea'> {
   label?: string;
-  textCountLimit?: number;
+  currentTextCount?: number;
 }
 
 const Textarea = ({
   label,
-  textCountLimit: limit,
+  currentTextCount: limit,
   ...props
 }: TextareaProps) => {
   return (
@@ -23,12 +23,10 @@ const Textarea = ({
           {limit && <label>{limit}</label>}/500자
         </span>
       </div>
-      <div className='relative'>
-        <textarea
-          className='h-[180px] w-full resize-none overscroll-contain rounded-lg border border-gray-accent7 outline-none focus:border-primary'
-          {...props}
-        />
-      </div>
+      <textarea
+        className='h-[180px] w-full resize-none overscroll-contain rounded-lg border border-gray-accent7 p-5 outline-none focus:border-primary'
+        {...props}
+      />
     </div>
   );
 };
