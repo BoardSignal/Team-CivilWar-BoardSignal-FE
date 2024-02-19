@@ -12,7 +12,7 @@ const MultipleSelect = ({
   onClick,
 }: MultipleSelectProps) => {
   return (
-    <div className='flex flex-wrap gap-2'>
+    <div className='flex select-none flex-wrap gap-2'>
       {optionItems.map(optionItem => (
         <OptionItemButton
           key={optionItem}
