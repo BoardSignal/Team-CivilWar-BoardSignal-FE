@@ -1,16 +1,16 @@
 import { cn } from '@/utils/cn';
 
-interface SelectableChipsProps {
+interface MultipleSelectProps {
   items: string[];
   selectedItems: string[];
   onClick: (item: string) => void;
 }
 
-const SelectableChips = ({
+const MultipleSelect = ({
   items,
   selectedItems,
   onClick,
-}: SelectableChipsProps) => {
+}: MultipleSelectProps) => {
   return (
     <div className='flex flex-wrap gap-2'>
       {items.map(item => (
@@ -29,4 +29,4 @@ const SelectableChips = ({
   );
 };
 
-export default SelectableChips;
+export default MultipleSelect;

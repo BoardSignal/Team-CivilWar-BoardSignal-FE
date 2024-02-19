@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SelectableChips from '@/components/SelectableChips';
+import MultipleSelect from '@/components/MultipleSelect';
 
-const meta: Meta<typeof SelectableChips> = {
+const meta: Meta<typeof MultipleSelect> = {
   title: 'components/SelectableChips',
   tags: ['autodocs'],
   decorators: [
@@ -14,12 +14,12 @@ const meta: Meta<typeof SelectableChips> = {
       </div>
     ),
   ],
-  component: SelectableChips,
+  component: MultipleSelect,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof SelectableChips>;
+type Story = StoryObj<typeof MultipleSelect>;
 
 export const DefaultTemplate = (args: Story) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([
@@ -49,7 +49,7 @@ export const DefaultTemplate = (args: Story) => {
   };
 
   return (
-    <SelectableChips
+    <MultipleSelect
       {...args}
       items={items}
       selectedItems={selectedItems}
