@@ -46,22 +46,20 @@ const Drawer = ({ children }: DrawerProps) => {
           key: index,
           onClick: () => setIsOpen(true),
         });
-      } else if (element.props.__type === 'Drawer.Title') {
-        return element;
-      } else if (element.props.__type === 'Drawer.Content') {
-        return element;
       }
+
+      return element;
     });
   }, [children]);
 
-  const drawerRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
 
   const handleCloseDrawer = () => {
     setIsOpen(false);
   };
 
   useEffect(() => {
-    const drawer = drawerRef.current;
+    const drawer = backdropRef.current;
     drawer?.addEventListener('click', handleCloseDrawer);
 
     return () => drawer?.removeEventListener('click', handleCloseDrawer);
@@ -77,7 +75,7 @@ const Drawer = ({ children }: DrawerProps) => {
         )}
       >
         <div
-          ref={drawerRef}
+          ref={backdropRef}
           className={cn(
             'h-full w-full bg-gray-accent1',
             isOpen ? 'animate-opacity70' : 'animate-opacity0',
