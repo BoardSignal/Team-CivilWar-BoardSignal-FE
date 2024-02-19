@@ -46,4 +46,6 @@ export type IconName =
   | 'chat-fill'
   | 'chat-line'
   | 'bell-fill'
-  | 'bell-line';
+  | 'bell-line'
+  | 'search-fill'
+  | 'search-line';
