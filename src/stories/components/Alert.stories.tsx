@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Alert from '@/components/alert/index';
+import Alert from '@/components/Alert/index';
 
 const meta: Meta<typeof Alert> = {
-  title: 'Components/Textarea',
+  title: 'Components/Alert',
   tags: ['autodocs'],
   component: Alert,
 };
