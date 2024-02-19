@@ -36,24 +36,12 @@ export const DefaultTemplate = (args: Story) => {
     '배팅/경매/레이스',
   ];
 
-  const handleClickButton = (optionItem: string) => {
-    if (selectedItems.includes(optionItem)) {
-      setSelectedItems(
-        selectedItems.filter(selectedItem => selectedItem !== optionItem),
-      );
-
-      return;
-    }
-
-    setSelectedItems([...selectedItems, optionItem]);
-  };
-
   return (
     <MultipleSelect
       {...args}
       optionItems={optionItems}
       selectedItems={selectedItems}
-      onClick={handleClickButton}
+      onChange={updatedItems => setSelectedItems([...updatedItems])}
     />
   );
 };
