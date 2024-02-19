@@ -72,7 +72,7 @@ const Drawer = ({ children }: DrawerProps) => {
       {drawerTrigger}
       <div
         className={cn(
-          'absolute left-0 top-0 z-20 h-screen w-full min-w-[350px] max-w-[450px]',
+          'absolute left-0 top-0 z-20 h-screen w-full min-w-[350px] max-w-[450px] overflow-y-hidden',
           isOpen ? 'animate-fadeIn' : 'hidden animate-fadeOut',
         )}
       >
@@ -85,7 +85,7 @@ const Drawer = ({ children }: DrawerProps) => {
         ></div>
         <div
           className={cn(
-            'fixed min-h-64 w-full min-w-[350px] max-w-[450px] rounded-t-lg bg-white p-6',
+            'absolute min-h-64 w-full rounded-t-lg bg-white p-6',
             isOpen ? 'animate-moveUp' : 'animate-moveDown',
           )}
         >
