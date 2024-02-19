@@ -11,7 +11,7 @@ export const useNaverLogin = () => {
       try {
         const { accessToken, isJoined } = await api();
         localStorage.setItem('accessToken', accessToken);
-        navigate(isJoined ? '/' : '/signUp');
+        navigate(isJoined ? '/' : '/sign-up');
       } catch (error) {
         console.error(error);
       }
