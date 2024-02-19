@@ -23,56 +23,83 @@
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    display: none;
-  }
-  100% {
-    display: block;
-  }
-}
+@layer utilities {
+  @keyframes RippleEffect {
+    0% {
+      transform: scale(0);
+    }
 
-@keyframes fadeOut {
-  0% {
-    display: block;
+    100% {
+      transform: scale(var(--ripple-element-width));
+      opacity: 0;
+    }
   }
-  100% {
-    display: none;
-  }
-}
 
-@keyframes opacity70 {
-  0% {
-    opacity: 0;
+  .ripple-effect {
+    animation: RippleEffect 0.5s ease-out;
   }
-  100% {
-    opacity: 0.7;
-  }
-}
 
-@keyframes opacity0 {
-  0% {
-    opacity: 0.7;
+  .ripple-fast {
+    animation-duration: 0.3s;
   }
-  100% {
-    opacity: 0;
+  
+  @keyframes fadeIn {
+    0% {
+      display: none;
+    }
+    
+    100% {
+      display: block;
+    }
   }
-}
 
-@keyframes moveUp {
-  0% {
-    bottom: -300px;
+  @keyframes fadeOut {
+    0% {
+      display: block;
+    }
+    
+    100% {
+      display: none;
+    }
   }
-  100% {
-    bottom: 0;
-  }
-}
 
-@keyframes moveDown {
-  0% {
-    bottom: 0;
+  @keyframes opacity70 {
+    0% {
+      opacity: 0;
+    }
+    
+    100% {
+      opacity: 0.7;
+    }
   }
-  100% {
-    bottom: -300px;
+
+  @keyframes opacity0 {
+    0% {
+      opacity: 0.7;
+    }
+    
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes moveUp {
+    0% {
+      bottom: -300px;
+    }
+    
+    100% {
+      bottom: 0;
+    }
+  }
+
+  @keyframes moveDown {
+    0% {
+      bottom: 0;
+    }
+    
+    100% {
+      bottom: -300px;
+    }
   }
 }
