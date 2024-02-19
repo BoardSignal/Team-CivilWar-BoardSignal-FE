@@ -22,7 +22,7 @@ dist-ssr
 *.sw?
 
 .vite
-
+.env
 build-storybook.log
 chromatic.log
 chromatic-build-*.xml

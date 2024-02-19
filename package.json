@@ -52,6 +52,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.17",
+    "axios": "^1.6.7",
     "chromatic": "^10.9.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
