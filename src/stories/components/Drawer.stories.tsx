@@ -6,13 +6,6 @@ const meta: Meta<typeof Drawer> = {
   title: 'components/Drawer',
   tags: ['autodocs'],
   component: Drawer,
-  decorators: [
-    Story => (
-      <div className='relative h-screen w-full min-w-[350px] max-w-[450px] shrink-0 shadow-xl'>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
