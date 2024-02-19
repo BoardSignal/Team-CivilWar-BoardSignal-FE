@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import MultipleSelect from '@/components/MultipleSelect';
 
 const meta: Meta<typeof MultipleSelect> = {
-  title: 'components/SelectableChips',
+  title: 'components/MultipleSelect',
   tags: ['autodocs'],
   decorators: [
     Story => (
@@ -26,7 +26,7 @@ export const DefaultTemplate = (args: Story) => {
     '전략',
     '추리',
   ]);
-  const items = [
+  const optionItems = [
     '전략',
     '심리',
     '추리',
@@ -36,24 +36,24 @@ export const DefaultTemplate = (args: Story) => {
     '배팅/경매/레이스',
   ];
 
-  const handleClickChip = (item: string) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems(prevState =>
-        prevState.filter(selectedItem => selectedItem !== item),
+  const handleClickButton = (optionItem: string) => {
+    if (selectedItems.includes(optionItem)) {
+      setSelectedItems(
+        selectedItems.filter(selectedItem => selectedItem !== optionItem),
       );
 
       return;
     }
 
-    setSelectedItems(prevState => [...prevState, item]);
+    setSelectedItems([...selectedItems, optionItem]);
   };
 
   return (
     <MultipleSelect
       {...args}
-      items={items}
+      optionItems={optionItems}
       selectedItems={selectedItems}
-      onClick={handleClickChip}
+      onClick={handleClickButton}
     />
   );
 };

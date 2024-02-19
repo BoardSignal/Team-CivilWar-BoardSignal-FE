@@ -1,29 +1,26 @@
-import { cn } from '@/utils/cn';
+import OptionItemButton from './OptionItemButton';
 
 interface MultipleSelectProps {
-  items: string[];
+  optionItems: string[];
   selectedItems: string[];
-  onClick: (item: string) => void;
+  onClick: (optionItem: string) => void;
 }
 
 const MultipleSelect = ({
-  items,
+  optionItems,
   selectedItems,
   onClick,
 }: MultipleSelectProps) => {
   return (
     <div className='flex flex-wrap gap-2'>
-      {items.map(item => (
-        <button
-          key={item}
-          className={cn(
-            'flex w-fit items-center rounded-3xl border px-4 py-2 text-sm text-gray-accent3',
-            selectedItems.includes(item) && 'border-primary text-primary',
-          )}
-          onClick={() => onClick(item)}
+      {optionItems.map(optionItem => (
+        <OptionItemButton
+          key={optionItem}
+          active={selectedItems.includes(optionItem)}
+          onClick={() => onClick(optionItem)}
         >
-          {item}
-        </button>
+          {optionItem}
+        </OptionItemButton>
       ))}
     </div>
   );
