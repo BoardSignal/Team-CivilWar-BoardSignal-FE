@@ -24,7 +24,7 @@ const Textarea = ({
         </span>
       </div>
       <textarea
-        className='h-[180px] w-full resize-none overscroll-contain rounded-lg border border-gray-accent7 p-5 outline-none focus:border-primary'
+        className='h-[180px] w-full resize-none overscroll-contain rounded-lg border border-gray-accent7 p-5 outline-none focus:border-gray-accent2'
         {...props}
       />
     </div>
