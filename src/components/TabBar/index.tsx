@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
+import { Children, ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ import Icon from '../Icon';
  * </TabBar.Container>
  */
 const Container = ({ children: rawChildren }: PropsWithChildren) => {
-  const [leftChildren, rightChildren] = React.Children.toArray(rawChildren);
+  const [leftChildren, rightChildren] = Children.toArray(rawChildren);
 
   return (
     <div className='flex justify-between p-2 text-gray-accent1'>
