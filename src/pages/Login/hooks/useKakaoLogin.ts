@@ -11,8 +11,7 @@ export const useKakaoLogin = () => {
       try {
         const { accessToken, isJoined } = await api();
         localStorage.setItem('accessToken', accessToken);
-        const routingUrl = isJoined ? '/' : '/signUp';
-        navigate(routingUrl);
+        navigate(isJoined ? '/' : '/signUp');
       } catch (error) {
         console.error(error);
       }
