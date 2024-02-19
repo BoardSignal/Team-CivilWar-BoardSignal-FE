@@ -6,6 +6,12 @@ const meta: Meta<typeof Alert> = {
   title: 'Components/Alert',
   tags: ['autodocs'],
   component: Alert,
+  argTypes: {
+    variant: {
+      options: ['primary', 'normal', 'danger'],
+      control: { type: 'radio' },
+    },
+  },
 };
 
 export default meta;
@@ -14,8 +20,7 @@ type Story = StoryObj<typeof Alert>;
 
 export const Default: Story = {
   args: {
-    text: '텍스트',
-    backgroundColor: '',
-    textColor: '',
+    children: 'Text',
+    variant: 'primary',
   },
 };
