@@ -20,6 +20,14 @@ export default {
           "accent7": 'var(--accent-7)',
         }
       },
+      animation: {
+        fadeIn: 'fadeIn ease 0.3s forwards',
+        fadeOut: 'fadeOut ease-out 0.3s forwards',
+        opacity70: 'opacity70 ease 0.3s forwards',
+        opacity0: 'opacity0 ease-out 0.3s forwards',
+        moveUp: 'moveUp ease 0.3s forwards',
+        moveDown: 'moveDown ease-out 0.3s forwards'
+      },
     },
   },
   plugins: [],

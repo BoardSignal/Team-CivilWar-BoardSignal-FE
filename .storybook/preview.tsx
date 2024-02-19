@@ -17,7 +17,9 @@ const preview: Preview = {
     withRouter,
     Story => (
       <ReactQueryClientProvider>
-        <Story />
+        <div className='relative h-screen w-full min-w-[350px] max-w-[450px] shadow-xl'>
+          <Story />
+        </div>
       </ReactQueryClientProvider>
     ),
   ],
