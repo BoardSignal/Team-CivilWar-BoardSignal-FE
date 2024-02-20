@@ -5,13 +5,6 @@ import TabBar from '@/components/TabBar';
 const meta: Meta<typeof TabBar.Container> = {
   title: 'common/TabBar',
   tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <div className='max-w-[390px] border border-gray-accent6 '>
-        <Story />
-      </div>
-    ),
-  ],
   component: TabBar.Container,
 };
 
