@@ -6,10 +6,20 @@ const meta: Meta<typeof ImageUpload> = {
   title: 'components/ImageUpload',
   tags: ['autodocs'],
   component: ImageUpload,
+  argTypes: {
+    variant: {
+      options: ['circle', 'square'],
+      control: { type: 'radio' },
+    },
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof ImageUpload>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    variant: 'circle',
+  },
+};
