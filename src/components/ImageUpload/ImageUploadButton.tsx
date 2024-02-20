@@ -4,13 +4,13 @@ import Icon from '../Icon';
 
 interface Props {
   setImageUrl: (imageUrl: string) => void;
+  onChange?: (file: File) => void;
 }
 
-const ImageUploadButton = ({ setImageUrl }: Props) => {
+const ImageUploadButton = ({ setImageUrl, onChange }: Props) => {
   const inputElement = useRef<HTMLInputElement>(null);
 
   const handleImageSelect = () => {
-    console.log(inputElement.current);
     if (!inputElement.current) {
       return;
     }
@@ -21,6 +21,8 @@ const ImageUploadButton = ({ setImageUrl }: Props) => {
     if (!file) {
       return;
     }
+    onChange && onChange(file);
+
     const imageUrl = URL.createObjectURL(file);
     setImageUrl(imageUrl);
   };
@@ -34,7 +36,7 @@ const ImageUploadButton = ({ setImageUrl }: Props) => {
       </label>
       <input
         id='imageUploadButton'
-        className='file-input file-input-bordered hidden w-full max-w-xs'
+        className='hidden w-full max-w-xs'
         type='file'
         accept='image/*'
         onChange={handleImageSelect}
