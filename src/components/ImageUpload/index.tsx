@@ -8,7 +8,7 @@ const ImageUpload = () => {
   );
 
   return (
-    <div className='relative mb-3 flex w-full justify-center overflow-hidden bg-gray-100 p-10'>
+    <div className='relative mb-3 flex w-full justify-center overflow-hidden bg-gray-accent7 p-10'>
       <img
         src={imageUrl}
         alt='profile'

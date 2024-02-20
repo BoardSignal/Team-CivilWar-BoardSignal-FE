@@ -28,7 +28,7 @@ const ImageUploadButton = ({ setImageUrl }: Props) => {
   return (
     <div>
       <label htmlFor='imageUploadButton'>
-        <div className='h-[35px] w-[35px] cursor-pointer rounded-full border border-gray-200 bg-white fill-gray-400 p-1.5'>
+        <div className='h-[35px] w-[35px] cursor-pointer rounded-full border border-gray-accent5 bg-white fill-gray-accent5 p-1.5'>
           <Icon id='camera-fill' />
         </div>
       </label>
