@@ -30,7 +30,7 @@ const Profile = ({
             size={20}
             className='fill-white text-profile-accent1'
           />
-          <span className='text-profile'>Signal</span>
+          <span className='text-profile-accent1'>Signal</span>
           <span className='text-gray-accent1'>{signal}</span>
         </div>
       </div>
