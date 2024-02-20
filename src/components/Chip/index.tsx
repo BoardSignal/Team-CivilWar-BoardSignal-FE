@@ -8,7 +8,7 @@ const ChipCSS = cva(
     variants: {
       variant: {
         small: ' px-2 py-0.5 text-[10px]',
-        large: ' px-4 py-2 text-base',
+        large: ' px-4 py-2',
       },
     },
     defaultVariants: {
@@ -16,9 +16,11 @@ const ChipCSS = cva(
     },
   },
 );
+
 type ChipProps = VariantProps<typeof ChipCSS> & {
   children: ReactNode;
 };
+
 const Chip = ({ variant, children, ...props }: ChipProps) => {
   return (
     <div className={ChipCSS({ variant })} {...props}>

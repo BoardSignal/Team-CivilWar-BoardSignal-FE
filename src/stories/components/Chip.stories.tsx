@@ -13,7 +13,7 @@ export default meta;
 type Story = StoryObj<typeof Chip>;
 
 export const DefaultTemplate = (args: Story) => {
-  const chipArray = [
+  const chips = [
     '배팅 / 전략',
     '카드경매',
     '심리',
@@ -24,9 +24,9 @@ export const DefaultTemplate = (args: Story) => {
 
   return (
     <div className='flex flex-wrap gap-2'>
-      {chipArray.map((e, i) => (
-        <Chip key={i} {...args}>
-          {e}
+      {chips.map((chipName, i) => (
+        <Chip key={new Date().getTime() + i} {...args}>
+          {chipName}
         </Chip>
       ))}
     </div>
