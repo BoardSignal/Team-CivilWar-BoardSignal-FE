@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
 
@@ -13,26 +13,10 @@ const inputCSS = cva(
     },
   },
 );
-interface TextInputProps
-  extends InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputCSS> {}
-
-const TextInput = ({
-  variant,
-  placeholder,
-  disabled,
-  onChange,
-  ...props
-}: TextInputProps) => {
-  return (
-    <input
-      {...props}
-      disabled={disabled}
-      placeholder={placeholder}
-      className={inputCSS({ variant })}
-      onChange={onChange}
-    />
-  );
+type TextInputProps = ComponentPropsWithoutRef<'input'> &
+  VariantProps<typeof inputCSS>;
+const TextInput = ({ variant, ...props }: TextInputProps) => {
+  return <input className={inputCSS({ variant })} {...props} />;
 };
 
 export default TextInput;

@@ -20,7 +20,7 @@ export const DefaultTemplate = (args: Story) => {
 
   return (
     <Label
-      currentLength={value}
+      currentLength={value.length}
       title='성별'
       width='300px'
       maxLength={500}
