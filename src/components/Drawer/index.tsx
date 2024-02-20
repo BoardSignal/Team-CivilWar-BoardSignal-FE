@@ -11,7 +11,7 @@ import {
 
 import { cn } from '@/utils/cn';
 
-import LayoutRootPortal from '../layout/LayoutRootPortal';
+import LayoutRootPortal from '../Layout/LayoutRootPortal';
 import DrawerContent, { DrawerContentProps } from './DrawerContent';
 import DrawerTitle, { DrawerTitleProps } from './DrawerTitle';
 import DrawerTrigger, { DrawerTriggerProps } from './DrawerTrigger';
