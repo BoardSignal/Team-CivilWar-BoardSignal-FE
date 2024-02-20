@@ -3,17 +3,11 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Label from '@/components/Label';
+import TextInput from '@/components/TextInput';
 
 const meta: Meta<typeof Label> = {
   title: 'components/Label',
   tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <div className='max-w-[390px]'>
-        <Story />
-      </div>
-    ),
-  ],
   component: Label,
 };
 
@@ -24,26 +18,19 @@ type Story = StoryObj<typeof Label>;
 export const DefaultTemplate = (args: Story) => {
   const [value, setValue] = useState('');
 
-  const inputStyle = {
-    active: `w-full rounded-lg border border-gray-accent7 p-4 
-    text-gray-accent2 focus:outline-gray-accent2`,
-    disabled: `w-full rounded-lg border border-gray-accent7 p-4 
-    text-gray-accent2 focus:outline-gray-accent2 bg-gray-accent7`,
-  };
-
   return (
     <Label
-      isLimitedText={true}
-      textValue={value}
-      textLimited={500}
-      labelText='호민'
+      currentLength={value}
+      title='성별'
+      width='300px'
+      maxLength={500}
       {...args}
     >
-      <input
-        placeholder={'손호민'}
+      <TextInput
+        placeholder='남성'
         disabled={false}
-        className={inputStyle.active}
         onChange={e => setValue(e.target.value)}
+        variant={'active'}
       />
     </Label>
   );

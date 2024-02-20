@@ -1,31 +1,30 @@
 import { PropsWithChildren } from 'react';
 
 interface LabelProps {
-  labelText: string;
+  title: string;
   isRequired?: boolean;
-  isLimitedText?: boolean;
-  textValue?: string;
-  textLimited?: number;
-  width?: 'small' | 'medium' | 'large';
+  currentLength?: string;
+  maxLength?: number;
+  width?: string;
 }
 
 const Label = ({
-  labelText,
+  title,
   isRequired = false,
-  textValue,
-  textLimited,
-  isLimitedText = false,
+  currentLength,
+  maxLength,
   children,
+  width,
 }: PropsWithChildren<LabelProps>) => {
   return (
-    <div className={`flex flex-col gap-2`}>
+    <div className='flex flex-col gap-2' style={{ width }}>
       <div className='flex justify-between'>
         <label className='text-sm text-gray-accent2'>
-          {labelText}
+          {title}
           {isRequired && <span className='ml-0.5 text-red-500'>*</span>}
         </label>
-        {isLimitedText && (
-          <span className='text-sm text-gray-accent2'>{`${textValue ? textValue.length : 0}/${textLimited}`}</span>
+        {maxLength && (
+          <span className='text-xs text-gray-accent3'>{`${currentLength ? currentLength.length : 0}/${maxLength}`}</span>
         )}
       </div>
       {children}
