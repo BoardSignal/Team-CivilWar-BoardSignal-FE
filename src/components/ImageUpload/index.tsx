@@ -30,7 +30,7 @@ const ImageUpload = ({ variant }: ImageUploadProps) => {
   const [previewImageUrl, setPreviewImageUrl] = useState(DEFAULT_IMAGE_URL);
 
   return (
-    <div className=' mb-3 flex w-full justify-center bg-gray-accent7 p-10'>
+    <div className='mb-3 flex w-full justify-center bg-gray-accent7 p-10'>
       <div className='relative'>
         <img
           src={previewImageUrl}

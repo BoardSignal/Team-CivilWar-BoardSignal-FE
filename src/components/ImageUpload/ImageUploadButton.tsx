@@ -21,7 +21,9 @@ const ImageUploadButton = ({ setImageUrl, onChange }: Props) => {
     if (!file) {
       return;
     }
-    onChange && onChange(file);
+    if (onChange) {
+      onChange(file);
+    }
 
     const imageUrl = URL.createObjectURL(file);
     setImageUrl(imageUrl);
