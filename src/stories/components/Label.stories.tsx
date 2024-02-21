@@ -28,9 +28,9 @@ export const DefaultTemplate = (args: Story) => {
     >
       <TextInput
         placeholder='남성'
-        disabled={false}
+        disabled={true}
         onChange={e => setValue(e.target.value)}
-        variant={'active'}
+        variant={'disabled'}
       />
     </Label>
   );
