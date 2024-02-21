@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Temperature from '@/pages/profile/components/Temperature';
+import SignalTemperature from '@/pages/profile/components/SignalTemperature';
 
-const meta: Meta<typeof Temperature> = {
-  title: 'Pages/Profile/Temperature',
+const meta: Meta<typeof SignalTemperature> = {
+  title: 'Pages/Profile/SignalTemperature',
   tags: ['autodocs'],
-  component: Temperature,
+  component: SignalTemperature,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Temperature>;
+type Story = StoryObj<typeof SignalTemperature>;
 
 export const Default: Story = {};
