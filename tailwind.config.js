@@ -19,6 +19,15 @@ export default {
           accent6: 'var(--accent-6)',
           accent7: 'var(--accent-7)',
         },
+        manner: {
+          accent1: 'var(--manner-accent-1)',
+          accent2: 'var(--manner-accent-2)',
+          accent3: 'var(--manner-accent-3)',
+          accent4: 'var(--manner-accent-4)',
+          accent5: 'var(--manner-accent-5)',
+          accent6: 'var(--manner-accent-6)',
+          accent7: 'var(--manner-accent-7)',
+        },
       },
       animation: {
         fadeIn: 'fadeIn ease 0.3s forwards',

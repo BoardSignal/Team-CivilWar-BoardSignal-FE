@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { ResponsiveLayoutWrapper } from './components/layout';
+import { ResponsiveLayoutWrapper } from './components/Layout';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 

@@ -3,15 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import TabBar from '@/components/TabBar';
 
 const meta: Meta<typeof TabBar.Container> = {
-  title: 'common/TabBar',
+  title: 'components/TabBar',
   tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <div className='max-w-[390px] border border-gray-accent6 '>
-        <Story />
-      </div>
-    ),
-  ],
   component: TabBar.Container,
 };
 

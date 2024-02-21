@@ -16,6 +16,13 @@
     --accent-5: #cccccc;
     --accent-6: #dddddd;
     --accent-7: #f0f0f0;
+    --manner-accent-1: #ff6e1d;
+    --manner-accent-2: #f7be68;
+    --manner-accent-3: #2fc795;
+    --manner-accent-4: #019ceb;
+    --manner-accent-5: #0277b2;
+    --manner-accent-6: #868b94;
+    --manner-accent-7: #333333;
   }
 
   :root.dark {
@@ -102,4 +109,14 @@
       bottom: -300px;
     }
   }
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 10%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-color: transparent transparent var(--accent-1) transparent;
 }
