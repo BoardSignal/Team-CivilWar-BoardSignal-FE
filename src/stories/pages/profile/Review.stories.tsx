@@ -1,31 +1,31 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Review from '@/pages/profile/components/Review';
+import MannerReview from '@/pages/profile/components/MannerReview';
 
-const meta: Meta<typeof Review> = {
-  title: 'Pages/Profile/Review',
+const meta: Meta<typeof MannerReview> = {
+  title: 'Pages/Profile/MannerReview',
   tags: ['autodocs'],
-  component: Review,
+  component: MannerReview,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Review>;
+type Story = StoryObj<typeof MannerReview>;
 
 export const Default: Story = {
   args: {
     reviews: [
       {
-        content: '시간을 잘 지켜요',
-        score: 12,
+        title: '시간을 잘 지켜요.',
+        count: 12,
       },
       {
-        content: '착해요',
-        score: 9,
+        title: '착해요.',
+        count: 9,
       },
       {
-        content: '게임을 재밌게 해요',
-        score: 4,
+        title: '게임을 재밌게 해요.',
+        count: 4,
       },
     ],
   },
