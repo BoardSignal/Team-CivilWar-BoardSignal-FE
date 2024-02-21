@@ -14,7 +14,7 @@ type Story = StoryObj<typeof Chip>;
 
 export const DefaultTemplate = (args: Story) => {
   const chips = [
-    '배팅 / 전략',
+    '배팅 / 전략 / 전술 / 기타',
     '카드경매',
     '심리',
     '블러핑',
