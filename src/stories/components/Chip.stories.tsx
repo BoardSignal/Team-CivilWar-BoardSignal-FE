@@ -24,8 +24,8 @@ export const DefaultTemplate = (args: Story) => {
 
   return (
     <div className='flex flex-wrap gap-2'>
-      {chips.map((chipName, i) => (
-        <Chip key={new Date().getTime() + i} {...args}>
+      {chips.map(chipName => (
+        <Chip key={chipName} {...args}>
           {chipName}
         </Chip>
       ))}
