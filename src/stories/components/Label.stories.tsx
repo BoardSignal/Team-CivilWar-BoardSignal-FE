@@ -30,7 +30,6 @@ export const DefaultTemplate = (args: Story) => {
         placeholder='남성'
         disabled={true}
         onChange={e => setValue(e.target.value)}
-        variant={'disabled'}
       />
     </Label>
   );
