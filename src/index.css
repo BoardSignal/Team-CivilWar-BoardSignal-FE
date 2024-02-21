@@ -16,7 +16,13 @@
     --accent-5: #cccccc;
     --accent-6: #dddddd;
     --accent-7: #f0f0f0;
-    --custom-blue: #63b5f1;
+    --manner-accent-1: #ff6e1d;
+    --manner-accent-2: #f7be68;
+    --manner-accent-3: #2fc795;
+    --manner-accent-4: #019ceb;
+    --manner-accent-5: #0277b2;
+    --manner-accent-6: #868b94;
+    --manner-accent-7: #333333;
   }
 
   :root.dark {
