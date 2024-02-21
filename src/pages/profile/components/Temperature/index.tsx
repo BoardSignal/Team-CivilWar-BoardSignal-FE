@@ -32,8 +32,8 @@ const Temperature = ({ value = 50.3 }: TemperatureProps) => {
             <img src={informationLine} alt='정보' className='h-4 w-4' />
           </span>
         </PopoverTrigger>
-        <PopoverContent>
-          <p>
+        <PopoverContent className='relative z-20 ml-[70px]'>
+          <p className='tooltip'>
             시그널온도는 다른 사용자로부터 받은 리뷰, 신고, 운영자 제재 등을
             종합해서 만든 매너 지표입니다.
           </p>

@@ -110,3 +110,13 @@
     }
   }
 }
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 10%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-color: transparent transparent var(--accent-1) transparent;
+}

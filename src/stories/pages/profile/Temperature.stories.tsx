@@ -6,13 +6,6 @@ const meta: Meta<typeof Temperature> = {
   title: 'Pages/Profile/Temperature',
   tags: ['autodocs'],
   component: Temperature,
-  decorators: [
-    Story => (
-      <div className='mx-[100px] my-[100px]'>
-        <Story />
-      </div>
-    ),
-  ],
 };
 
 export default meta;
