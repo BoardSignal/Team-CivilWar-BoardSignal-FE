@@ -29,10 +29,10 @@ export const router = createBrowserRouter([
         path: 'me',
         element: <HomePage />,
       },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
     ],
-  },
-  {
-    path: 'login',
-    element: <LoginPage />,
   },
 ]);
