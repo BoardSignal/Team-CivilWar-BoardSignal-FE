@@ -61,7 +61,7 @@ const Drawer = ({ children }: DrawerProps) => {
       <LayoutRootPortal>
         <div
           className={cn(
-            'absolute left-0 top-0 z-20 h-full w-full min-w-[350px] max-w-[450px] overflow-y-hidden',
+            'absolute left-0 top-0 z-20 h-full w-full overflow-y-hidden',
             isOpen ? 'animate-fadeIn' : 'hidden animate-fadeOut',
           )}
         >
