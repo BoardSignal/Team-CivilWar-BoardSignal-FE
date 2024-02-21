@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 
+import Button from '../Button';
 import Icon from '../Icon';
 
 interface Props {
@@ -32,9 +33,9 @@ const ImageUploadButton = ({ setImageUrl, onChange }: Props) => {
   return (
     <div>
       <label htmlFor='imageUploadButton'>
-        <div className='h-[35px] w-[35px] cursor-pointer rounded-full border border-gray-accent5 bg-white fill-gray-accent5 p-1.5'>
+        <Button className='h-[35px] w-[35px] rounded-full border border-gray-accent5 bg-white text-gray-accent2'>
           <Icon id='camera-fill' />
-        </div>
+        </Button>
       </label>
       <input
         id='imageUploadButton'
