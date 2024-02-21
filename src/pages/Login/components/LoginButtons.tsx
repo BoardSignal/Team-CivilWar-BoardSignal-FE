@@ -6,8 +6,8 @@ import Button from '@/components/Button';
 import { useKakaoLogin } from '../hooks/useKakaoLogin';
 import { useNaverLogin } from '../hooks/useNaverLogin';
 
-// 63px로 높이를 지정하는 이유는 원본 이미지의 크기가 그렇기 때문이에요.
-const KAKAO_LOGIN_BUTTON_HEIGHT = 'h-[63px]';
+// 53.7px로 높이를 지정하는 이유는 원본 이미지의 크기가 그렇기 때문이에요.
+const KAKAO_LOGIN_BUTTON_HEIGHT = 'h-[53.7px]';
 
 export const KakaoLoginButton = () => {
   const { kakaoLogin } = useKakaoLogin();
