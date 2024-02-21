@@ -10,9 +10,6 @@ export default {
           lighten: 'var(--primary-lighten)',
           lighter: 'var(--primary-lighter)',
         },
-        profile: {
-          accent1: 'var(--profile)',
-        },
         gray: {
           accent1: 'var(--accent-1)',
           accent2: 'var(--accent-2)',
