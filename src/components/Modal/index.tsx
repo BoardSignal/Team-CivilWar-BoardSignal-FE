@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
 
-const ModalTitleCSS = cva('mb-4 text-lg font-bold ', {
+const modalTitleCSS = cva('mb-4 text-lg font-bold ', {
   variants: {
     variant: {
       primary: 'text-primary',
@@ -10,7 +10,7 @@ const ModalTitleCSS = cva('mb-4 text-lg font-bold ', {
     },
   },
 });
-const ModalButtonCSS = cva(
+const modalButtonCSS = cva(
   'mt-8 flex w-full items-center justify-center rounded-md py-2',
   {
     variants: {
@@ -22,7 +22,7 @@ const ModalButtonCSS = cva(
   },
 );
 
-interface ModalProps extends VariantProps<typeof ModalTitleCSS> {
+interface ModalProps extends VariantProps<typeof modalTitleCSS> {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -43,9 +43,9 @@ const Modal = ({
   return (
     <div className='absolute inset-0 flex items-center justify-center bg-gray-accent3 bg-opacity-50'>
       <div className='flex w-96 flex-col items-center rounded-lg bg-white p-8'>
-        <label className={ModalTitleCSS({ variant })}>{title}</label>
+        <label className={modalTitleCSS({ variant })}>{title}</label>
         <p className='text-m text-gray-accent2'>{message}</p>
-        <button onClick={onClose} className={ModalButtonCSS({ variant })}>
+        <button onClick={onClose} className={modalButtonCSS({ variant })}>
           {children}
         </button>
         {variant === 'cancel' && (
