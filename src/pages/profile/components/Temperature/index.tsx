@@ -1,11 +1,6 @@
 import informationLine from '@/assets/information-line.png';
 import smileFace from '@/assets/smiling-face.png';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/Tooltip';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
 import { cn } from '@/utils/cn';
 
 interface TemperatureProps {
@@ -29,21 +24,21 @@ const Temperature = ({ value = 50.3 }: TemperatureProps) => {
   };
 
   return (
-    <div>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger>
-            <span className='flex w-fit gap-1 text-xs text-gray-accent1 underline'>
-              {'시그널온도'}
-              <img src={informationLine} alt='정보' className='h-4 w-4' />
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>
+    <>
+      <Popover>
+        <PopoverTrigger>
+          <span className='flex w-fit gap-1 text-xs text-gray-accent1 underline'>
+            {'시그널온도'}
+            <img src={informationLine} alt='정보' className='h-4 w-4' />
+          </span>
+        </PopoverTrigger>
+        <PopoverContent>
+          <p>
             시그널온도는 다른 사용자로부터 받은 리뷰, 신고, 운영자 제재 등을
             종합해서 만든 매너 지표입니다.
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+          </p>
+        </PopoverContent>
+      </Popover>
       <div className='flex flex-col gap-1'>
         <span
           className={cn(
@@ -61,7 +56,7 @@ const Temperature = ({ value = 50.3 }: TemperatureProps) => {
           ></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
