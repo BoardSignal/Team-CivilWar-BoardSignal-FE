@@ -18,14 +18,13 @@ export const DefaultTemplate = (args: Story) => {
   const [isChecked, setIsChecked] = useState(false);
 
   return (
-    <div className='flex h-full w-full items-center justify-center'>
-      <Checkbox
-        {...args}
-        checked={isChecked}
-        onChange={e => setIsChecked(e.target.checked)}
-      >
-        예
-      </Checkbox>
-    </div>
+    <Checkbox
+      {...args}
+      checked={isChecked}
+      onChange={e => setIsChecked(e.target.checked)}
+      name='gender'
+    >
+      예
+    </Checkbox>
   );
 };
