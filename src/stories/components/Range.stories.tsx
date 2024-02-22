@@ -40,7 +40,7 @@ export const Age = (args: Story) => {
       step={5}
       defaultValue={ageValues}
       includedValue={26}
-      onChange={(value: number[]) => setAgeValues(value)}
+      onChange={(values: number[]) => setAgeValues(values)}
     />
   );
 };

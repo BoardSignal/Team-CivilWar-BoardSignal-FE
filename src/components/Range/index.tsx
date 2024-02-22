@@ -6,7 +6,7 @@ interface RangeProps {
   step: number;
   defaultValue: number[];
   includedValue?: number;
-  onChange: (value: number[]) => void;
+  onChange: (values: number[]) => void;
 }
 
 const Range = ({
