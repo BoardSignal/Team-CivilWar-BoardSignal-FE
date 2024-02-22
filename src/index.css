@@ -30,6 +30,49 @@
   }
 }
 
+@layer components {
+  .input-range::-webkit-slider-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    position: relative;
+    transform: translate(0, -6.75px);
+    cursor: pointer;
+    appearance: none;
+    pointer-events: all;
+    z-index: 1;
+  }
+
+  .input-range::-moz-range-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    position: relative;
+    transform: translate(0, -6.75px);
+    cursor: pointer;
+    appearance: none;
+    pointer-events: all;
+    z-index: 1;
+  }
+
+  .input-range::-webkit-slider-thumb:hover {
+    background-color: var(--primary-darken);
+  }
+
+  .input-range {
+    position: absolute;
+    appearance: none;
+    height: 8px;
+    width: 100%;
+    border-radius: 8px;
+    outline: none;
+    background-color: var(--accent-7);
+    pointer-events: none;
+  }
+}
+
 @layer utilities {
   @keyframes RippleEffect {
     0% {
