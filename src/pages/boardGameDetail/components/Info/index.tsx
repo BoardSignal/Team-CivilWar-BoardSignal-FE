@@ -30,12 +30,12 @@ const Info = ({
     <>
       <img
         src={imageUrl || DEFAULT_BOARD_GAME_IMAGE_URL}
-        className='mx-auto h-[240px] w-[390px] object-cover'
+        className='h-full w-full min-w-[350px] max-w-[450px] object-cover'
       />
-      <div className='flex flex-col items-center gap-3 py-5'>
+      <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
         <div className='flex flex-col items-center gap-1'>
-          <span className='font-bold text-gray-accent1'>{name}</span>
-          <div className='flex flex-wrap gap-2'>
+          <span className='text-lg font-bold text-gray-accent1'>{name}</span>
+          <div className='flex flex-wrap gap-1'>
             {categories.map(category => (
               <Chip key={category} size='small'>
                 {category}
@@ -43,27 +43,25 @@ const Info = ({
             ))}
           </div>
         </div>
-        <span className='flex items-center gap-1'>
+        <span className='flex gap-1 text-xs text-gray-accent1'>
           <span className='flex items-center gap-0.5'>
-            <span className='text-sm font-bold text-gray-accent1'>난이도</span>
-            <span className='text-xs text-gray-accent2'>{difficulty}</span>
+            <span className='font-bold'>난이도</span>
+            <span className='text-gray-accent2'>{difficulty}</span>
           </span>
           <span className='flex items-center gap-0.5'>
-            <span className='text-sm font-bold text-gray-accent1'>인원</span>
-            <span className='text-xs text-gray-accent2'>{`${minParticipants}-${maxParticipants}`}</span>
+            <span className='font-bold'>인원</span>
+            <span className='text-gray-accent2'>{`${minParticipants}-${maxParticipants}`}</span>
           </span>
           <span className='flex items-center gap-0.5'>
-            <span className='text-sm font-bold text-gray-accent1'>
-              소요시간
-            </span>
-            <span className='text-xs text-gray-accent2'>{`${fromPlayTime}분-${toPlayTime}분`}</span>
+            <span className='font-bold'>소요시간</span>
+            <span className='text-gray-accent2'>{`${fromPlayTime}분-${toPlayTime}분`}</span>
           </span>
         </span>
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center gap-1'>
           <div className='flex h-8 w-8 items-center justify-center rounded-full border border-gray-accent3 '>
-            <Icon id='bookmark-line' className='text-gray-accent3'></Icon>
+            <Icon id='bookmark-line' size={16} className='text-gray-accent3' />
           </div>
-          <span>{wishCount}</span>
+          <span className='text-xs text-gray-accent1'>{wishCount}</span>
         </div>
       </div>
     </>
