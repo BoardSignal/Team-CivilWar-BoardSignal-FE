@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { ResponsiveLayoutWrapper } from './components/Layout';
+import BoardGameDetail from './pages/BoardGameDetail';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: 'me',
         element: <HomePage />,
+      },
+      {
+        path: 'board-game-detail',
+        element: <BoardGameDetail />,
       },
     ],
   },
