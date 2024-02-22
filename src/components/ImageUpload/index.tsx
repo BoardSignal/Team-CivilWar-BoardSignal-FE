@@ -21,13 +21,18 @@ const CameraButtonCSS = cva('absolute z-10', {
   },
 });
 
-type ImageUploadProps = VariantProps<typeof imageCSS>;
+interface ImageUploadProps extends VariantProps<typeof imageCSS> {
+  imageSrcUrl?: string;
+}
 
 const DEFAULT_IMAGE_URL =
   'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
 
-const ImageUpload = ({ variant }: ImageUploadProps) => {
-  const [previewImageUrl, setPreviewImageUrl] = useState(DEFAULT_IMAGE_URL);
+const ImageUpload = ({
+  variant,
+  imageSrcUrl = DEFAULT_IMAGE_URL,
+}: ImageUploadProps) => {
+  const [previewImageUrl, setPreviewImageUrl] = useState(imageSrcUrl);
 
   return (
     <div className='mb-3 flex w-full justify-center bg-gray-accent7 p-10'>
