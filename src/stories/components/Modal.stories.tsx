@@ -2,10 +2,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Modal from '@/components/Modal/index';
 
+import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
+
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   tags: ['autodocs'],
   component: Modal,
+  decorators: [CommonPageLayoutDecorator],
   argTypes: {
     variant: {
       options: ['primary', 'cancel'],
