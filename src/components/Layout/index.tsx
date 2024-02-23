@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { Introduction } from './Introduction';
+import { Introduction } from '@/components/Layout/Introduction';
 
 /**
  * PC, 태블릿 등 핸드폰보다 큰 화면으로 접속 시 화면 폭을 핸드폰의 크기로 제한해요.
