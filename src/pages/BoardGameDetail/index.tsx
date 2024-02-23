@@ -1,7 +1,9 @@
 import TabBar from '@/components/TabBar';
 
-import Description from './components/Description';
-import Info from './components/Info';
+import GameDescription from './components/GameDescription';
+import GamePlayDetail from './components/GamePlayDetail';
+import GameSummary from './components/GameSummary';
+import GameWish from './components/GameWish';
 
 const DummyData = {
   name: '스플렌더',
@@ -31,26 +33,29 @@ const BoardGameDetailPage = () => {
     description,
   } = DummyData;
 
+  const boardGameImageUrl = imageUrl || 'https://picsum.photos/200/200';
+
   return (
-    <div className='flex h-full flex-col'>
+    <div className='flex h-full flex-col justify-center'>
       <TabBar.Container>
         <TabBar.Left>
           <TabBar.GoBackButton />
           <TabBar.Title>{name}</TabBar.Title>
         </TabBar.Left>
       </TabBar.Container>
-      <Info
-        name={name}
-        imageUrl={imageUrl}
-        wishCount={wishCount}
-        minParticipants={minParticipants}
-        maxParticipants={maxParticipants}
-        fromPlayTime={fromPlayTime}
-        toPlayTime={toPlayTime}
-        difficulty={difficulty}
-        categories={categories}
-      />
-      <Description description={description} />
+      <img src={boardGameImageUrl} className='h-60' />
+      <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
+        <GameSummary name={name} categories={categories} />
+        <GamePlayDetail
+          minParticipants={minParticipants}
+          maxParticipants={maxParticipants}
+          fromPlayTime={fromPlayTime}
+          toPlayTime={toPlayTime}
+          difficulty={difficulty}
+        />
+        <GameWish wishCount={wishCount} />
+      </div>
+      <GameDescription description={description} />
     </div>
   );
 };

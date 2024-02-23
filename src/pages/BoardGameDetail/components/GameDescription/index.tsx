@@ -1,7 +1,7 @@
 interface DescriptionProps {
   description: string;
 }
-const Description = ({ description }: DescriptionProps) => {
+const GameDescription = ({ description }: DescriptionProps) => {
   return (
     <div className='text-accent-gray1 flex flex-col gap-1.5 border-b border-gray-accent7 p-4'>
       <span className='font-bold'>설명</span>
@@ -10,4 +10,4 @@ const Description = ({ description }: DescriptionProps) => {
   );
 };
 
-export default Description;
+export default GameDescription;
