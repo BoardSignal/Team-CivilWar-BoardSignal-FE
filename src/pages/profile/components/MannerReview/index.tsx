@@ -11,11 +11,11 @@ interface ReviewContentProps {
 
 const MannerReview = ({ reviews }: ReviewProps) => {
   return (
-    <div className='flex flex-col gap-2'>
-      <span className='font-bold'>매너 리뷰</span>
+    <div className='flex flex-col'>
+      <span className='py-2 font-bold'>매너 리뷰</span>
       <div className='flex flex-col gap-2 px-1'>
         {reviews.map(({ count, title }) => (
-          <ReviewContent count={count} title={title} />
+          <ReviewContent count={count} title={title} key={title} />
         ))}
       </div>
     </div>
