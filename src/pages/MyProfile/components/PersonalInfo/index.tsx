@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 
-interface PersonalInfoProps {
+interface PersonalInfo {
   nickname: string;
   signal: number;
   gender: string;
@@ -10,28 +11,28 @@ interface PersonalInfoProps {
   profileImageUrl: string;
 }
 
-const PersonalInfo = ({
-  nickname,
-  signal,
-  gender,
-  ageGroup,
-  profileImageUrl,
-}: PersonalInfoProps) => {
-  const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
+interface PersonalInfoProps {
+  personalInfo: PersonalInfo;
+}
+
+const PersonalInfo = ({ personalInfo }: PersonalInfoProps) => {
   const navigate = useNavigate();
+  const { nickname, signal, gender, ageGroup, profileImageUrl } = personalInfo;
+  const userProfileImageUrl =
+    profileImageUrl || 'https://picsum.photos/200/200';
 
   return (
-    <div className='flex flex-col items-center gap-2 px-4'>
+    <div className='flex flex-col items-center gap-2 border-b border-gray-accent7 py-4'>
       <img
-        src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
+        src={userProfileImageUrl}
         alt='아바타 이미지'
         className='h-[150px] w-[150px] rounded-full object-cover'
       />
       <div className='flex flex-col items-center gap-1'>
         <span className='text-lg font-bold text-gray-accent1'>{nickname}</span>
         <span className='text-sm text-gray-accent2'>{`${ageGroup} ${gender}`}</span>
-        <div
-          className='flex cursor-pointer gap-1'
+        <Button
+          className='flex h-fit cursor-pointer gap-1'
           onClick={() => navigate('end-game')}
         >
           <Icon id='dice-line' className='text-indigo-500' />
@@ -39,7 +40,7 @@ const PersonalInfo = ({
           <span className='cursor-default text-sm font-bold text-gray-accent1'>
             {signal}
           </span>
-        </div>
+        </Button>
       </div>
     </div>
   );

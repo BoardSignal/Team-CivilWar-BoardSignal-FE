@@ -27,9 +27,9 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
   const { text, background } = getColorByTemperature(value);
 
   return (
-    <>
+    <div>
       <Popover>
-        <PopoverTrigger className='pb-2'>
+        <PopoverTrigger>
           <span className='flex w-fit gap-1 text-xs text-gray-accent1 underline'>
             시그널온도
             <Icon id='information-line' size={16}></Icon>
@@ -59,7 +59,7 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
           ></div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
