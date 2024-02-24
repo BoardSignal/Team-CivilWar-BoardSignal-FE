@@ -32,44 +32,15 @@
 
 @layer components {
   .input-range::-webkit-slider-thumb {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    position: relative;
-    transform: translate(0, -6.75px);
-    cursor: pointer;
-    appearance: none;
-    pointer-events: all;
-    z-index: 1;
+    @apply pointer-events-auto relative z-[1] h-3 w-3 translate-y-[-6.75px] cursor-pointer appearance-none rounded-md bg-[var(--primary)];
   }
 
   .input-range::-moz-range-thumb {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    position: relative;
-    transform: translate(0, -6.75px);
-    cursor: pointer;
-    appearance: none;
-    pointer-events: all;
-    z-index: 1;
-  }
-
-  .input-range::-webkit-slider-thumb:hover {
-    background-color: var(--primary-darken);
+    @apply pointer-events-auto relative z-[1] h-3 w-3 translate-y-[-6.75px] cursor-pointer appearance-none rounded-md bg-[var(--primary)];
   }
 
   .input-range {
-    position: absolute;
-    appearance: none;
-    height: 8px;
-    width: 100%;
-    border-radius: 8px;
-    outline: none;
-    background-color: var(--accent-7);
-    pointer-events: none;
+    @apply pointer-events-none absolute	h-2 w-full appearance-none rounded-lg bg-[var(--accent-7)] outline-none [&::-webkit-slider-thumb:hover]:bg-[var(--primary-darken)];
   }
 }
 
