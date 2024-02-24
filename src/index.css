@@ -40,7 +40,7 @@
   }
 
   .input-range {
-    @apply pointer-events-none absolute	h-2 w-full appearance-none rounded-lg bg-[var(--accent-7)] outline-none [&::-webkit-slider-thumb:hover]:bg-[var(--primary-darken)];
+    @apply pointer-events-none absolute	h-2 w-full appearance-none rounded-lg bg-[var(--accent-7)] outline-none [&::-moz-range-thumb:hover]:bg-[var(--primary-darken)] [&::-webkit-slider-thumb:hover]:bg-[var(--primary-darken)];
   }
 }
 

@@ -15,7 +15,7 @@ export default meta;
 type Story = StoryObj<typeof Range>;
 
 export const Headcount = (args: Story) => {
-  const [headcountValues, setHeadcountValues] = useState<number[]>([3, 5]);
+  const [headcountValues, setHeadcountValues] = useState([3, 5]);
 
   return (
     <Range
@@ -23,8 +23,8 @@ export const Headcount = (args: Story) => {
       min={1}
       max={8}
       step={1}
-      defaultValue={headcountValues}
-      onChange={(value: number[]) => setHeadcountValues(value)}
+      value={headcountValues}
+      onChange={(values: number[]) => setHeadcountValues([...values])}
     />
   );
 };
@@ -38,7 +38,7 @@ export const Age = (args: Story) => {
       min={10}
       max={40}
       step={5}
-      defaultValue={ageValues}
+      value={ageValues}
       includedValue={26}
       onChange={(values: number[]) => setAgeValues(values)}
     />

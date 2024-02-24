@@ -1,10 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 
+import { cn } from '@/utils/cn';
+
 interface RangeProps {
   min: number;
   max: number;
   step: number;
-  defaultValue: number[];
+  value: number[];
   includedValue?: number;
   onChange: (values: number[]) => void;
 }
@@ -13,11 +15,11 @@ const Range = ({
   min,
   max,
   step,
-  defaultValue = [min, max],
+  value,
   includedValue,
   onChange,
 }: RangeProps) => {
-  const [from, to] = defaultValue;
+  const [from, to] = value;
 
   const [minValue, setMinValue] = useState(from);
   const [maxValue, setMaxValue] = useState(to);
@@ -30,31 +32,29 @@ const Range = ({
   );
 
   const handleMinThumb = (e: ChangeEvent<HTMLInputElement>) => {
-    if (includedValue && parseInt(e.target.value) > includedValue) {
+    const inputValue = parseInt(e.target.value);
+
+    if (includedValue !== undefined && inputValue > includedValue) {
       return;
     }
 
-    if (parseInt(e.target.value) > maxValue) {
-      setMinValue(maxValue);
-    } else {
-      setMinValue(parseInt(e.target.value));
-    }
+    const nextMinValue = Math.min(maxValue, inputValue);
+    setMinValue(nextMinValue);
 
-    onChange && onChange([minValue, maxValue]);
+    onChange([nextMinValue, maxValue]);
   };
 
   const handleMaxThumb = (e: ChangeEvent<HTMLInputElement>) => {
-    if (includedValue && parseInt(e.target.value) < includedValue) {
+    const inputValue = parseInt(e.target.value);
+
+    if (includedValue !== undefined && inputValue < includedValue) {
       return;
     }
 
-    if (parseInt(e.target.value) < minValue) {
-      setMaxValue(minValue);
-    } else {
-      setMaxValue(parseInt(e.target.value));
-    }
+    const nextMaxValue = Math.max(minValue, inputValue);
 
-    onChange && onChange([minValue, maxValue]);
+    setMaxValue(nextMaxValue);
+    onChange([minValue, nextMaxValue]);
   };
 
   return (
@@ -68,7 +68,12 @@ const Range = ({
           step={step}
           list='markers'
           onChange={handleMinThumb}
-          className={`input-range ${minValue === max ? 'z-10' : 'z-[1px]'}`}
+          className={cn(
+            'input-range',
+            minValue === max
+              ? '[&::-moz-range-thumb]:z-10 [&::-webkit-slider-thumb]:z-10'
+              : '[&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:z-[1]',
+          )}
         />
         <input
           type='range'
@@ -89,14 +94,21 @@ const Range = ({
           )`,
           }}
           onChange={handleMaxThumb}
-          className={`input-range ${maxValue === min ? 'z-10' : 'z-[1px]'}`}
+          className={cn(
+            'input-range',
+            maxValue === min
+              ? '[&::-moz-range-thumb]:z-10 [&::-webkit-slider-thumb]:z-10'
+              : '[&::-moz-range-thumb]:z-[1] [&::-webkit-slider-thumb]:z-[1]',
+          )}
         />
         <datalist
           id='markers'
-          className='flex h-fit w-full translate-y-4 justify-between text-primary'
+          className='flex h-fit w-full translate-y-4 justify-between text-gray-accent2'
         >
           {ticks.map(tick => (
-            <option value={tick}>{tick}</option>
+            <option key={tick} value={tick}>
+              {tick}
+            </option>
           ))}
         </datalist>
       </div>
