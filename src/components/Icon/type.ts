@@ -48,4 +48,5 @@ export type IconName =
   | 'bell-fill'
   | 'bell-line'
   | 'search-fill'
-  | 'search-line';
+  | 'search-line'
+  | 'close-line';

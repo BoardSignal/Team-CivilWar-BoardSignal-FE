@@ -6,11 +6,7 @@ export interface DrawerTriggerProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const DrawerTrigger = ({ children, ...props }: DrawerTriggerProps) => {
-  return (
-    <div className='h-fit w-fit' {...props}>
-      {children}
-    </div>
-  );
+  return <div {...props}>{children}</div>;
 };
 
 DrawerTrigger.defaultProps = {

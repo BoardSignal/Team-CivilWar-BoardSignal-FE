@@ -12,12 +12,14 @@ import {
 import { cn } from '@/utils/cn';
 
 import LayoutRootPortal from '../Layout/LayoutRootPortal';
+import DrawerCloser, { DrawerCloserProps } from './DrawerClose';
 import DrawerContent, { DrawerContentProps } from './DrawerContent';
 import DrawerTitle, { DrawerTitleProps } from './DrawerTitle';
 import DrawerTrigger, { DrawerTriggerProps } from './DrawerTrigger';
 
 interface DrawerProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode;
+  onClose?: () => void;
 }
 
 const childrenToArray = (children: ReactNode, types: string | string[]) => {
@@ -26,34 +28,49 @@ const childrenToArray = (children: ReactNode, types: string | string[]) => {
   );
 };
 
-const Drawer = ({ children }: DrawerProps) => {
+const Drawer = ({ children, onClose }: DrawerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [drawerTrigger, drawerTitle, drawerContent] = useMemo(() => {
-    return (
-      childrenToArray(children, [
-        'Drawer.Trigger',
-        'Drawer.Title',
-        'Drawer.Content',
-      ]) as ReactElement<
-        DrawerTriggerProps | DrawerTitleProps | DrawerContentProps
-      >[]
-    ).map((element, index) => {
-      if (element.props.__type === 'Drawer.Trigger') {
-        return cloneElement(element, {
-          ...element.props,
-          key: index,
-          onClick: () => setIsOpen(true),
-        });
-      }
-
-      return element;
-    });
-  }, [children]);
 
   const handleCloseDrawer = () => {
     setIsOpen(false);
+    onClose && onClose();
   };
+
+  const [drawerTrigger, drawerTitle, drawerContent, drawerCloser] =
+    useMemo(() => {
+      return (
+        childrenToArray(children, [
+          'Drawer.Trigger',
+          'Drawer.Title',
+          'Drawer.Content',
+          'Drawer.Closer',
+        ]) as ReactElement<
+          | DrawerTriggerProps
+          | DrawerTitleProps
+          | DrawerContentProps
+          | DrawerCloserProps
+        >[]
+      ).map((element, index) => {
+        if (element.props.__type === 'Drawer.Trigger') {
+          return cloneElement(element, {
+            ...element.props,
+            key: index,
+            onClick: () => setIsOpen(true),
+          });
+        }
+
+        if (element.props.__type === 'Drawer.Closer') {
+          return cloneElement(element, {
+            ...element.props,
+            key: index,
+            onClick: handleCloseDrawer,
+          });
+        }
+
+        return element;
+      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [children]);
 
   return (
     <>
@@ -74,12 +91,13 @@ const Drawer = ({ children }: DrawerProps) => {
           ></div>
           <div
             className={cn(
-              'absolute min-h-64 w-full rounded-t-lg bg-white p-6',
+              'absolute flex min-h-64 w-full flex-col rounded-t-lg bg-white p-6',
               isOpen ? 'animate-moveUp' : 'animate-moveDown',
             )}
           >
             {drawerTitle}
             {drawerContent}
+            {drawerCloser}
           </div>
         </div>
       </LayoutRootPortal>
@@ -90,5 +108,6 @@ const Drawer = ({ children }: DrawerProps) => {
 Drawer.Trigger = DrawerTrigger;
 Drawer.Title = DrawerTitle;
 Drawer.Content = DrawerContent;
+Drawer.Closer = DrawerCloser;
 
 export default Drawer;

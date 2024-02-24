@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import OptionItemButton from './OptionItemButton';
 
 interface MultipleSelectProps {
@@ -13,20 +11,16 @@ const MultipleSelect = ({
   selectedItems,
   onChange,
 }: MultipleSelectProps) => {
-  const [newSelectedItems, setNewSelectedItems] = useState([...selectedItems]);
-
-  const handleClickButton = (selectedItem: string) => {
-    if (newSelectedItems.includes(selectedItem)) {
-      setNewSelectedItems(
-        newSelectedItems.filter(
-          newSelectedItem => newSelectedItem !== selectedItem,
-        ),
+  const handleClickButton = (newSelectedItem: string) => {
+    if (selectedItems.includes(newSelectedItem)) {
+      onChange(
+        selectedItems.filter(selectedItem => selectedItem !== newSelectedItem),
       );
-    } else {
-      setNewSelectedItems([...newSelectedItems, selectedItem]);
+
+      return;
     }
 
-    onChange && onChange(newSelectedItems);
+    onChange([...selectedItems, newSelectedItem]);
   };
 
   return (
@@ -35,7 +29,7 @@ const MultipleSelect = ({
         <OptionItemButton
           key={optionItem}
           optionItem={optionItem}
-          active={newSelectedItems.includes(optionItem)}
+          active={selectedItems.includes(optionItem)}
           onClick={handleClickButton}
         />
       ))}
