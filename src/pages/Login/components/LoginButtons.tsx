@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import kakaoLoginButtonImage from '@/assets/kakao-login-button.png';
 import Button from '@/components/Button';
@@ -30,18 +30,11 @@ export const NaverLoginButton = () => {
 };
 
 export const SkipLoginButton = () => {
-  const navigate = useNavigate();
-
-  // Ripple 효과가 나오기 전에 이동이 되어서 setTimeout을 사용해요.
-  const goToMain = () => {
-    setTimeout(() => {
-      navigate('/');
-    }, 200);
-  };
-
   return (
-    <Button onClick={goToMain} className={KAKAO_LOGIN_BUTTON_HEIGHT}>
-      회원가입 없이 둘러보기
-    </Button>
+    <Link to='/' className='w-full'>
+      <Button className={KAKAO_LOGIN_BUTTON_HEIGHT}>
+        회원가입 없이 둘러보기
+      </Button>
+    </Link>
   );
 };
