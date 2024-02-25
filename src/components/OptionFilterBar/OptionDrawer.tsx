@@ -13,29 +13,31 @@ interface OptionDrawerProps {
 }
 
 const OptionDrawer = ({ option }: OptionDrawerProps) => {
-  const { name, items, queryKey } = option;
+  const { name, items, queryStringKey } = option;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [newSelectedItems, setNewSelectedItems] = useState([
-    ...searchParams.getAll(queryKey),
+    ...searchParams.getAll(queryStringKey),
   ]);
 
   const handleClickCloser = () => {
-    searchParams.delete(queryKey);
-    newSelectedItems.map(item => searchParams.append(queryKey, item));
+    searchParams.delete(queryStringKey);
+    newSelectedItems.map(item => searchParams.append(queryStringKey, item));
     setSearchParams(searchParams);
   };
 
   useEffect(() => {
     if (searchParams.toString()) return;
 
-    setNewSelectedItems([...searchParams.getAll(queryKey)]);
+    setNewSelectedItems([...searchParams.getAll(queryStringKey)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
     <Drawer
-      onClose={() => setNewSelectedItems([...searchParams.getAll(queryKey)])}
+      onClose={() =>
+        setNewSelectedItems([...searchParams.getAll(queryStringKey)])
+      }
     >
       <Drawer.Trigger>
         <OptionFilterButton option={option} />

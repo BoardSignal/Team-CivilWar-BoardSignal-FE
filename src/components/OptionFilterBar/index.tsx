@@ -14,7 +14,7 @@ export interface Option {
   name: string;
   icons: Icon;
   items: string[];
-  queryKey: string;
+  queryStringKey: string;
 }
 
 interface OptionFilterBarProps {
@@ -24,10 +24,10 @@ interface OptionFilterBarProps {
 const OptionFilterBar = ({ options }: OptionFilterBarProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleToggleButton = (queryKey: string, optionItem: string) => {
-    searchParams.get(queryKey)
-      ? searchParams.delete(queryKey)
-      : searchParams.set(queryKey, optionItem);
+  const handleToggleButton = (queryStringKey: string, optionItem: string) => {
+    searchParams.get(queryStringKey)
+      ? searchParams.delete(queryStringKey)
+      : searchParams.set(queryStringKey, optionItem);
 
     setSearchParams(searchParams);
   };
@@ -46,7 +46,7 @@ const OptionFilterBar = ({ options }: OptionFilterBarProps) => {
               <OptionFilterButton
                 option={option}
                 onClick={() =>
-                  handleToggleButton(option.queryKey, option.items[0])
+                  handleToggleButton(option.queryStringKey, option.items[0])
                 }
               />
             </div>

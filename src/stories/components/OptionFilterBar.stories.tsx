@@ -28,7 +28,7 @@ const OPTIONS = [
       line: 'map-pin-line',
     },
     items: ['강남역', '합정역', '신당역'],
-    queryKey: 'subway',
+    queryStringKey: 'station',
   },
   {
     name: '시간',
@@ -37,7 +37,7 @@ const OPTIONS = [
       line: 'time-line',
     },
     items: ['평일 오전', '평일 오후', '주말 오전', '주말 오후'],
-    queryKey: 'time',
+    queryStringKey: 'time',
   },
   {
     name: '카테고리',
@@ -54,7 +54,7 @@ const OPTIONS = [
       '협력',
       '베팅/경매/레이스',
     ],
-    queryKey: 'category',
+    queryStringKey: 'category',
   },
   {
     name: '성별',
@@ -63,7 +63,7 @@ const OPTIONS = [
       line: 'team-line',
     },
     items: ['동성만'],
-    queryKey: 'gender',
+    queryStringKey: 'gender',
   },
 ];
 

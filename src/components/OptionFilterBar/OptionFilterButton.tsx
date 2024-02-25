@@ -13,7 +13,7 @@ interface OptionFilterButtonProps {
 }
 
 const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
-  const { name, icons, queryKey } = option;
+  const { name, icons, queryStringKey } = option;
 
   const [searchParams] = useSearchParams();
 
@@ -21,24 +21,24 @@ const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
     <Button
       className={cn(
         'h-fit w-fit gap-1 rounded-full border px-4 py-2 text-xs',
-        searchParams.get(queryKey) && 'bg-gray-accent1 text-white',
+        searchParams.get(queryStringKey) && 'bg-gray-accent1 text-white',
       )}
       onClick={onClick}
     >
       <Icon
         id={
-          searchParams.get(queryKey)
+          searchParams.get(queryStringKey)
             ? (icons.fill as IconName)
             : (icons.line as IconName)
         }
         size={16}
         className={
-          searchParams.get(queryKey) ? 'fill-white' : 'fill-gray-accent2'
+          searchParams.get(queryStringKey) ? 'fill-white' : 'fill-gray-accent2'
         }
       />
       <span>
-        {searchParams.get(queryKey)
-          ? `${searchParams.get(queryKey)}${searchParams.getAll(queryKey).length > 1 ? ` 외 ${searchParams.getAll(queryKey).length - 1}개` : ''}`
+        {searchParams.get(queryStringKey)
+          ? `${searchParams.get(queryStringKey)}${searchParams.getAll(queryStringKey).length > 1 ? ` 외 ${searchParams.getAll(queryStringKey).length - 1}개` : ''}`
           : name}
       </span>
     </Button>
