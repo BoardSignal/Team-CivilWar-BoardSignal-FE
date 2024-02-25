@@ -6,7 +6,7 @@ interface LoginResponse {
   accessToken: string;
   isJoined: boolean;
 }
-export const postNaverLogin = () => {
+const postNaverLogin = () => {
   return api.post<LoginResponse>({
     url: '/auth/login/naver',
   });
