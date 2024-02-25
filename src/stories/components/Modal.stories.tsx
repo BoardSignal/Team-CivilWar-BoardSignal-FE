@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Modal from '@/components/Modal/index';
@@ -11,7 +13,7 @@ const meta: Meta<typeof Modal> = {
   decorators: [CommonPageLayoutDecorator],
   argTypes: {
     variant: {
-      options: ['primary', 'cancel'],
+      options: ['primary', 'danger'],
       control: { type: 'radio' },
     },
   },
@@ -21,12 +23,15 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-export const Default: Story = {
-  args: {
-    isOpen: true,
-    title: '안내',
-    message: '환영합니다!',
-    variant: 'primary',
-    children: '확인',
-  },
+export const Default = (args: Story) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <Modal
+      {...args}
+      title='안내'
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+    />
+  );
 };
