@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 import { cn } from '@/utils/cn';
 
@@ -19,10 +19,7 @@ const Range = ({
   includedValue,
   onChange,
 }: RangeProps) => {
-  const [from, to] = value;
-
-  const [minValue, setMinValue] = useState(from);
-  const [maxValue, setMaxValue] = useState(to);
+  const [minValue, maxValue] = value;
 
   const range = max - min;
 
@@ -39,7 +36,6 @@ const Range = ({
     }
 
     const nextMinValue = Math.min(maxValue, inputValue);
-    setMinValue(nextMinValue);
 
     onChange([nextMinValue, maxValue]);
   };
@@ -53,7 +49,6 @@ const Range = ({
 
     const nextMaxValue = Math.max(minValue, inputValue);
 
-    setMaxValue(nextMaxValue);
     onChange([minValue, nextMaxValue]);
   };
 
