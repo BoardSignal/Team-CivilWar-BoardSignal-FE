@@ -30,6 +30,20 @@
   }
 }
 
+@layer components {
+  .input-range::-webkit-slider-thumb {
+    @apply pointer-events-auto relative z-[1] h-3 w-3 translate-y-[-6.75px] cursor-pointer appearance-none rounded-md bg-[var(--primary)];
+  }
+
+  .input-range::-moz-range-thumb {
+    @apply pointer-events-auto relative z-[1] h-3 w-3 translate-y-[-6.75px] cursor-pointer appearance-none rounded-md bg-[var(--primary)];
+  }
+
+  .input-range {
+    @apply pointer-events-none absolute	h-2 w-full appearance-none rounded-lg bg-[var(--accent-7)] outline-none [&::-moz-range-thumb:hover]:bg-[var(--primary-darken)] [&::-webkit-slider-thumb:hover]:bg-[var(--primary-darken)];
+  }
+}
+
 @layer utilities {
   @keyframes RippleEffect {
     0% {
