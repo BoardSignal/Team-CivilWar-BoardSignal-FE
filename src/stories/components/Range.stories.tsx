@@ -24,7 +24,7 @@ export const Headcount = (args: Story) => {
       max={8}
       step={1}
       value={headcountValues}
-      onChange={(values: number[]) => setHeadcountValues([...values])}
+      onChange={setHeadcountValues}
     />
   );
 };
@@ -40,7 +40,7 @@ export const Age = (args: Story) => {
       step={5}
       value={ageValues}
       includedValue={26}
-      onChange={(values: number[]) => setAgeValues(values)}
+      onChange={setAgeValues}
     />
   );
 };
