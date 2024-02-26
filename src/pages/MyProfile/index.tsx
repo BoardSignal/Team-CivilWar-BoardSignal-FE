@@ -1,7 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import Ripple from '@/components/Ripple';
 import TabBar from '@/components/TabBar';
 
 import MannerReview from './components/MannerReview';
@@ -9,10 +10,10 @@ import PersonalInfo from './components/PersonalInfo';
 import PreferCategory from './components/PreferCategory';
 import SignalTemperature from './components/SignalTemperature';
 
-const ProfilePageDummyDate = {
+const PROFILE_PAGE_DUMMY_DATA = {
   personalInfo: {
     nickname: '네이밍 못짓는 호민',
-    signal: 15,
+    signalCount: 15,
     profileImageUrl: '',
     ageGroup: '20대',
     gender: '남성',
@@ -20,58 +21,62 @@ const ProfilePageDummyDate = {
   signalTemperature: 86.3,
   reviews: [
     {
-      title: '시간을 잘 지켜요.',
-      count: 12,
+      content: '시간 약속을 잘 지켜요.',
+      reviewScore: 12,
     },
     {
-      title: '착해요.',
-      count: 9,
+      content: '친절하고 매너가 좋아요.',
+      reviewScore: 9,
     },
     {
-      title: '게임을 재밌게 해요.',
-      count: 4,
+      content: '응답이 빨라요.',
+      reviewScore: 4,
     },
   ],
   categories: ['배팅/전략', '카드경매', '심리', '블러핑', '마피아', '카드빙고'],
+  wishCount: 3,
 };
 
-const WishGameList = ({ wish }: { wish: number }) => {
+const WishGameList = ({ wishGamesCount }: { wishGamesCount: number }) => {
   const navigate = useNavigate();
+  const { userId } = useParams() as { userId: string };
+  const goToWishGamePage = (userId: string) => {
+    navigate(`/wish-game/${userId}`);
+  };
 
   return (
-    <Button
-      onClick={() => navigate('/wish-game')}
+    <Ripple
+      onClick={() => {
+        goToWishGamePage(userId);
+      }}
       className='flex gap-4 border-b border-gray-accent7 p-4'
     >
       <div className='flex w-full justify-between'>
         <span className='flex gap-1'>
           <span className='font-bold text-gray-accent1'>찜한 게임 목록</span>
-          <span>{wish}</span>
+          <span>{wishGamesCount}</span>
         </span>
         <Icon id='arrow-right-line' className='cursor-pointer'></Icon>
       </div>
-    </Button>
+    </Ripple>
   );
 };
 
 const EditProfileButton = () => {
-  const navigate = useNavigate();
-
   return (
     <div className='p-4'>
-      <Button
-        className='rounded-lg bg-primary text-white'
-        onClick={() => navigate('/edit-profile')}
-      >
-        프로필 수정
-      </Button>
+      <Link to='/edit-profile'>
+        <Button className='rounded-lg bg-primary text-white'>
+          프로필 수정
+        </Button>
+      </Link>
     </div>
   );
 };
 
 const MyProfilePage = () => {
-  const { reviews, signalTemperature, personalInfo, categories } =
-    ProfilePageDummyDate;
+  const { reviews, signalTemperature, personalInfo, categories, wishCount } =
+    PROFILE_PAGE_DUMMY_DATA;
 
   return (
     <>
@@ -85,14 +90,16 @@ const MyProfilePage = () => {
           <TabBar.SettingsButton />
         </TabBar.Right>
       </TabBar.Container>
-      <PersonalInfo personalInfo={personalInfo} />
-      <EditProfileButton />
-      <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
-        <SignalTemperature value={signalTemperature} />
-        <MannerReview reviews={reviews} />
+      <div className='scroll-auto'>
+        <PersonalInfo personalInfo={personalInfo} />
+        <EditProfileButton />
+        <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
+          <SignalTemperature value={signalTemperature} />
+          <MannerReview reviews={reviews} />
+        </div>
+        <PreferCategory categories={categories} />
+        <WishGameList wishGamesCount={wishCount} />
       </div>
-      <PreferCategory categories={categories} />
-      <WishGameList wish={3} />
     </>
   );
 };
