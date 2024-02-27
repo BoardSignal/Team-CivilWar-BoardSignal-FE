@@ -33,11 +33,11 @@ export const router = createBrowserRouter([
       {
         path: 'board-game-detail',
         element: <BoardGameDetail />,
-      },
+       },
+       {
+        path: 'login',
+        element: <LoginPage />,
+       }
     ],
-  },
-  {
-    path: 'login',
-    element: <LoginPage />,
   },
 ]);
