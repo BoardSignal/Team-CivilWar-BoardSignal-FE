@@ -2,32 +2,32 @@ import UserSignalTemperature from './UserSignalTemperature';
 
 interface UserProfileProps {
   nickname: string;
-  profileImageUrl: string;
+  profileImageUrl?: string;
   ageGroup: string;
-  value: number;
+  signalTemperature: number;
 }
+
+const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const UserProfile = ({
   nickname,
-  profileImageUrl,
+  profileImageUrl = DEFAULT_PROFILE_IMAGE_URL,
   ageGroup,
-  value,
+  signalTemperature,
 }: UserProfileProps) => {
-  const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
-
   return (
     <div className='flex'>
       <img
-        src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
-        className='h-10 w-10 rounded-full object-cover'
-        style={{ marginRight: '0.5rem' }}
+        src={profileImageUrl}
+        alt='프로필사진'
+        className='mr-2 h-10 w-10 rounded-full object-cover'
       />
       <div className='flex w-full justify-between'>
         <div className='flex flex-col'>
           <span className='font-bold text-gray-accent1'>{nickname}</span>
           <span className='text-xs text-gray-accent2'>{ageGroup}</span>
         </div>
-        <UserSignalTemperature value={value} />
+        <UserSignalTemperature value={signalTemperature} />
       </div>
     </div>
   );

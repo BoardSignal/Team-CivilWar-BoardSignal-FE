@@ -13,5 +13,5 @@ export default meta;
 type Story = StoryObj<typeof UserProfile>;
 
 export const Default: Story = {
-  args: { nickname: '크라켄마스터', ageGroup: '20대', value: 36.6 },
+  args: { nickname: '크라켄마스터', ageGroup: '20대', signalTemperature: 36.6 },
 };
