@@ -62,7 +62,7 @@ const OPTIONS = [
       fill: 'team-fill',
       line: 'team-line',
     },
-    items: ['동성만'],
+    items: ['남성', '여성'],
     queryStringKey: 'gender',
   },
 ];
