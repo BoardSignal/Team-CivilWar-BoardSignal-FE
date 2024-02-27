@@ -24,7 +24,7 @@ const PersonalInfo = ({ personalInfo }: PersonalInfoProps) => {
   const userProfileImageUrl = profileImageUrl || DEFAULT_PROFILE_IMAGE_URL;
 
   return (
-    <div className='flex flex-col items-center gap-2 border-b border-gray-accent7 py-4'>
+    <div className='flex flex-col items-center gap-2 py-4'>
       <img
         src={userProfileImageUrl}
         alt='아바타 이미지'
