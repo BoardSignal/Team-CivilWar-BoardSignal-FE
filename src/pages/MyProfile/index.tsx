@@ -2,7 +2,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import Ripple from '@/components/Ripple';
 import TabBar from '@/components/TabBar';
 
 import MannerReview from './components/MannerReview';
@@ -39,17 +38,15 @@ const PROFILE_PAGE_DUMMY_DATA = {
 
 const WishGameList = ({ wishGamesCount }: { wishGamesCount: number }) => {
   const navigate = useNavigate();
-  const { userId } = useParams() as { userId: string };
-  const goToWishGamePage = (userId: string) => {
+  const { userId } = useParams();
+  const goToWishGamePage = () => {
     navigate(`/wish-game/${userId}`);
   };
 
   return (
-    <Ripple
-      onClick={() => {
-        goToWishGamePage(userId);
-      }}
-      className='flex gap-4 border-b border-gray-accent7 p-4'
+    <Button
+      onClick={goToWishGamePage}
+      className='flex h-auto gap-4 border-b border-gray-accent7 p-4'
     >
       <div className='flex w-full justify-between'>
         <span className='flex gap-1'>
@@ -58,13 +55,13 @@ const WishGameList = ({ wishGamesCount }: { wishGamesCount: number }) => {
         </span>
         <Icon id='arrow-right-line' className='cursor-pointer'></Icon>
       </div>
-    </Ripple>
+    </Button>
   );
 };
 
 const EditProfileButton = () => {
   return (
-    <div className='p-4'>
+    <div className='border-b border-gray-accent7 p-4'>
       <Link to='/edit-profile'>
         <Button className='rounded-lg bg-primary text-white'>
           프로필 수정
@@ -79,7 +76,7 @@ const MyProfilePage = () => {
     PROFILE_PAGE_DUMMY_DATA;
 
   return (
-    <>
+    <div className='flex h-full flex-col'>
       <TabBar.Container>
         <TabBar.Left>
           <TabBar.GoBackButton />
@@ -90,7 +87,7 @@ const MyProfilePage = () => {
           <TabBar.SettingsButton />
         </TabBar.Right>
       </TabBar.Container>
-      <div className='scroll-auto'>
+      <div className='grow overflow-y-auto'>
         <PersonalInfo personalInfo={personalInfo} />
         <EditProfileButton />
         <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
@@ -100,7 +97,7 @@ const MyProfilePage = () => {
         <PreferCategory categories={categories} />
         <WishGameList wishGamesCount={wishCount} />
       </div>
-    </>
+    </div>
   );
 };
 
