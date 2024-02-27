@@ -1,11 +1,11 @@
 import Chip from '@/components/Chip';
 
-interface InfoProps {
+interface GameSummaryProps {
   name: string;
   categories: string[];
 }
 
-const GameSummary = ({ name, categories }: InfoProps) => {
+const GameSummary = ({ name, categories }: GameSummaryProps) => {
   return (
     <>
       <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>

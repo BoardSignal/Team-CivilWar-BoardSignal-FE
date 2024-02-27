@@ -43,15 +43,17 @@ const BoardGameDetailPage = () => {
           <TabBar.Title>{name}</TabBar.Title>
         </TabBar.Left>
       </TabBar.Container>
-      <img src={boardGameImageUrl} className='h-60' />
+      <img src={boardGameImageUrl} className='h-60' alt={name} />
       <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
         <GameSummary name={name} categories={categories} />
         <GamePlayDetail
-          minParticipants={minParticipants}
-          maxParticipants={maxParticipants}
-          fromPlayTime={fromPlayTime}
-          toPlayTime={toPlayTime}
-          difficulty={difficulty}
+          gamePlayDetail={{
+            difficulty,
+            minParticipants,
+            maxParticipants,
+            fromPlayTime,
+            toPlayTime,
+          }}
         />
         <GameWish wishCount={wishCount} />
       </div>
