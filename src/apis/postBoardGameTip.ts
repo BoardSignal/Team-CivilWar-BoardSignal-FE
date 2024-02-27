@@ -5,12 +5,16 @@ import { api } from './core';
 interface CreateTipResponse {
   content: string;
 }
+
 export interface CreateTipRequest {
   boardGameId: string;
   content: string;
 }
 
-export const postGameTip = ({ boardGameId, content }: CreateTipRequest) => {
+export const postBoardGameTip = ({
+  boardGameId,
+  content,
+}: CreateTipRequest) => {
   return api.post<CreateTipResponse>({
     url: `board-games/tip/${boardGameId}`,
     data: {
@@ -19,9 +23,9 @@ export const postGameTip = ({ boardGameId, content }: CreateTipRequest) => {
   });
 };
 
-export const usePostGameTip = () => {
+export const usePostBoardGameTip = () => {
   const { mutateAsync } = useMutation({
-    mutationFn: postGameTip,
+    mutationFn: postBoardGameTip,
   });
 
   return mutateAsync;
