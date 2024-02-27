@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CreateTipPage from '@/pages/CreateTip';
+import CreateTipPage from '@/pages/CreateBoardGameTip';
 import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
 const meta: Meta<typeof CreateTipPage> = {
