@@ -32,6 +32,8 @@ export const Default = (args: Story) => {
       title='안내'
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
+      children='모임이 취소되었어요'
+      buttonChildren='확인'
     />
   );
 };
