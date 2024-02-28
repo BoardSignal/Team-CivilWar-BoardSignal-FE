@@ -1,6 +1,7 @@
 import {
   Children,
   ComponentPropsWithoutRef,
+  PropsWithChildren,
   ReactElement,
   ReactNode,
   cloneElement,
@@ -18,7 +19,6 @@ import DrawerTitle, { DrawerTitleProps } from './DrawerTitle';
 import DrawerTrigger, { DrawerTriggerProps } from './DrawerTrigger';
 
 interface DrawerProps extends ComponentPropsWithoutRef<'div'> {
-  children: ReactNode;
   onClose?: () => void;
 }
 
@@ -28,7 +28,7 @@ const childrenToArray = (children: ReactNode, types: string | string[]) => {
   );
 };
 
-const Drawer = ({ children, onClose }: DrawerProps) => {
+const Drawer = ({ children, onClose }: PropsWithChildren<DrawerProps>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseDrawer = () => {

@@ -1,13 +1,16 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
 import { cn } from '@/utils/cn';
 
 export interface DrawerCloserProps extends ComponentPropsWithoutRef<'div'> {
-  children: ReactNode;
   __type: 'Drawer.Closer';
 }
 
-const DrawerCloser = ({ children, className, ...props }: DrawerCloserProps) => {
+const DrawerCloser = ({
+  children,
+  className,
+  ...props
+}: PropsWithChildren<DrawerCloserProps>) => {
   return (
     <div {...props} className={cn('h-fit', className)}>
       {children}
