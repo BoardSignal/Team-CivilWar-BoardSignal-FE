@@ -4,7 +4,7 @@ import { ResponsiveLayoutWrapper } from './components/Layout';
 import BoardGameDetail from './pages/BoardGameDetail';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
-import ProfilePage from './pages/MyProfile';
+import ProfilePage from './pages/Profile';
 
 export const router = createBrowserRouter([
   {
@@ -38,11 +38,11 @@ export const router = createBrowserRouter([
       {
         path: 'board-game-detail',
         element: <BoardGameDetail />,
-       },
-       {
+      },
+      {
         path: 'login',
         element: <LoginPage />,
-       }
+      },
     ],
   },
 ]);
