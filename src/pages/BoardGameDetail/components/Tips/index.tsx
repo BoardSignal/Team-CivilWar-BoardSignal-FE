@@ -45,7 +45,7 @@ interface TipsProps {
 const Tips = ({ tips }: TipsProps) => {
   return (
     <>
-      <div className='flex items-center justify-between border-b border-gray-accent7 p-4'>
+      <div className='flex items-center justify-between p-4'>
         <span className='font-bold'>공략</span>
         <Ripple className='flex w-fit items-center gap-0.5 rounded-3xl bg-primary p-3 pl-2 text-white'>
           <Icon id='add-line' size={17} />
