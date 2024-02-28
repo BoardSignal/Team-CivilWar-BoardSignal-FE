@@ -23,28 +23,19 @@ export default meta;
 const OPTIONS = [
   {
     name: '지역',
-    icons: {
-      fill: 'map-pin-fill',
-      line: 'map-pin-line',
-    },
+    icon: 'map-pin',
     items: ['강남역', '합정역', '신당역'],
     queryStringKey: 'station',
   },
   {
     name: '시간',
-    icons: {
-      fill: 'time-fill',
-      line: 'time-line',
-    },
+    icon: 'time',
     items: ['평일 오전', '평일 오후', '주말 오전', '주말 오후'],
     queryStringKey: 'time',
   },
   {
     name: '카테고리',
-    icons: {
-      fill: 'gamepad-fill',
-      line: 'gamepad-line',
-    },
+    icon: 'gamepad',
     items: [
       '전략',
       '심리',
@@ -58,10 +49,7 @@ const OPTIONS = [
   },
   {
     name: '성별',
-    icons: {
-      fill: 'team-fill',
-      line: 'team-line',
-    },
+    icon: 'team',
     items: ['남성', '여성'],
     queryStringKey: 'gender',
   },

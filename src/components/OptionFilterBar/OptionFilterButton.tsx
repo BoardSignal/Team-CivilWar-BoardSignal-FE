@@ -1,11 +1,11 @@
 import { useSearchParams } from 'react-router-dom';
 
 import Icon from '@/components/Icon';
-import { IconName } from '@/components/Icon/type';
 import { cn } from '@/utils/cn';
 
 import type { Option } from '.';
 import Button from '../Button';
+import { IconName } from '../Icon/type';
 
 interface OptionFilterButtonProps {
   option: Option;
@@ -13,9 +13,20 @@ interface OptionFilterButtonProps {
 }
 
 const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
-  const { name, icons, queryStringKey } = option;
+  const { name, icon, queryStringKey } = option;
 
   const [searchParams] = useSearchParams();
+
+  const getButtonText = () => {
+    const selectedItemName = searchParams.get(queryStringKey);
+    const selectedItems = searchParams.getAll(queryStringKey);
+
+    if (selectedItemName) {
+      return `${selectedItemName}${selectedItems.length > 1 ? ` 외 ${selectedItems.length - 1}개` : ''}`;
+    }
+
+    return name;
+  };
 
   return (
     <Button
@@ -28,19 +39,15 @@ const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
       <Icon
         id={
           searchParams.get(queryStringKey)
-            ? (icons.fill as IconName)
-            : (icons.line as IconName)
+            ? (`${icon}-fill` as IconName)
+            : (`${icon}-line` as IconName)
         }
         size={16}
         className={
-          searchParams.get(queryStringKey) ? 'fill-white' : 'fill-gray-accent2'
+          searchParams.get(queryStringKey) ? 'text-white' : 'text-gray-accent2'
         }
       />
-      <span>
-        {searchParams.get(queryStringKey)
-          ? `${searchParams.get(queryStringKey)}${searchParams.getAll(queryStringKey).length > 1 ? ` 외 ${searchParams.getAll(queryStringKey).length - 1}개` : ''}`
-          : name}
-      </span>
+      <span>{getButtonText()}</span>
     </Button>
   );
 };

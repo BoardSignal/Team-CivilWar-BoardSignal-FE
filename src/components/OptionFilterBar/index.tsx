@@ -12,7 +12,7 @@ interface Icon {
 }
 export interface Option {
   name: string;
-  icons: Icon;
+  icon: string;
   items: string[];
   queryStringKey: string;
 }
