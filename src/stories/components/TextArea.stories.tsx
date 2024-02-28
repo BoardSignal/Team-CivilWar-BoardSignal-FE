@@ -12,9 +12,4 @@ export default meta;
 
 type Story = StoryObj<typeof Textarea>;
 
-export const Default: Story = {
-  args: {
-    label: '모임 제목',
-    currentTextCount: 0,
-  },
-};
+export const Default: Story = {};
