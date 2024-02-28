@@ -1,10 +1,10 @@
 import TabBar from '@/components/TabBar';
 
+import BoardGameTip from './components/BoardGameTips';
 import GameDescription from './components/GameDescription';
 import GamePlayDetail from './components/GamePlayDetail';
 import GameSummary from './components/GameSummary';
 import GameWish from './components/GameWish';
-import BoardGameTip from './components/Tips';
 
 const DummyData = {
   name: '스플렌더',

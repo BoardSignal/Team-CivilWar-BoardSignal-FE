@@ -38,11 +38,11 @@ const Tip = ({ nickname, profileImageUrl, createdAt, content }: TipProps) => {
   );
 };
 
-interface TipsProps {
+interface BoardGameTipsProps {
   tips: TipProps[];
 }
 
-const Tips = ({ tips }: TipsProps) => {
+const BoardGameTips = ({ tips }: BoardGameTipsProps) => {
   return (
     <>
       <div className='flex items-center justify-between p-4'>
@@ -70,4 +70,4 @@ const Tips = ({ tips }: TipsProps) => {
   );
 };
 
-export default Tips;
+export default BoardGameTips;
