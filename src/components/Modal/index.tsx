@@ -17,20 +17,27 @@ const modalTitleCSS = cva('mb-4 text-lg font-bold ', {
 interface ModalProps extends VariantProps<typeof modalTitleCSS> {
   isOpen: boolean;
   onClose: () => void;
+  onDelete?: () => void;
   title: string;
-  children?: ReactNode;
+  children: ReactNode;
   buttonChildren: string;
 }
 
 const Modal = ({
   isOpen,
   onClose,
+  onDelete,
   title,
   variant,
   children,
   buttonChildren,
 }: ModalProps) => {
   if (!isOpen) return null;
+
+  const handleDelete = () => {
+    onDelete && onDelete();
+    onClose();
+  };
 
   return (
     <LayoutRootPortal>
@@ -46,7 +53,7 @@ const Modal = ({
           )}
           {variant === 'danger' && (
             <>
-              <Button variant='danger' onClick={onClose} className='mt-8'>
+              <Button variant='danger' onClick={handleDelete} className='mt-8'>
                 {buttonChildren}
               </Button>
               <Button variant='outline' onClick={onClose} className='mt-2'>
