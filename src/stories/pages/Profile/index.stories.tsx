@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import MyProfile from '@/pages/MyProfile';
+import MyProfile from '@/pages/Profile';
 
 const meta: Meta<typeof MyProfile> = {
   title: 'pages/MyProfile/page',
