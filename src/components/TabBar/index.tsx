@@ -84,6 +84,12 @@ const SearchButton = (props: HTMLButtonProps) => (
   </button>
 );
 
+const LogoutButton = (props: HTMLButtonProps) => (
+  <button {...props}>
+    <Icon id='logout-line' />
+  </button>
+);
+
 const TabBar = {
   Container,
   Left,
@@ -94,6 +100,7 @@ const TabBar = {
   ShareButton,
   SettingsButton,
   SearchButton,
+  LogoutButton,
 };
 
 export default TabBar;

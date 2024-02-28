@@ -4,6 +4,7 @@ import { ResponsiveLayoutWrapper } from './components/Layout';
 import BoardGameDetail from './pages/BoardGameDetail';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
+import ProfilePage from './pages/MyProfile';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: 'me',
         element: <HomePage />,
+      },
+      {
+        path: 'profile/:userId',
+        element: <ProfilePage />,
       },
       {
         path: 'board-game-detail',
