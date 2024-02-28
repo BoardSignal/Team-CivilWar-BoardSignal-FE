@@ -1,8 +1,8 @@
-import { usePostBoardGameTip } from '@/apis/postBoardGameTip';
+import { usePostBoardGameTipApi } from '@/apis/postBoardGameTip';
 import { CreateTipRequest } from '@/apis/postBoardGameTip';
 
 export const useCreateBoardGameTip = () => {
-  const api = usePostBoardGameTip();
+  const api = usePostBoardGameTipApi();
 
   return {
     createBoardGameTip: async ({ boardGameId, content }: CreateTipRequest) => {

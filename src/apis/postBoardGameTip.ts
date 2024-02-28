@@ -23,7 +23,7 @@ export const postBoardGameTip = ({
   });
 };
 
-export const usePostBoardGameTip = () => {
+export const usePostBoardGameTipApi = () => {
   const { mutateAsync } = useMutation({
     mutationFn: postBoardGameTip,
   });

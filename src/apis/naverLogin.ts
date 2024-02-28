@@ -12,7 +12,7 @@ const postNaverLogin = () => {
   });
 };
 
-export const usePostNaverLogin = () => {
+export const usePostNaverLoginApi = () => {
   const { mutateAsync } = useMutation({
     mutationFn: postNaverLogin,
   });
