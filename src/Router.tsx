@@ -34,10 +34,10 @@ export const router = createBrowserRouter([
         path: 'profile/:userId',
         element: <ProfilePage />,
       },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
     ],
-  },
-  {
-    path: 'login',
-    element: <LoginPage />,
   },
 ]);
