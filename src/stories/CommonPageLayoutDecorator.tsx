@@ -1,6 +1,7 @@
 import { type Decorator } from '@storybook/react';
 
 import { LAYOUT_ROOT_ID } from '@/components/Layout';
+import ToastRoot from '@/components/Layout/ToastRoot';
 
 export const CommonPageLayoutDecorator: Decorator = Story => (
   <div
@@ -8,5 +9,6 @@ export const CommonPageLayoutDecorator: Decorator = Story => (
     className='relative h-[844px] w-full shrink-0 shadow-xl'
   >
     <Story />
+    <ToastRoot />
   </div>
 );
