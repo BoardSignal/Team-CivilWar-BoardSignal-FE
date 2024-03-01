@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { usePostNaverLogin } from '@/apis/naverLogin';
+import { usePostNaverLoginApi } from '@/apis/naverLogin';
 
 export const useNaverLogin = () => {
-  const api = usePostNaverLogin();
+  const api = usePostNaverLoginApi();
   const navigate = useNavigate();
 
   return {
