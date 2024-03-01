@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import { useGetUserProfilesApi } from '@/apis/userProfile';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import TabBar from '@/components/TabBar';
@@ -74,6 +75,10 @@ const EditProfileButton = () => {
 const MyProfilePage = () => {
   const { reviews, signalTemperature, personalInfo, categories, wishCount } =
     PROFILE_PAGE_DUMMY_DATA;
+
+  const { userId } = useParams() as { userId: string };
+  const { data, isPending, isError } = useGetUserProfilesApi(userId);
+  console.log(data, isPending, isError);
 
   return (
     <div className='flex h-full flex-col'>
