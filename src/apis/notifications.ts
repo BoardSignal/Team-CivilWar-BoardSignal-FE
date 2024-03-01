@@ -1,7 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { NotificationItem } from '@/pages/NotificationList';
-
 import { api } from './core';
 
 export const GET_NOTIFICATION_URL = '/users/notifications/my';
@@ -10,15 +8,14 @@ export const GET_NOTIFICATION_URL = '/users/notifications/my';
 export interface Notification {
   id: number;
   type: string;
-  payload: {
-    roomId: number;
-    stationName: string;
-  };
-  createdAt: Date;
+  message: string;
+  createdAt: string;
+  link?: string;
+  thumbnailUrl?: string;
 }
 
 const getNotifications = () =>
-  api.get<NotificationItem[]>({
+  api.get<Notification[]>({
     url: GET_NOTIFICATION_URL,
   });
 

@@ -28,7 +28,7 @@ const Container = ({ children: rawChildren }: PropsWithChildren) => {
   const [leftChildren, rightChildren] = Children.toArray(rawChildren);
 
   return (
-    <div className='border-gray-accent-7 flex justify-between border-b p-2 text-gray-accent1'>
+    <div className='border-gray-accent-7 flex justify-between border-b px-4 py-2 text-gray-accent1'>
       {leftChildren}
       {rightChildren}
     </div>
@@ -55,7 +55,7 @@ const GoBackButton = ({ onClick, ...props }: HTMLButtonProps) => {
 
   return (
     <button onClick={onClick || goBack} {...props}>
-      <Icon id='arrow-left-line' size={24} />
+      <Icon id='arrow-left-line' size={24} className='-ml-2' />
     </button>
   );
 };
