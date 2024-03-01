@@ -15,6 +15,7 @@ interface SelectProps
  * Select 컴포넌트는 필수로 값을 전달해야 하며,
  * option을 선택한 뒤에는 취소할 수 없습니다.
  *
+ * value 초깃값은 빈 string('')만 가능합니다.
  */
 
 const Select = ({ options, placeholder, onChange, ...props }: SelectProps) => {
