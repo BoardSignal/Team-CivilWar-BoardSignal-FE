@@ -22,7 +22,11 @@ const noticeUserOnServerError = (error: unknown) => {
 
 // TODO: Sentry 등의 로그 수집, 모니터링 도구 사용하기
 // eslint-disable-next-line
+// @ts-ignore
+// eslint-disable-next-line
 const logQueryError = (error: unknown) => {};
+// eslint-disable-next-line
+// @ts-ignore
 // eslint-disable-next-line
 const logMutationError = (error: unknown) => {};
 
