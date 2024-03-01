@@ -17,7 +17,7 @@ const Label = ({
   width,
 }: LabelProps) => {
   return (
-    <div className='flex flex-col gap-2' style={{ width }}>
+    <div className='flex flex-col gap-2 p-4' style={{ width }}>
       <div className='flex justify-between'>
         <label className='text-sm text-gray-accent2'>
           {title}
