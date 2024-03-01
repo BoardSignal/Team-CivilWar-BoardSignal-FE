@@ -9,8 +9,11 @@ import {
 
 import { ReactQueryClientProvider } from '../src/ReactQueryClientProvider';
 import '../src/index.css';
+import { ignoreDevResources } from '../src/mocks';
 
-initializeMSW();
+initializeMSW({
+  onUnhandledRequest: ignoreDevResources,
+});
 
 const preview: Preview = {
   decorators: [
