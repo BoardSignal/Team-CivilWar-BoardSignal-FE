@@ -25,6 +25,7 @@ const DummyData = {
       profileImageUrl: '',
       createdAt: '2024-01-31 14:30',
       content: '개꿀팁 갑니다',
+      likeCount: 3,
     },
     {
       tipId: 2,
@@ -37,6 +38,7 @@ const DummyData = {
         개꿀팁 갑니다 ㅋㅋㅋ 
         개꿀팁 갑니다 
         개꿀팁 갑니다`,
+      likeCount: 3,
     },
     {
       tipId: 2,
@@ -51,6 +53,7 @@ const DummyData = {
         적은 인원일 땐 귀족 카드 노리세요. 
         적은 인원일 땐 귀족 카드 노리세요. 
         `,
+      likeCount: 10,
     },
   ],
 };
@@ -80,8 +83,8 @@ const BoardGameDetailPage = () => {
           <TabBar.Title>{name}</TabBar.Title>
         </TabBar.Left>
       </TabBar.Container>
-      <img src={boardGameImageUrl} className='h-60' alt={name} />
-      <div className='overflow-y-auto'>
+      <div className='flex flex-col overflow-y-auto'>
+        <img src={boardGameImageUrl} className='h-60' alt={name} />
         <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
           <GameSummary name={name} categories={categories} />
           <GamePlayDetail
