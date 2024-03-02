@@ -10,13 +10,13 @@ interface TextInputProps extends ComponentPropsWithoutRef<'input'> {
 }
 
 const TextInputWithIcon = ({ iconId, ...props }: TextInputProps) => {
-  const { disabled: isDisabled, type } = props;
+  const { disabled: isDisabled, type = 'text' } = props;
 
   return (
     <div className='relative'>
       <Icon id={iconId} className='absolute left-4 top-1/3 text-gray-accent4' />
       <input
-        type={type || 'text'}
+        type={type}
         className={cn(
           'w-full rounded-lg border border-gray-accent7 p-4 pl-[44px] text-gray-accent2 placeholder-gray-accent4 focus:outline-gray-accent2',
           isDisabled &&
