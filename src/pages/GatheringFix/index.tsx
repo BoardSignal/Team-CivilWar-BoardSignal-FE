@@ -28,7 +28,7 @@ const GatheringFixPage = () => {
         </Label>
       </div>
       <div className='flex p-4'>
-        <Button className='bg-primary py-2 text-white' onClick={() => {}}>
+        <Button variant='primary' onClick={() => {}}>
           모임 확정하기
         </Button>
       </div>
