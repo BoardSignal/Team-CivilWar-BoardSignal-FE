@@ -18,7 +18,7 @@ const preview: Preview = {
     Story => (
       <ReactQueryClientProvider>
         <div className='flex w-full min-w-[350px] max-w-[450px] items-center justify-center'>
-          <div className='grow p-8'>
+          <div className='grow p-8 w-full'>
             <Story />
           </div>
         </div>

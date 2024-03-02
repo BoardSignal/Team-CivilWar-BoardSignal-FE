@@ -7,14 +7,7 @@ import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
 const meta: Meta<typeof OptionFilterBar> = {
   title: 'components/OptionFilterBar',
   tags: ['autodocs'],
-  decorators: [
-    Story => (
-      <div className='h-full min-w-[350px] max-w-[450px]'>
-        <Story />
-      </div>
-    ),
-    CommonPageLayoutDecorator,
-  ],
+  decorators: [CommonPageLayoutDecorator],
   component: OptionFilterBar,
 };
 

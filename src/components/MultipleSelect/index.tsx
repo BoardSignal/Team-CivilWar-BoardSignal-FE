@@ -11,7 +11,7 @@ const MultipleSelect = ({
   selectedItems,
   onChange,
 }: MultipleSelectProps) => {
-  const handleClickButton = (newSelectedItem: string) => {
+  const handleToggleItemButton = (newSelectedItem: string) => {
     if (selectedItems.includes(newSelectedItem)) {
       onChange(
         selectedItems.filter(selectedItem => selectedItem !== newSelectedItem),
@@ -30,7 +30,7 @@ const MultipleSelect = ({
           key={optionItem}
           optionItem={optionItem}
           active={selectedItems.includes(optionItem)}
-          onClick={handleClickButton}
+          onClick={handleToggleItemButton}
         />
       ))}
     </div>
