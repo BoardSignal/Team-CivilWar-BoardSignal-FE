@@ -23,7 +23,7 @@ const getColorByTemperature = (value: number) => {
   return { text: 'text-manner-accent1', background: 'bg-manner-accent1' };
 };
 
-const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
+const SignalTemperature = ({ value }: TemperatureProps) => {
   const { text, background } = getColorByTemperature(value);
 
   return (
