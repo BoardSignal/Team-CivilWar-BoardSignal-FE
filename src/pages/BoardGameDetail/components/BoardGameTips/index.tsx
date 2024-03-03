@@ -1,19 +1,20 @@
+import { Link } from 'react-router-dom';
+
+import type { MyTip, Tip } from '@/apis/boardGameDetail';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { convertToRelativeTime } from '@/utils/convertToRelativeTime';
 
-interface TipProps {
-  tipId: number;
-  nickname: string;
-  profileImageUrl: string;
-  createdAt: string;
-  content: string;
-  likeCount: number;
+interface BoardGameTipsProps {
+  tips: Tip[];
+  name: string;
+  boardGameId: string;
+  myTip: MyTip;
 }
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
-const Tip = ({ tip }: { tip: TipProps }) => {
+const Tip = ({ tip }: { tip: Tip }) => {
   const { nickname, profileImageUrl, createdAt, content, likeCount } = tip;
 
   return (
@@ -41,22 +42,27 @@ const Tip = ({ tip }: { tip: TipProps }) => {
   );
 };
 
-interface BoardGameTipsProps {
-  tips: TipProps[];
-}
-
-const BoardGameTips = ({ tips }: BoardGameTipsProps) => {
+const BoardGameTips = ({
+  tips,
+  name,
+  boardGameId,
+  myTip,
+}: BoardGameTipsProps) => {
   return (
     <>
-      <div className='flex items-center justify-between p-4'>
-        <span className='font-bold'>공략</span>
-        <Button className='flex w-fit items-center gap-0.5 rounded-3xl bg-primary p-3 pl-2 text-white'>
-          <Icon id='add-line' size={17} />
-          <span className='text-xs font-bold'>작성하기</span>
-        </Button>
-      </div>
+      {!myTip && (
+        <div className='flex items-center justify-between p-4'>
+          <span className='font-bold'>공략</span>
+          <Link to={`board-games/${boardGameId}/${name}/tip/create`}>
+            <Button className='flex w-fit items-center gap-0.5 rounded-3xl bg-primary p-3 pl-2 text-white'>
+              <Icon id='add-line' size={17} />
+              <span className='text-xs font-bold'>작성하기</span>
+            </Button>
+          </Link>
+        </div>
+      )}
       {tips.map(tip => {
-        return <Tip tip={tip} />;
+        return <Tip tip={tip} key={tip.tipId} />;
       })}
     </>
   );

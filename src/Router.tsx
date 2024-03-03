@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         element: <ProfilePage />,
       },
       {
-        path: 'board-game-detail',
+        path: 'board-games/:boardGameId',
         element: <BoardGameDetail />,
       },
       {
