@@ -50,4 +50,5 @@ export type IconName =
   | 'bell-line'
   | 'search-fill'
   | 'search-line'
+  | 'close-line'
   | 'logout-line';

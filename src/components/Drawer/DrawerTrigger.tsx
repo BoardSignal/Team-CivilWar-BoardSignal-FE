@@ -1,16 +1,14 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
 export interface DrawerTriggerProps extends ComponentPropsWithoutRef<'div'> {
-  children: ReactNode;
   __type: 'Drawer.Trigger';
 }
 
-const DrawerTrigger = ({ children, ...props }: DrawerTriggerProps) => {
-  return (
-    <div className='h-fit w-fit' {...props}>
-      {children}
-    </div>
-  );
+const DrawerTrigger = ({
+  children,
+  ...props
+}: PropsWithChildren<DrawerTriggerProps>) => {
+  return <div {...props}>{children}</div>;
 };
 
 DrawerTrigger.defaultProps = {
