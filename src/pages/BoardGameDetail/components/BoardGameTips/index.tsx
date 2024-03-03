@@ -61,9 +61,9 @@ const BoardGameTips = ({
           </Link>
         </div>
       )}
-      {tips.map(tip => {
-        return <Tip tip={tip} key={tip.tipId} />;
-      })}
+      {tips.map(tip => (
+        <Tip tip={tip} key={tip.tipId} />
+      ))}
     </>
   );
 };
