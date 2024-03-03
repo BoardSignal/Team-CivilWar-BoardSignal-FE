@@ -2,6 +2,7 @@ export type IconName =
   | 'add-line'
   | 'arrow-bottom-line'
   | 'arrow-left-line'
+  | 'arrow-right-line'
   | 'bar-chart-line'
   | 'bar-chart-fill'
   | 'bookmark-fill'
@@ -49,4 +50,5 @@ export type IconName =
   | 'bell-line'
   | 'search-fill'
   | 'search-line'
-  | 'close-line';
+  | 'close-line'
+  | 'logout-line';

@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SignalTemperature from '@/pages/profile/components/SignalTemperature';
+import SignalTemperature from '@/pages/MyProfile/components/SignalTemperature';
 
 const meta: Meta<typeof SignalTemperature> = {
-  title: 'Pages/Profile/SignalTemperature',
+  title: 'Pages/MyProfile/SignalTemperature',
   tags: ['autodocs'],
   component: SignalTemperature,
 };
