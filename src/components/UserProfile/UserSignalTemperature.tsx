@@ -1,13 +1,13 @@
 import smileFace from '@/assets/smiling-face.png';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
-import { getColorByTemperature } from '@/utils/TemperatureColor';
 import { cn } from '@/utils/cn';
+import getColorByTemperature from '@/utils/getTemperatureColor';
 
 interface UserTemperatureProps {
   value: number;
 }
 
-const UserSignalTemperature = ({ value = 50.3 }: UserTemperatureProps) => {
+const UserSignalTemperature = ({ value }: UserTemperatureProps) => {
   const { text, background } = getColorByTemperature(value);
 
   return (
@@ -38,7 +38,7 @@ const UserSignalTemperature = ({ value = 50.3 }: UserTemperatureProps) => {
           </span>
         </PopoverTrigger>
         <PopoverContent className='relative right-[60px] z-20'>
-          <p className='userTooltip'>
+          <p className='tooltip before:left-[85%]'>
             시그널온도는 다른 사용자로부터 받은 리뷰, 신고, 운영자 제재 등을
             종합해서 만든 매너 지표입니다.
           </p>

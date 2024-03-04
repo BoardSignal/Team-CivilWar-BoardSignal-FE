@@ -3,7 +3,7 @@ interface TemperatureColor {
   background: string;
 }
 
-export const getColorByTemperature = (value: number): TemperatureColor => {
+const getColorByTemperature = (value: number): TemperatureColor => {
   if (value < 12.5)
     return { text: 'text-manner-accent7', background: 'bg-manner-accent7' };
   if (value <= 30)
@@ -18,3 +18,5 @@ export const getColorByTemperature = (value: number): TemperatureColor => {
     return { text: 'text-manner-accent2', background: 'bg-manner-accent2' };
   return { text: 'text-manner-accent1', background: 'bg-manner-accent1' };
 };
+
+export default getColorByTemperature;

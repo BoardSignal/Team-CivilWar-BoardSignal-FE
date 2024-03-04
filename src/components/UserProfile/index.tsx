@@ -24,7 +24,9 @@ const UserProfile = ({
       />
       <div className='flex w-full justify-between'>
         <div className='flex flex-col'>
-          <span className='font-bold text-gray-accent1'>{nickname}</span>
+          <span className='text-[14px] font-bold text-gray-accent1'>
+            {nickname}
+          </span>
           <span className='text-xs text-gray-accent2'>{ageGroup}</span>
         </div>
         <UserSignalTemperature value={signalTemperature} />
