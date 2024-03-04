@@ -15,10 +15,7 @@ const RIPPLE_DEFAULT_OFFSET = {
   cursorTop: 0,
 };
 
-const getOffset = (
-  e: React.MouseEvent<HTMLButtonElement>,
-  el: HTMLButtonElement,
-) => {
+const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
   const { left, top } = el.getBoundingClientRect();
 
   return {
@@ -28,7 +25,7 @@ const getOffset = (
   };
 };
 
-interface RippleProps extends ComponentProps<'button'> {
+interface RippleProps extends ComponentProps<'div'> {
   fast?: boolean;
 }
 
@@ -46,11 +43,11 @@ const Ripple = ({
   children,
   ...props
 }: RippleProps) => {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [offset, setOffset] = useState(RIPPLE_DEFAULT_OFFSET);
 
-  const showRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const showRipple = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) {
       return;
     }
@@ -74,7 +71,7 @@ const Ripple = ({
   };
 
   return (
-    <button
+    <div
       className={cn('relative overflow-hidden', className)}
       ref={ref}
       onClick={showRipple}
@@ -82,7 +79,7 @@ const Ripple = ({
     >
       {isAnimating && <RippleEffect {...offset} />}
       {children}
-    </button>
+    </div>
   );
 };
 
