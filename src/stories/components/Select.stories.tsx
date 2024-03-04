@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -18,7 +18,7 @@ export const DefaultTemplate = (args: Story) => {
   const OPTIONS = ['평일 오전', '평일 오후', '주말 오전', '주말 오후'];
   const PLACEHOLDER_TEXT = '시간대 선택';
 
-  const [selectValue, setSelectValue] = useState(PLACEHOLDER_TEXT);
+  const [selectValue, setSelectValue] = useState('');
 
   return (
     <Select
@@ -26,7 +26,9 @@ export const DefaultTemplate = (args: Story) => {
       options={OPTIONS}
       placeholder={PLACEHOLDER_TEXT}
       value={selectValue}
-      onChange={setSelectValue}
+      onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+        setSelectValue(e.target.value)
+      }
     />
   );
 };
