@@ -15,6 +15,7 @@ const OptionItemButton = ({
 }: OptionItemButtonProps) => {
   return (
     <Button
+      type='button'
       className={cn(
         'flex w-fit items-center rounded-3xl border px-4 py-2 text-sm text-gray-accent3',
         active && 'border-primary text-primary',
