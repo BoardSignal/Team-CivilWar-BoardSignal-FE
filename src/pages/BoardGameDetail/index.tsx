@@ -34,6 +34,7 @@ const BoardGameDetailPage = () => {
     toPlayTime,
     wishCount,
     imageUrl,
+    isWished,
     myTip,
     tips,
   } = boardGameDetail as BoardGameDetailResponse;
@@ -59,7 +60,7 @@ const BoardGameDetailPage = () => {
               toPlayTime,
             }}
           />
-          <GameWish wishCount={wishCount} />
+          <GameWish wishCount={wishCount} isWished={isWished} />
         </div>
         <GameDescription description={description} />
         <BoardGameTip

@@ -7,15 +7,26 @@ import Icon from '@/components/Icon';
 import { useBoardGameWish } from '@/pages/BoardGameDetail/hooks/useBoardGameWish';
 import { cn } from '@/utils/cn';
 
-const GameWish = ({ wishCount }: { wishCount: number }) => {
+const GameWish = ({
+  wishCount,
+  isWished,
+}: {
+  wishCount: number;
+  isWished: boolean;
+}) => {
   const { boardGameId } = useParams() as { boardGameId: string };
-  const [isBoardGameWished, setIsBoardGameWished] = useState(false);
+  const [isBoardGameWished, setIsBoardGameWished] = useState(isWished);
+  const [boardGameWishCount, setBoardGameWishCount] = useState(wishCount);
 
-  const { postBoardGameWish } = useBoardGameWish(boardGameId);
+  const { postBoardGameWish, deleteBoardGameWish } =
+    useBoardGameWish(boardGameId);
 
   const clickedWishButton = () => {
-    postBoardGameWish();
+    isBoardGameWished ? deleteBoardGameWish() : postBoardGameWish();
     setIsBoardGameWished(!isBoardGameWished);
+    isBoardGameWished
+      ? setBoardGameWishCount(boardGameWishCount - 1)
+      : setBoardGameWishCount(boardGameWishCount + 1);
   };
 
   return (
@@ -33,7 +44,7 @@ const GameWish = ({ wishCount }: { wishCount: number }) => {
           className={cn('text-gray-accent3', isBoardGameWished && 'text-white')}
         />
       </Button>
-      <span className='text-xs text-gray-accent1'>{wishCount}</span>
+      <span className='text-xs text-gray-accent1'>{boardGameWishCount}</span>
     </div>
   );
 };

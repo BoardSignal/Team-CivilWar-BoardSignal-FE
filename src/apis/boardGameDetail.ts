@@ -14,6 +14,7 @@ export interface BoardGameDetailResponse {
   toPlayTime: number;
   wishCount: number;
   imageUrl: string;
+  isWished: boolean;
   myTip: MyTip;
   tips: Tip[];
 }
