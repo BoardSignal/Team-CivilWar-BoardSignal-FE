@@ -47,6 +47,8 @@ type FormValueNames =
   | 'place'
   | 'categories';
 
+type SubmitForm = (data: FormValues) => void;
+
 const BOARDGAME_CATEGORIES = [
   '워게임',
   '가족게임',
@@ -77,16 +79,14 @@ interface GatheringCreateFormProps {
   onChangeGatheringId: Dispatch<SetStateAction<number | undefined>>;
 }
 
-type SubmitForm = (data: FormValues) => void;
-
 const GatheringCreateForm = ({
   onOpenModal,
   onChangeGatheringId,
 }: GatheringCreateFormProps) => {
-  const api = usePostGatheringCreateApi();
+  const gatheringCreateApi = usePostGatheringCreateApi();
 
-  const gatheringCreate = async (requestBody: GatheringCreateRequest) => {
-    const { roomId } = await api(requestBody);
+  const gatheringCreater = async (requestBody: GatheringCreateRequest) => {
+    const { roomId } = await gatheringCreateApi(requestBody);
 
     onOpenModal();
     onChangeGatheringId(roomId);
@@ -194,7 +194,7 @@ const GatheringCreateForm = ({
       ...restGathering,
     };
 
-    gatheringCreate({
+    gatheringCreater({
       imageFile,
       gathering,
     });
@@ -287,7 +287,7 @@ const GatheringCreateForm = ({
                     min={10}
                     max={40}
                     step={5}
-                    includedValue={24}
+                    includedValue={23}
                     value={value}
                     onChange={onChange}
                   />

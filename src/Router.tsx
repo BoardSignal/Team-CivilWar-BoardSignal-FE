@@ -48,6 +48,10 @@ export const router = createBrowserRouter([
         path: 'gatherings/create',
         element: <GatheringCreatePage />,
       },
+      {
+        path: 'gatherings/:gatheringId',
+        element: <HomePage />,
+      },
     ],
   },
 ]);
