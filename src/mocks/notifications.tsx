@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import getApiBaseUrl from '@/apis/core/getApiBaseUrl';
+import API_BASE_URL from '@/apis/core/constants';
 import { GET_NOTIFICATION_URL } from '@/apis/notifications';
 
 const repeatArray = <T,>(count: number, arr: T[]) =>
@@ -8,9 +8,7 @@ const repeatArray = <T,>(count: number, arr: T[]) =>
     .map(() => arr)
     .flat();
 
-const MOCK_BASE_URL = getApiBaseUrl();
-
-export const MOCK_GET_NOTIFICATIONS_URL = `${MOCK_BASE_URL}${GET_NOTIFICATION_URL}`;
+export const MOCK_GET_NOTIFICATIONS_URL = `${API_BASE_URL}${GET_NOTIFICATION_URL}`;
 
 export const mockGetNotificationsHandler = async () => {
   return HttpResponse.json(
