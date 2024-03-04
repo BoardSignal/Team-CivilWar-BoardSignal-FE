@@ -15,17 +15,8 @@ export interface BoardGameDetailResponse {
   wishCount: number;
   imageUrl: string;
   isWished: boolean;
-  myTip: MyTip;
+  myTip: Tip | null;
   tips: Tip[];
-}
-
-export interface MyTip {
-  tipId: number;
-  nickname: string;
-  profileImageUrl: string;
-  createdAt: string;
-  content: string;
-  likeCount: number;
 }
 
 export interface Tip {
@@ -35,6 +26,7 @@ export interface Tip {
   createdAt: string;
   content: string;
   likeCount: number;
+  isLiked: boolean;
 }
 
 const GET_BOARD_GAME_DETAIL_URL = '/board-games';
