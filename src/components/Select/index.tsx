@@ -5,11 +5,35 @@ import {
   useState,
 } from 'react';
 
+import { VariantProps, cva } from 'class-variance-authority';
+
 import { cn } from '@/utils/cn';
 
 import Icon from '../Icon';
 
-interface SelectProps extends ComponentPropsWithoutRef<'select'> {
+const selectCSS = cva(
+  'relative z-10 w-full cursor-pointer appearance-none rounded-lg border bg-transparent p-4 outline-none',
+  {
+    variants: {
+      variant: {
+        default: 'focus:ring-2 focus:ring-gray-accent2',
+        error: 'ring-2 ring-red-500',
+      },
+      isShowingPlaceholder: {
+        false: 'text-gray-accent1',
+        true: 'text-gray-accent4',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      isShowingPlaceholder: false,
+    },
+  },
+);
+
+interface SelectProps
+  extends ComponentPropsWithoutRef<'select'>,
+    VariantProps<typeof selectCSS> {
   options: string[];
   placeholder: string;
 }
@@ -22,7 +46,7 @@ interface SelectProps extends ComponentPropsWithoutRef<'select'> {
  */
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ options, placeholder, onChange, ...props }, ref) => {
+  ({ variant, options, placeholder, onChange, ...props }, ref) => {
     const [isShowingPlaceholder, setIsShowingPlaceholder] = useState(true);
 
     const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -38,10 +62,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           {...props}
           ref={ref}
-          className={cn(
-            'relative z-10 w-full cursor-pointer appearance-none rounded-lg border bg-transparent p-4 outline-gray-accent2',
-            isShowingPlaceholder ? 'text-gray-accent4' : 'text-gray-accent1',
-          )}
+          className={cn(selectCSS({ variant, isShowingPlaceholder }))}
           onChange={handleChangeSelect}
         >
           <option value='' disabled hidden>

@@ -223,6 +223,7 @@ const GatheringCreateForm = ({
             currentLength={watch('roomTitle')?.length}
           >
             <TextInput
+              variant={errors.roomTitle ? 'error' : 'default'}
               maxLength={50}
               {...requiredAndLengthRegister(roomTitleRegister)}
             />
@@ -234,7 +235,10 @@ const GatheringCreateForm = ({
             maxLength={500}
             currentLength={watch('description')?.length}
           >
-            <Textarea {...requiredAndLengthRegister(descriptionRegister)} />
+            <Textarea
+              variant={errors.description ? 'error' : 'default'}
+              {...requiredAndLengthRegister(descriptionRegister)}
+            />
             <ErrorMessage message={errors.description?.message} />
           </Label>
           <Label title='동성만 참여하도록 제한할까요?'>
@@ -261,6 +265,7 @@ const GatheringCreateForm = ({
           </Label>
           <Label title='시간대' isRequired>
             <Select
+              variant={errors.time ? 'error' : 'default'}
               options={TIMES}
               placeholder='시간대 선택'
               {...requiredAndLengthRegister(timeRegister)}
@@ -292,7 +297,10 @@ const GatheringCreateForm = ({
             <Alert>{AGE_ALERT_MESSAGE}</Alert>
           </Label>
           <Label title='지역 (가까운 지하철역)' isRequired>
-            <TextInput {...requiredAndLengthRegister(subwayStationRegister)} />
+            <TextInput
+              variant={errors.subwayStation ? 'error' : 'default'}
+              {...requiredAndLengthRegister(subwayStationRegister)}
+            />
             <ErrorMessage message={errors.subwayStation?.message} />
           </Label>
           <Label title='장소'>
@@ -319,9 +327,7 @@ const GatheringCreateForm = ({
       </div>
       <div className='border-t border-gray-accent7 p-4'>
         {isValid ? (
-          <Button variant='primary' onClick={handleSubmit(onSubmit)}>
-            모임 생성하기
-          </Button>
+          <Button variant='primary'>모임 생성하기</Button>
         ) : (
           <Button variant='inactive'>모임 생성하기</Button>
         )}

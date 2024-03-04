@@ -8,7 +8,6 @@ import TabBar from '@/components/TabBar';
 import GatheringCreateForm from './components/GatheringCreateForm';
 
 // TODO: 나이대 includedValue 사용자 연령으로 변경
-// TODO: 생성한 모임으로 이동
 const GatheringCreatePage = () => {
   const navigate = useNavigate();
 
