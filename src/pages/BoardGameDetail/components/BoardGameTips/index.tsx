@@ -9,7 +9,7 @@ interface BoardGameTipsProps {
   tips: Tip[];
   name: string;
   boardGameId: string;
-  myTip: MyTip;
+  myTip: MyTip | null;
 }
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
