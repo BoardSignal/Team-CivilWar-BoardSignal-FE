@@ -22,6 +22,7 @@ export const Default: Story = {
         createdAt: '2024-01-31 14:30',
         content: '개꿀팁 갑니다',
         likeCount: 10,
+        isLiked: false,
       },
       {
         tipId: 2,
@@ -35,6 +36,7 @@ export const Default: Story = {
         개꿀팁 갑니다 
         개꿀팁 갑니다`,
         likeCount: 5,
+        isLiked: false,
       },
       {
         tipId: 2,
@@ -49,6 +51,7 @@ export const Default: Story = {
         적은 인원일 땐 귀족 카드 노리세요. 
         적은 인원일 땐 귀족 카드 노리세요. 
         `,
+        isLiked: true,
         likeCount: 8,
       },
     ],

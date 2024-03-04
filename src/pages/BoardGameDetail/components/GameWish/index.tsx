@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import { useBoardGameWish } from '@/pages/BoardGameDetail/hooks/useBoardGameWish';
 import { cn } from '@/utils/cn';
+
+import { useBoardGameWish } from '../../hooks/useBoardGameWish';
 
 const GameWish = ({
   wishCount,

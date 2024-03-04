@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import { cn } from '@/utils/cn';
 import { convertToRelativeTime } from '@/utils/convertToRelativeTime';
 
-import { useBoardGameTipLike } from './hooks/useBoardGameTipLike';
+import { useBoardGameTipLike } from '../../hooks/useBoardGameTipLike';
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
