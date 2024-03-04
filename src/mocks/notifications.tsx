@@ -1,5 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
+import getApiBaseUrl from '@/apis/core/getApiBaseUrl';
 import { GET_NOTIFICATION_URL } from '@/apis/notifications';
 
 const repeatArray = <T,>(count: number, arr: T[]) =>
@@ -7,7 +8,7 @@ const repeatArray = <T,>(count: number, arr: T[]) =>
     .map(() => arr)
     .flat();
 
-const MOCK_BASE_URL = import.meta.env.VITE_BASE_URL;
+const MOCK_BASE_URL = getApiBaseUrl();
 
 export const MOCK_GET_NOTIFICATIONS_URL = `${MOCK_BASE_URL}${GET_NOTIFICATION_URL}`;
 

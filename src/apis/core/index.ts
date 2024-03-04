@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { attachAccessToken, refreshExpiredToken } from './authentication';
+import getApiBaseUrl from './getApiBaseUrl';
 import { makeMutationResponse } from './makeMutationResponse';
 import { makeQueryResponse } from './makeQueryResponse';
 
@@ -15,7 +16,7 @@ const HTTP_METHODS = {
 const TIME_OUT = 2000;
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: getApiBaseUrl(),
   timeout: TIME_OUT,
   headers: {
     'Content-Type': 'application/json',

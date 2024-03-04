@@ -6,6 +6,7 @@ import { HttpStatusCode } from 'axios';
 import { HttpResponse, delay, http } from 'msw';
 
 import { api } from '@/apis/core';
+import getApiBaseUrl from '@/apis/core/getApiBaseUrl';
 import Button from '@/components/Button';
 import Label from '@/components/Label';
 import TextInput from '@/components/TextInput';
@@ -64,7 +65,7 @@ const Example = () => {
   );
 };
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = getApiBaseUrl();
 
 const meta: Meta<typeof Example> = {
   title: 'examples/오류 핸들링/Mutation status 분기 처리',
