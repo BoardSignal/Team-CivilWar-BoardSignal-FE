@@ -11,7 +11,8 @@ import Icon from '@/components/Icon';
  */
 export const showErrorToast = (message: string) => {
   toast.error(message, {
-    className: 'bg-gray-accent1 text-white text-sm',
+    // toast 자체의 style이 className의 스타일을 덮어써서 important를 적용해요
+    className: '!bg-gray-accent1 !text-white !text-sm',
     icon: <Icon id='error-warning-fill' className='size-4 text-red-500' />,
   });
 };
