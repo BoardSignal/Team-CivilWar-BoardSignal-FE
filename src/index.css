@@ -64,6 +64,15 @@
     animation-duration: 0.3s;
   }
 
+  .scroll-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .scroll-none::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+
   @keyframes fadeIn {
     0% {
       display: none;

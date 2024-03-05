@@ -13,7 +13,7 @@ const postKakaoLogin = () => {
   });
 };
 
-export const usePostKakaoLogin = () => {
+export const usePostKakaoLoginApi = () => {
   const { mutateAsync } = useMutation({
     mutationFn: postKakaoLogin,
   });

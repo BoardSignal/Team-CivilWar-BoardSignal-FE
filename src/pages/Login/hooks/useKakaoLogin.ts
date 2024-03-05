@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 
-import { usePostKakaoLogin } from '@/apis/kakaoLogin';
+import { usePostKakaoLoginApi } from '@/apis/kakaoLogin';
 
 export const useKakaoLogin = () => {
-  const api = usePostKakaoLogin();
+  const api = usePostKakaoLoginApi();
   const navigate = useNavigate();
 
   return {

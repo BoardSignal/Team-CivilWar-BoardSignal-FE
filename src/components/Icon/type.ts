@@ -54,3 +54,5 @@ export type IconName =
   | 'refresh-line'
   | 'error-warning-fill'
   | 'loader-line';
+  | 'close-line'
+  | 'logout-line';
