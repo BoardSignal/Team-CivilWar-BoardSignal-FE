@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Icon from '@/components/Icon';
 import { getRelativeTime } from '@/utils/time';
 
 import type { Gathering } from '.';
+import Ripple from '../Ripple';
 
 interface GatheringItemProps {
   gathering: Gathering;
@@ -10,6 +13,7 @@ interface GatheringItemProps {
 
 const GatheringItem = ({ gathering }: GatheringItemProps) => {
   const {
+    id: gatheringId,
     imageUrl,
     title,
     station,
@@ -24,38 +28,47 @@ const GatheringItem = ({ gathering }: GatheringItemProps) => {
     createdAt,
   } = gathering;
 
-  const AGE_RANGE = `${minAge === maxAge ? minAge : `${minAge}~${maxAge}`}세`;
-  const PARTICIPANTS_RANGE = `${minParticipants === maxParticipants ? minParticipants : `${minParticipants}~${maxParticipants}`}인`;
-  const CATEGORIES_TEXT = categories.map(
-    (category, index) =>
-      `${category}${index !== categories.length - 1 ? ' · ' : ''}`,
-  );
+  const ageRange = minAge === maxAge ? minAge : `${minAge}~${maxAge}`;
+  const participantsRange =
+    minParticipants === maxParticipants
+      ? minParticipants
+      : `${minParticipants}~${maxParticipants}`;
+  const gatheringSummary = [
+    station,
+    time,
+    `${ageRange}세`,
+    allowedGender,
+    `${participantsRange}명`,
+  ].join(' · ');
+  const categoriesText = categories.join(' · ');
 
   return (
-    <li className='flex gap-4 border-b border-gray-accent7 p-4'>
-      <img
-        src={imageUrl || defaultThumbnailImage}
-        alt={title}
-        width={100}
-        height={100}
-        className='rounded-lg object-cover'
-      />
-      <div className='flex grow flex-col justify-between overflow-x-hidden'>
-        <div className='flex flex-col gap-1'>
-          <div className='truncate'>{title}</div>
-          <div className='text-xs text-gray-accent2'>
-            {`${station} · ${time} · ${AGE_RANGE} · ${allowedGender} · ${PARTICIPANTS_RANGE}`}
+    <li className='border-b border-gray-accent7'>
+      <Link to={`/gatherings/${gatheringId}`}>
+        <Ripple className='flex cursor-pointer gap-4 p-4'>
+          <img
+            src={imageUrl || defaultThumbnailImage}
+            alt={title}
+            className='size-[100px] rounded-lg object-cover'
+          />
+          <div className='flex grow flex-col justify-between overflow-x-hidden'>
+            <div className='flex flex-col gap-1'>
+              <div className='truncate'>{title}</div>
+              <div className='text-xs text-gray-accent2'>
+                {gatheringSummary}
+              </div>
+              <div className='text-xs text-gray-accent2'>{categoriesText}</div>
+            </div>
+            <div className='flex justify-between text-xs text-gray-accent3'>
+              <div>{getRelativeTime(createdAt)}</div>
+              <div className='flex items-center gap-1'>
+                <Icon id='user-line' size={12} />
+                <span>{headCount}</span>
+              </div>
+            </div>
           </div>
-          <div className='text-xs text-gray-accent2'>{CATEGORIES_TEXT}</div>
-        </div>
-        <div className='flex justify-between text-xs text-gray-accent3'>
-          <div>{getRelativeTime(createdAt)}</div>
-          <div className='flex items-center gap-1'>
-            <Icon id='user-line' size={12} />
-            <span>{headCount}</span>
-          </div>
-        </div>
-      </div>
+        </Ripple>
+      </Link>
     </li>
   );
 };
