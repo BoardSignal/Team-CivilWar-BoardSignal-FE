@@ -1,13 +1,11 @@
-import { ComponentProps } from 'react';
-
 import { type VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '@/utils/cn';
 
-import Ripple, { RippleProps } from '../Ripple';
+import Ripple, { RippleProps } from './Ripple';
 
 const buttonCSS = cva(
-  'flex h-10 w-full cursor-pointer items-center justify-center rounded-lg',
+  'flex h-10 w-full select-none items-center justify-center rounded-lg',
   {
     variants: {
       variant: {
@@ -24,20 +22,19 @@ const buttonCSS = cva(
   },
 );
 
-export type ButtonProps = ComponentProps<'div'> &
-  VariantProps<typeof buttonCSS> &
-  RippleProps;
+type ButtonProps = RippleProps & VariantProps<typeof buttonCSS>;
 
-const Button = ({ variant, className, ...props }: ButtonProps) => (
-  <Ripple
-    role='button'
-    className={cn(
-      buttonCSS({ variant }),
-      variant === 'inactive' && 'pointer-events-none',
-      className,
-    )}
-    {...props}
-  />
-);
+const Button = ({ variant, className, ...props }: ButtonProps) => {
+  return (
+    <Ripple
+      className={cn(
+        buttonCSS({ variant }),
+        variant === 'inactive' && 'pointer-events-none',
+        className,
+      )}
+      {...props}
+    />
+  );
+};
 
 export default Button;
