@@ -18,7 +18,7 @@ const TabMenu = ({ tabs, onSelectTab }: TabMenuProps) => {
       {tabs.map((tab, index) => (
         <div
           key={index}
-          className={` h-[40px] w-full cursor-pointer border-t pt-2 text-center ${activeTab === index ? 'border-b-[5px] border-b-primary text-primary' : ' text-gray-accent4'}`}
+          className={`h-[40px] w-full cursor-pointer border-t pt-2 text-center ${activeTab === index ? 'border-b-[5px] border-b-primary text-primary' : ' text-gray-accent4'}`}
           onClick={() => handleTabClick(index)}
         >
           {tab}
