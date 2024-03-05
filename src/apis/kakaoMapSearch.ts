@@ -1,11 +1,11 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
+import useLoadKakaoMapScript from '@/components/LocationSelect/useLoadKakaoMapScript';
+
 import {
   KakaoMapSearchAPIResponse,
   LocationItem,
-} from '@/apis/types/KakaoMapSearch';
-
-import useLoadKakaoMapScript from './useLoadKakaoMapScript';
+} from './types/KakaoMapSearch';
 
 /**
  * 카카오 API 응답 객체의 snakeCase 프로퍼티들을 camelCase로 변환해요.
@@ -26,7 +26,7 @@ const convertSearchApiResponse = ({
   phoneNumber: phone,
 });
 
-const useKakaoMapSearchApi = (searchTerm: string) => {
+const useGetKakaoMapSearchApi = (searchTerm: string) => {
   const { kakaoMapSearch } = useLoadKakaoMapScript();
 
   const {
@@ -60,4 +60,4 @@ const useKakaoMapSearchApi = (searchTerm: string) => {
   };
 };
 
-export default useKakaoMapSearchApi;
+export default useGetKakaoMapSearchApi;

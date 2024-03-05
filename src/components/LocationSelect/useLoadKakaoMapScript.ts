@@ -4,8 +4,8 @@ import {
   KakaoMapSearchAPI,
   KakaoMapSearchFunction,
   KakaoMapSearchResult,
-} from './KakaoMapSearch';
-import './KakaoMapSearch.d.ts';
+} from '@/apis/types/KakaoMapSearch';
+import '@/apis/types/KakaoMapSearch.d.ts';
 
 const KAKAO_MAP_ACCESS_KEY =
   import.meta.env.STORYBOOK_KAKAO_MAP_ACCESS_KEY ||

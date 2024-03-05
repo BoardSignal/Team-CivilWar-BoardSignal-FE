@@ -1,13 +1,6 @@
-import Button from '../Button';
+import { LocationItem } from '@/apis/types/KakaoMapSearch';
 
-export interface LocationItem {
-  id: string;
-  name: string;
-  type: string;
-  phoneNumber?: string;
-  newFormatAddress: string;
-  oldFormatAddress: string;
-}
+import Button from '../Button';
 
 interface LocationListItemProps {
   onClick: (locationName: string) => void;

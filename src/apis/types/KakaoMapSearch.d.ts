@@ -77,3 +77,15 @@ export type KakaoMapSearchFunction = (
   keyword: string,
   page: number,
 ) => Promise<KakaoMapSearchResult>;
+
+/**
+ * 우리 프론트엔드에서 실제로 사용되는(변환된 후의) 객체의 타입이에요.
+ */
+export interface LocationItem {
+  id: string;
+  name: string;
+  type: string;
+  phoneNumber?: string;
+  newFormatAddress: string;
+  oldFormatAddress: string;
+}
