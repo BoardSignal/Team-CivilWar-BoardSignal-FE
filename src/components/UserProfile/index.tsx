@@ -20,7 +20,7 @@ const UserProfile = ({
       <img
         src={profileImageUrl}
         alt='프로필사진'
-        className='mr-2 h-10 w-10 rounded-full object-cover'
+        className='mr-2 size-10 rounded-full object-cover'
       />
       <div className='flex w-full justify-between'>
         <div className='flex flex-col'>
@@ -29,7 +29,7 @@ const UserProfile = ({
           </span>
           <span className='text-xs text-gray-accent2'>{ageGroup}</span>
         </div>
-        <UserSignalTemperature value={signalTemperature} />
+        <UserSignalTemperature temperature={signalTemperature} />
       </div>
     </div>
   );

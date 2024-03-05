@@ -2,7 +2,7 @@ import smileFace from '@/assets/smiling-face.png';
 import Icon from '@/components/Icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
 import { cn } from '@/utils/cn';
-import getColorByTemperature from '@/utils/getTemperatureColor';
+import getColorByTemperature from '@/utils/getColorByTemperature';
 
 interface TemperatureProps {
   value: number;

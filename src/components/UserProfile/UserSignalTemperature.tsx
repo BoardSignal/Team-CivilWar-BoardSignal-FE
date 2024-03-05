@@ -1,14 +1,14 @@
-import smileFace from '@/assets/smiling-face.png';
+import smileFaceEmoji from '@/assets/smiling-face.png';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
 import { cn } from '@/utils/cn';
-import getColorByTemperature from '@/utils/getTemperatureColor';
+import getColorByTemperature from '@/utils/getColorByTemperature';
 
 interface UserTemperatureProps {
-  value: number;
+  temperature: number;
 }
 
-const UserSignalTemperature = ({ value }: UserTemperatureProps) => {
-  const { text, background } = getColorByTemperature(value);
+const UserSignalTemperature = ({ temperature }: UserTemperatureProps) => {
+  const { text, background } = getColorByTemperature(temperature);
 
   return (
     <div className='flex flex-col items-end gap-1'>
@@ -20,16 +20,16 @@ const UserSignalTemperature = ({ value }: UserTemperatureProps) => {
               text,
             )}
           >
-            {`${value}˚C`}
+            {`${temperature}˚C`}
           </span>
           <div className='h-1 overflow-hidden rounded-2xl bg-gray-accent7'>
             <div
               className={cn('h-full', background)}
-              style={{ width: `${value}%` }}
+              style={{ width: `${temperature}%` }}
             ></div>
           </div>
         </div>
-        <img src={smileFace} alt='Signal' className='ml-1 h-6 w-6' />
+        <img src={smileFaceEmoji} alt='' className='ml-1 size-6' />
       </div>
       <Popover>
         <PopoverTrigger className='pb-2'>
