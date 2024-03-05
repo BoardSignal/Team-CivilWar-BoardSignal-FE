@@ -1,0 +1,61 @@
+import { KeyboardEvent, Suspense, useState } from 'react';
+
+import Button from '@/components/Button';
+import Icon from '@/components/Icon';
+import LayoutRootPortal from '@/components/Layout/LayoutRootPortal';
+import TextInput from '@/components/TextInput';
+import useAutoCloseOnGoBack from '@/hooks/useAutoCloseModal.ts';
+
+import LocationList from './LocationList.tsx';
+
+interface LocationListModalProps {
+  onClose: () => void;
+  onSelect: (value: string) => void;
+}
+
+/**
+ * 장소를 선택할 때 사용되는 목록을 띄우는 모달이에요.
+ *
+ * 목록을 길게 표시할 수 있도록 전체 화면으로 만들었어요.
+ */
+const LocationListModal = ({ onClose, onSelect }: LocationListModalProps) => {
+  useAutoCloseOnGoBack(onClose);
+  const [searchWord, setSearchWord] = useState('');
+
+  const updateSearchWord = async (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setSearchWord(e.currentTarget.value);
+    }
+  };
+
+  return (
+    <LayoutRootPortal>
+      <div className='absolute left-0 top-0 flex h-full w-full flex-col gap-2 bg-white'>
+        <div className='flex items-center gap-2 border-b border-gray-accent7 px-4 py-2'>
+          <Button onClick={onClose} fast className='h-fit w-fit'>
+            <Icon
+              size={32}
+              id='arrow-left-line'
+              className='text-gray-accent2'
+            />
+          </Button>
+          <TextInput
+            autoFocus
+            onKeyDown={updateSearchWord}
+            placeholder='장소를 검색하세요...'
+          />
+        </div>
+        <div className='grow overflow-y-auto'>
+          {searchWord && (
+            // TODO: Spinner 병합 시 사용할 예정이에요.
+            <Suspense fallback={null}>
+              <LocationList onSelect={onSelect} searchWord={searchWord} />
+            </Suspense>
+          )}
+        </div>
+      </div>
+    </LayoutRootPortal>
+  );
+};
+
+export default LocationListModal;
