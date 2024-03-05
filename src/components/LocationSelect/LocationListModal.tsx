@@ -32,7 +32,7 @@ const LocationListModal = ({ onClose, onSelect }: LocationListModalProps) => {
     <LayoutRootPortal>
       <div className='absolute left-0 top-0 flex h-full w-full flex-col gap-2 bg-white'>
         <div className='flex items-center gap-2 border-b border-gray-accent7 px-4 py-2'>
-          <Button onClick={onClose} fast className='h-fit w-fit'>
+          <Button onClick={onClose} className='h-fit w-fit'>
             <Icon
               size={32}
               id='arrow-left-line'
