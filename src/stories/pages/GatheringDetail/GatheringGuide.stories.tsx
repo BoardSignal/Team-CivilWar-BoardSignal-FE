@@ -20,7 +20,7 @@ export const Default: Story = {
       minParticipants: 2,
       maxParticipants: 4,
       categories: ['전략게임', '워게임'],
-      isAllowedAppositeGender: false,
+      isAllowedAppositeGender: '혼성',
       minAge: 21,
       maxAge: 28,
     },
