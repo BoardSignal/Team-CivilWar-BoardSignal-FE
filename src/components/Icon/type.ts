@@ -53,6 +53,6 @@ export type IconName =
   | 'logout-line'
   | 'refresh-line'
   | 'error-warning-fill'
-  | 'loader-line';
+  | 'loader-line'
   | 'close-line'
   | 'logout-line';
