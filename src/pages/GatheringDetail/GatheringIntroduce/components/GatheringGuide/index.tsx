@@ -7,7 +7,7 @@ interface GatheringGuide {
   minParticipants: number;
   maxParticipants: number;
   categories: string[];
-  isAllowedAppositeGender: boolean;
+  isAllowedAppositeGender: string;
   minAge: number;
   maxAge: number;
 }
