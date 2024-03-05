@@ -1,7 +1,10 @@
+import { useState } from 'react';
+
 import TabBar from '@/components/TabBar';
 
 import GatheringDescription from './components/GatheringDescription';
 import GatheringGuide from './components/GatheringGuide';
+import TabMenu from './components/TabMenu';
 
 interface GatheringIntroduceProps {
   imageUrl?: string;
@@ -27,6 +30,11 @@ const GATHERING_INTRO_DUMMY_DATA = {
 
 const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
   const { title, description, gatheringGuide } = GATHERING_INTRO_DUMMY_DATA;
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabSelect = (index: number) => {
+    setActiveTab(index);
+  };
 
   return (
     <div className='flex h-full flex-col'>
@@ -40,17 +48,26 @@ const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
       </TabBar.Container>
 
       <div>
-        {imageUrl && (
-          <img
-            src={imageUrl || DEFAULT_IMAGE_URL}
-            alt='모임 이미지'
-            className='h-[350px] w-full object-cover'
-          />
+        <TabMenu
+          tabs={['모임 소개', '참가자 ()']}
+          onSelectTab={handleTabSelect}
+        />
+        {activeTab === 0 && (
+          <div>
+            {imageUrl && (
+              <img
+                src={imageUrl || DEFAULT_IMAGE_URL}
+                alt='모임 이미지'
+                className='h-[350px] w-full object-cover'
+              />
+            )}
+            <GatheringDescription title={title} description={description} />
+            <div className='m-5 '>
+              <GatheringGuide gatheringGuide={gatheringGuide} />
+            </div>
+          </div>
         )}
-        <GatheringDescription title={title} description={description} />
-        <div className='p-5'>
-          <GatheringGuide gatheringGuide={gatheringGuide} />
-        </div>
+        {activeTab === 1 && <div>{/* 참가자 프로필*/}</div>}
       </div>
     </div>
   );
