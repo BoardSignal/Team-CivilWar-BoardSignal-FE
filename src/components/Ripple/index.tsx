@@ -15,7 +15,10 @@ const RIPPLE_DEFAULT_OFFSET = {
   cursorTop: 0,
 };
 
-const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
+const getOffset = (
+  e: React.MouseEvent<HTMLButtonElement>,
+  el: HTMLButtonElement,
+) => {
   const { left, top } = el.getBoundingClientRect();
 
   return {
@@ -25,14 +28,14 @@ const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
   };
 };
 
-interface RippleProps extends ComponentProps<'div'> {
+interface RippleProps extends ComponentProps<'button'> {
   fast?: boolean;
 }
 
 /**
  * Ripple 트랜지션을 렌더링하는 컨테이너 컴포넌트에요.
  *
- * div로 구현되기 때문에 일부 스타일을 Ripple에 적용해야 할 수 있어요.
+ * button으로 구현되기 때문에 일부 스타일을 Ripple에 적용해야 할 수 있어요.
  *
  * fast={true}로 설정하면 빠른 Ripple 효과를 렌더링할 수 있어요.
  */
@@ -43,11 +46,11 @@ const Ripple = ({
   children,
   ...props
 }: RippleProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [offset, setOffset] = useState(RIPPLE_DEFAULT_OFFSET);
 
-  const showRipple = (e: React.MouseEvent<HTMLDivElement>) => {
+  const showRipple = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!ref.current) {
       return;
     }
@@ -71,7 +74,7 @@ const Ripple = ({
   };
 
   return (
-    <div
+    <button
       className={cn('relative overflow-hidden', className)}
       ref={ref}
       onClick={showRipple}
@@ -79,7 +82,7 @@ const Ripple = ({
     >
       {isAnimating && <RippleEffect {...offset} />}
       {children}
-    </div>
+    </button>
   );
 };
 

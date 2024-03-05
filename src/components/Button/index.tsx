@@ -24,7 +24,7 @@ const buttonCSS = cva(
   },
 );
 
-type ButtonProps = ComponentProps<'div'> & VariantProps<typeof buttonCSS>;
+type ButtonProps = ComponentProps<'button'> & VariantProps<typeof buttonCSS>;
 
 const Button = ({ variant, className, ...props }: ButtonProps) => {
   return (

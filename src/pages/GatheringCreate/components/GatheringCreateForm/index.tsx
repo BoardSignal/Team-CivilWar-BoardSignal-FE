@@ -327,9 +327,7 @@ const GatheringCreateForm = ({
       </div>
       <div className='border-t border-gray-accent7 p-4'>
         {isValid ? (
-          <Button variant='primary' onClick={handleSubmit(onSubmit)}>
-            모임 생성하기
-          </Button>
+          <Button variant='primary'>모임 생성하기</Button>
         ) : (
           <Button variant='inactive'>모임 생성하기</Button>
         )}
