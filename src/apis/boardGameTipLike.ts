@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { api } from './core';
 
@@ -17,17 +17,33 @@ const deleteBoardGameTipLike = (tipId: number) =>
     url: `/board-games/like/${tipId}`,
   });
 
-export const usePostBoardGameTipLikeApi = (tipId: number) => {
+export const usePostBoardGameTipLikeApi = (
+  tipId: number,
+  boardGameId: string,
+) => {
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: () => postBoardGameTipLike(tipId),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['boardGameDetail', boardGameId],
+      }),
   });
 
   return mutateAsync;
 };
 
-export const useDeleteBoardGameTipLikeApi = (tipId: number) => {
+export const useDeleteBoardGameTipLikeApi = (
+  tipId: number,
+  boardGameId: string,
+) => {
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: () => deleteBoardGameTipLike(tipId),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ['boardGameDetail', boardGameId],
+      }),
   });
 
   return mutateAsync;
