@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      # setup-node의 pnpm 지원을 위한 Action 
+      # setup-node의 pnpm 지원을 위한 Action
       - uses: pnpm/action-setup@v2
         with:
           version: 8.15.1
@@ -23,3 +23,5 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           exitZeroOnChanges: true
+        env:
+          STORYBOOK_BASE_URL: https://api.boardsignal.com/api/v1
