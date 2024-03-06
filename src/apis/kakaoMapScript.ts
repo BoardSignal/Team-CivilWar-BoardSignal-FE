@@ -53,7 +53,7 @@ const promisifySearchFunction =
  * - SDK를 가져오기
  * - SDK의 load 함수를 호출하기
  */
-const loadKakaoMapSearchScript = (accessKey: string) =>
+export const loadKakaoMapSearchScript = (accessKey: string) =>
   new Promise<KakaoMapSearchFunction>(resolve => {
     const loaderScriptTag = document.createElement('script');
     loaderScriptTag.src = getSDKUrl(accessKey);
@@ -80,7 +80,7 @@ const loadKakaoMapSearchScript = (accessKey: string) =>
  *
  * 세션 동안은 다시 불러올 필요가 없어 stale, gc를 비활성화했어요.
  */
-const useLoadKakaoMapScript = () => {
+export const useLoadKakaoMapScript = () => {
   const { data } = useSuspenseQuery({
     queryKey: ['kakao-map-search-script'],
     queryFn: () => loadKakaoMapSearchScript(KAKAO_MAP_ACCESS_KEY),
@@ -92,5 +92,3 @@ const useLoadKakaoMapScript = () => {
     kakaoMapSearch: data,
   };
 };
-
-export default useLoadKakaoMapScript;

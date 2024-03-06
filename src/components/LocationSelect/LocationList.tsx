@@ -1,7 +1,8 @@
+import { useKakaoMapSearchApi } from '@/apis/kakaoMapSearch';
+
 import InfiniteScrollAutoFetcher from '../InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '../Spinner/SpinnerListBottom';
 import LocationListItem from './LocationListItem';
-import useKakaoMapSearchApi from './useKakaoMapSearchApi';
 
 interface LocationListProps {
   searchWord: string;
