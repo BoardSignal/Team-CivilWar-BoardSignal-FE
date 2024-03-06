@@ -1,6 +1,5 @@
 export const AUTH_API_URL = '/auth';
-export const AUTH_LOGIN_KAKAO_API_URL = '/auth/login/kakao';
-export const AUTH_LOGIN_NAVER_API_URL = '/auth/login/naver';
+
 export const AUTH_LOGOUT_API_URL = '/auth/logout';
 export const AUTH_REISSUE_API_URL = '/auth/reissue';
 
