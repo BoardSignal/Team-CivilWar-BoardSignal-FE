@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
-
 import { Controller, useForm } from 'react-hook-form';
 
 import { usePostGatheringCreateApi } from '@/apis/postGatheringCreate';
@@ -15,7 +13,7 @@ import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
 
-interface FormValues {
+interface GatheringCreateFormValues {
   thumbnailImage: File;
   roomTitle: string;
   description: string;
@@ -32,12 +30,12 @@ interface FormValues {
 
 interface RequiredAndLengthRegister {
   required: boolean;
-  name: FormValueNames;
+  name: GatheringCreateFormValueNames;
   minLength?: number;
   maxLength?: number;
 }
 
-type FormValueNames =
+type GatheringCreateFormValueNames =
   | 'roomTitle'
   | 'description'
   | 'time'
@@ -46,8 +44,6 @@ type FormValueNames =
   | 'subwayStation'
   | 'place'
   | 'categories';
-
-type SubmitForm = (data: FormValues) => void;
 
 const BOARDGAME_CATEGORIES = [
   '워게임',
@@ -75,21 +71,31 @@ const ErrorMessage = ({ message }: { message: string | undefined }) => {
 };
 
 interface GatheringCreateFormProps {
-  onOpenModal: () => void;
-  onChangeGatheringId: Dispatch<SetStateAction<number | undefined>>;
+  onCreate: (gatheringId: number) => void;
 }
 
-const GatheringCreateForm = ({
-  onOpenModal,
-  onChangeGatheringId,
-}: GatheringCreateFormProps) => {
+const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
   const gatheringCreateApi = usePostGatheringCreateApi();
 
-  const gatheringCreater = async (requestBody: GatheringCreateRequest) => {
-    const { roomId } = await gatheringCreateApi(requestBody);
+  const createGathering = async (request: GatheringCreateRequest) => {
+    const { roomId: gatheringId } = await gatheringCreateApi(request);
 
-    onOpenModal();
-    onChangeGatheringId(roomId);
+    onCreate(gatheringId);
+  };
+
+  const gatheringCreateDefaultValue = {
+    thumbnailImage: new File([], ''),
+    roomTitle: '',
+    description: '',
+    isArrowedSameGender: false,
+    headcount: [1, 8],
+    time: '',
+    startTime: '',
+    age: [20, 30],
+    subwayLine: '',
+    subwayStation: '',
+    place: '',
+    categories: [],
   };
 
   const {
@@ -98,22 +104,9 @@ const GatheringCreateForm = ({
     formState: { errors, isValid },
     watch,
     control,
-  } = useForm<FormValues>({
+  } = useForm<GatheringCreateFormValues>({
     mode: 'all',
-    defaultValues: {
-      thumbnailImage: new File([], ''),
-      roomTitle: '',
-      description: '',
-      isArrowedSameGender: false,
-      headcount: [1, 8],
-      time: '',
-      startTime: '',
-      age: [20, 30],
-      subwayLine: '',
-      subwayStation: '',
-      place: '',
-      categories: [],
-    },
+    defaultValues: gatheringCreateDefaultValue,
   });
 
   const requiredAndLengthRegister = ({
@@ -129,6 +122,10 @@ const GatheringCreateForm = ({
           value: minLength,
           message: `${minLength}자 이상 입력해야 합니다.`,
         },
+        validate: value =>
+          typeof value === 'string' && value.trim().length < minLength
+            ? `앞뒤 공백 제외 ${minLength}자 이상 입력해야 합니다.`
+            : true,
       }),
       ...(maxLength && {
         maxLength: {
@@ -173,7 +170,7 @@ const GatheringCreateForm = ({
     name: 'place',
   };
 
-  const onSubmit: SubmitForm = (data: FormValues) => {
+  const onSubmit = (data: GatheringCreateFormValues) => {
     const {
       thumbnailImage: imageFile,
       isArrowedSameGender,
@@ -194,7 +191,7 @@ const GatheringCreateForm = ({
       ...restGathering,
     };
 
-    gatheringCreater({
+    createGathering({
       imageFile,
       gathering,
     });
@@ -326,11 +323,9 @@ const GatheringCreateForm = ({
         </section>
       </div>
       <div className='border-t border-gray-accent7 p-4'>
-        {isValid ? (
-          <Button variant='primary'>모임 생성하기</Button>
-        ) : (
-          <Button variant='inactive'>모임 생성하기</Button>
-        )}
+        <Button variant={isValid ? 'primary' : 'inactive'}>
+          모임 생성하기
+        </Button>
       </div>
     </form>
   );

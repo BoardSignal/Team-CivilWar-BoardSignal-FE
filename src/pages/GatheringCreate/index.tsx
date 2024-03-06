@@ -12,7 +12,9 @@ const GatheringCreatePage = () => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [gatheringId, setGatheringId] = useState<number | undefined>(undefined);
+  const [createdGatheringId, setCreatedGatheringId] = useState<
+    number | undefined
+  >(undefined);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -20,7 +22,12 @@ const GatheringCreatePage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`/gatherings/${gatheringId}`);
+    navigate(`/gatherings/${createdGatheringId}`);
+  };
+
+  const handleCreateGathering = (gatheringId: number) => {
+    handleOpenModal();
+    setCreatedGatheringId(gatheringId);
   };
 
   return (
@@ -39,10 +46,7 @@ const GatheringCreatePage = () => {
           <TabBar.GoBackButton />
         </TabBar.Left>
       </TabBar.Container>
-      <GatheringCreateForm
-        onOpenModal={handleOpenModal}
-        onChangeGatheringId={setGatheringId}
-      />
+      <GatheringCreateForm onCreate={handleCreateGathering} />
     </div>
   );
 };
