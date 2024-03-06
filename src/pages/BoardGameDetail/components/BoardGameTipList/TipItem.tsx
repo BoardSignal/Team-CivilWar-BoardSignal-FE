@@ -27,7 +27,7 @@ const TipItem = ({ tip }: { tip: Tip }) => {
     boardGameId,
   );
 
-  const clickedTipLike = () => {
+  const toggledTipLike = () => {
     isLiked ? deleteBoardGameTipLike() : postBoardGameTipLike();
   };
 
@@ -49,7 +49,7 @@ const TipItem = ({ tip }: { tip: Tip }) => {
         <p className='text-gray-accent1'>{content}</p>
         <div
           className='flex w-fit cursor-pointer items-center gap-1'
-          onClick={clickedTipLike}
+          onClick={toggledTipLike}
         >
           <Icon
             id={isLiked ? 'thumb-up-fill' : 'thumb-up-line'}
