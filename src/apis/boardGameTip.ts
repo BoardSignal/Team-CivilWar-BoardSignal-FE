@@ -1,5 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { BOARD_GAMES_TIP_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
 interface CreateTipResponse {
@@ -11,9 +13,9 @@ export interface CreateTipRequest {
   content: string;
 }
 
-const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
+export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
   api.post<CreateTipResponse>({
-    url: `board-games/tip/${boardGameId}`,
+    url: `${BOARD_GAMES_TIP_API_URL}/${boardGameId}`,
     data: {
       content,
     },

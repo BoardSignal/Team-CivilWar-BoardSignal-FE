@@ -1,5 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { AUTH_LOGIN_NAVER_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
 interface LoginResponse {
@@ -8,7 +10,7 @@ interface LoginResponse {
 }
 const postNaverLogin = () => {
   return api.post<LoginResponse>({
-    url: '/auth/login/naver',
+    url: AUTH_LOGIN_NAVER_API_URL,
   });
 };
 
