@@ -6,26 +6,26 @@ import { cn } from '@/utils/cn';
 
 import { useBoardGameWish } from '../../hooks/useBoardGameWish';
 
-const GameWish = ({
-  wishCount,
-  isWished,
-}: {
+interface GameWishProps {
   wishCount: number;
   isWished: boolean;
-}) => {
-  const { boardGameId } = useParams() as { boardGameId: string };
+}
+const GameWish = ({ wishCount, isWished }: GameWishProps) => {
+  const { boardGameId } = useParams();
+
+  if (!boardGameId) {
+    throw new Error('boardGameId is required');
+  }
 
   const { postBoardGameWish, deleteBoardGameWish } =
     useBoardGameWish(boardGameId);
 
-  const clickedWishButton = () => {
-    isWished ? deleteBoardGameWish() : postBoardGameWish();
-  };
+  const toggledWish = isWished ? deleteBoardGameWish : postBoardGameWish;
 
   return (
     <div className='flex flex-col items-center gap-1'>
       <Button
-        onClick={clickedWishButton}
+        onClick={toggledWish}
         className={cn(
           'flex h-8 w-8 items-center justify-center rounded-full border border-gray-accent3',
           isWished && 'bg-primary',

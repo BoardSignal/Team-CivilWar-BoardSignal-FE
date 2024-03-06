@@ -3,14 +3,18 @@ import { useParams } from 'react-router-dom';
 import { useGetBoardGameDetailApi } from '@/apis/boardGameDetail';
 import TabBar from '@/components/TabBar';
 
-import BoardGameTip from './components/BoardGameTips';
+import BoardGameTipList from './components/BoardGameTipList';
 import GameDescription from './components/GameDescription';
 import GamePlayDetail from './components/GamePlayDetail';
 import GameSummary from './components/GameSummary';
 import GameWish from './components/GameWish';
 
 const BoardGameDetailPage = () => {
-  const { boardGameId } = useParams() as { boardGameId: string };
+  const { boardGameId } = useParams();
+  if (!boardGameId) {
+    throw new Error('boardGameId is required');
+  }
+
   const {
     data: boardGameDetail,
     isPending,
@@ -50,7 +54,7 @@ const BoardGameDetailPage = () => {
           <GameWish wishCount={wishCount} isWished={isWished} />
         </div>
         <GameDescription description={description} />
-        <BoardGameTip
+        <BoardGameTipList
           tips={tips}
           name={name}
           boardGameId={boardGameId}
