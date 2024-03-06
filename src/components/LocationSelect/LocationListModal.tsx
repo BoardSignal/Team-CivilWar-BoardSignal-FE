@@ -6,6 +6,8 @@ import LayoutRootPortal from '@/components/Layout/LayoutRootPortal';
 import TextInput from '@/components/TextInput';
 import useAutoCloseOnGoBack from '@/hooks/useAutoCloseModal.ts';
 
+import ApiErrorBoundary from '../ErrorBoundary/ApiErrorBoundary.tsx';
+import SpinnerFullScreen from '../Spinner/SpinnerFullScreen.tsx';
 import LocationList from './LocationList.tsx';
 
 interface LocationListModalProps {
@@ -47,10 +49,11 @@ const LocationListModal = ({ onClose, onSelect }: LocationListModalProps) => {
         </div>
         <div className='grow overflow-y-auto'>
           {searchWord && (
-            // TODO: Spinner 병합 시 사용할 예정이에요.
-            <Suspense fallback={null}>
-              <LocationList onSelect={onSelect} searchWord={searchWord} />
-            </Suspense>
+            <ApiErrorBoundary>
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <LocationList onSelect={onSelect} searchWord={searchWord} />
+              </Suspense>
+            </ApiErrorBoundary>
           )}
         </div>
       </div>
