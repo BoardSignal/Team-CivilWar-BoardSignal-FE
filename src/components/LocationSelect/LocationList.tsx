@@ -1,4 +1,4 @@
-import { useGetKakaoMapSearchApi } from '@/apis/kakaoMapSearch';
+import { useGetInfiniteKakaoMapSearchApi } from '@/apis/kakaoMapSearch';
 
 import InfiniteScrollAutoFetcher from '../InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '../Spinner/SpinnerListBottom';
@@ -11,7 +11,7 @@ interface LocationListProps {
 
 const LocationList = ({ onSelect, searchWord }: LocationListProps) => {
   const { locations, totalCount, hasNextPage, fetchStatus, fetchNextPage } =
-    useGetKakaoMapSearchApi(searchWord);
+    useGetInfiniteKakaoMapSearchApi(searchWord);
 
   return (
     <InfiniteScrollAutoFetcher

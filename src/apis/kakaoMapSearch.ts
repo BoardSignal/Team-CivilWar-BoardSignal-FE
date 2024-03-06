@@ -26,7 +26,7 @@ const convertSearchApiResponse = ({
   phoneNumber: phone,
 });
 
-export const useGetKakaoMapSearchApi = (searchTerm: string) => {
+export const useGetInfiniteKakaoMapSearchApi = (searchTerm: string) => {
   const { kakaoMapSearch } = useGetKakaoMapScript();
 
   const {
@@ -35,8 +35,8 @@ export const useGetKakaoMapSearchApi = (searchTerm: string) => {
     fetchStatus,
     fetchNextPage,
   } = useSuspenseInfiniteQuery({
-    queryKey: ['locations', 'infinite', searchTerm],
-    queryFn: ({ pageParam: page }) => kakaoMapSearch(searchTerm, page),
+    queryKey: ['kakao-map-search', 'infinite', searchTerm],
+    queryFn: ({ pageParam }) => kakaoMapSearch(searchTerm, pageParam),
     initialPageParam: 1,
     // Next Page가 없는 경우 undefined를 반환해야 한다고 해요.
     getNextPageParam: ({ page: { current, last } }) =>
