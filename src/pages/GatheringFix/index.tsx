@@ -18,7 +18,7 @@ const GatheringFixPage = () => {
           <Alert>모임이 확정된 시작 시각과 장소를 입력해주세요</Alert>
         </div>
         <Label title='시작 시각' isRequired={true}>
-          <TextInputWithIcon type='time' iconId='time-fill' />
+          <TextInputWithIcon iconId='time-fill' />
         </Label>
         <Label title='지역 (가까운 지하철역)' isRequired={true}>
           <TextInputWithIcon iconId='map-pin-fill' />
