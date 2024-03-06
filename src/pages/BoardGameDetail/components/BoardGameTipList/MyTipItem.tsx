@@ -16,7 +16,7 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
       />
       <div className='flex w-full flex-col gap-2'>
         <span className='flex items-center justify-between gap-1'>
-          <Chip size='middle'>내 공략</Chip>
+          <Chip variant='fill'>내 공략</Chip>
           <span className='text-sm font-bold text-gray-accent1'>
             {nickname}
           </span>

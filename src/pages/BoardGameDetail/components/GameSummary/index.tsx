@@ -8,14 +8,12 @@ interface GameSummaryProps {
 const GameSummary = ({ name, categories }: GameSummaryProps) => {
   return (
     <>
-      <div className='flex w-full flex-col items-center gap-3 border-gray-accent7 py-5'>
+      <div className='flex w-full flex-col items-center gap-3 py-5'>
         <div className='flex flex-col items-center gap-1'>
           <span className='text-lg font-bold text-gray-accent1'>{name}</span>
           <div className='flex flex-wrap gap-1'>
             {categories.map(category => (
-              <Chip key={category} size='small'>
-                {category}
-              </Chip>
+              <Chip key={category}>{category}</Chip>
             ))}
           </div>
         </div>

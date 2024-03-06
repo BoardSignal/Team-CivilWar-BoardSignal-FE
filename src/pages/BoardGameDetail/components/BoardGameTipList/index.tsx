@@ -7,7 +7,7 @@ import Alert from '@/components/alert';
 import { cn } from '@/utils/cn';
 
 import MyTipItem from './MyTipItem';
-import TipIListtem from './TipItem';
+import TipIListItem from './TipItem';
 
 interface BoardGameTipsProps {
   tips: Tip[];
@@ -53,7 +53,7 @@ const BoardGameTipList = ({
       </div>
       {myTip && <MyTipItem tip={myTip} />}
       {tips.map(tip => (
-        <TipIListtem tip={tip} key={tip.tipId} />
+        <TipIListItem tip={tip} key={tip.tipId} />
       ))}
     </>
   );
