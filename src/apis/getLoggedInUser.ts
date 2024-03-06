@@ -19,8 +19,11 @@ const getLoggedInUser = () =>
     url: AUTH_API_URL,
   });
 
-export const useGetLoggedInUserApi = () =>
-  useSuspenseQuery({
+export const useGetLoggedInUserApi = () => {
+  const { data } = useSuspenseQuery({
     queryKey: ['loggedInUser'],
     queryFn: getLoggedInUser,
   });
+
+  return data;
+};

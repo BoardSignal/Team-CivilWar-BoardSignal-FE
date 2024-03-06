@@ -1,5 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 
+import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
 import { usePostGatheringCreateApi } from '@/apis/postGatheringCreate';
 import type { GatheringCreateRequest } from '@/apis/postGatheringCreate';
 import Button from '@/components/Button';
@@ -58,8 +59,9 @@ interface GatheringCreateFormProps {
 }
 
 const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
-  const gatheringCreateApi = usePostGatheringCreateApi();
+  const currentUser = useGetLoggedInUserApi();
 
+  const gatheringCreateApi = usePostGatheringCreateApi();
   const createGathering = async (request: GatheringCreateRequest) => {
     const { data, isBadRequest } = await gatheringCreateApi(request);
 
@@ -271,7 +273,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                     min={10}
                     max={40}
                     step={5}
-                    includedValue={23}
+                    includedValue={currentUser.age}
                     value={value}
                     onChange={onChange}
                   />
