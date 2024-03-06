@@ -5,7 +5,7 @@ import {
   LocationItem,
 } from '@/apis/types/KakaoMapSearch';
 
-import { useLoadKakaoMapScript } from './kakaoMapScript';
+import { useGetKakaoMapScript } from './kakaoMapScript';
 
 /**
  * 카카오 API 응답 객체의 snakeCase 프로퍼티들을 camelCase로 변환해요.
@@ -26,8 +26,8 @@ const convertSearchApiResponse = ({
   phoneNumber: phone,
 });
 
-export const useKakaoMapSearchApi = (searchTerm: string) => {
-  const { kakaoMapSearch } = useLoadKakaoMapScript();
+export const useGetKakaoMapSearchApi = (searchTerm: string) => {
+  const { kakaoMapSearch } = useGetKakaoMapScript();
 
   const {
     data: { pages },
@@ -36,9 +36,7 @@ export const useKakaoMapSearchApi = (searchTerm: string) => {
     fetchNextPage,
   } = useSuspenseInfiniteQuery({
     queryKey: ['locations', 'infinite', searchTerm],
-    queryFn: ({ pageParam: page }) => {
-      return kakaoMapSearch(searchTerm, page);
-    },
+    queryFn: ({ pageParam: page }) => kakaoMapSearch(searchTerm, page),
     initialPageParam: 1,
     // Next Page가 없는 경우 undefined를 반환해야 한다고 해요.
     getNextPageParam: ({ page: { current, last } }) =>
