@@ -4,6 +4,7 @@ import { usePostGatheringCreateApi } from '@/apis/postGatheringCreate';
 import type { GatheringCreateRequest } from '@/apis/postGatheringCreate';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
+import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import MultipleSelect from '@/components/MultipleSelect';
@@ -51,14 +52,6 @@ type GatheringCreateFormValueNames =
 const REQUIRE_MESSAGE = '필수 입력 사항입니다.';
 const AGE_ALERT_MESSAGE =
   '나이대는 본인 나이를 포함한 범위만 설정할 수 있어요.';
-
-const ErrorMessage = ({ message }: { message: string | undefined }) => {
-  return (
-    <p role='alert' className='text-sm text-red-500'>
-      {message}
-    </p>
-  );
-};
 
 interface GatheringCreateFormProps {
   onCreate: (gatheringId: number) => void;
@@ -218,7 +211,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
               maxLength={50}
               {...requiredAndLengthRegister(roomTitleRegister)}
             />
-            <ErrorMessage message={errors.roomTitle?.message} />
+            <FormErrorMessage message={errors.roomTitle?.message} />
           </Label>
           <Label
             title='모임 설명'
@@ -230,7 +223,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
               variant={errors.description ? 'error' : 'default'}
               {...requiredAndLengthRegister(descriptionRegister)}
             />
-            <ErrorMessage message={errors.description?.message} />
+            <FormErrorMessage message={errors.description?.message} />
           </Label>
           <Label title='동성만 참여하도록 제한할까요?'>
             <Checkbox {...register('isArrowedSameGender')}>예</Checkbox>
@@ -261,7 +254,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
               placeholder='시간대 선택'
               {...requiredAndLengthRegister(timeRegister)}
             />
-            <ErrorMessage message={errors.time?.message} />
+            <FormErrorMessage message={errors.time?.message} />
           </Label>
           <Label title='시작 시각'>
             <TextInput {...requiredAndLengthRegister(startTimeRegister)} />
@@ -292,7 +285,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
               variant={errors.subwayStation ? 'error' : 'default'}
               {...requiredAndLengthRegister(subwayStationRegister)}
             />
-            <ErrorMessage message={errors.subwayStation?.message} />
+            <FormErrorMessage message={errors.subwayStation?.message} />
           </Label>
           <Label title='장소'>
             <TextInput {...requiredAndLengthRegister(placeRegister)} />
