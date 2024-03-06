@@ -10,10 +10,12 @@ import GameSummary from './components/GameSummary';
 import GameWish from './components/GameWish';
 
 const BoardGameDetailPage = () => {
-  const { boardGameId } = useParams();
-  if (!boardGameId) {
-    throw new Error('boardGameId is required');
-  }
+  const { boardGameId = '1' } = useParams();
+  // if (!boardGameId) {
+  //   throw new Error('boardGameId is required');
+  // }
+
+  console.log(boardGameId);
 
   const {
     data: boardGameDetail,
@@ -37,6 +39,8 @@ const BoardGameDetailPage = () => {
     tips,
     ...gamePlayDetail
   } = boardGameDetail;
+
+  console.log(boardGameDetail);
 
   return (
     <div className='flex h-full flex-col justify-center'>

@@ -11,11 +11,11 @@ interface GameWishProps {
   isWished: boolean;
 }
 const GameWish = ({ wishCount, isWished }: GameWishProps) => {
-  const { boardGameId } = useParams();
+  const { boardGameId = '1' } = useParams();
 
-  if (!boardGameId) {
-    throw new Error('boardGameId is required');
-  }
+  // if (!boardGameId) {
+  //   throw new Error('boardGameId is required');
+  // }
 
   const { postBoardGameWish, deleteBoardGameWish } =
     useBoardGameWish(boardGameId);
