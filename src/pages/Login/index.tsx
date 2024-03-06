@@ -1,11 +1,7 @@
 import logoImage from '@/assets/logo.png';
 import TabBar from '@/components/TabBar';
 
-import {
-  KakaoLoginButton,
-  NaverLoginButton,
-  SkipLoginButton,
-} from './components/LoginButtons';
+import { KakaoLoginButton, SkipLoginButton } from './components/LoginButtons';
 
 const SLOGAN_MESSAGE1 = '"매치업! 보드게임을 즐기는';
 const SLOGAN_MESSAGE2 = '사람들을 찾는 최적의 장소."';
@@ -24,7 +20,6 @@ const LoginPage = () => {
         </div>
       </div>
       <div className='flex flex-col gap-2 p-4'>
-        <NaverLoginButton />
         <KakaoLoginButton />
         <SkipLoginButton />
       </div>
