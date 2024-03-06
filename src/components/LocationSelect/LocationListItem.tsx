@@ -21,11 +21,17 @@ const LocationListItem = ({
       className='flex h-fit flex-col items-start gap-1 border-b border-gray-accent7 px-4 py-2'
     >
       <div className='flex items-center gap-1'>
-        <span className='font-bold text-gray-accent1'>{name}</span>
-        <span className='text-sm text-gray-accent3'>{type}</span>
+        <span className='line-clamp-1 text-start font-bold text-gray-accent1'>
+          {name}
+        </span>
+        <span className='shrink-0 text-sm text-gray-accent3'>{type}</span>
       </div>
-      <span className='text-sm text-gray-accent2'>{newFormatAddress}</span>
-      <span className='text-sm text-gray-accent2'>{oldFormatAddress}</span>
+      <span className='text-start text-sm text-gray-accent2'>
+        {newFormatAddress}
+      </span>
+      <span className='text-start text-sm text-gray-accent2'>
+        {oldFormatAddress}
+      </span>
       <span className='text-sm text-primary'>{phoneNumber}</span>
     </Button>
   );
