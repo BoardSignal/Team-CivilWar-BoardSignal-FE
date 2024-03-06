@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import Button from '@/components/Button';
 import Drawer from '@/components/Drawer';
 
 import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
@@ -31,6 +32,9 @@ export const DefaultTemplate: Story = {
         </Drawer.Trigger>
         <Drawer.Title>Draw Title</Drawer.Title>
         <Drawer.Content>Draw Content</Drawer.Content>
+        <Drawer.Closer>
+          <Button variant='primary'>확인</Button>
+        </Drawer.Closer>
       </Drawer>
     );
   },

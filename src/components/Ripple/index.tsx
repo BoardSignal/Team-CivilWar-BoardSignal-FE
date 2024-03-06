@@ -25,7 +25,7 @@ const getOffset = (e: React.MouseEvent<HTMLDivElement>, el: HTMLDivElement) => {
   };
 };
 
-interface RippleProps extends ComponentProps<'div'> {
+export interface RippleProps extends ComponentProps<'div'> {
   fast?: boolean;
 }
 
