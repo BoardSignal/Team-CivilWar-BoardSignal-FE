@@ -12,6 +12,7 @@ import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
+import { showErrorToast } from '@/utils/showToast';
 
 interface GatheringCreateFormValues {
   thumbnailImage: File;
@@ -78,9 +79,13 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
   const gatheringCreateApi = usePostGatheringCreateApi();
 
   const createGathering = async (request: GatheringCreateRequest) => {
-    const { roomId: gatheringId } = await gatheringCreateApi(request);
+    const { data, isBadRequest } = await gatheringCreateApi(request);
 
-    onCreate(gatheringId);
+    if (isBadRequest) {
+      return showErrorToast(data.message);
+    }
+
+    onCreate(data.roomId);
   };
 
   const gatheringCreateDefaultValue = {
