@@ -11,11 +11,12 @@ import GameWish from './components/GameWish';
 
 const BoardGameDetailPage = () => {
   const { boardGameId = '1' } = useParams();
-  // if (!boardGameId) {
-  //   throw new Error('boardGameId is required');
-  // }
-
-  console.log(boardGameId);
+  /**
+   * if (!boardGameId) {
+   *   추후에 404페이지로 라우팅 될 예정입니다 .
+   * }
+   * 현재 mock 데이터가 없어서 임시로 1번 게임을 조회합니다.
+   */
 
   const {
     data: boardGameDetail,
@@ -39,8 +40,6 @@ const BoardGameDetailPage = () => {
     tips,
     ...gamePlayDetail
   } = boardGameDetail;
-
-  console.log(boardGameDetail);
 
   return (
     <div className='flex h-full flex-col justify-center'>
