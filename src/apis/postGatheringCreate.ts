@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { api } from './core';
+import { ROOMS_API_URL } from '@/constants/apiRoutes';
 
-const POST_GATHERING_CREATE_URL = '/rooms';
+import { api } from './core';
 
 interface Gathering {
   roomTitle: string;
@@ -45,7 +45,7 @@ export const postGatheringCreate = ({
   );
 
   return api.post<GatheringCreateResponse>({
-    url: POST_GATHERING_CREATE_URL,
+    url: ROOMS_API_URL,
     data: formData,
     headers: {
       'Content-Type': 'multipart/form-data',

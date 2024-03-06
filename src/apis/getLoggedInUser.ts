@@ -1,5 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
+import { AUTH_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
 export interface LoggedInUserResponse {
@@ -12,11 +14,9 @@ export interface LoggedInUserResponse {
   isJoined: boolean;
 }
 
-const GET_LOGGED_IN_USER_URL = '/auth';
-
 const getLoggedInUser = () =>
   api.get<LoggedInUserResponse>({
-    url: GET_LOGGED_IN_USER_URL,
+    url: AUTH_API_URL,
   });
 
 export const useGetLoggedInUserApi = () =>

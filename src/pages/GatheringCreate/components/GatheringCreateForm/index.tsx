@@ -12,6 +12,8 @@ import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
+import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
+import { TIMES } from '@/constants/times';
 import { showErrorToast } from '@/utils/showToast';
 
 interface GatheringCreateFormValues {
@@ -45,19 +47,6 @@ type GatheringCreateFormValueNames =
   | 'subwayStation'
   | 'place'
   | 'categories';
-
-const BOARDGAME_CATEGORIES = [
-  '워게임',
-  '가족게임',
-  '전략게임',
-  '추상게임',
-  '테마게임',
-  '파티게임',
-  '어린이게임',
-  '컬렉터블게임',
-];
-
-const TIMES = ['평일 오전', '평일 오후', '주말 오전', '주말 오후'];
 
 const REQUIRE_MESSAGE = '필수 입력 사항입니다.';
 const AGE_ALERT_MESSAGE =
