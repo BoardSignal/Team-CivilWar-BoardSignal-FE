@@ -1,8 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { api } from './core';
+import { NOTIFICATIONS_API_URL } from '@/constants/apiRoutes';
 
-export const GET_NOTIFICATION_URL = '/users/notifications/my';
+import { api } from './core';
 
 // FIXME: 실제 API 응답에 맞게 변환이 필요해요. 현재는 단순 예시용이에요.
 export interface Notification {
@@ -16,7 +16,7 @@ export interface Notification {
 
 const getNotifications = () =>
   api.get<Notification[]>({
-    url: GET_NOTIFICATION_URL,
+    url: NOTIFICATIONS_API_URL,
   });
 
 export const useGetNotificationsApi = () => {
