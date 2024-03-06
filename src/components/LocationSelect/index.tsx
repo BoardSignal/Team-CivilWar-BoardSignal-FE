@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 
 import TextInput from '../TextInput';
 import LocationListModal from './LocationListModal';
@@ -28,13 +28,10 @@ const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
       {/* 모임 확정 페이지 PR의 TextInputWithIcon 병합 시 사용할 예정이에요. */}
       <TextInput value={value} onClick={openModal} />
       {isModalOpen && (
-        // TODO: Spinner 병합 시 사용할 예정이에요.
-        <Suspense fallback={null}>
-          <LocationListModal
-            onClose={closeModal}
-            onSelect={handleLocationSelect}
-          />
-        </Suspense>
+        <LocationListModal
+          onClose={closeModal}
+          onSelect={handleLocationSelect}
+        />
       )}
     </>
   );
