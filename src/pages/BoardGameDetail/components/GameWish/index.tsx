@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
@@ -16,18 +14,12 @@ const GameWish = ({
   isWished: boolean;
 }) => {
   const { boardGameId } = useParams() as { boardGameId: string };
-  const [isBoardGameWished, setIsBoardGameWished] = useState(isWished);
-  const [boardGameWishCount, setBoardGameWishCount] = useState(wishCount);
 
   const { postBoardGameWish, deleteBoardGameWish } =
     useBoardGameWish(boardGameId);
 
   const clickedWishButton = () => {
-    isBoardGameWished ? deleteBoardGameWish() : postBoardGameWish();
-    setIsBoardGameWished(!isBoardGameWished);
-    isBoardGameWished
-      ? setBoardGameWishCount(boardGameWishCount - 1)
-      : setBoardGameWishCount(boardGameWishCount + 1);
+    isWished ? deleteBoardGameWish() : postBoardGameWish();
   };
 
   return (
@@ -36,16 +28,16 @@ const GameWish = ({
         onClick={clickedWishButton}
         className={cn(
           'flex h-8 w-8 items-center justify-center rounded-full border border-gray-accent3',
-          isBoardGameWished && 'bg-primary',
+          isWished && 'bg-primary',
         )}
       >
         <Icon
-          id={isBoardGameWished ? 'bookmark-fill' : 'bookmark-line'}
+          id={isWished ? 'bookmark-fill' : 'bookmark-line'}
           size={16}
-          className={cn('text-gray-accent3', isBoardGameWished && 'text-white')}
+          className={cn('text-gray-accent3', isWished && 'text-white')}
         />
       </Button>
-      <span className='text-xs text-gray-accent1'>{boardGameWishCount}</span>
+      <span className='text-xs text-gray-accent1'>{wishCount}</span>
     </div>
   );
 };

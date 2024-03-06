@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
 import Icon from '@/components/Icon';
@@ -20,16 +20,15 @@ const TipItem = ({ tip }: { tip: Tip }) => {
     isLiked,
   } = tip;
 
-  const { postBoardGameTipLike, deleteBoardGameTipLike } =
-    useBoardGameTipLike(tipId);
+  const { boardGameId } = useParams() as { boardGameId: string };
 
-  const [isTipLiked, setIsLiked] = useState(isLiked);
-  const [likedTipCount, setLikeCount] = useState(likeCount);
+  const { postBoardGameTipLike, deleteBoardGameTipLike } = useBoardGameTipLike(
+    tipId,
+    boardGameId,
+  );
 
   const clickedTipLike = () => {
-    isTipLiked ? deleteBoardGameTipLike() : postBoardGameTipLike();
-    setIsLiked(!isTipLiked);
-    setLikeCount(isTipLiked ? likedTipCount - 1 : likedTipCount + 1);
+    isLiked ? deleteBoardGameTipLike() : postBoardGameTipLike();
   };
 
   return (
@@ -53,11 +52,11 @@ const TipItem = ({ tip }: { tip: Tip }) => {
           onClick={clickedTipLike}
         >
           <Icon
-            id={isTipLiked ? 'thumb-up-fill' : 'thumb-up-line'}
+            id={isLiked ? 'thumb-up-fill' : 'thumb-up-line'}
             size={16}
-            className={cn('text-gray-accent3', isTipLiked && 'text-primary')}
+            className={cn('text-gray-accent3', isLiked && 'text-primary')}
           />
-          <span className='text-xs text-gray-accent1'>{likedTipCount}</span>
+          <span className='text-xs text-gray-accent1'>{likeCount}</span>
         </div>
       </div>
     </div>

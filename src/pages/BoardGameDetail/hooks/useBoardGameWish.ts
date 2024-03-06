@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import {
   useDeleteBoardGameWishApi,
   usePostBoardGameWishApi,
@@ -6,21 +8,16 @@ import {
 export const useBoardGameWish = (boardGameId: string) => {
   const postApi = usePostBoardGameWishApi(boardGameId);
   const deleteApi = useDeleteBoardGameWishApi(boardGameId);
-
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({
+    queryKey: ['boardGameDetail', boardGameId],
+  });
   return {
     postBoardGameWish: async () => {
-      try {
-        await postApi();
-      } catch (error) {
-        console.error(error);
-      }
+      await postApi();
     },
     deleteBoardGameWish: async () => {
-      try {
-        await deleteApi();
-      } catch (error) {
-        console.error(error);
-      }
+      await deleteApi();
     },
   };
 };

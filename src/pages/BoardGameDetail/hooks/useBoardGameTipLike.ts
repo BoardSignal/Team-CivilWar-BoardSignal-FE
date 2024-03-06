@@ -1,26 +1,24 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import {
   useDeleteBoardGameTipLikeApi,
   usePostBoardGameTipLikeApi,
 } from '@/apis/boardGameTipLike';
 
-export const useBoardGameTipLike = (tipId: number) => {
+export const useBoardGameTipLike = (tipId: number, boardGameId: string) => {
   const postApi = usePostBoardGameTipLikeApi(tipId);
   const deleteApi = useDeleteBoardGameTipLikeApi(tipId);
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({
+    queryKey: ['boardGameDetail', boardGameId],
+  });
 
   return {
     postBoardGameTipLike: async () => {
-      try {
-        await postApi();
-      } catch (error) {
-        console.error(error);
-      }
+      await postApi();
     },
     deleteBoardGameTipLike: async () => {
-      try {
-        await deleteApi();
-      } catch (error) {
-        console.error(error);
-      }
+      await deleteApi();
     },
   };
 };
