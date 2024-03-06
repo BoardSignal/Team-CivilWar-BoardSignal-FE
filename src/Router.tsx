@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
 import ProfilePage from './pages/Profile';
+import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
         path: 'gatherings/:gatheringId',
         element: <HomePage />,
       },
+      { path: '/redirect', element: <RedirectOnAuthentication /> },
     ],
   },
 ]);

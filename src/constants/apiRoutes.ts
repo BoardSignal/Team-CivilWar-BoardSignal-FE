@@ -3,6 +3,8 @@ export const AUTH_API_URL = '/auth';
 export const AUTH_LOGOUT_API_URL = '/auth/logout';
 export const AUTH_REISSUE_API_URL = '/auth/reissue';
 
+export const KAKAO = '/kakao';
+
 export const USERS_API_URL = '/users';
 export const USERS_END_GAME_API_URL = '/users/end-game';
 export const USERS_MY_API_URL = '/users/my';
