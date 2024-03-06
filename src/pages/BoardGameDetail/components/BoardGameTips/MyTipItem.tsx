@@ -1,4 +1,5 @@
 import type { Tip } from '@/apis/boardGameDetail';
+import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 import { convertToRelativeTime } from '@/utils/convertToRelativeTime';
 
@@ -15,9 +16,7 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
       />
       <div className='flex w-full flex-col gap-2'>
         <span className='flex items-center justify-between gap-1'>
-          <div className='flex rounded-2xl border border-primary bg-primary px-2 py-0.5 text-xs font-bold text-white'>
-            내 공략
-          </div>
+          <Chip size='middle'>내 공략</Chip>
           <span className='text-sm font-bold text-gray-accent1'>
             {nickname}
           </span>

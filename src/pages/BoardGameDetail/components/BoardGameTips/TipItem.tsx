@@ -48,7 +48,10 @@ const TipItem = ({ tip }: { tip: Tip }) => {
           </span>
         </div>
         <p className='text-gray-accent1'>{content}</p>
-        <div className='flex items-center gap-1' onClick={clickedTipLike}>
+        <div
+          className='flex w-fit cursor-pointer items-center gap-1'
+          onClick={clickedTipLike}
+        >
           <Icon
             id={isTipLiked ? 'thumb-up-fill' : 'thumb-up-line'}
             size={16}

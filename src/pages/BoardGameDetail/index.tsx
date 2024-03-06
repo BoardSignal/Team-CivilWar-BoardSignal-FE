@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetBoardGameDetailApi } from '@/apis/boardGameDetail';
-import { BoardGameDetailResponse } from '@/apis/boardGameDetail';
 import TabBar from '@/components/TabBar';
 
 import BoardGameTip from './components/BoardGameTips';
@@ -27,17 +26,13 @@ const BoardGameDetailPage = () => {
     name,
     description,
     categories,
-    difficulty,
-    minParticipants,
-    maxParticipants,
-    fromPlayTime,
-    toPlayTime,
     wishCount,
     imageUrl,
     isWished,
     myTip,
     tips,
-  } = boardGameDetail as BoardGameDetailResponse;
+    ...gamePlayDetail
+  } = boardGameDetail;
 
   return (
     <div className='flex h-full flex-col justify-center'>
@@ -51,15 +46,7 @@ const BoardGameDetailPage = () => {
         <img src={imageUrl} className='h-60' alt={name} />
         <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
           <GameSummary name={name} categories={categories} />
-          <GamePlayDetail
-            gamePlayDetail={{
-              difficulty,
-              minParticipants,
-              maxParticipants,
-              fromPlayTime,
-              toPlayTime,
-            }}
-          />
+          <GamePlayDetail gamePlayDetail={gamePlayDetail} />
           <GameWish wishCount={wishCount} isWished={isWished} />
         </div>
         <GameDescription description={description} />

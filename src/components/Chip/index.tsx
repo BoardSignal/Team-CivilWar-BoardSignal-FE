@@ -3,11 +3,12 @@ import { ReactNode } from 'react';
 import { type VariantProps, cva } from 'class-variance-authority';
 
 const chipCSS = cva(
-  'flex w-fit items-center border border-primary text-primary',
+  'flex w-fit items-center rounded-2xl border border-primary px-2 py-0.5 text-primary',
   {
     variants: {
       size: {
-        small: 'rounded-2xl px-2 py-0.5 text-[10px]',
+        small: 'text-[10px]',
+        middle: 'bg-primary text-xs font-bold text-white',
         large: 'rounded-3xl px-4 py-2',
       },
     },
