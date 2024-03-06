@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { USERS_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
 interface UserProfileResponse {
@@ -19,11 +21,9 @@ export interface Review {
   reviewScore: number;
 }
 
-const GET_PROFILE_URL = '/users';
-
 const getUserProfile = (userId: string) => {
   api.get<UserProfileResponse>({
-    url: `${GET_PROFILE_URL}/${userId}`,
+    url: `${USERS_API_URL}/${userId}`,
   });
 };
 

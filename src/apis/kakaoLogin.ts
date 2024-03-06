@@ -1,5 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { AUTH_LOGIN_KAKAO_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
 interface LoginResponse {
@@ -9,7 +11,7 @@ interface LoginResponse {
 
 const postKakaoLogin = () => {
   return api.post<LoginResponse>({
-    url: '/auth/login/kakao',
+    url: AUTH_LOGIN_KAKAO_API_URL,
   });
 };
 
