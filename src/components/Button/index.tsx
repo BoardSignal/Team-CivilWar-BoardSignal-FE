@@ -24,7 +24,7 @@ const buttonCSS = cva(
   },
 );
 
-type ButtonProps = ComponentProps<'button'> &
+export type ButtonProps = ComponentProps<'button'> &
   VariantProps<typeof buttonCSS> &
   RippleProps;
 

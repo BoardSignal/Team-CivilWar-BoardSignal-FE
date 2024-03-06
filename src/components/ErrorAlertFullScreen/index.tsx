@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 
-import Button, { ButtonProps } from '../Button';
+import Button, { type ButtonProps } from '../Button';
 import Icon from '../Icon';
 
 const DEFAULT_ERROR_TITLE = '잠시 후 다시 시도해주세요 :(';
@@ -9,7 +9,7 @@ const DEFAULT_BUTTON_TITLE = '새로 고침하기';
 
 export interface ErrorAlertProps {
   error: unknown;
-  onReset: MouseEventHandler<HTMLDivElement>;
+  onReset: MouseEventHandler<HTMLButtonElement>;
   isShowingErrorIcon?: boolean;
   title?: string;
   message?: string;
