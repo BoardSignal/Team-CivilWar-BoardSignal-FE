@@ -5,20 +5,26 @@ interface ReviewProps {
   reviews: Review[];
 }
 
+interface ReviewContentProps {
+  review: Review;
+}
+
 const MannerReview = ({ reviews }: ReviewProps) => {
   return (
     <div className='flex flex-col'>
       <span className='py-2 font-bold'>매너 리뷰</span>
       <div className='flex flex-col gap-2 px-1'>
-        {reviews.map(({ score, content }) => (
-          <ReviewContent content={content} score={score} key={content} />
+        {reviews.map(review => (
+          <ReviewContent review={review} key={review.content} />
         ))}
       </div>
     </div>
   );
 };
 
-const ReviewContent = ({ score, content }: Review) => {
+const ReviewContent = ({ review }: ReviewContentProps) => {
+  const { content, score } = review;
+
   return (
     <div className='flex'>
       <div className='flex w-[60px] items-center gap-2'>

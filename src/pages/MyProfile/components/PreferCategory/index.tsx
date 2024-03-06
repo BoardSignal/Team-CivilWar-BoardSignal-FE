@@ -1,6 +1,10 @@
 import Chip from '@/components/Chip';
 
-const PreferCategory = ({ categories }: { categories: string[] }) => {
+interface PreferCategoryProps {
+  categories: string[];
+}
+
+const PreferCategory = ({ categories }: PreferCategoryProps) => {
   return (
     <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
       <span className='flex gap-1'>

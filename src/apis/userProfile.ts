@@ -22,11 +22,10 @@ export interface Review {
 
 const GET_PROFILE_URL = '/users';
 
-const getUserProfile = (userId: string) => {
-  return api.get<UserProfileResponse>({
+const getUserProfile = (userId: string) =>
+  api.get<UserProfileResponse>({
     url: `${GET_PROFILE_URL}/${userId}`,
   });
-};
 
 export const useGetUserProfilesApi = (userId: string) =>
   useQuery({
