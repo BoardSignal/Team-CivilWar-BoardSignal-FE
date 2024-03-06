@@ -1,4 +1,5 @@
 import InfiniteScrollAutoFetcher from '../InfiniteScrollAutoFetcher';
+import SpinnerListBottom from '../Spinner/SpinnerListBottom';
 import LocationListItem from './LocationListItem';
 import useKakaoMapSearchApi from './useKakaoMapSearchApi';
 
@@ -16,6 +17,7 @@ const LocationList = ({ onSelect, searchWord }: LocationListProps) => {
       hasNextPage={hasNextPage}
       fetchNextPage={fetchNextPage}
       fetchStatus={fetchStatus}
+      loaderElement={<SpinnerListBottom />}
     >
       <div className='px-4 pb-2 text-gray-accent2'>
         검색 결과 {totalCount}개

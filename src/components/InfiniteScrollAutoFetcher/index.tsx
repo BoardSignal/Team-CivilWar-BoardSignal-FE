@@ -1,8 +1,15 @@
 /* eslint prefer-arrow-callback: 0 */
-import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { cn } from '@/utils/cn';
 
+import Spinner from '../Spinner';
 import FetchMarker from './FetchMarker';
 
 const caculateBottomY = (element: HTMLElement, ratio: number) => {
@@ -17,6 +24,7 @@ interface InfiniteScrollAutoFetcherProps
   hasNextPage: boolean;
   fetchNextPage: () => void;
   bottomYRatio?: number;
+  loaderElement?: ReactNode;
 }
 
 /**
@@ -33,6 +41,7 @@ const InfiniteScrollAutoFetcher = ({
   children,
   className,
   bottomYRatio = 0.3,
+  loaderElement = <Spinner />,
   ...props
 }: InfiniteScrollAutoFetcherProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,8 +83,9 @@ const InfiniteScrollAutoFetcher = ({
 
   return (
     <div ref={containerRef} className={cn(className, 'relative')} {...props}>
-      <FetchMarker ref={markerRef} y={markerY} />
       {children}
+      <FetchMarker ref={markerRef} y={markerY} />
+      {fetchStatus === 'fetching' && loaderElement}
     </div>
   );
 };
