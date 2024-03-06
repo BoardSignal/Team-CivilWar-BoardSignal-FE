@@ -4,7 +4,7 @@ export interface Participants {
   userId: number;
   nickname: string;
   ageGroup: string;
-  isLeader?: boolean;
+  isLeader: boolean;
   signalTemperature: number;
 }
 
@@ -24,6 +24,7 @@ const GatheringParticipants = ({
             nickname={participant.nickname}
             ageGroup={participant.ageGroup}
             signalTemperature={participant.signalTemperature}
+            isLeader={participant.isLeader}
           />
         ))}
       </ul>
