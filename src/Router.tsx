@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { ResponsiveLayoutWrapper } from './components/Layout';
-import BoardGameDetail from './pages/BoardGameDetail';
+import ResponsiveLayoutWrapper from './components/Layout';
+import BoardGameDetailPage from './pages/BoardGameDetail';
 import GatheringCreatePage from './pages/GatheringCreate';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import ProfilePage from './pages/MyProfile';
+import NotificationListPage from './pages/NotificationList';
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'notifications',
-        element: <HomePage />,
+        element: <NotificationListPage />,
       },
       {
         path: 'me',
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'board-game-detail',
-        element: <BoardGameDetail />,
+        element: <BoardGameDetailPage />,
       },
       {
         path: 'login',

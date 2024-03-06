@@ -4,7 +4,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 
 import { cn } from '@/utils/cn';
 
-import Ripple from '../Ripple';
+import Ripple, { RippleProps } from '../Ripple';
 
 const buttonCSS = cva(
   'flex h-10 w-full cursor-pointer items-center justify-center rounded-lg',
@@ -24,7 +24,9 @@ const buttonCSS = cva(
   },
 );
 
-type ButtonProps = ComponentProps<'button'> & VariantProps<typeof buttonCSS>;
+type ButtonProps = ComponentProps<'button'> &
+  VariantProps<typeof buttonCSS> &
+  RippleProps;
 
 const Button = ({ variant, className, ...props }: ButtonProps) => {
   return (

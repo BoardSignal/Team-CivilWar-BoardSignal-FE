@@ -28,7 +28,7 @@ const getOffset = (
   };
 };
 
-interface RippleProps extends ComponentProps<'button'> {
+export interface RippleProps extends ComponentProps<'button'> {
   fast?: boolean;
 }
 

@@ -1,6 +1,6 @@
 import logoImage from '@/assets/logo.png';
 
-export const Introduction = () => (
+const Introduction = () => (
   <div className='flex flex-col items-center'>
     <img src={logoImage} />
     <p className='text-center text-gray-500'>
@@ -8,3 +8,5 @@ export const Introduction = () => (
     </p>
   </div>
 );
+
+export default Introduction;
