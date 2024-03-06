@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import ProfilePage from './pages/MyProfile';
 import NotificationListPage from './pages/NotificationList';
+import RedirectPage from './pages/Redirect';
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: '/redirect',
+        element: <RedirectPage />,
       },
     ],
   },
