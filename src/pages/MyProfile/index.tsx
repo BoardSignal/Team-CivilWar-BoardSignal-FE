@@ -8,6 +8,7 @@ import MannerReview from './components/MannerReview';
 import PersonalInfo from './components/PersonalInfo';
 import PreferCategory from './components/PreferCategory';
 import SignalTemperature from './components/SignalTemperature';
+import { useLogout } from './hooks/useLogout';
 
 const PROFILE_PAGE_DUMMY_DATA = {
   personalInfo: {
@@ -75,6 +76,8 @@ const MyProfilePage = () => {
   const { reviews, signalTemperature, personalInfo, categories, wishCount } =
     PROFILE_PAGE_DUMMY_DATA;
 
+  const { logout } = useLogout();
+
   return (
     <div className='flex h-full flex-col'>
       <TabBar.Container>
@@ -83,7 +86,7 @@ const MyProfilePage = () => {
         </TabBar.Left>
         <TabBar.Right>
           <TabBar.ShareButton />
-          <TabBar.LogoutButton />
+          <TabBar.LogoutButton onClick={logout} />
           <TabBar.SettingsButton />
         </TabBar.Right>
       </TabBar.Container>
