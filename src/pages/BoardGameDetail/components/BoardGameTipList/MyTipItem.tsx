@@ -1,7 +1,6 @@
 import type { Tip } from '@/apis/boardGameDetail';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
-import { convertToRelativeTime } from '@/utils/convertToRelativeTime';
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
@@ -17,18 +16,16 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
       <div className='flex w-full flex-col gap-2'>
         <span className='flex items-center justify-between gap-1'>
           <Chip variant='fill'>내 공략</Chip>
-          <span className='text-sm font-bold text-gray-accent1'>
+          <span className='grow text-sm font-bold text-gray-accent1'>
             {nickname}
           </span>
-          <span className='grow text-[10px] text-gray-accent3'>
-            {convertToRelativeTime(createdAt)}
-          </span>
-          <Icon id='more-line' size={16} className='text-gray-accent3' />
+          <span className='text-[10px] text-gray-accent3'>{createdAt}</span>
         </span>
         <p className='text-gray-accent1'>{content}</p>
         <div className='flex items-center gap-1'>
           <Icon id='thumb-up-line' size={16} className='text-gray-accent3' />
-          <span className='text-xs text-gray-accent1'>{likeCount}</span>
+          <span className='grow text-xs text-gray-accent1'>{likeCount}</span>
+          <Icon id='delete-bin-line' className='text-gray-accent3' />
         </div>
       </div>
     </div>
