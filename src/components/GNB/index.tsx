@@ -14,7 +14,7 @@ export const GNB = () => {
           <Button className='flex h-fit flex-col items-center gap-0.5 pb-2 pt-4'>
             <Icon
               id={icons[pathname === path ? 'fill' : 'line']}
-              className='h-5 w-5 text-gray-accent1'
+              className='text-gray-accent1'
             />
             <div className='text-[10px] text-gray-accent1'>{name}</div>
           </Button>

@@ -1,31 +1,31 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { USERS_API_URL } from '@/constants/apiRoutes';
+
 import { api } from './core';
 
-interface UserProfileResponse {
+export interface UserProfileResponse {
   nickname: string;
   signal: number;
-  categories: string[];
+  preferCategories: string[];
   gender: string;
   ageGroup: string;
   profileImageUrl: string;
   mannerScore: number;
   reviews: Review[];
   wishCount: number;
+  isProfileManager: boolean;
 }
 
 export interface Review {
   content: string;
-  reviewScore: number;
+  score: number;
 }
 
-const GET_PROFILE_URL = '/users';
-
-const getUserProfile = (userId: string) => {
+const getUserProfile = (userId: string) =>
   api.get<UserProfileResponse>({
-    url: `${GET_PROFILE_URL}/${userId}`,
+    url: `${USERS_API_URL}/${userId}`,
   });
-};
 
 export const useGetUserProfilesApi = (userId: string) =>
   useQuery({

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { usePostNaverLoginApi } from '@/apis/naverLogin';
+import { REGISTER_PAGE_URL } from '@/constants/pageRoutes';
 
 export const useNaverLogin = () => {
   const api = usePostNaverLoginApi();
@@ -11,7 +12,7 @@ export const useNaverLogin = () => {
       try {
         const { accessToken, isJoined } = await api();
         localStorage.setItem('accessToken', accessToken);
-        navigate(isJoined ? '/' : '/sign-up');
+        navigate(isJoined ? '/' : REGISTER_PAGE_URL);
       } catch (error) {
         console.error(error);
       }
