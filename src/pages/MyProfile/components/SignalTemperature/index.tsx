@@ -1,6 +1,7 @@
 import smileFace from '@/assets/smiling-face.png';
 import Icon from '@/components/Icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
+import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/signalTemperature';
 import { cn } from '@/utils/cn';
 
 interface TemperatureProps {
@@ -36,10 +37,7 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
           </span>
         </PopoverTrigger>
         <PopoverContent className='relative z-20 ml-[60px]'>
-          <p className='tooltip'>
-            시그널온도는 다른 사용자로부터 받은 리뷰, 신고, 운영자 제재 등을
-            종합해서 만든 매너 지표입니다.
-          </p>
+          <p className='tooltip'>{SIGNAL_TEMPERATURE_MESSAGE}</p>
         </PopoverContent>
       </Popover>
       <div className='flex flex-col gap-1'>
