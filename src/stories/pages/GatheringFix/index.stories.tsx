@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Profile from '@/pages/Profile';
+import GatheringFixPage from '@/pages/GatheringFix';
 import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
-const meta: Meta<typeof Profile> = {
-  title: 'pages/Profile/page',
+const meta: Meta<typeof GatheringFixPage> = {
+  title: 'pages/GatheringFix/page',
   tags: ['autodocs'],
   decorators: [CommonPageLayoutDecorator],
-  component: Profile,
+  component: GatheringFixPage,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Profile>;
+type Story = StoryObj<typeof GatheringFixPage>;
 
 export const DefaultTemplate: Story = {};

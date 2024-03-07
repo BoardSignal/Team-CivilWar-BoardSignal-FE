@@ -22,8 +22,7 @@ export interface Review {
   score: number;
 }
 
-
-const getUserProfile = (userId: string) => 
+const getUserProfile = (userId: string) =>
   api.get<UserProfileResponse>({
     url: `${USERS_API_URL}/${userId}`,
   });
