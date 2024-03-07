@@ -12,15 +12,15 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
   const { text, background } = getColorByTemperature(value);
 
   return (
-    <>
+    <div>
       <Popover>
-        <PopoverTrigger className='pb-2'>
+        <PopoverTrigger>
           <span className='flex w-fit gap-1 text-xs text-gray-accent1 underline'>
             시그널온도
             <Icon id='information-line' size={16}></Icon>
           </span>
         </PopoverTrigger>
-        <PopoverContent className='relative z-20 ml-[30px]'>
+        <PopoverContent className='relative z-20 ml-[60px]'>
           <p className='tooltip'>
             시그널온도는 다른 사용자로부터 받은 리뷰, 신고, 운영자 제재 등을
             종합해서 만든 매너 지표입니다.
@@ -44,7 +44,7 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
           ></div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

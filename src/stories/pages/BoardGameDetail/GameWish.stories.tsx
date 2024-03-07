@@ -15,5 +15,6 @@ type Story = StoryObj<typeof GameWish>;
 export const Default: Story = {
   args: {
     wishCount: 3,
+    isWished: false,
   },
 };
