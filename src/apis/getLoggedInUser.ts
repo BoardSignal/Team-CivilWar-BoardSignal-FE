@@ -21,7 +21,7 @@ const getLoggedInUser = () =>
 
 export const useGetLoggedInUserApi = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['loggedInUser'],
+    queryKey: ['logged-in-user'],
     queryFn: getLoggedInUser,
   });
 
