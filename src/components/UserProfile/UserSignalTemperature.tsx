@@ -1,6 +1,6 @@
 import smileFaceEmoji from '@/assets/smiling-face.png';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
-import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/signalTemperature';
+import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/boardSignal';
 import { cn } from '@/utils/cn';
 import getColorByTemperature from '@/utils/getColorByTemperature';
 

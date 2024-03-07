@@ -1,7 +1,7 @@
 import smileFace from '@/assets/smiling-face.png';
 import Icon from '@/components/Icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
-import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/signalTemperature';
+import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/boardSignal';
 import { cn } from '@/utils/cn';
 
 interface TemperatureProps {

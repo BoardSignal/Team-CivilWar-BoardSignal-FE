@@ -1,11 +1,13 @@
 import { MouseEventHandler } from 'react';
 
+import {
+  DEFAULT_BUTTON_TITLE,
+  DEFAULT_ERROR_MESSAGE,
+  DEFAULT_ERROR_TITLE,
+} from '@/constants/messages/error';
+
 import Button, { ButtonProps } from '../Button';
 import Icon from '../Icon';
-
-const DEFAULT_ERROR_TITLE = '잠시 후 다시 시도해주세요 :(';
-const DEFAULT_ERROR_MESSAGE = '요청사항을 처리하는데 실패했습니다.';
-const DEFAULT_BUTTON_TITLE = '새로 고침하기';
 
 export interface ErrorAlertProps {
   error: unknown;
