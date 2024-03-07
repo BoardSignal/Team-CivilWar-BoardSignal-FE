@@ -4,8 +4,8 @@ import ResponsiveLayoutWrapper from './components/Layout';
 import BoardGameDetailPage from './pages/BoardGameDetail';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
-import ProfilePage from './pages/Profile';
 import NotificationListPage from './pages/NotificationList';
+import ProfilePage from './pages/Profile';
 
 export const router = createBrowserRouter([
   {
