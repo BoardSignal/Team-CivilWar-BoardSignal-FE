@@ -26,7 +26,7 @@ export const DefaultTemplate = (args: Story) => {
         title='성별'
         width='300px'
         maxLength={500}
-        {...args}
+        className='p-4'
       >
         <TextInput
           placeholder='남성'
@@ -39,6 +39,7 @@ export const DefaultTemplate = (args: Story) => {
         title='모임 설명'
         width='300px'
         maxLength={500}
+        className='p-4'
         {...args}
       >
         <Textarea
