@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { reactRouterParameters } from 'storybook-addon-react-router-v6';
 
 import boardGameDetailMocks from '@/mocks/boardGameDetail';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
@@ -11,6 +12,16 @@ const meta: Meta<typeof BoardGameDetailPage> = {
     msw: {
       handlers: [...boardGameDetailMocks],
     },
+    reactRouter: reactRouterParameters({
+      routing: {
+        path: '/board-games/:boardGameId',
+      },
+      location: {
+        pathParams: {
+          boardGameId: 1,
+        },
+      },
+    }),
   },
 };
 

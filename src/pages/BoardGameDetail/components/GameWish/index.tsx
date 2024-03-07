@@ -11,14 +11,11 @@ interface GameWishProps {
   isWished: boolean;
 }
 const GameWish = ({ wishCount, isWished }: GameWishProps) => {
-  const { boardGameId = '1' } = useParams();
+  const { boardGameId } = useParams();
 
-  /**
-   * if (!boardGameId) {
-   *   추후에 404페이지로 라우팅 될 예정입니다 .
-   * }
-   * 현재 mock 데이터가 없어서 임시로 1번 게임을 조회합니다.
-   */
+  if (!boardGameId) {
+    throw new Error('boardGameId is required');
+  }
 
   const { postBoardGameWish, deleteBoardGameWish } =
     useBoardGameWish(boardGameId);
