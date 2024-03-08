@@ -21,7 +21,7 @@ const SubwaySelect = ({ value, onChange }: SubwaySelectProps) => {
   return (
     <>
       <TextInputWithIcon
-        iconId='map-pin-fill'
+        iconId='ri-subway-fill'
         value={value}
         onClick={openModal}
       />
