@@ -1,6 +1,6 @@
 import smileFaceEmoji from '@/assets/smiling-face.png';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
-import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/boardSignal';
+import { SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE } from '@/constants/messages/boardSignal';
 import { cn } from '@/utils/cn';
 import getColorByTemperature from '@/utils/getColorByTemperature';
 
@@ -40,7 +40,7 @@ const UserSignalTemperature = ({ temperature }: UserTemperatureProps) => {
         </PopoverTrigger>
         <PopoverContent className='relative right-[60px] z-20'>
           <p className='tooltip before:left-[85%]'>
-            {SIGNAL_TEMPERATURE_MESSAGE}
+            {SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE}
           </p>
         </PopoverContent>
       </Popover>

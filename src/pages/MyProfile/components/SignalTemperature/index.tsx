@@ -1,7 +1,7 @@
 import smileFace from '@/assets/smiling-face.png';
 import Icon from '@/components/Icon';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/Popover';
-import { SIGNAL_TEMPERATURE_MESSAGE } from '@/constants/messages/boardSignal';
+import { SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE } from '@/constants/messages/boardSignal';
 import { cn } from '@/utils/cn';
 
 interface TemperatureProps {
@@ -37,7 +37,7 @@ const SignalTemperature = ({ value = 50.3 }: TemperatureProps) => {
           </span>
         </PopoverTrigger>
         <PopoverContent className='relative z-20 ml-[60px]'>
-          <p className='tooltip'>{SIGNAL_TEMPERATURE_MESSAGE}</p>
+          <p className='tooltip'>{SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE}</p>
         </PopoverContent>
       </Popover>
       <div className='flex flex-col gap-1'>
