@@ -5,7 +5,7 @@ import Icon from '@/components/Icon';
 import { getRelativeTime } from '@/utils/time';
 
 import type { Gathering } from '.';
-import Ripple from '../Ripple';
+import Button from '../Button';
 
 interface GatheringItemProps {
   gathering: Gathering;
@@ -45,7 +45,7 @@ const GatheringItem = ({ gathering }: GatheringItemProps) => {
   return (
     <li className='border-b border-gray-accent7'>
       <Link to={`/gatherings/${gatheringId}`}>
-        <Ripple className='flex cursor-pointer gap-4 p-4'>
+        <Button className='flex cursor-pointer gap-4 p-4'>
           <img
             src={imageUrl || defaultThumbnailImage}
             alt={title}
@@ -67,7 +67,7 @@ const GatheringItem = ({ gathering }: GatheringItemProps) => {
               </div>
             </div>
           </div>
-        </Ripple>
+        </Button>
       </Link>
     </li>
   );
