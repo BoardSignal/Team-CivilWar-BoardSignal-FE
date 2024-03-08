@@ -1,4 +1,6 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
+import { array, boolean, mixed, number, object, string } from 'yup';
 
 import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
 import { usePostGatheringCreateApi } from '@/apis/postGatheringCreate';
@@ -33,26 +35,32 @@ interface GatheringCreateFormValues {
   categories: string[];
 }
 
-interface RequiredAndLengthRegister {
-  required: boolean;
-  name: GatheringCreateFormValueNames;
-  minLength?: number;
-  maxLength?: number;
-}
-
-type GatheringCreateFormValueNames =
-  | 'roomTitle'
-  | 'description'
-  | 'time'
-  | 'startTime'
-  | 'subwayLine'
-  | 'subwayStation'
-  | 'place'
-  | 'categories';
-
 const REQUIRE_MESSAGE = '필수 입력 사항입니다.';
 const AGE_ALERT_MESSAGE =
   '나이대는 본인 나이를 포함한 범위만 설정할 수 있어요.';
+
+const gatheringCreateSchema = object().shape({
+  thumbnailImage: mixed<File>().required(),
+  roomTitle: string()
+    .required(REQUIRE_MESSAGE)
+    .trim()
+    .min(2, '앞뒤 공백 제외 2자 이상 입력해야 해요.')
+    .max(50, '50까지 입력할 수 있어요.'),
+  description: string()
+    .required(REQUIRE_MESSAGE)
+    .trim()
+    .min(2, '앞뒤 공백 제외 2자 이상 입력해야 해요.')
+    .max(500, '500자까지 입력할 수 있어요.'),
+  isArrowedSameGender: boolean().required(),
+  headcount: array(number().required()).required().length(2),
+  time: string().required(REQUIRE_MESSAGE),
+  startTime: string().defined(),
+  age: array(number().required()).required().length(2),
+  subwayLine: string().defined(),
+  subwayStation: string().required(REQUIRE_MESSAGE),
+  place: string().defined(),
+  categories: array(string().defined()).required(),
+});
 
 interface GatheringCreateFormProps {
   onCreate: (gatheringId: number) => void;
@@ -80,7 +88,10 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
     headcount: [1, 8],
     time: '',
     startTime: '',
-    age: [20, 30],
+    age: [
+      Math.floor(currentUser.age / 10) * 10,
+      Math.ceil(currentUser.age / 10) * 10,
+    ],
     subwayLine: '',
     subwayStation: '',
     place: '',
@@ -93,79 +104,20 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
     formState: { errors, isValid },
     watch,
     control,
-  } = useForm<GatheringCreateFormValues>({
+  } = useForm({
     mode: 'all',
     defaultValues: gatheringCreateDefaultValue,
+    resolver: yupResolver(gatheringCreateSchema),
   });
 
-  const requiredAndLengthRegister = ({
-    required,
-    name,
-    minLength,
-    maxLength,
-  }: RequiredAndLengthRegister) => {
-    return register(name, {
-      ...(required && { required: REQUIRE_MESSAGE }),
-      ...(minLength && {
-        minLength: {
-          value: minLength,
-          message: `${minLength}자 이상 입력해야 합니다.`,
-        },
-        validate: value =>
-          typeof value === 'string' && value.trim().length < minLength
-            ? `앞뒤 공백 제외 ${minLength}자 이상 입력해야 합니다.`
-            : true,
-      }),
-      ...(maxLength && {
-        maxLength: {
-          value: maxLength,
-          message: `${maxLength}자까지 입력할 수 있습니다.`,
-        },
-      }),
-    });
-  };
-
-  const roomTitleRegister: RequiredAndLengthRegister = {
-    required: true,
-    name: 'roomTitle',
-    maxLength: 20,
-    minLength: 2,
-  };
-
-  const descriptionRegister: RequiredAndLengthRegister = {
-    required: true,
-    name: 'description',
-    maxLength: 500,
-    minLength: 2,
-  };
-
-  const timeRegister: RequiredAndLengthRegister = {
-    required: true,
-    name: 'time',
-  };
-
-  const startTimeRegister: RequiredAndLengthRegister = {
-    required: false,
-    name: 'startTime',
-  };
-
-  const subwayStationRegister: RequiredAndLengthRegister = {
-    required: true,
-    name: 'subwayStation',
-  };
-
-  const placeRegister: RequiredAndLengthRegister = {
-    required: false,
-    name: 'place',
-  };
-
-  const onSubmit = (data: GatheringCreateFormValues) => {
+  const onSubmitGathering = (data: GatheringCreateFormValues) => {
     const {
       thumbnailImage: imageFile,
       isArrowedSameGender,
       headcount: [minParticipants, maxParticipants],
       time,
       age: [minAge, maxAge],
+      categories,
       ...restGathering
     } = data;
 
@@ -177,6 +129,8 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
       time: time.split(' ')[1],
       minAge,
       maxAge,
+      categories:
+        categories.length === 0 ? [...BOARDGAME_CATEGORIES] : categories,
       ...restGathering,
     };
 
@@ -188,7 +142,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmitGathering)}
       className='flex grow flex-col overflow-y-hidden'
     >
       <div className='overflow-y-auto'>
@@ -211,7 +165,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
             <TextInput
               variant={errors.roomTitle ? 'error' : 'default'}
               maxLength={50}
-              {...requiredAndLengthRegister(roomTitleRegister)}
+              {...register('roomTitle')}
             />
             <FormErrorMessage message={errors.roomTitle?.message} />
           </Label>
@@ -223,7 +177,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
           >
             <Textarea
               variant={errors.description ? 'error' : 'default'}
-              {...requiredAndLengthRegister(descriptionRegister)}
+              {...register('description')}
             />
             <FormErrorMessage message={errors.description?.message} />
           </Label>
@@ -254,12 +208,12 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
               variant={errors.time ? 'error' : 'default'}
               options={TIMES}
               placeholder='시간대 선택'
-              {...requiredAndLengthRegister(timeRegister)}
+              {...register('time')}
             />
             <FormErrorMessage message={errors.time?.message} />
           </Label>
           <Label title='시작 시각'>
-            <TextInput {...requiredAndLengthRegister(startTimeRegister)} />
+            <TextInput {...register('startTime')} />
           </Label>
           <Label title='나이대' isRequired>
             <Controller
@@ -285,12 +239,12 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
           <Label title='지역 (가까운 지하철역)' isRequired>
             <TextInput
               variant={errors.subwayStation ? 'error' : 'default'}
-              {...requiredAndLengthRegister(subwayStationRegister)}
+              {...register('subwayStation')}
             />
             <FormErrorMessage message={errors.subwayStation?.message} />
           </Label>
           <Label title='장소'>
-            <TextInput {...requiredAndLengthRegister(placeRegister)} />
+            <TextInput {...register('place')} />
           </Label>
           <Label title='게임 카테고리'>
             <Controller
