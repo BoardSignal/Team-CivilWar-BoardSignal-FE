@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 
-import { ERROR_TOAST_MESSAGE } from './constants/messages/error';
+import { ERROR_TOAST_MESSAGE_ON_SERVER_ERROR } from './constants/messages/error';
 import { showErrorToast } from './utils/showToast';
 
 const noticeUserOnServerError = (error: unknown) => {
@@ -16,7 +16,7 @@ const noticeUserOnServerError = (error: unknown) => {
     throw error;
   }
 
-  return showErrorToast(ERROR_TOAST_MESSAGE);
+  return showErrorToast(ERROR_TOAST_MESSAGE_ON_SERVER_ERROR);
 };
 
 // TODO: Sentry 등의 로그 수집, 모니터링 도구 사용하기

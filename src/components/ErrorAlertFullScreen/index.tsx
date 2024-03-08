@@ -14,6 +14,7 @@ export interface ErrorAlertProps {
   isShowingErrorIcon?: boolean;
   title?: string;
   message?: string;
+  buttonText?: string;
 }
 
 const ErrorIcon = () => (
@@ -35,6 +36,7 @@ const ErrorAlertFullScreen = ({
   isShowingErrorIcon = true,
   title = DEFAULT_ERROR_TITLE,
   message = DEFAULT_ERROR_MESSAGE,
+  buttonText = '새로 고침하기',
 }: ErrorAlertProps) => (
   <div className='flex h-full flex-col items-center justify-center'>
     <div className='flex w-[50%] flex-col items-center gap-2'>
@@ -45,7 +47,7 @@ const ErrorAlertFullScreen = ({
       <div className='shrink-0 break-keep text-center text-sm text-gray-accent2'>
         {message}
       </div>
-      <RefreshButton onClick={onReset}>새로 고침하기</RefreshButton>
+      <RefreshButton onClick={onReset}>{buttonText}</RefreshButton>
     </div>
   </div>
 );
