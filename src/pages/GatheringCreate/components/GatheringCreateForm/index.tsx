@@ -17,6 +17,13 @@ import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
 import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
+import { AGE_RANGE_ALERT_MESSAGE } from '@/constants/messages/alert';
+import {
+  MAX_LENGTH_ERROR_MESSAGE,
+  MIN_LENGTH_ERROR_MESSAGE,
+  REQUIRED_ERROR_MESSAGE,
+  TRIM_ERROR_MESSAGE,
+} from '@/constants/messages/error';
 import { TIMES } from '@/constants/times';
 import { showErrorToast } from '@/utils/showToast';
 
@@ -35,29 +42,25 @@ interface GatheringCreateFormValues {
   categories: string[];
 }
 
-const REQUIRE_MESSAGE = '필수 입력 사항입니다.';
-const AGE_ALERT_MESSAGE =
-  '나이대는 본인 나이를 포함한 범위만 설정할 수 있어요.';
-
 const gatheringCreateSchema = object().shape({
   thumbnailImage: mixed<File>().required(),
   roomTitle: string()
-    .required(REQUIRE_MESSAGE)
+    .required(REQUIRED_ERROR_MESSAGE)
     .trim()
-    .min(2, '앞뒤 공백 제외 2자 이상 입력해야 해요.')
-    .max(50, '50까지 입력할 수 있어요.'),
+    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
+    .max(50, `50${MAX_LENGTH_ERROR_MESSAGE}`),
   description: string()
-    .required(REQUIRE_MESSAGE)
+    .required(REQUIRED_ERROR_MESSAGE)
     .trim()
-    .min(2, '앞뒤 공백 제외 2자 이상 입력해야 해요.')
-    .max(500, '500자까지 입력할 수 있어요.'),
+    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
+    .max(500, `500${MAX_LENGTH_ERROR_MESSAGE}`),
   isArrowedSameGender: boolean().required(),
   headcount: array(number().required()).required().length(2),
-  time: string().required(REQUIRE_MESSAGE),
+  time: string().required(REQUIRED_ERROR_MESSAGE),
   startTime: string().defined(),
   age: array(number().required()).required().length(2),
   subwayLine: string().defined(),
-  subwayStation: string().required(REQUIRE_MESSAGE),
+  subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
   place: string().defined(),
   categories: array(string().defined()).required(),
 });
@@ -234,7 +237,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                 );
               }}
             />
-            <Alert>{AGE_ALERT_MESSAGE}</Alert>
+            <Alert>{AGE_RANGE_ALERT_MESSAGE}</Alert>
           </Label>
           <Label title='지역 (가까운 지하철역)' isRequired>
             <TextInput
