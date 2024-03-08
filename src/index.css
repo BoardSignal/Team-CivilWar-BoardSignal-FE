@@ -143,3 +143,7 @@
   border-width: 6px;
   border-color: transparent transparent var(--accent-1) transparent;
 }
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}

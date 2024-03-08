@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
+
 import { Outlet } from 'react-router-dom';
 
 import ApiErrorBoundary from '../ErrorBoundary/ApiErrorBoundary';
+import SpinnerFullScreen from '../Spinner/SpinnerFullScreen';
 import Introduction from './Introduction';
 import { RootLayout } from './RootLayout';
 import ToastRoot from './ToastRoot';
@@ -21,7 +24,9 @@ const ResponsiveLayoutWrapper = () => {
       </div>
       <RootLayout>
         <ApiErrorBoundary>
-          <Outlet />
+          <Suspense fallback={<SpinnerFullScreen />}>
+            <Outlet />
+          </Suspense>
           <ToastRoot />
         </ApiErrorBoundary>
       </RootLayout>

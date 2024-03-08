@@ -1,6 +1,10 @@
-import { PropsWithChildren } from 'react';
+import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
-interface LabelProps extends PropsWithChildren {
+import { cn } from '@/utils/cn';
+
+interface LabelProps
+  extends PropsWithChildren,
+    ComponentPropsWithoutRef<'div'> {
   title: string;
   isRequired?: boolean;
   currentLength?: number;
@@ -15,9 +19,15 @@ const Label = ({
   maxLength,
   children,
   width,
+  className,
+  ...props
 }: LabelProps) => {
   return (
-    <div className='flex flex-col gap-2' style={{ width }}>
+    <div
+      className={cn('flex flex-col gap-2', className)}
+      style={{ width }}
+      {...props}
+    >
       <div className='flex justify-between'>
         <label className='text-sm text-gray-accent2'>
           {title}

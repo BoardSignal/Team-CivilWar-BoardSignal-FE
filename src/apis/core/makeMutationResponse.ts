@@ -12,6 +12,7 @@ interface BadRequestResponse {
   isBadRequest: true;
   data: {
     message: string;
+    code: string;
   };
 }
 

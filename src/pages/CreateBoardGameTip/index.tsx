@@ -37,7 +37,7 @@ const BoardGameCreateTipPage = ({ boardGameTitle }: CreateTipPageProps) => {
       </div>
       <div className='flex p-4'>
         <Button
-          className='bg-primary py-2 text-white'
+          variant='primary'
           onClick={() => {
             createBoardGameTip({ boardGameId: '1', content: tipState });
           }}
