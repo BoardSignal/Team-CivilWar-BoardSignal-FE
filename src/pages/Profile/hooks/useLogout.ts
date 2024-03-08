@@ -7,14 +7,10 @@ export const useLogout = () => {
   const navigate = useNavigate();
 
   return {
-    logout: async () => {
-      try {
-        await api();
-        localStorage.removeItem('accessToken');
-        navigate('/');
-      } catch (error) {
-        console.error(error);
-      }
+    logoutApi: async () => {
+      await api();
+      localStorage.removeItem('accessToken');
+      navigate('/');
     },
   };
 };

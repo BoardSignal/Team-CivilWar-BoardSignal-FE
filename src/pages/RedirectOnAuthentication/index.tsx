@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+import { REGISTER_PAGE_URL } from '@/constants/pageRoutes';
+
 const RedirectOnAuthentication = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const RedirectOnAuthentication = () => {
       localStorage.setItem('accessToken', accessToken);
     }
 
-    navigate(isJoined === 'true' ? '/' : '/register');
+    navigate(isJoined === 'true' ? '/' : `${REGISTER_PAGE_URL}`);
   }, [navigate, searchParams]);
 
   return null;
