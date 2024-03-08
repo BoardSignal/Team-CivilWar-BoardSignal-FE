@@ -42,7 +42,7 @@ interface GatheringCreateFormValues {
   categories: string[];
 }
 
-const gatheringCreateSchema = object().shape({
+const gatheringCreateSchema = object({
   thumbnailImage: mixed<File>().required(),
   roomTitle: string()
     .required(REQUIRED_ERROR_MESSAGE)
