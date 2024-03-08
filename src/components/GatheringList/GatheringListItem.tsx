@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { getRelativeTime } from '@/utils/time';
 
 import type { Gathering } from '.';
-import Button from '../Button';
 
-interface GatheringItemProps {
+interface GatheringListItemProps {
   gathering: Gathering;
 }
 
-const GatheringItem = ({ gathering }: GatheringItemProps) => {
+const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
   const {
     id: gatheringId,
     imageUrl,
@@ -45,7 +45,7 @@ const GatheringItem = ({ gathering }: GatheringItemProps) => {
   return (
     <li className='border-b border-gray-accent7'>
       <Link to={`/gatherings/${gatheringId}`}>
-        <Button className='flex cursor-pointer gap-4 p-4'>
+        <Button className='flex h-fit cursor-pointer gap-4 p-4'>
           <img
             src={imageUrl || defaultThumbnailImage}
             alt={title}
@@ -73,4 +73,4 @@ const GatheringItem = ({ gathering }: GatheringItemProps) => {
   );
 };
 
-export default GatheringItem;
+export default GatheringListItem;
