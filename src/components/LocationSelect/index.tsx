@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import TextInput from '../TextInput';
+import TextInputWithIcon from '../TextInputWithIcon';
 import LocationListModal from './LocationListModal';
 
 interface LocationSelectProps {
@@ -25,8 +25,11 @@ const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
 
   return (
     <>
-      {/* 모임 확정 페이지 PR의 TextInputWithIcon 병합 시 사용할 예정이에요. */}
-      <TextInput value={value} onClick={openModal} />
+      <TextInputWithIcon
+        iconId='map-pin-fill'
+        value={value}
+        onClick={openModal}
+      />
       {isModalOpen && (
         <LocationListModal
           onClose={closeModal}

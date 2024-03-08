@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { Args, Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Label from '@/components/Label';
 import LocationSelect from '@/components/LocationSelect';
@@ -19,12 +19,12 @@ const meta: Meta<typeof LocationSelect> = {
     ),
     CommonPageLayoutDecorator,
   ],
-  render: function ExampleForm(args: Args) {
+  render: function ExampleForm() {
     const [value, setValue] = useState('');
 
     return (
       <Label title='모임 장소' isRequired>
-        <LocationSelect value={value} onChange={setValue} {...args} />
+        <LocationSelect value={value} onChange={setValue} />
       </Label>
     );
   },
