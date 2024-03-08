@@ -56,4 +56,5 @@ export type IconName =
   | 'loader-line'
   | 'close-line'
   | 'logout-line'
-  | 'delete-bin-line';
+  | 'delete-bin-line'
+  | 'ri-subway-fill';
