@@ -6,6 +6,8 @@ import axios, {
 
 import { AUTH_REISSUE_API_URL } from '@/constants/apiRoutes';
 
+import API_BASE_URL from './constants';
+
 const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
 
 interface ReissueResponse {
@@ -28,7 +30,7 @@ export const refreshExpiredToken = async (error: unknown) => {
     error.response?.data.message === TOKEN_EXPIRED_MESSAGE
   ) {
     const { data } = await axios<ReissueResponse>(
-      `${import.meta.env.VITE_BASE_URL}${AUTH_REISSUE_API_URL}`,
+      `${API_BASE_URL}${AUTH_REISSUE_API_URL}`,
       {
         withCredentials: true,
       },
