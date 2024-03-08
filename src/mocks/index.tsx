@@ -1,6 +1,7 @@
 import { SharedOptions, delay, http } from 'msw';
 import { setupWorker } from 'msw/browser';
 
+import boardGameDetailMocks from './boardGameDetail';
 import notificationsMocks from './notifications';
 
 /**
@@ -14,7 +15,11 @@ import notificationsMocks from './notifications';
  * await enableAPIMocks();
  */
 export const enableAPIMocks = () => {
-  const handlers = [globalDelay, ...notificationsMocks];
+  const handlers = [
+    globalDelay,
+    ...notificationsMocks,
+    ...boardGameDetailMocks,
+  ];
   const worker = setupWorker(...handlers);
 
   return worker.start({
