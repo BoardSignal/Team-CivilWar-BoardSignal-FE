@@ -1,11 +1,12 @@
 import { MouseEventHandler } from 'react';
 
+import {
+  DEFAULT_ERROR_MESSAGE,
+  DEFAULT_ERROR_TITLE,
+} from '@/constants/messages/error';
+
 import Button, { ButtonProps } from '../Button';
 import Icon from '../Icon';
-
-const DEFAULT_ERROR_TITLE = '잠시 후 다시 시도해주세요 :(';
-const DEFAULT_ERROR_MESSAGE = '요청사항을 처리하는데 실패했습니다.';
-const DEFAULT_BUTTON_TITLE = '새로 고침하기';
 
 export interface ErrorAlertProps {
   error: unknown;
@@ -35,7 +36,7 @@ const ErrorAlertFullScreen = ({
   isShowingErrorIcon = true,
   title = DEFAULT_ERROR_TITLE,
   message = DEFAULT_ERROR_MESSAGE,
-  buttonText = DEFAULT_BUTTON_TITLE,
+  buttonText = '새로 고침하기',
 }: ErrorAlertProps) => (
   <div className='flex h-full flex-col items-center justify-center'>
     <div className='flex w-[50%] flex-col items-center gap-2'>
