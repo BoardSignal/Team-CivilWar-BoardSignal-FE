@@ -13,21 +13,30 @@ export interface CreateTipRequest {
   content: string;
 }
 
-export const postBoardGameTip = ({
-  boardGameId,
-  content,
-}: CreateTipRequest) => {
-  return api.post<CreateTipResponse>({
+export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
+  api.post<CreateTipResponse>({
     url: `${BOARD_GAMES_TIP_API_URL}/${boardGameId}`,
     data: {
       content,
     },
   });
-};
+
+const deleteBoardGameTip = ({ tipId }: { tipId: number }) =>
+  api.delete({
+    url: `board-games/${tipId}`,
+  });
 
 export const usePostBoardGameTipApi = () => {
   const { mutateAsync } = useMutation({
     mutationFn: postBoardGameTip,
+  });
+
+  return mutateAsync;
+};
+
+export const useDeleteBoardGameTipApi = () => {
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteBoardGameTip,
   });
 
   return mutateAsync;

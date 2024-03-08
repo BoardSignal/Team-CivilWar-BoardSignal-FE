@@ -55,4 +55,5 @@ export type IconName =
   | 'error-warning-fill'
   | 'loader-line'
   | 'close-line'
-  | 'logout-line';
+  | 'logout-line'
+  | 'delete-bin-line';
