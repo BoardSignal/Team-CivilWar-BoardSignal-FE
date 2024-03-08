@@ -24,9 +24,10 @@ const buttonCSS = cva(
 
 export type ButtonProps = RippleProps & VariantProps<typeof buttonCSS>;
 
-const Button = ({ variant, className, ...props }: ButtonProps) => {
+const Button = ({ variant, type, className, ...props }: ButtonProps) => {
   return (
     <Ripple
+      type={type || 'button'}
       className={cn(
         buttonCSS({ variant }),
         variant === 'inactive' && 'pointer-events-none',

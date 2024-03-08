@@ -12,7 +12,7 @@ import { cn } from '@/utils/cn';
 import Spinner from '../Spinner';
 import FetchMarker from './FetchMarker';
 
-const caculateBottomY = (element: HTMLElement, ratio: number) => {
+const calculateBottomY = (element: HTMLElement, ratio: number) => {
   const { height } = element.getBoundingClientRect();
 
   return Math.floor(height * ratio);
@@ -75,7 +75,7 @@ const InfiniteScrollAutoFetcher = ({
         return;
       }
 
-      const bottomY = caculateBottomY(containerElement, bottomYRatio);
+      const bottomY = calculateBottomY(containerElement, bottomYRatio);
       setMarkerY(bottomY);
     },
     [fetchStatus, bottomYRatio],
