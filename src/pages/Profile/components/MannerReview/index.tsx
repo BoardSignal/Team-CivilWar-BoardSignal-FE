@@ -1,7 +1,7 @@
 import type { Review } from '@/apis/userProfile';
 import Icon from '@/components/Icon';
 
-interface ReviewProps {
+interface MannerReviewProps {
   reviews: Review[];
 }
 
@@ -9,18 +9,16 @@ interface ReviewContentProps {
   review: Review;
 }
 
-const MannerReview = ({ reviews }: ReviewProps) => {
-  return (
-    <div className='flex flex-col'>
-      <span className='py-2 font-bold'>매너 리뷰</span>
-      <div className='flex flex-col gap-2 px-1'>
-        {reviews.map(review => (
-          <ReviewContent review={review} key={review.content} />
-        ))}
-      </div>
+const MannerReview = ({ reviews }: MannerReviewProps) => (
+  <div className='flex flex-col'>
+    <span className='py-2 font-bold'>매너 리뷰</span>
+    <div className='flex flex-col gap-2 px-1'>
+      {reviews.map(review => (
+        <ReviewContent review={review} key={review.content} />
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 const ReviewContent = ({ review }: ReviewContentProps) => {
   const { content, score } = review;
