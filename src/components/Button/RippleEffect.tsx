@@ -15,7 +15,7 @@ const RippleEffect = ({
 }: RippleEffectProps) => (
   <div
     className={cn(
-      'ripple-effect absolute h-[2px] w-[2px] rounded-full bg-black bg-opacity-20',
+      'ripple-effect absolute h-[2px] w-[2px] rounded-full bg-black bg-opacity-20 dark:bg-white',
       fast && 'ripple-fast',
     )}
     style={

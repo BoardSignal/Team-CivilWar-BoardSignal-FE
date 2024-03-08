@@ -32,7 +32,9 @@ const Modal = ({
   children,
   buttonChildren,
 }: ModalProps) => {
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const handleDelete = () => {
     onDelete && onDelete();
@@ -41,9 +43,8 @@ const Modal = ({
 
   return (
     <LayoutRootPortal>
-      <div className='absolute inset-0 z-50 flex h-full items-center justify-center'>
-        <div className='h-full w-full bg-gray-accent1 opacity-70' />
-        <div className='absolute flex w-[66%] flex-col items-center rounded-lg bg-white p-8'>
+      <div className='backdrop inset-0 flex h-full items-center justify-center'>
+        <div className='flex w-[66%] flex-col items-center rounded-lg bg-gray-bg-base p-8'>
           <label className={modalTitleCSS({ variant })}>{title}</label>
           <p className='text-m text-gray-accent2'>{children}</p>
 

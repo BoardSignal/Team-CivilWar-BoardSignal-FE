@@ -28,7 +28,7 @@ const Container = ({ children: rawChildren }: PropsWithChildren) => {
   const [leftChildren, rightChildren] = Children.toArray(rawChildren);
 
   return (
-    <div className='border-gray-accent-7 flex justify-between border-b px-4 py-2 text-gray-accent1'>
+    <div className='flex justify-between border-b border-gray-accent7 px-4 py-2 text-gray-accent1'>
       {leftChildren}
       {rightChildren}
     </div>
