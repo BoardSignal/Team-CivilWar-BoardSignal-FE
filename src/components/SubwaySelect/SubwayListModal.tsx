@@ -2,6 +2,7 @@ import { SubwayStates } from '@/assets/subway-stations';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import LayoutRootPortal from '@/components/Layout/LayoutRootPortal';
+import useAutoCloseOnGoBack from '@/hooks/useAutoCloseModal';
 
 import StateList from './StateList';
 import SubwayLineList from './SubwayLineList';
@@ -19,6 +20,8 @@ interface SubwayListModalProps {
  * 목록을 길게 표시할 수 있도록 전체 화면으로 만들었어요.
  */
 const SubwayListModal = ({ onClose, onSelect }: SubwayListModalProps) => {
+  useAutoCloseOnGoBack(onClose);
+
   const {
     states,
     selectedState,
