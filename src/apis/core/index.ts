@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+import { API_BASE_URL } from '@/constants/apiRoutes';
+
 import { attachAccessToken, refreshExpiredToken } from './authentication';
-import API_BASE_URL from './constants';
 import { makeMutationResponse } from './makeMutationResponse';
 import { makeQueryResponse } from './makeQueryResponse';
 

@@ -1,7 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import API_BASE_URL from '@/apis/core/constants';
-import { BOARD_GAMES_API_URL } from '@/constants/apiRoutes';
+import { API_BASE_URL, BOARD_GAMES_API_URL } from '@/constants/apiRoutes';
 
 export const MOCK_GET_BOARD_GAME_DETAIL_URL = `${API_BASE_URL}${BOARD_GAMES_API_URL}/1`;
 
