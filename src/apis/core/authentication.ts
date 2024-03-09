@@ -4,9 +4,7 @@ import axios, {
   isAxiosError,
 } from 'axios';
 
-import { AUTH_REISSUE_API_URL } from '@/constants/apiRoutes';
-
-import API_BASE_URL from './constants';
+import { API_BASE_URL, AUTH_REISSUE_API_URL } from '@/constants/apiRoutes';
 
 const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
 
