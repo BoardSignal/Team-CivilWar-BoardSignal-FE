@@ -11,6 +11,7 @@ import {
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
+import BoardGameTipCreate from './pages/CreateBoardGameTip';
 import GatheringCreatePage from './pages/GatheringCreate';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
         // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
         path: '/redirect',
         element: <RedirectOnAuthentication />,
+      },
+      {
+        path: 'board-games/tip/create/:boardGameId/:boardGameTitle',
+        element: <BoardGameTipCreate />,
       },
     ],
   },

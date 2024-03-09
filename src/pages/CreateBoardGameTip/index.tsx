@@ -1,52 +1,57 @@
 import { useState } from 'react';
 
-import Button from '@/components/Button';
-import Label from '@/components/Label';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
+import { BOARD_GAMES_PAGE_URL } from '@/constants/pageRoutes';
 
-import { useCreateBoardGameTip } from './hooks/useCreateBoardGameTip';
+import BoardGameCreateTipForm from './components/CreateBoardGameTipForm';
 
-interface CreateTipPageProps {
-  boardGameTitle: string;
-}
+const CreateBoardGameTipPage = () => {
+  const navigate = useNavigate();
 
-const BoardGameCreateTipPage = ({ boardGameTitle }: CreateTipPageProps) => {
-  const [tipState, setTipState] = useState('');
-  const { createBoardGameTip } = useCreateBoardGameTip();
+  const { boardGameId, boardGameTitle } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!boardGameId || !boardGameTitle) throw new Error();
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    navigate(`${BOARD_GAMES_PAGE_URL}/${boardGameId}`);
+  };
+
+  const handleCreateBoardGameTip = () => {
+    handleOpenModal();
+  };
 
   return (
     <div className='flex h-full flex-col'>
+      <Modal
+        variant='primary'
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title='안내'
+        buttonChildren='확인'
+      >
+        공략이 작성됐어요.
+      </Modal>
       <TabBar.Container>
         <TabBar.Left>
           <TabBar.GoBackButton />
           <TabBar.Title>{boardGameTitle}</TabBar.Title>
         </TabBar.Left>
       </TabBar.Container>
-      <div className='flex h-full grow flex-col gap-2 p-4'>
-        <Label
-          title='공략 내용'
-          isRequired={true}
-          currentLength={tipState.length}
-          maxLength={500}
-        >
-          <textarea
-            className='h-[180px] resize-none overscroll-contain rounded-lg border border-gray-accent7 p-4 p-5 outline-none focus:border-gray-accent2'
-            onChange={e => setTipState(e.target.value)}
-          />
-        </Label>
-      </div>
-      <div className='flex p-4'>
-        <Button
-          variant='primary'
-          onClick={() => {
-            createBoardGameTip({ boardGameId: '1', content: tipState });
-          }}
-        >
-          완료
-        </Button>
-      </div>
+      <BoardGameCreateTipForm
+        onCreate={handleCreateBoardGameTip}
+        boardGameId={boardGameId}
+      />
     </div>
   );
 };
 
-export default BoardGameCreateTipPage;
+export default CreateBoardGameTipPage;
