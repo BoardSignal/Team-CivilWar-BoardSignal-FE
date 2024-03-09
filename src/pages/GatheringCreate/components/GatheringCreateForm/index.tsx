@@ -269,7 +269,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
         </section>
       </div>
       <div className='border-t border-gray-accent7 p-4'>
-        <Button variant={isValid ? 'primary' : 'inactive'}>
+        <Button type='submit' variant={isValid ? 'primary' : 'inactive'}>
           모임 생성하기
         </Button>
       </div>
