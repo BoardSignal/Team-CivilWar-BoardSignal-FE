@@ -9,7 +9,7 @@ const KAKAO_LOGIN_BUTTON_HEIGHT = 'h-[53.7px]';
 
 export const KakaoLoginButton = () => {
   return (
-    <Link to={AUTH_LOGIN_KAKAO_URL}>
+    <Link to={`${import.meta.env.VITE_LOGIN_URL}${AUTH_LOGIN_KAKAO_URL}`}>
       <Button className={KAKAO_LOGIN_BUTTON_HEIGHT}>
         <img src={kakaoLoginButtonImage} alt='네이버 로그인 버튼' />
       </Button>

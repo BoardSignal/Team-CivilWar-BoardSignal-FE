@@ -1,7 +1,6 @@
 export const AUTH_API_URL = '/auth';
 
-export const AUTH_LOGIN_KAKAO_URL =
-  'https://boardsignal.com/oauth2/authorization/kakao';
+export const AUTH_LOGIN_KAKAO_URL = '/kakao';
 
 export const AUTH_LOGOUT_API_URL = '/auth/logout';
 export const AUTH_REISSUE_API_URL = '/auth/reissue';
