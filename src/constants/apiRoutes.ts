@@ -1,7 +1,7 @@
-export const AUTH_API_URL = '/auth';
-
 export const API_BASE_URL =
   import.meta.env.VITE_BASE_URL || import.meta.env.STORYBOOK_BASE_URL;
+
+export const AUTH_API_URL = '/auth';
 
 export const AUTH_LOGIN_KAKAO_URL = '/kakao';
 

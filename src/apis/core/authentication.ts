@@ -5,8 +5,7 @@ import axios, {
 } from 'axios';
 
 import { API_BASE_URL, AUTH_REISSUE_API_URL } from '@/constants/apiRoutes';
-
-const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
+import { TOKEN_EXPIRED_MESSAGE } from '@/constants/messages/error';
 
 interface ReissueResponse {
   accessToken: string;
