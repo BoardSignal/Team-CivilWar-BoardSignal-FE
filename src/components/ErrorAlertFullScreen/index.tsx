@@ -10,7 +10,7 @@ import Icon from '../Icon';
 
 export interface ErrorAlertProps {
   error: unknown;
-  onReset: MouseEventHandler<HTMLDivElement>;
+  onReset: MouseEventHandler<HTMLButtonElement>;
   isShowingErrorIcon?: boolean;
   title?: string;
   message?: string;
