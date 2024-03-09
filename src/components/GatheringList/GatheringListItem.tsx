@@ -60,7 +60,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
               <div className='text-xs text-gray-accent2'>{categoriesText}</div>
             </div>
             <div className='flex justify-between text-xs text-gray-accent3'>
-              <div>{getRelativeTime(createdAt)}</div>
+              <div>{getRelativeTime({ time: createdAt })}</div>
               <div className='flex items-center gap-1'>
                 <Icon id='user-line' size={12} />
                 <span>{headCount}</span>
