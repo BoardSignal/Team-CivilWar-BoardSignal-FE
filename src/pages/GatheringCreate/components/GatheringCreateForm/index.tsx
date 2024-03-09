@@ -1,10 +1,8 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
+
 import { Controller, useForm } from 'react-hook-form';
-import { array, boolean, mixed, number, object, string } from 'yup';
 
 import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
-import { usePostGatheringCreateApi } from '@/apis/postGatheringCreate';
-import type { GatheringCreateRequest } from '@/apis/postGatheringCreate';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
 import FormErrorMessage from '@/components/FormErrorMessage';
@@ -18,88 +16,23 @@ import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
 import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
 import { AGE_RANGE_ALERT_MESSAGE } from '@/constants/messages/alert';
-import {
-  MAX_LENGTH_ERROR_MESSAGE,
-  MIN_LENGTH_ERROR_MESSAGE,
-  REQUIRED_ERROR_MESSAGE,
-  TRIM_ERROR_MESSAGE,
-} from '@/constants/messages/error';
 import { TIMES } from '@/constants/times';
-import { showErrorToast } from '@/utils/showToast';
 
-interface GatheringCreateFormValues {
-  thumbnailImage: File;
-  roomTitle: string;
-  description: string;
-  isArrowedSameGender: boolean;
-  headcount: number[];
-  time: string;
-  startTime: string;
-  age: number[];
-  subwayLine: string;
-  subwayStation: string;
-  place: string;
-  categories: string[];
-}
+import { gatheringCreateFormOptions } from './formSchema';
+import gatheringCreateRequestMapper, {
+  GatheringCreateFormValues,
+} from './gatheringCreateRequestMapper';
+import useCreateGathering from './useCreateGathering';
 
-const gatheringCreateSchema = object({
-  thumbnailImage: mixed<File>().required(),
-  roomTitle: string()
-    .required(REQUIRED_ERROR_MESSAGE)
-    .trim()
-    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
-    .max(50, `50${MAX_LENGTH_ERROR_MESSAGE}`),
-  description: string()
-    .required(REQUIRED_ERROR_MESSAGE)
-    .trim()
-    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
-    .max(500, `500${MAX_LENGTH_ERROR_MESSAGE}`),
-  isArrowedSameGender: boolean().required(),
-  headcount: array(number().required()).required().length(2),
-  time: string().required(REQUIRED_ERROR_MESSAGE),
-  startTime: string().defined(),
-  age: array(number().required()).required().length(2),
-  subwayLine: string().defined(),
-  subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
-  place: string().defined(),
-  categories: array(string().defined()).required(),
-});
+export type OnGatheringCreate = (gatheringId: number) => void;
 
 interface GatheringCreateFormProps {
-  onCreate: (gatheringId: number) => void;
+  onCreate: OnGatheringCreate;
 }
 
 const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
-  const currentUser = useGetLoggedInUserApi();
-
-  const gatheringCreateApi = usePostGatheringCreateApi();
-  const createGathering = async (request: GatheringCreateRequest) => {
-    const { data, isBadRequest } = await gatheringCreateApi(request);
-
-    if (isBadRequest) {
-      return showErrorToast(data.message);
-    }
-
-    onCreate(data.roomId);
-  };
-
-  const gatheringCreateDefaultValue = {
-    thumbnailImage: new File([], ''),
-    roomTitle: '',
-    description: '',
-    isArrowedSameGender: false,
-    headcount: [1, 8],
-    time: '',
-    startTime: '',
-    age: [
-      Math.floor(currentUser.age / 10) * 10,
-      Math.ceil(currentUser.age / 10) * 10,
-    ],
-    subwayLine: '',
-    subwayStation: '',
-    place: '',
-    categories: [],
-  };
+  const { age: currentUserAge } = useGetLoggedInUserApi();
+  const createGathering = useCreateGathering(onCreate);
 
   const {
     register,
@@ -107,41 +40,21 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
     formState: { errors, isValid },
     watch,
     control,
-  } = useForm({
-    mode: 'all',
-    defaultValues: gatheringCreateDefaultValue,
-    resolver: yupResolver(gatheringCreateSchema),
-  });
+    setValue,
+  } = useForm(gatheringCreateFormOptions);
 
   const onSubmitGathering = (data: GatheringCreateFormValues) => {
-    const {
-      thumbnailImage: imageFile,
-      isArrowedSameGender,
-      headcount: [minParticipants, maxParticipants],
-      time,
-      age: [minAge, maxAge],
-      categories,
-      ...restGathering
-    } = data;
-
-    const gathering = {
-      isAllowedOppositeGender: !isArrowedSameGender,
-      minParticipants,
-      maxParticipants,
-      day: time.split(' ')[0],
-      time: time.split(' ')[1],
-      minAge,
-      maxAge,
-      categories:
-        categories.length === 0 ? [...BOARDGAME_CATEGORIES] : categories,
-      ...restGathering,
-    };
-
-    createGathering({
-      imageFile,
-      gathering,
-    });
+    const request = gatheringCreateRequestMapper(data);
+    createGathering(request);
   };
+
+  // 현재 사용자의 나이에 맞게 나이대 필드의 선택 가능 범위를 설정해요.
+  useEffect(() => {
+    setValue('age', [
+      Math.floor(currentUserAge / 10) * 10,
+      Math.ceil(currentUserAge / 10) * 10,
+    ]);
+  }, [currentUserAge, setValue]);
 
   return (
     <form
@@ -230,7 +143,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                     min={10}
                     max={40}
                     step={5}
-                    includedValue={currentUser.age}
+                    includedValue={currentUserAge}
                     value={value}
                     onChange={onChange}
                   />
