@@ -4,17 +4,27 @@ import { BOARD_GAMES_TIP_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
-interface CreateTipResponse {
+interface CreateBoardGameTipResponse {
   content: string;
 }
 
-export interface CreateTipRequest {
+export interface CreateBoardGameTipRequestBody {
+  content: string;
+}
+
+interface BoardGameId {
   boardGameId: string;
-  content: string;
 }
 
-export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
-  api.post<CreateTipResponse>({
+export interface CreateBoardGameTipRequest
+  extends CreateBoardGameTipRequestBody,
+    BoardGameId {}
+
+export const postBoardGameTip = ({
+  boardGameId,
+  content,
+}: CreateBoardGameTipRequest) =>
+  api.post<CreateBoardGameTipResponse>({
     url: `${BOARD_GAMES_TIP_API_URL}/${boardGameId}`,
     data: {
       content,
