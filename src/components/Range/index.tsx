@@ -53,7 +53,7 @@ const Range = ({
   };
 
   return (
-    <div className='mx-auto w-full px-4'>
+    <div className='mx-auto w-full p-4'>
       <div className='relative'>
         <input
           type='range'

@@ -1,19 +1,21 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '@/utils/cn';
 
 import Icon from '../Icon';
 
-interface CheckboxProps extends ComponentPropsWithoutRef<'input'> {}
-
-const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
+const Checkbox = forwardRef<
+  HTMLInputElement,
+  ComponentPropsWithoutRef<'input'>
+>(({ children, name, ...props }, ref) => {
   return (
-    <div className='flex items-center gap-2'>
+    <div className='relative flex items-center gap-2'>
       <input
+        ref={ref}
         name={name}
         type='checkbox'
         id={name}
-        className='peer relative h-5 w-5 cursor-pointer appearance-none rounded border border-gray-accent7'
+        className='peer h-5 w-5 cursor-pointer appearance-none rounded border border-gray-accent7'
         {...props}
       />
       <label
@@ -24,10 +26,10 @@ const Checkbox = ({ children, name, ...props }: CheckboxProps) => {
       </label>
       <Icon
         id='check-line'
-        className='pointer-events-none absolute hidden w-5 w-5 text-primary peer-checked:block'
+        className='pointer-events-none absolute hidden w-5 text-primary peer-checked:block'
       />
     </div>
   );
-};
+});
 
 export default Checkbox;

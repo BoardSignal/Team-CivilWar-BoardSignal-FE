@@ -5,7 +5,7 @@ import {
   DEFAULT_ERROR_TITLE,
 } from '@/constants/messages/error';
 
-import Button, { ButtonProps } from '../Button';
+import Button, { type ButtonProps } from '../Button';
 import Icon from '../Icon';
 
 export interface ErrorAlertProps {

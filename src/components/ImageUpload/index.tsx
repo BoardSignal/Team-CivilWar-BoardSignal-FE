@@ -23,6 +23,7 @@ const CameraButtonCSS = cva('absolute z-10', {
 
 interface ImageUploadProps extends VariantProps<typeof imageCSS> {
   imageSrcUrl?: string;
+  onChange?: (file?: File) => void;
 }
 
 const DEFAULT_IMAGE_URL =
@@ -31,6 +32,7 @@ const DEFAULT_IMAGE_URL =
 const ImageUpload = ({
   variant,
   imageSrcUrl = DEFAULT_IMAGE_URL,
+  onChange,
 }: ImageUploadProps) => {
   const [previewImageUrl, setPreviewImageUrl] = useState(imageSrcUrl);
 
@@ -43,7 +45,10 @@ const ImageUpload = ({
           className={imageCSS({ variant })}
         />
         <div className={CameraButtonCSS({ variant })}>
-          <ImageUploadButton setImageUrl={setPreviewImageUrl} />
+          <ImageUploadButton
+            setImageUrl={setPreviewImageUrl}
+            onChange={onChange}
+          />
         </div>
       </div>
     </div>
