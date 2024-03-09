@@ -6,10 +6,10 @@ import { HttpStatusCode } from 'axios';
 import { HttpResponse, delay, http } from 'msw';
 
 import { api } from '@/apis/core';
-import API_BASE_URL from '@/apis/core/constants';
 import Button from '@/components/Button';
 import Label from '@/components/Label';
 import TextInput from '@/components/TextInput';
+import { API_BASE_URL } from '@/constants/apiRoutes';
 import { showErrorToast } from '@/utils/showToast';
 
 import { CommonPageLayoutDecorator } from '../../CommonPageLayoutDecorator';

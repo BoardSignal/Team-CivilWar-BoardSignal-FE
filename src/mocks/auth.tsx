@@ -1,7 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import API_BASE_URL from '@/apis/core/constants';
-import { AUTH_API_URL } from '@/constants/apiRoutes';
+import { API_BASE_URL, AUTH_API_URL } from '@/constants/apiRoutes';
 
 export const MOCK_GET_AUTH_URL = `${API_BASE_URL}${AUTH_API_URL}`;
 

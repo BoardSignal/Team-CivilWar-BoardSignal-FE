@@ -1,7 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import API_BASE_URL from '@/apis/core/constants';
-import { NOTIFICATIONS_API_URL } from '@/constants/apiRoutes';
+import { API_BASE_URL, NOTIFICATIONS_API_URL } from '@/constants/apiRoutes';
 
 const repeatArray = <T,>(count: number, arr: T[]) =>
   Array.from({ length: count })

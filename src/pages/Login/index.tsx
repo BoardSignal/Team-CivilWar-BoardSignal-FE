@@ -5,11 +5,7 @@ import {
   SLOGAN_MESSAGE2,
 } from '@/constants/messages/boardSignal';
 
-import {
-  KakaoLoginButton,
-  NaverLoginButton,
-  SkipLoginButton,
-} from './components/LoginButtons';
+import { KakaoLoginButton, SkipLoginButton } from './components/LoginButtons';
 
 const LoginPage = () => {
   return (
@@ -25,7 +21,6 @@ const LoginPage = () => {
         </div>
       </div>
       <div className='flex flex-col gap-2 p-4'>
-        <NaverLoginButton />
         <KakaoLoginButton />
         <SkipLoginButton />
       </div>

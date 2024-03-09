@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
 import ProfilePage from './pages/Profile';
+import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
 
 export const router = createBrowserRouter([
   {
@@ -50,9 +51,15 @@ export const router = createBrowserRouter([
         element: <GatheringCreatePage />,
       },
       {
+        // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
+        path: '/redirect',
+        element: <RedirectOnAuthentication />,
+      },
+      {
         path: 'gatherings/:gatheringId',
         element: <HomePage />,
       },
+      { path: '/redirect', element: <RedirectOnAuthentication /> },
     ],
   },
 ]);

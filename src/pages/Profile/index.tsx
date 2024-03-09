@@ -11,10 +11,12 @@ import PersonalInfo from './components/PersonalInfo';
 import PreferCategory from './components/PreferCategory';
 import SignalTemperature from './components/SignalTemperature';
 import WishGameButton from './components/WishGameButton';
+import { useLogout } from './hooks/useLogout';
 
 const MyProfilePage = () => {
   const { userId } = useParams() as { userId: string };
   const { data, isPending, isError } = useGetUserProfilesApi(userId);
+  const { logoutApi } = useLogout();
 
   if (isPending) return <div>Loading...</div>;
   if (isError) return <div>Error...</div>;
@@ -36,7 +38,7 @@ const MyProfilePage = () => {
         </TabBar.Left>
         <TabBar.Right>
           <TabBar.ShareButton />
-          <TabBar.LogoutButton />
+          <TabBar.LogoutButton onClick={logoutApi} />
           <TabBar.SettingsButton />
         </TabBar.Right>
       </TabBar.Container>

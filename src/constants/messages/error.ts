@@ -11,3 +11,6 @@ export const DEFAULT_ERROR_MESSAGE = '요청사항을 처리하는데 실패했�
 // Error Toast Message
 export const ERROR_TOAST_MESSAGE_ON_SERVER_ERROR =
   '요청을 처리할 수 없었습니다.\r\n잠시 후 다시 시도해주세요.';
+
+//Error Token Expired
+export const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
