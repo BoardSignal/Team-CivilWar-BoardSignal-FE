@@ -25,3 +25,4 @@ jobs:
           exitZeroOnChanges: true
         env:
           STORYBOOK_BASE_URL: https://api.boardsignal.com/api/v1
+          STORYBOOK_KAKAO_MAP_ACCESS_KEY: ${{ secrets.STORYBOOK_KAKAO_MAP_ACCESS_KEY }}

@@ -1,4 +1,4 @@
-import GatheringItem from './GatheringItem';
+import GatheringListItem from './GatheringListItem';
 
 export interface Gathering {
   id: number;
@@ -26,7 +26,7 @@ const GatheringList = ({ gatherings }: GatheringListProps) => {
     <section className='grow overflow-y-auto'>
       <ul>
         {gatherings.map(gathering => (
-          <GatheringItem key={gathering.id} gathering={gathering} />
+          <GatheringListItem key={gathering.id} gathering={gathering} />
         ))}
       </ul>
     </section>
