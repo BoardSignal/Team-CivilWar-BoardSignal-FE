@@ -27,7 +27,7 @@ export const getRelativeTime = ({ time, duration }: GetRelativeTimeProps) => {
     (new Date().getTime() - new Date(time).getTime()) / 60000;
 
   if (
-    duration &&
+    duration !== undefined &&
     minutesDifference >= duration * MINUTES_PER_TIME_UNIT[3].minutes
   ) {
     return new Intl.DateTimeFormat('ko-KR').format(new Date(time));
