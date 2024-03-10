@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import GatheringIntroduce from '@/pages/GatheringDetail/GatheringIntroduce/index';
+import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
 const meta: Meta<typeof GatheringIntroduce> = {
   title: 'Pages/GatheringDetail/GatheringIntroduce',
   tags: ['autodocs'],
   component: GatheringIntroduce,
+  decorators: [CommonPageLayoutDecorator],
 };
 
 export default meta;

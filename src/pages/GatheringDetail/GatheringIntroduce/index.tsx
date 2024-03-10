@@ -7,7 +7,7 @@ import GatheringGuide from './components/GatheringGuide';
 import TabMenu from './components/TabMenu';
 
 interface GatheringIntroduceProps {
-  imageUrl?: string;
+  imageUrl?: string | null;
 }
 
 const DEFAULT_IMAGE_URL = 'https://picsum.photos/200/200';
@@ -19,13 +19,14 @@ const GATHERING_INTRO_DUMMY_DATA = {
     minParticipants: 1,
     maxParticipants: 8,
     categories: ['전략게임', '워게임'],
-    isAllowedAppositeGender: '혼성',
+    allowedGender: '남성',
     maxAge: 21,
     minAge: 28,
   },
   title: '정령섬 심화 격주로 하실 1~2분',
   description: '예전보다 소개팅도 줄어들고~',
   isLeader: false,
+  imageUrl: DEFAULT_IMAGE_URL,
 };
 
 const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
@@ -56,13 +57,14 @@ const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
           <div>
             {imageUrl && (
               <img
-                src={imageUrl || DEFAULT_IMAGE_URL}
+                src={imageUrl}
                 alt='모임 이미지'
                 className='h-[350px] w-full object-cover'
               />
             )}
-            <GatheringDescription title={title} description={description} />
-            <div className='m-5 '>
+
+            <div className='flex flex-col gap-4 px-4 py-6'>
+              <GatheringDescription title={title} description={description} />
               <GatheringGuide gatheringGuide={gatheringGuide} />
             </div>
           </div>
