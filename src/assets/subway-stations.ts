@@ -27,7 +27,17 @@ export type SubwayLines =
   | '김해'
   | '동해';
 
-const subwayStations = {
+interface SubwayStations {
+  states: SubwayStates[];
+  lines: Record<SubwayStates, { name: SubwayLines; color: string }[]>;
+  data: {
+    category: SubwayStates;
+    lineName: SubwayLines;
+    stations: string[];
+  }[];
+}
+
+const subwayStations: SubwayStations = {
   states: ['수도권', '대전', '대구', '광주', '부산'],
   lines: {
     수도권: [

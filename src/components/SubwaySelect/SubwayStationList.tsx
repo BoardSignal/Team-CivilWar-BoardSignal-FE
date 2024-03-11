@@ -19,9 +19,7 @@ const SubwayStationList = ({ onSelect, stations }: SubwayStationListProps) => {
             onClick={handleClick}
             className='flex h-fit flex-col items-start gap-1 border-b border-gray-accent7 px-4 py-2'
           >
-            <div className='rounded-full px-2 py-1 text-sm text-gray-accent1'>
-              {name}
-            </div>
+            <div className='px-2 py-1 text-sm text-gray-accent1'>{name}</div>
           </Button>
         );
       })}

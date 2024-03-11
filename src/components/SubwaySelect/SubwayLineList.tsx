@@ -1,11 +1,12 @@
+import { type SubwayLines } from '@/assets/subway-stations';
 import { cn } from '@/utils/cn';
 
 import Button from '../Button';
 
 interface SubwayLineListProps {
-  onSelect: (value: string) => void;
-  lines: { name: string; color: string }[];
-  selectedLine: string;
+  onSelect: (value: SubwayLines) => void;
+  lines: { name: SubwayLines; color: string }[];
+  selectedLine: SubwayLines;
 }
 
 const SubwayLineList = ({

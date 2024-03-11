@@ -1,4 +1,4 @@
-import { SubwayStates } from '@/assets/subway-stations';
+import { type SubwayStates } from '@/assets/subway-stations';
 import { cn } from '@/utils/cn';
 
 import Button from '../Button';

@@ -1,4 +1,3 @@
-import { SubwayStates } from '@/assets/subway-stations';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import LayoutRootPortal from '@/components/Layout/LayoutRootPortal';
@@ -47,8 +46,7 @@ const SubwayListModal = ({ onClose, onSelect }: SubwayListModalProps) => {
         </div>
         <StateList
           onSelect={handleStateSelect}
-          // FIXME: 어쩔 수 없는 타입 단언.. 타입을 자동으로 잘 잡지 못하고 있어요.
-          states={states as SubwayStates[]}
+          states={states}
           selectedState={selectedState}
         />
         <div className='scroll-none flex grow overflow-y-auto'>
