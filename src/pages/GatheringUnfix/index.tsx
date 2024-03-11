@@ -41,7 +41,8 @@ const GatheringUnfixPage = () => {
     if (isFix === '미확정' || !isParticipant) {
       throw new Error('Inaccessible page');
     }
-  }, [currentUserId, participants, isFix]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUserId, participants]);
 
   return (
     <div className='flex h-full flex-col'>
