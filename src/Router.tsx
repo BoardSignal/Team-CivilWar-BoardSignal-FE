@@ -12,6 +12,7 @@ import {
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
 import GatheringCreatePage from './pages/GatheringCreate';
+import GatheringListPage from './pages/GatheringList';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <HomePage />,
+        element: <GatheringListPage />,
       },
       {
         path: LOGIN_PAGE_URL,

@@ -2,7 +2,7 @@ import GatheringListItem from './GatheringListItem';
 
 export interface Gathering {
   id: number;
-  imageUrl: string;
+  imageUrl: string | null;
   title: string;
   description: string;
   station: string;

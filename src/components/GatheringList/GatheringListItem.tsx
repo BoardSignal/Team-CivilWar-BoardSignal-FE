@@ -45,19 +45,21 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
   return (
     <li className='border-b border-gray-accent7'>
       <Link to={`/gatherings/${gatheringId}`}>
-        <Button className='flex h-fit cursor-pointer gap-4 p-4'>
+        <Button className='h-fit gap-4 p-4'>
           <img
             src={imageUrl || defaultThumbnailImage}
             alt={title}
-            className='size-[100px] rounded-lg object-cover'
+            className='size-24 shrink-0 rounded-lg object-cover'
           />
-          <div className='flex grow flex-col justify-between overflow-x-hidden'>
-            <div className='flex flex-col gap-1'>
+          <div className='flex h-24 grow flex-col justify-between overflow-x-hidden'>
+            <div className='flex flex-col items-start gap-1'>
               <div className='truncate'>{title}</div>
-              <div className='text-xs text-gray-accent2'>
+              <div className='text-left text-xs text-gray-accent2'>
                 {gatheringSummary}
               </div>
-              <div className='text-xs text-gray-accent2'>{categoriesText}</div>
+              <div className='w-fit text-left text-xs text-gray-accent2'>
+                {categoriesText}
+              </div>
             </div>
             <div className='flex justify-between text-xs text-gray-accent3'>
               <div>{getRelativeTime(createdAt)}</div>
