@@ -19,15 +19,16 @@ const TipItem = ({ tip }: { tip: Tip }) => {
     isLiked,
   } = tip;
 
-  const { boardGameId } = useParams() as { boardGameId: string };
+  const { boardGameId } = useParams();
+  if (!boardGameId) throw new Error('boardGameId is required');
 
-  const { postBoardGameTipLike, deleteBoardGameTipLike } = useBoardGameTipLike(
-    tipId,
-    boardGameId,
-  );
+  const { postBoardGameTipLike, deleteBoardGameTipLike } =
+    useBoardGameTipLike(boardGameId);
 
   const toggledTipLike = () => {
-    isLiked ? deleteBoardGameTipLike() : postBoardGameTipLike();
+    isLiked
+      ? deleteBoardGameTipLike({ tipId })
+      : postBoardGameTipLike({ tipId });
   };
 
   return (

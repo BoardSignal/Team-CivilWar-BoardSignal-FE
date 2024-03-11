@@ -1,18 +1,19 @@
 import {
+  type BoardGameTipLikeRequest,
   useDeleteBoardGameTipLikeApi,
   usePostBoardGameTipLikeApi,
 } from '@/apis/boardGameTipLike';
 
-export const useBoardGameTipLike = (tipId: number, boardGameId: string) => {
-  const postApi = usePostBoardGameTipLikeApi(tipId, boardGameId);
-  const deleteApi = useDeleteBoardGameTipLikeApi(tipId, boardGameId);
+export const useBoardGameTipLike = (boardGameId: string) => {
+  const postApi = usePostBoardGameTipLikeApi(boardGameId);
+  const deleteApi = useDeleteBoardGameTipLikeApi(boardGameId);
 
   return {
-    postBoardGameTipLike: async () => {
-      await postApi();
+    postBoardGameTipLike: async (tipId: BoardGameTipLikeRequest) => {
+      await postApi(tipId);
     },
-    deleteBoardGameTipLike: async () => {
-      await deleteApi();
+    deleteBoardGameTipLike: async (tipId: BoardGameTipLikeRequest) => {
+      await deleteApi(tipId);
     },
   };
 };

@@ -25,7 +25,7 @@ const GameWish = ({ wishCount, isWished }: GameWishProps) => {
   return (
     <div className='flex flex-col items-center gap-1'>
       <Button
-        onClick={toggledWish}
+        onClick={() => toggledWish({ boardGameId })}
         className={cn(
           'flex h-8 w-8 items-center justify-center rounded-full border border-gray-accent3',
           isWished && 'bg-primary',

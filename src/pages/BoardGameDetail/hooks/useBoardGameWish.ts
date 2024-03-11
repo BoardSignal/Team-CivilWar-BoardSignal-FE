@@ -1,4 +1,5 @@
 import {
+  type BoardGameWishRequest,
   useDeleteBoardGameWishApi,
   usePostBoardGameWishApi,
 } from '@/apis/boardGameWish';
@@ -8,11 +9,11 @@ export const useBoardGameWish = (boardGameId: string) => {
   const deleteApi = useDeleteBoardGameWishApi(boardGameId);
 
   return {
-    postBoardGameWish: async () => {
-      await postApi();
+    postBoardGameWish: async (boardGameId: BoardGameWishRequest) => {
+      await postApi(boardGameId);
     },
-    deleteBoardGameWish: async () => {
-      await deleteApi();
+    deleteBoardGameWish: async (boardGameId: BoardGameWishRequest) => {
+      await deleteApi(boardGameId);
     },
   };
 };

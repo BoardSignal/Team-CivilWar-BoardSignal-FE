@@ -1,4 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { BOARD_GAMES_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
@@ -29,15 +31,18 @@ export interface Tip {
   isLiked: boolean;
 }
 
-const GET_BOARD_GAME_DETAIL_URL = '/board-games';
-
-const getBoardGameDetail = (boardGameId: string) =>
+interface BoardGameDetailRequest {
+  boardGameId: string;
+}
+const getBoardGameDetail = ({ boardGameId }: BoardGameDetailRequest) =>
   api.get<BoardGameDetailResponse>({
-    url: `${GET_BOARD_GAME_DETAIL_URL}/${boardGameId}`,
+    url: `${BOARD_GAMES_API_URL}/${boardGameId}`,
   });
 
-export const useGetBoardGameDetailApi = (boardGameId: string) =>
-  useQuery({
-    queryFn: () => getBoardGameDetail(boardGameId),
-    queryKey: ['boardGameDetail', boardGameId],
+export const useGetBoardGameDetailApi = ({
+  boardGameId,
+}: BoardGameDetailRequest) =>
+  useSuspenseQuery({
+    queryFn: () => getBoardGameDetail({ boardGameId }),
+    queryKey: ['board-game-detail', boardGameId],
   });
