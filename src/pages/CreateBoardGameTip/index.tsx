@@ -4,29 +4,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
+import { SUCCESS_CREATE_TIP } from '@/constants/messages/modal';
 import { BOARD_GAMES_PAGE_URL } from '@/constants/pageRoutes';
 
 import BoardGameCreateTipForm from './components/CreateBoardGameTipForm';
 
 const CreateBoardGameTipPage = () => {
   const navigate = useNavigate();
-
   const { boardGameId, boardGameTitle } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!boardGameId || !boardGameTitle) throw new Error();
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
     navigate(`${BOARD_GAMES_PAGE_URL}/${boardGameId}`);
-  };
-
-  const handleCreateBoardGameTip = () => {
-    handleOpenModal();
   };
 
   return (
@@ -38,7 +30,7 @@ const CreateBoardGameTipPage = () => {
         title='안내'
         buttonChildren='확인'
       >
-        공략이 작성됐어요.
+        {SUCCESS_CREATE_TIP}
       </Modal>
       <TabBar.Container>
         <TabBar.Left>
@@ -47,7 +39,7 @@ const CreateBoardGameTipPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <BoardGameCreateTipForm
-        onCreate={handleCreateBoardGameTip}
+        onCreate={() => setIsModalOpen(true)}
         boardGameId={boardGameId}
       />
     </div>

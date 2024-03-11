@@ -11,7 +11,7 @@ import {
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
-import BoardGameTipCreate from './pages/CreateBoardGameTip';
+import CreateBoardGameTipPage from './pages/CreateBoardGameTip';
 import GatheringCreatePage from './pages/GatheringCreate';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'board-games/tip/create/:boardGameId/:boardGameTitle',
-        element: <BoardGameTipCreate />,
+        element: <CreateBoardGameTipPage />,
       },
     ],
   },

@@ -1,13 +1,19 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { object, string } from 'yup';
 
-import type { CreateBoardGameTipRequestBody } from '@/apis/boardGameTip';
 import Button from '@/components/Button';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Label from '@/components/Label';
 import Textarea from '@/components/TextArea';
+import {
+  MAX_LENGTH_ERROR_MESSAGE,
+  MIN_LENGTH_ERROR_MESSAGE,
+  REQUIRED_ERROR_MESSAGE,
+  TRIM_ERROR_MESSAGE,
+} from '@/constants/messages/error';
 
 import useCreateBoardGameTip from '../../hooks/useCreateBoardGameTip';
-import { createBoardGameTipFormOptions } from './formSchema';
 
 export type OnBoardGameTipCreate = () => void;
 
@@ -16,22 +22,33 @@ interface BoardGameTipCreateFormProps {
   boardGameId: string;
 }
 
-const BoardGameTipCreateForm = ({
+const CreateBoardGameTipForm = ({
   onCreate,
   boardGameId,
 }: BoardGameTipCreateFormProps) => {
-  const createBoardGameTip = useCreateBoardGameTip(onCreate);
+  const createBoardGameTip = useCreateBoardGameTip(onCreate, boardGameId);
+
+  const createBoardGameTipSchema = object({
+    content: string()
+      .required(REQUIRED_ERROR_MESSAGE)
+      .trim()
+      .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
+      .max(500, `50${MAX_LENGTH_ERROR_MESSAGE}`),
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     watch,
-  } = useForm(createBoardGameTipFormOptions);
+  } = useForm({
+    mode: 'all',
+    defaultValues: { content: '' },
+    resolver: yupResolver(createBoardGameTipSchema),
+  });
 
-  const onSubmitBoardGameTip = (data: CreateBoardGameTipRequestBody) => {
-    const request = { ...data, boardGameId };
-    createBoardGameTip(request);
+  const onSubmitBoardGameTip = ({ content }: { content: string }) => {
+    createBoardGameTip(content);
   };
 
   return (
@@ -63,4 +80,4 @@ const BoardGameTipCreateForm = ({
   );
 };
 
-export default BoardGameTipCreateForm;
+export default CreateBoardGameTipForm;

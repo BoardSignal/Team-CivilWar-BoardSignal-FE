@@ -8,22 +8,7 @@ interface CreateBoardGameTipResponse {
   content: string;
 }
 
-export interface CreateBoardGameTipRequestBody {
-  content: string;
-}
-
-interface BoardGameId {
-  boardGameId: string;
-}
-
-export interface CreateBoardGameTipRequest
-  extends CreateBoardGameTipRequestBody,
-    BoardGameId {}
-
-export const postBoardGameTip = ({
-  boardGameId,
-  content,
-}: CreateBoardGameTipRequest) =>
+const postBoardGameTip = (boardGameId: string, content: string) =>
   api.post<CreateBoardGameTipResponse>({
     url: `${BOARD_GAMES_TIP_API_URL}/${boardGameId}`,
     data: {
@@ -31,14 +16,14 @@ export const postBoardGameTip = ({
     },
   });
 
-const deleteBoardGameTip = ({ tipId }: { tipId: number }) =>
+const deleteBoardGameTip = (tipId: number) =>
   api.delete({
     url: `board-games/${tipId}`,
   });
 
-export const usePostBoardGameTipApi = () => {
+export const usePostBoardGameTipApi = (boardGameId: string) => {
   const { mutateAsync } = useMutation({
-    mutationFn: postBoardGameTip,
+    mutationFn: (content: string) => postBoardGameTip(boardGameId, content),
   });
 
   return mutateAsync;
