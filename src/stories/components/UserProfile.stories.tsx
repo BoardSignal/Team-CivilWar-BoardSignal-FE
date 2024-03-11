@@ -12,11 +12,16 @@ export default meta;
 
 type Story = StoryObj<typeof UserProfile>;
 
+const DUMMY_USERPROFILE = {
+  nickname: '크라켄마스터',
+  profileImageUrl: 'https://picsum.photos/200/200',
+  ageGroup: '20대',
+  signalTemperature: 36.6,
+  isLeader: true,
+};
+
 export const Default: Story = {
   args: {
-    nickname: '크라켄마스터',
-    ageGroup: '20대',
-    signalTemperature: 36.6,
-    isLeader: true,
+    userProfile: DUMMY_USERPROFILE,
   },
 };

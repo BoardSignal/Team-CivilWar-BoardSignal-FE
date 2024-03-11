@@ -1,7 +1,7 @@
 import Icon from '../Icon';
 import UserSignalTemperature from './UserSignalTemperature';
 
-interface UserProfileProps {
+export interface UserProfileProps {
   userProfile: {
     nickname: string;
     profileImageUrl?: string;
