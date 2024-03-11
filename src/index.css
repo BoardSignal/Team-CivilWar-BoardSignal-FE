@@ -27,7 +27,8 @@
     --manner-accent-7: #333333;
   }
 
-  /* Storybook 환경에선 root가 아닐 수도 있어요 */
+  /* Storybook 환경에선 :root가 아닐 수도 있어요 */
+  #styleRoot.dark,
   .dark #styleRoot {
     background-color: black;
     color: white;
