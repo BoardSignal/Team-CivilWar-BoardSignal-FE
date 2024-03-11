@@ -14,9 +14,9 @@ import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
-import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
 import { AGE_RANGE_ALERT_MESSAGE } from '@/constants/messages/alert';
-import { TIMES } from '@/constants/times';
+import { BOARDGAME_CATEGORIES } from '@/constants/options';
+import { TIMES } from '@/constants/options';
 
 import { gatheringCreateFormOptions } from './formSchema';
 import gatheringCreateRequestMapper, {
