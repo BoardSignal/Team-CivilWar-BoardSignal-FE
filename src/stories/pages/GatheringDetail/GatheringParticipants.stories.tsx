@@ -15,6 +15,7 @@ type Story = StoryObj<typeof GatheringParticipants>;
 const DUMMY_PARTICIPANTS = [
   {
     userId: 1,
+    profileImageUrl: 'https://picsum.photos/200/200',
     nickname: '인주니',
     ageGroup: '30대',
     isLeader: true,
@@ -22,6 +23,7 @@ const DUMMY_PARTICIPANTS = [
   },
   {
     userId: 2,
+    profileImageUrl: 'https://picsum.photos/200/200',
     nickname: '조로김강훈',
     ageGroup: '20대',
     isLeader: false,

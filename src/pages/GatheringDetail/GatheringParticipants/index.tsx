@@ -2,6 +2,7 @@ import UserProfile from '@/components/UserProfile';
 
 export interface Participants {
   userId: number;
+  profileImageUrl?: string;
   nickname: string;
   ageGroup: string;
   isLeader: boolean;
@@ -19,13 +20,10 @@ const GatheringParticipants = ({
     <section className='grow overflow-y-auto'>
       <ul>
         {participants.map(participant => (
-          <UserProfile
-            key={participant.userId}
-            nickname={participant.nickname}
-            ageGroup={participant.ageGroup}
-            signalTemperature={participant.signalTemperature}
-            isLeader={participant.isLeader}
-          />
+          <li key={participant.userId}>
+            <UserProfile userProfile={participant} />
+            <div className='border-b border-gray-accent7'></div>
+          </li>
         ))}
       </ul>
     </section>
