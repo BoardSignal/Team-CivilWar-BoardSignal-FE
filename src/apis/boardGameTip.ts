@@ -21,7 +21,7 @@ export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
     },
   });
 
-const deleteBoardGameTip = ({ tipId }: { tipId: number }) =>
+const deleteBoardGameTip = (tipId: number) =>
   api.delete({
     url: `board-games/${tipId}`,
   });
@@ -34,9 +34,9 @@ export const usePostBoardGameTipApi = () => {
   return mutateAsync;
 };
 
-export const useDeleteBoardGameTipApi = () => {
+export const useDeleteBoardGameTipApi = (tipId: number) => {
   const { mutateAsync } = useMutation({
-    mutationFn: deleteBoardGameTip,
+    mutationFn: () => deleteBoardGameTip(tipId),
   });
 
   return mutateAsync;
