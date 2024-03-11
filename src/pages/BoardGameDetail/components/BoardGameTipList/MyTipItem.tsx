@@ -1,11 +1,21 @@
+import { useParams } from 'react-router-dom';
+
 import type { Tip } from '@/apis/boardGameDetail';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 
+import { useDeleteBoardGameTip } from '../../hooks/useDeleteBoardGameTip';
+
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const MyTipItem = ({ tip }: { tip: Tip }) => {
-  const { nickname, profileImageUrl, createdAt, content, likeCount } = tip;
+  const { nickname, profileImageUrl, createdAt, content, likeCount, tipId } =
+    tip;
+
+  const { boardGameId } = useParams();
+  if (!boardGameId) throw new Error('boardGameId is required');
+
+  const { deleteBoardGameTip } = useDeleteBoardGameTip(boardGameId);
 
   return (
     <div className='flex gap-2 border-b border-gray-accent7 p-4'>
@@ -25,7 +35,11 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
         <div className='flex items-center gap-1'>
           <Icon id='thumb-up-line' size={16} className='text-gray-accent3' />
           <span className='grow text-xs text-gray-accent1'>{likeCount}</span>
-          <Icon id='delete-bin-line' className='text-gray-accent3' />
+          <Icon
+            id='delete-bin-line'
+            className='text-gray-accent3'
+            onClick={() => deleteBoardGameTip({ tipId })}
+          />
         </div>
       </div>
     </div>
