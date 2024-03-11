@@ -1,7 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import API_BASE_URL from '@/apis/core/constants';
-import { USERS_API_URL } from '@/constants/apiRoutes';
+import { API_BASE_URL, USERS_API_URL } from '@/constants/apiRoutes';
 
 export const MOCK_GET_PROFILE_URL = `${API_BASE_URL}${USERS_API_URL}/1`;
 
