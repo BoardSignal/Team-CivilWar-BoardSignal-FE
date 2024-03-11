@@ -22,7 +22,7 @@ export const usePostBoardGameWishApi = (boardGameId: string) => {
     mutationFn: () => postBoardGameWish(boardGameId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: ['board-game-detail', boardGameId],
       }),
   });
 
@@ -35,7 +35,7 @@ export const useDeleteBoardGameWishApi = (boardGameId: string) => {
     mutationFn: () => deleteBoardGameWish(boardGameId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: ['board-game-detail', boardGameId],
       }),
   });
 

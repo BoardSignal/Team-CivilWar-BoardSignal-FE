@@ -26,7 +26,7 @@ export const usePostBoardGameTipLikeApi = (
     mutationFn: () => postBoardGameTipLike(tipId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: ['board-game-detail', boardGameId],
       }),
   });
 
@@ -42,7 +42,7 @@ export const useDeleteBoardGameTipLikeApi = (
     mutationFn: () => deleteBoardGameTipLike(tipId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: ['board-game-detail', boardGameId],
       }),
   });
 

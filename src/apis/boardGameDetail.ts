@@ -39,5 +39,5 @@ const getBoardGameDetail = (boardGameId: string) =>
 export const useGetBoardGameDetailApi = (boardGameId: string) =>
   useQuery({
     queryFn: () => getBoardGameDetail(boardGameId),
-    queryKey: ['boardGameDetail', boardGameId],
+    queryKey: ['board-game-detail', boardGameId],
   });

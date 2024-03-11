@@ -43,7 +43,7 @@ export const useDeleteBoardGameTipApi = (
     mutationFn: () => deleteBoardGameTip(tipId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: ['board-game-detail', boardGameId],
       }),
   });
 
