@@ -1,42 +1,34 @@
+import {
+  BOARD_GAMES_PAGE_URL,
+  CHATS_PAGE_URL,
+  NOTIFICATIONS_PAGE_URL,
+  USERS_PAGE_URL,
+} from '@/constants/pageRoutes';
+
 export const GNBRoutes = [
   {
     name: '홈',
     path: '/',
-    icons: {
-      fill: 'home-fill',
-      line: 'home-line',
-    },
+    icon: 'home',
   },
   {
     name: '채팅',
-    path: '/chat',
-    icons: {
-      fill: 'chat-fill',
-      line: 'chat-line',
-    },
+    path: CHATS_PAGE_URL,
+    icon: 'chat',
   },
   {
     name: '게임 정보',
-    path: '/game-info',
-    icons: {
-      fill: 'gamepad-fill',
-      line: 'gamepad-line',
-    },
+    path: BOARD_GAMES_PAGE_URL,
+    icon: 'gamepad',
   },
   {
     name: '알림',
-    path: '/notifications',
-    icons: {
-      fill: 'bell-fill',
-      line: 'bell-line',
-    },
+    path: NOTIFICATIONS_PAGE_URL,
+    icon: 'bell',
   },
   {
     name: '나의 정보',
-    path: '/me',
-    icons: {
-      fill: 'user-fill',
-      line: 'user-line',
-    },
+    path: `${USERS_PAGE_URL}/me`,
+    icon: 'user',
   },
 ] as const;
