@@ -10,7 +10,7 @@ import {
 
 export const gatheringCreateSchema = object({
   thumbnailImage: mixed<File>().required(),
-  roomTitle: string()
+  title: string()
     .required(REQUIRED_ERROR_MESSAGE)
     .trim()
     .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
@@ -33,7 +33,7 @@ export const gatheringCreateSchema = object({
 
 export const gatheringCreateDefaultValue = {
   thumbnailImage: new File([], ''),
-  roomTitle: '',
+  title: '',
   description: '',
   isArrowedSameGender: false,
   headcount: [1, 8],

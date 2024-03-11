@@ -2,7 +2,7 @@ import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
 export interface GatheringCreateFormValues {
   thumbnailImage: File;
-  roomTitle: string;
+  title: string;
   description: string;
   isArrowedSameGender: boolean;
   headcount: number[];

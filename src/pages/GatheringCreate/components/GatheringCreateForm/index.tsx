@@ -20,7 +20,7 @@ import { TIMES } from '@/constants/options';
 
 import { gatheringCreateFormOptions } from './formSchema';
 import gatheringCreateRequestMapper, {
-  GatheringCreateFormValues,
+  type GatheringCreateFormValues,
 } from './gatheringCreateRequestMapper';
 import useCreateGathering from './useCreateGathering';
 
@@ -76,14 +76,14 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
             title='모임 제목'
             isRequired
             maxLength={50}
-            currentLength={watch('roomTitle')?.length}
+            currentLength={watch('title')?.length}
           >
             <TextInput
-              variant={errors.roomTitle ? 'error' : 'default'}
+              variant={errors.title ? 'error' : 'default'}
               maxLength={50}
-              {...register('roomTitle')}
+              {...register('title')}
             />
-            <FormErrorMessage message={errors.roomTitle?.message} />
+            <FormErrorMessage message={errors.title?.message} />
           </Label>
           <Label
             title='모임 설명'
