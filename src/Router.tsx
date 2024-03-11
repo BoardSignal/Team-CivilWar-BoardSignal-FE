@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import ResponsiveLayoutWrapper from './components/Layout';
+import { GATHERINGS_UNFIX_PAGE_URL } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
 import GatheringCreatePage from './pages/GatheringCreate';
 import GatheringUnfixPage from './pages/GatheringUnfix';
@@ -61,7 +62,7 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'gatherings/unfix/:gatheringId',
+        path: `${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`,
         element: <GatheringUnfixPage />,
       },
     ],
