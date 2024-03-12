@@ -1,14 +1,10 @@
-// Give the service worker access to Firebase Messaging.
-// Note that you can only use Firebase Messaging here. Other Firebase libraries
-// are not available in the service worker.
+// 파이어베이스 메시징을 위한 서비스 워커
 importScripts('https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js');
 importScripts(
   'https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js',
 );
 
-// Initialize the Firebase app in the service worker by passing in
-// your app's Firebase config object.
-// https://firebase.google.com/docs/web/setup#config-object
+// 서비스워커에서 사용할 파이어베이스 설정
 firebase.initializeApp({
   apiKey: 'AIzaSyCvXb1godlEjfPaEjOVklc7GICxxzoFXOE',
   authDomain: 'boardsignal-71515.firebaseapp.com',
@@ -19,8 +15,7 @@ firebase.initializeApp({
   measurementId: 'G-JVV5FGH9X7',
 });
 
-// Retrieve an instance of Firebase Messaging so that it can handle background
-// messages.
+// 백그라운드에서 메시지를 처리할 수 있도록 인스턴스를 생성하고 이벤트를 등록
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage(payload => {
   const title = '보드시그널';
