@@ -34,7 +34,6 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
       ? minParticipants
       : `${minParticipants}~${maxParticipants}`;
   const gatheringSummary = [
-    station,
     time,
     `${ageRange}세`,
     allowedGender,
@@ -49,16 +48,21 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
           <img
             src={imageUrl || defaultThumbnailImage}
             alt={title}
-            className='size-24 shrink-0 rounded-lg object-cover'
+            className='size-[100px] shrink-0 rounded-lg object-cover'
           />
-          <div className='flex h-24 grow flex-col justify-between overflow-x-hidden'>
+          <div className='flex h-[100px] grow flex-col justify-between overflow-x-hidden'>
             <div className='flex flex-col items-start gap-1'>
-              <div className='truncate'>{title}</div>
+              <div className='w-full truncate text-left'>{title}</div>
               <div className='text-left text-xs text-gray-accent2'>
                 {gatheringSummary}
               </div>
-              <div className='w-fit text-left text-xs text-gray-accent2'>
-                {categoriesText}
+              <div className='flex w-full justify-between'>
+                <span className='w-fit text-left text-xs text-gray-accent2'>
+                  {categoriesText}
+                </span>
+                <span className='w-[100px] truncate text-right text-xs text-gray-accent2'>
+                  {station}
+                </span>
               </div>
             </div>
             <div className='flex justify-between text-xs text-gray-accent3'>
