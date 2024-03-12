@@ -13,25 +13,11 @@ const MINUTES_PER_TIME_UNIT: MinutesPerTimeUnit[] = [
   { unit: 'minute', minutes: 1 },
 ];
 
-interface GetRelativeTimeProps {
-  time: string;
-  duration?: number;
-}
+const getMinutesDifferenceFromNow = (time: string) =>
+  (new Date().getTime() - new Date(time).getTime()) / 60000;
 
-/**
- * time은 yyyy-mm-ddThh:mm:ss, yyyy/mm/dd hh:mm:ss 포맷만 가능합니다.
- * duration은 상대적 시간을 표시하는 지속 기간으로, 단위는 일(day)입니다.
- */
-export const getRelativeTime = ({ time, duration }: GetRelativeTimeProps) => {
-  const minutesDifference =
-    (new Date().getTime() - new Date(time).getTime()) / 60000;
-
-  if (
-    duration !== undefined &&
-    minutesDifference >= duration * MINUTES_PER_TIME_UNIT[3].minutes
-  ) {
-    return new Intl.DateTimeFormat('ko-KR').format(new Date(time));
-  }
+const getRelativeTime = (time: string) => {
+  const minutesDifference = getMinutesDifferenceFromNow(time);
 
   const formatter = new Intl.RelativeTimeFormat('ko', {
     numeric: 'always',
@@ -46,4 +32,22 @@ export const getRelativeTime = ({ time, duration }: GetRelativeTimeProps) => {
   }
 
   return '방금 전';
+};
+
+/**
+ * time은 yyyy-mm-ddThh:mm:ss, yyyy/mm/dd hh:mm:ss 포맷만 가능합니다.
+ *
+ * limit은 상대적 시간을 표시하는 지속 기간으로, 일(day) 단위입니다.
+ */
+export const getRelativeTimeWithin = (time: string, limit?: number) => {
+  const minutesDifference = getMinutesDifferenceFromNow(time);
+
+  if (
+    limit !== undefined &&
+    minutesDifference >= limit * MINUTES_PER_TIME_UNIT[3].minutes
+  ) {
+    return new Intl.DateTimeFormat('ko-KR').format(new Date(time));
+  }
+
+  return getRelativeTime(time);
 };
