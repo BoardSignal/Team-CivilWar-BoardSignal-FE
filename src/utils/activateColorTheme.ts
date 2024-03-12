@@ -2,7 +2,7 @@ const systemDarkCSS = '(prefers-color-scheme: dark)';
 
 const isDarkTheme = () => {
   const isSystemDark = matchMedia(systemDarkCSS).matches;
-  const isConfigWhite = localStorage.theme === 'light';
+  const isConfigWhite = localStorage.getItem('theme') === 'light';
 
   return !isConfigWhite || isSystemDark;
 };
