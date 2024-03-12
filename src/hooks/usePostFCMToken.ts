@@ -6,6 +6,14 @@ import 'firebase/messaging';
 import { usePostFCMTokenApi } from '@/apis/FCMToken';
 import { STORAGE_KEY_FCM_TOKEN } from '@/constants/storageKeys';
 
+interface FirebaseMessagePayload {
+  notification: {
+    title: string;
+    body: string;
+    icon: string;
+  };
+}
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -40,14 +48,16 @@ const usePostFCMToken = () => {
         }
       });
 
-    messaging.onMessage(payload => {
+    const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
       const title = payload.notification.title;
       const options = {
         body: payload.notification.body,
         icon: payload.notification.icon,
       };
       new Notification(title, options);
-    });
+    };
+
+    messaging.onMessage(foregroundMessageHandler);
   }, [postFCMTokenApi]);
 };
 
