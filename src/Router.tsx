@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import ResponsiveLayoutWrapper from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
@@ -45,19 +46,27 @@ export const router = createBrowserRouter([
       },
       {
         path: NOTIFICATIONS_PAGE_URL,
-        element: <NotificationListPage />,
-      },
-      {
-        path: `${USERS_PAGE_URL}/me`,
-        element: <ProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <NotificationListPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: `${USERS_PAGE_URL}/:userId`,
-        element: <ProfilePage />,
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: GATHERINGS_CREATE_PAGE_URL,
-        element: <GatheringCreatePage />,
+        element: (
+          <ProtectedRoute>
+            <GatheringCreatePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: `${GATHERINGS_PAGE_URL}/:gatheringId`,

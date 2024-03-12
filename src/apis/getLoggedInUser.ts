@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { AUTH_API_URL } from '@/constants/apiRoutes';
 
@@ -27,3 +27,12 @@ export const useGetLoggedInUserApi = () => {
 
   return data;
 };
+
+// Suspense를 사용해서 데이터를 조회하는 경우 응답이 400번대일 때 throw에러가 발생해서 useQuery를 사용하였습니다.
+export const useGetIsJoinedUserApi = (accessToken: string | null) =>
+  useQuery({
+    queryKey: ['logged-in-user'],
+    queryFn: getLoggedInUser,
+    enabled: !!accessToken,
+    throwOnError: true,
+  });
