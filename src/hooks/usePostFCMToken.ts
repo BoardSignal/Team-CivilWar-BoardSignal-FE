@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import 'firebase/messaging';
 
 import { usePostFCMTokenApi } from '@/apis/FCMToken';
+import { STORAGE_KEY_FCM_TOKEN } from '@/constants/storageKeys';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -32,10 +33,10 @@ const usePostFCMToken = () => {
 
     IS_LOGGED_IN &&
       messaging.getToken({ vapidKey: VAPID_KEY }).then(issuedFCMToken => {
-        const savedFCMToken = localStorage.getItem('FCMToken');
+        const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
         if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
           postFCMTokenApi({ token: issuedFCMToken });
-          localStorage.setItem('FCMToken', issuedFCMToken);
+          localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
         }
       });
 
