@@ -1,8 +1,8 @@
 import { GNB } from '@/components/GNB';
-import useFcmToken from '@/hooks/useFcmToken';
+import usePostFCMToken from '@/hooks/usePostFCMToken';
 
 export const HomePage = () => {
-  useFcmToken();
+  usePostFCMToken();
   return (
     <div className='flex h-screen flex-col'>
       <div className='grow'>

@@ -4,11 +4,11 @@ import { FCM_TOKEN_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
-interface FcmTokenRequest {
+interface FCMTokenRequest {
   token: string;
 }
 
-const postFcmToken = ({ token }: FcmTokenRequest) =>
+const postFCMToken = ({ token }: FCMTokenRequest) =>
   api.post({
     url: FCM_TOKEN_API_URL,
     data: {
@@ -16,9 +16,9 @@ const postFcmToken = ({ token }: FcmTokenRequest) =>
     },
   });
 
-export const usePostFcmTokenApi = () => {
+export const usePostFCMTokenApi = () => {
   const { mutateAsync } = useMutation({
-    mutationFn: postFcmToken,
+    mutationFn: postFCMToken,
   });
 
   return mutateAsync;

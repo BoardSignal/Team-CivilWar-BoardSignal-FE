@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/messaging';
 
-import { usePostFcmTokenApi } from '@/apis/postFcmToken';
+import { usePostFCMTokenApi } from '@/apis/FCMToken';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -16,40 +16,38 @@ const firebaseConfig = {
 };
 
 const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
+const IS_LOGGED_IN = localStorage.getItem('accessToken');
 
-const useFcmToken = () => {
-  const postApi = usePostFcmTokenApi();
+const firebaseInitialized = firebase.apps.length
+  ? firebase.app()
+  : firebase.initializeApp(firebaseConfig);
+
+const usePostFCMToken = () => {
+  const postFCMTokenApi = usePostFCMTokenApi();
 
   useEffect(() => {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    } else {
-      firebase.app();
-    }
+    firebaseInitialized;
 
     const messaging = firebase.messaging();
-    const isAuthenticated = localStorage.getItem('accessToken');
-    const savedFcmToken = localStorage.getItem('fcmToken');
 
-    isAuthenticated &&
-      messaging.getToken({ vapidKey: VAPID_KEY }).then(currentToken => {
-        if (currentToken) {
-          if (savedFcmToken !== currentToken) {
-            localStorage.setItem('fcmToken', currentToken);
-            postApi({ token: currentToken });
-          }
+    IS_LOGGED_IN &&
+      messaging.getToken({ vapidKey: VAPID_KEY }).then(issuedFCMToken => {
+        const savedFCMToken = localStorage.getItem('FCMToken');
+        if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
+          postFCMTokenApi({ token: issuedFCMToken });
+          localStorage.setItem('FCMToken', issuedFCMToken);
         }
       });
 
     messaging.onMessage(payload => {
-      const title = '보드시그널';
+      const title = payload.notification.title;
       const options = {
         body: payload.notification.body,
         icon: payload.notification.icon,
       };
       new Notification(title, options);
     });
-  }, [postApi]);
+  }, [postFCMTokenApi]);
 };
 
-export default useFcmToken;
+export default usePostFCMToken;
