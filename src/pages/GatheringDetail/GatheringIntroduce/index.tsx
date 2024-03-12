@@ -14,8 +14,10 @@ const DEFAULT_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const GATHERING_INTRO_DUMMY_DATA = {
   gatheringGuide: {
-    startTime: '토요일 오후',
+    time: '토요일 오후',
+    startTime: '',
     place: '사당역 근처 레드버튼',
+    subwayStation: '사당역',
     minParticipants: 1,
     maxParticipants: 8,
     categories: ['전략게임', '워게임'],
@@ -54,7 +56,7 @@ const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
           onSelectTab={handleTabSelect}
         />
         {activeTab === 0 && (
-          <div>
+          <div className='overflow-y-auto'>
             {imageUrl && (
               <img
                 src={imageUrl}

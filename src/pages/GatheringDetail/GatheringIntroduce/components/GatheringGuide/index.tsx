@@ -2,8 +2,10 @@ import Icon from '@/components/Icon';
 import { IconName } from '@/components/Icon/type';
 
 interface GatheringGuide {
-  startTime: string;
-  place: string;
+  time: string;
+  startTime: string | null;
+  subwayStation: string;
+  place: string | null;
   minParticipants: number;
   maxParticipants: number;
   categories: string[];
@@ -34,7 +36,9 @@ const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
 
 const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
   const {
+    time,
     startTime,
+    subwayStation,
     place,
     minParticipants,
     maxParticipants,
@@ -50,8 +54,16 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
   return (
     <div className='flex w-full flex-col gap-2 rounded-lg bg-gray-accent7 p-4'>
       <span className='font-bold'>모임 조건 안내</span>
-      <GuideItem iconId='time-fill' label='시간대' content={startTime} />
-      <GuideItem iconId='map-pin-fill' label='장소' content={place} />
+      <GuideItem
+        iconId='time-fill'
+        label='시간대'
+        content={startTime ? startTime : time}
+      />
+      <GuideItem
+        iconId='map-pin-fill'
+        label='장소'
+        content={place ? `${place} (${subwayStation})` : subwayStation}
+      />
       <GuideItem iconId='team-fill' label='인원' content={participantsGroup} />
       <GuideItem iconId='user-fill' label='나이대' content={ageGroup} />
       <GuideItem

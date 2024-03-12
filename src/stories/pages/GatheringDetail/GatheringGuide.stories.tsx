@@ -15,8 +15,10 @@ type Story = StoryObj<typeof GatheringGuide>;
 export const Default: Story = {
   args: {
     gatheringGuide: {
-      startTime: '토요일 오후',
+      time: '토요일 오후',
+      startTime: '',
       place: '사당역 근처 레드버튼',
+      subwayStation: '사당역',
       minParticipants: 2,
       maxParticipants: 4,
       categories: ['전략게임', '워게임'],
