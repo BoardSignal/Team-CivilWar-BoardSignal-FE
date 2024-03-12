@@ -54,9 +54,9 @@ const CreateBoardGameTipForm = ({
   return (
     <form
       onSubmit={handleSubmit(onSubmitBoardGameTip)}
-      className='flex h-full flex-col'
+      className='flex grow flex-col'
     >
-      <div className='flex h-full grow flex-col gap-2 p-4'>
+      <div className='flex flex-col gap-2 p-4'>
         <Label
           title='공략 내용'
           isRequired

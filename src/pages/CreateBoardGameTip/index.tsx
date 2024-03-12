@@ -14,7 +14,9 @@ const CreateBoardGameTipPage = () => {
   const { boardGameId, boardGameTitle } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!boardGameId || !boardGameTitle) throw new Error();
+  if (!boardGameId || !boardGameTitle) {
+    throw new Error();
+  }
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
