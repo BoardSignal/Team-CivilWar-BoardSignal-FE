@@ -1,11 +1,11 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import qs from 'qs';
 
 import { ROOMS_FILTER_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
-interface Gathering {
+export interface Gathering {
   id: number;
   title: string;
   description: string;
@@ -32,39 +32,40 @@ export interface GetGatheringListParams {
   station: string[];
   time: string[];
   category: string[];
-  gender: string;
+  gender?: string;
 }
 
-const getGatheringList = ({
-  size,
-  station,
-  time,
-  category,
-  gender,
-}: GetGatheringListParams) =>
+const getGatheringList = ({ size, ...restParams }: GetGatheringListParams) =>
   api.get<GatheringListResponse>({
     url: ROOMS_FILTER_API_URL,
     params: {
       size,
-      station,
-      time,
-      category,
-      gender,
+      ...restParams,
     },
     paramsSerializer: params => qs.stringify(params, { indices: false }),
   });
 
 export const useGetGatheringListApi = ({
   size,
-  station,
-  time,
-  category,
-  gender,
+  ...restParams
 }: GetGatheringListParams) => {
-  const { data } = useSuspenseQuery({
-    queryKey: ['gatherings', size, station, time, category, gender],
-    queryFn: () => getGatheringList({ size, station, time, category, gender }),
-  });
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useSuspenseInfiniteQuery<GatheringListResponse>({
+      queryKey: ['gatherings', restParams],
+      queryFn: ({ pageParam = size }) =>
+        getGatheringList({
+          size: pageParam as number,
+          ...restParams,
+        }),
+      initialPageParam: size,
+      getNextPageParam: ({ size: currentSize, hasNext }) =>
+        hasNext ? currentSize + size : undefined,
+    });
 
-  return data;
+  return {
+    data: data?.pages.flat()[data.pages.length - 1] || [],
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  };
 };
