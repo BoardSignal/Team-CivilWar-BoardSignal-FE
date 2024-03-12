@@ -13,12 +13,12 @@ export const gatheringCreateSchema = object({
   title: string()
     .required(REQUIRED_ERROR_MESSAGE)
     .trim()
-    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
+    .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
     .max(50, `50${MAX_LENGTH_ERROR_MESSAGE}`),
   description: string()
     .required(REQUIRED_ERROR_MESSAGE)
     .trim()
-    .min(2, `${TRIM_ERROR_MESSAGE}2${MIN_LENGTH_ERROR_MESSAGE}`)
+    .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
     .max(500, `500${MAX_LENGTH_ERROR_MESSAGE}`),
   isArrowedSameGender: boolean().required(),
   headcount: array(number().required()).required().length(2),
