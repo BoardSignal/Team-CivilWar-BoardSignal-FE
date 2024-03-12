@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 
-import API_BASE_URL from '@/apis/core/constants';
+import { API_BASE_URL } from '@/constants/apiRoutes';
 import { ROOMS_FILTER_API_URL } from '@/constants/apiRoutes';
 
 export const MOCK_GET_GATHERING_LIST_URL = `${API_BASE_URL}${ROOMS_FILTER_API_URL}`;
