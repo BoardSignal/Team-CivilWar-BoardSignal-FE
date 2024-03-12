@@ -30,7 +30,7 @@ const GatheringCreatePage = () => {
   };
 
   return (
-    <div className='flex h-full flex-col'>
+    <>
       <Modal
         variant='primary'
         isOpen={isModalOpen}
@@ -40,13 +40,15 @@ const GatheringCreatePage = () => {
       >
         모임 생성을 완료했어요.
       </Modal>
-      <TabBar.Container>
-        <TabBar.Left>
-          <TabBar.GoBackButton />
-        </TabBar.Left>
-      </TabBar.Container>
-      <GatheringCreateForm onCreate={handleCreateGathering} />
-    </div>
+      <div className='flex h-full flex-col'>
+        <TabBar.Container>
+          <TabBar.Left>
+            <TabBar.GoBackButton />
+          </TabBar.Left>
+        </TabBar.Container>
+        <GatheringCreateForm onCreate={handleCreateGathering} />
+      </div>
+    </>
   );
 };
 
