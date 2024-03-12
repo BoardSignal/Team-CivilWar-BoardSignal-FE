@@ -18,7 +18,7 @@ firebase.initializeApp({
 // 백그라운드에서 메시지를 처리할 수 있도록 인스턴스를 생성하고 이벤트를 등록
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage(payload => {
-  const title = '보드시그널';
+  const title = payload.notification.title;
   const options = {
     body: payload.notification.body,
     icon: payload.notification.icon,
