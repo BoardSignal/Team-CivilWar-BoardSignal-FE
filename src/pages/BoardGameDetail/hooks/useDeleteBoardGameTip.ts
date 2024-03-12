@@ -1,11 +1,10 @@
 import { useDeleteBoardGameTipApi } from '@/apis/boardGameTip';
 
-export const useDeleteBoardGameTip = (tipId: number, boardGameID: string) => {
+export const useDeleteBoardGameTip = async (
+  tipId: number,
+  boardGameID: string,
+) => {
   const deleteBoardGameTipApi = useDeleteBoardGameTipApi(tipId, boardGameID);
 
-  return {
-    deleteBoardGameTip: async () => {
-      await deleteBoardGameTipApi();
-    },
-  };
+  return await deleteBoardGameTipApi();
 };

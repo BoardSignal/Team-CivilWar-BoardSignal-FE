@@ -10,3 +10,4 @@ export const SUCCESS_DELETE_GATHERING_MODAL_MESSAGE = '모임이 취소됐어요
 export const SUCCESS_FIX_GATHERING_MODAL_MESSAGE = '모임이 확정됐어요.';
 export const SUCCESS_UNFIX_GATHERING_MODAL_MESSAGE = '모임 확정이 취소됐어요.';
 export const SUCCESS_CREATE_TIP = '공략이 작성됐어요.';
+export const SUCCESS_DELETE_TIP = '공략을 삭제했어요.';
