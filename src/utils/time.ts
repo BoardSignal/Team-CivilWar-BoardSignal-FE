@@ -13,8 +13,13 @@ const MINUTES_PER_TIME_UNIT: MinutesPerTimeUnit[] = [
   { unit: 'minute', minutes: 1 },
 ];
 
-const getMinutesDifferenceFromNow = (time: string) =>
-  (new Date().getTime() - new Date(time).getTime()) / 60000;
+const getMinutesDifferenceFromNow = (time: string) => {
+  if (!new Date(time).getTime()) {
+    throw new Error('Invalid Date');
+  }
+
+  return (new Date().getTime() - new Date(time).getTime()) / 60000;
+};
 
 const getRelativeTime = (time: string) => {
   const minutesDifference = getMinutesDifferenceFromNow(time);
