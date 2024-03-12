@@ -1,39 +1,56 @@
 import { Controller, useForm } from 'react-hook-form';
 
+import Button from '@/components/Button';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import MultipleSelect from '@/components/MultipleSelect';
 import TextInput from '@/components/TextInput';
 import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
+import {
+  AGREE_MARKETING_MESSAGE,
+  AGREE_TERMS_MESSAGE,
+} from '@/constants/messages/boardSignal';
 
-import { signUpFormOptions } from './formSchema';
+import Agreement from './Agreement';
+import { registerFormOptions } from './formSchema';
+import registerRequestMapper, { RegisterFormValue } from './registerMapper';
+import useRegister from './useRegister';
 
-// export type OnSignUp = (gatheringId: number) => void;
+export type OnRegister = () => void;
 
-// interface SignUpFormProps {
-//   onCreate: OnSignUp;
-// }
+interface RegisterFormProps {
+  onRegister: OnRegister;
+}
 
-const SignUpForm = () => {
+const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const {
     register,
-    //handleSubmit,
-    formState: { errors },
+    handleSubmit,
+    formState: { errors, isValid },
     control,
-    //setValue,
-  } = useForm(signUpFormOptions);
+  } = useForm(registerFormOptions);
+
+  const registerUser = useRegister(onRegister);
+
+  const onSubmitResister = (data: RegisterFormValue) => {
+    const request = registerRequestMapper(data);
+    registerUser(request);
+  };
 
   return (
-    <form className='flex grow flex-col overflow-y-hidden'>
-      <div className='overflow-y-auto'>
+    <form
+      onSubmit={handleSubmit(onSubmitResister)}
+      className='flex grow flex-col overflow-y-hidden'
+    >
+      <div className='grow overflow-y-auto'>
         <Controller
           name='profileImageUrl'
           control={control}
           render={({ field }) => {
             const { onChange } = field;
 
-            return <ImageUpload variant='square' onChange={onChange} />;
+            return <ImageUpload variant='circle' onChange={onChange} />;
           }}
         />
         <section className='flex flex-col gap-4 p-4'>
@@ -82,8 +99,21 @@ const SignUpForm = () => {
           </Label>
         </section>
       </div>
+      <div className='flex flex-col gap-2 border-t border-gray-accent7 p-4'>
+        <div>
+          <Agreement {...register('isAgreeTerms')}>
+            {AGREE_TERMS_MESSAGE}
+          </Agreement>
+          <Agreement {...register('isAgreeMarketing')}>
+            {AGREE_MARKETING_MESSAGE}
+          </Agreement>
+        </div>
+        <Button type='submit' variant={isValid ? 'primary' : 'inactive'}>
+          가입하기
+        </Button>
+      </div>
     </form>
   );
 };
 
-export default SignUpForm;
+export default RegisterForm;

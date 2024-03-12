@@ -1,14 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { array, mixed, object, string } from 'yup';
+import { array, boolean, mixed, object, string } from 'yup';
 
 import {
+  AGREE_TERMS_ERROR_MESSAGE,
   MAX_LENGTH_ERROR_MESSAGE,
   MIN_LENGTH_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE,
   TRIM_ERROR_MESSAGE,
 } from '@/constants/messages/error';
 
-export const signUpSchema = object({
+export const registerSchema = object({
   profileImageUrl: mixed<File>().required(),
   nickname: string()
     .required(REQUIRED_ERROR_MESSAGE)
@@ -18,18 +19,22 @@ export const signUpSchema = object({
   subwayLine: string().defined(),
   subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
   categories: array(string().defined()).required(),
+  isAgreeTerms: boolean().required().oneOf([true], AGREE_TERMS_ERROR_MESSAGE),
+  isAgreeMarketing: boolean().defined(),
 });
 
-export const signUpDefaultValue = {
+export const registerDefaultValue = {
   profileImageUrl: new File([], ''),
   nickname: '',
-  subwayLine: '',
+  subwayLine: '2호선',
   subwayStation: '',
   categories: [],
+  isAgreeTerms: false,
+  isAgreeMarketing: false,
 };
 
-export const signUpFormOptions = {
+export const registerFormOptions = {
   mode: 'all',
-  defaultValues: signUpDefaultValue,
-  resolver: yupResolver(signUpSchema),
+  defaultValues: registerDefaultValue,
+  resolver: yupResolver(registerSchema),
 } as const;

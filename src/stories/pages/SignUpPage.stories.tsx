@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import authMocks from '@/mocks/auth';
-import SignUpPage from '@/pages/SignUp';
+import RegisterPage from '@/pages/Register';
 import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
-const meta: Meta<typeof SignUpPage> = {
-  title: 'pages/SignUpPage',
+const meta: Meta<typeof RegisterPage> = {
+  title: 'pages/RegisterPage',
   tags: ['autodocs'],
   decorators: [CommonPageLayoutDecorator],
   parameters: {
@@ -13,11 +13,11 @@ const meta: Meta<typeof SignUpPage> = {
       handlers: [...authMocks],
     },
   },
-  component: SignUpPage,
+  component: RegisterPage,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof SignUpPage>;
+type Story = StoryObj<typeof RegisterPage>;
 
 export const DefaultTemplate: Story = {};

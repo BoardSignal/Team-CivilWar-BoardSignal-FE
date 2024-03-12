@@ -8,6 +8,7 @@ import {
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
+  REGISTER_PAGE_URL,
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
@@ -17,6 +18,7 @@ import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
 import ProfilePage from './pages/Profile';
 import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
+import RegisterPage from './pages/Register';
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +70,7 @@ export const router = createBrowserRouter([
         path: '/redirect',
         element: <RedirectOnAuthentication />,
       },
+      { path: REGISTER_PAGE_URL, element: <RegisterPage /> },
     ],
   },
 ]);
