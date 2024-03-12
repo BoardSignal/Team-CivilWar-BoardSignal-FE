@@ -1,24 +1,19 @@
 import { useState } from 'react';
 
 import TextInputWithIcon from '../TextInputWithIcon';
-import LocationListModal from './LocationListModal';
+import SubwayListModal from './SubwayListModal';
 
-interface LocationSelectProps {
+interface SubwaySelectProps {
   value: string;
   onChange: (value: string) => void;
 }
 
-/**
- * 장소를 검색해서 선택할 수 있는 Select에요.
- *
- * 카카오맵 API를 활용해서 검색 결과 목록을 제공해요.
- */
-const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
+const SubwaySelect = ({ value, onChange }: SubwaySelectProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleLocationSelect = (locationName: string) => {
+  const handleSubwaySelect = (locationName: string) => {
     setIsModalOpen(false);
     onChange(locationName);
   };
@@ -26,19 +21,16 @@ const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
   return (
     <>
       <TextInputWithIcon
-        iconId='map-pin-fill'
+        iconId='ri-subway-fill'
         readOnly
         value={value}
         onClick={openModal}
       />
       {isModalOpen && (
-        <LocationListModal
-          onClose={closeModal}
-          onSelect={handleLocationSelect}
-        />
+        <SubwayListModal onClose={closeModal} onSelect={handleSubwaySelect} />
       )}
     </>
   );
 };
 
-export default LocationSelect;
+export default SubwaySelect;
