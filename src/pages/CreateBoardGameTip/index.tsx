@@ -21,6 +21,10 @@ const CreateBoardGameTipPage = () => {
     navigate(`${BOARD_GAMES_PAGE_URL}/${boardGameId}`);
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <div className='flex h-full flex-col'>
       <Modal
@@ -39,7 +43,7 @@ const CreateBoardGameTipPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <BoardGameCreateTipForm
-        onCreate={() => setIsModalOpen(true)}
+        onCreate={handleOpenModal}
         boardGameId={boardGameId}
       />
     </div>
