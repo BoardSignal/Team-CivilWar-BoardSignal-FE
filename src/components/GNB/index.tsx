@@ -8,7 +8,7 @@ export const GNB = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className='flex select-none border-t border-gray-200'>
+    <div className='flex select-none border-t border-gray-accent7'>
       {GNBRoutes.map(({ name, path, icon }) => (
         <Link to={path} key={path} className='flex-1'>
           <Button className='flex h-fit flex-col items-center gap-0.5 pb-2 pt-4'>

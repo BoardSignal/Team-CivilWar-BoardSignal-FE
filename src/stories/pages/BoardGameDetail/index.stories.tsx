@@ -3,11 +3,13 @@ import { reactRouterParameters } from 'storybook-addon-react-router-v6';
 
 import boardGameDetailMocks from '@/mocks/boardGameDetail';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
+import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
 const meta: Meta<typeof BoardGameDetailPage> = {
   title: 'pages/BoardGameDetail/page',
   tags: ['autodocs'],
   component: BoardGameDetailPage,
+  decorators: [CommonPageLayoutDecorator],
   parameters: {
     msw: {
       handlers: [...boardGameDetailMocks],

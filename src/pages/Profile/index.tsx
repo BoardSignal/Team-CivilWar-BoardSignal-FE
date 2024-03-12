@@ -14,7 +14,11 @@ import WishGameButton from './components/WishGameButton';
 import { useLogout } from './hooks/useLogout';
 
 const MyProfilePage = () => {
-  const { userId } = useParams() as { userId: string };
+  const { userId } = useParams();
+  if (!userId) {
+    throw new Error('invalid userId');
+  }
+
   const { data, isPending, isError } = useGetUserProfilesApi(userId);
   const { logoutApi } = useLogout();
 

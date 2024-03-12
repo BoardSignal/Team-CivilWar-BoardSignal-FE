@@ -4,11 +4,11 @@ import { SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE } from '@/constants/messages/boardSi
 import { cn } from '@/utils/cn';
 import getColorByTemperature from '@/utils/getColorByTemperature';
 
-interface UserTemperatureProps {
+interface UserSignalTemperatureProps {
   temperature: number;
 }
 
-const UserSignalTemperature = ({ temperature }: UserTemperatureProps) => {
+const UserSignalTemperature = ({ temperature }: UserSignalTemperatureProps) => {
   const { text, background } = getColorByTemperature(temperature);
 
   return (
