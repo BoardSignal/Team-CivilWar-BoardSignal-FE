@@ -6,13 +6,14 @@ import axios, {
 
 import { API_BASE_URL, AUTH_REISSUE_API_URL } from '@/constants/apiRoutes';
 import { TOKEN_EXPIRED_MESSAGE } from '@/constants/messages/error';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 interface ReissueResponse {
   accessToken: string;
 }
 
 export const attachAccessToken = (config: InternalAxiosRequestConfig) => {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
   if (accessToken && config.headers) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   }
@@ -32,7 +33,7 @@ export const refreshExpiredToken = async (error: unknown) => {
         withCredentials: true,
       },
     );
-    localStorage.setItem('accessToken', data.accessToken);
+    localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, data.accessToken);
 
     const newAxiosConfig = {
       ...error.config,
