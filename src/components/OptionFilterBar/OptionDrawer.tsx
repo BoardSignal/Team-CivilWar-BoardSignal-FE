@@ -13,7 +13,7 @@ interface OptionDrawerProps {
 }
 
 const OptionDrawer = ({ option }: OptionDrawerProps) => {
-  const { name, items, queryStringKey } = option;
+  const { name, items, queryStringKey, selectLimit } = option;
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [newSelectedItems, setNewSelectedItems] = useState([
@@ -47,6 +47,7 @@ const OptionDrawer = ({ option }: OptionDrawerProps) => {
         <MultipleSelect
           optionItems={items}
           selectedItems={newSelectedItems}
+          limit={selectLimit}
           onChange={updatedItems => {
             setNewSelectedItems([...updatedItems]);
           }}

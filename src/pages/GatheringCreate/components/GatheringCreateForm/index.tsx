@@ -14,7 +14,10 @@ import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
-import { AGE_RANGE_ALERT_MESSAGE } from '@/constants/messages/alert';
+import {
+  AGE_RANGE_ALERT_MESSAGE,
+  CATEGORY_SELECT_ALERT_MESSAGE,
+} from '@/constants/messages/alert';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 import { TIMES } from '@/constants/options';
 
@@ -173,11 +176,13 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                   <MultipleSelect
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
+                    limit={3}
                     onChange={onChange}
                   />
                 );
               }}
             />
+            <Alert>{CATEGORY_SELECT_ALERT_MESSAGE}</Alert>
           </Label>
         </section>
       </div>

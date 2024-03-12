@@ -15,6 +15,7 @@ export interface Option {
   icon: string;
   items: string[];
   queryStringKey: string;
+  selectLimit?: number;
 }
 
 interface OptionFilterBarProps {

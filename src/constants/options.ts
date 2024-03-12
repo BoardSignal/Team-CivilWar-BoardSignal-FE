@@ -17,6 +17,7 @@ export const OPTIONS = [
     icon: 'map-pin',
     items: ['강남역', '합정역', '신당역'],
     queryStringKey: 'station',
+    selectLimit: 3,
   },
   {
     name: '시간',
@@ -35,5 +36,6 @@ export const OPTIONS = [
     icon: 'team',
     items: ['남성', '여성'],
     queryStringKey: 'gender',
+    selectLimit: 1,
   },
 ];
