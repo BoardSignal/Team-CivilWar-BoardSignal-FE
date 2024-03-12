@@ -1,11 +1,12 @@
+import { STORAGE_KEY_THEME } from '@/constants/storageKeys';
+
 const systemDarkCSS = '(prefers-color-scheme: dark)';
 
 const isDarkTheme = () => {
   const isSystemDark = matchMedia(systemDarkCSS).matches;
-  const isConfigWhite = localStorage.getItem('theme') === 'light';
-  const isConfigDark = localStorage.getItem('theme') === 'dark';
+  const theme = localStorage.getItem(STORAGE_KEY_THEME);
 
-  return isConfigDark || (!isConfigWhite && isSystemDark);
+  return (!theme && isSystemDark) || theme === 'dark';
 };
 
 /**
