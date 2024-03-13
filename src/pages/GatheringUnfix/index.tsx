@@ -63,7 +63,10 @@ const GatheringUnfixPage = () => {
       <div className='px-4'>
         <Alert variant='danger'>{UNFIX_GATHERING_ALERT_MESSAGE}</Alert>
       </div>
-      <GatheringUnfixForm gatheringId={gatheringId} onUnfix={handleOpenModal} />
+      <GatheringUnfixForm
+        gatheringId={gatheringId as string}
+        onUnfix={handleOpenModal}
+      />
     </div>
   );
 };
