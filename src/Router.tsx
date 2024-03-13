@@ -1,99 +1,79 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import AuthorizedRoute from './components/AuthorizedRoute';
-import ResponsiveLayoutWrapper from './components/Layout';
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_PAGE_URL,
-  GATHERINGS_UNFIX_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
-  REGISTER_PAGE_URL,
-  USERS_EDIT_PAGE_URL,
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
-import CreateBoardGameTipPage from './pages/CreateBoardGameTip';
 import GatheringCreatePage from './pages/GatheringCreate';
-import GatheringUnfixPage from './pages/GatheringUnfix';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
 import ProfilePage from './pages/Profile';
-import ProfileEdit from './pages/ProfileEdit';
 import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
-import RegisterPage from './pages/Register';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <ResponsiveLayoutWrapper />,
-    children: [
-      {
-        path: '',
-        element: <HomePage />,
-      },
-      {
-        path: LOGIN_PAGE_URL,
-        element: <LoginPage />,
-      },
-      {
-        path: CHATS_PAGE_URL,
-        element: <HomePage />,
-      },
-      {
-        path: BOARD_GAMES_PAGE_URL,
-        element: <HomePage />,
-      },
-      {
-        path: `${BOARD_GAMES_PAGE_URL}/:boardGameId`,
-        element: <BoardGameDetailPage />,
-      },
-      {
-        path: NOTIFICATIONS_PAGE_URL,
-        element: (
+/**
+ * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
+ */
+const Router = () => {
+  // TODO: 동작 방식에 대한 설명 추가하기
+  const location = useLocation();
+
+  return (
+    <Routes location={location}>
+      <Route path='' element={<HomePage />} />
+      <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
+      <Route path={CHATS_PAGE_URL} element={<HomePage />} />
+      <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
+      <Route
+        path={`${BOARD_GAMES_PAGE_URL}/:boardGameId`}
+        element={<BoardGameDetailPage />}
+      />
+      <Route
+        path={NOTIFICATIONS_PAGE_URL}
+        element={
           <AuthorizedRoute>
             <NotificationListPage />
           </AuthorizedRoute>
-        ),
-      },
-      {
-        path: `${USERS_PAGE_URL}/:userId`,
-        element: (
+        }
+      />
+      <Route
+        path={`${USERS_PAGE_URL}/me`}
+        element={
           <AuthorizedRoute>
             <ProfilePage />
           </AuthorizedRoute>
-        ),
-      },
-      {
-        path: GATHERINGS_CREATE_PAGE_URL,
-        element: (
+        }
+      />
+      <Route
+        path={`${USERS_PAGE_URL}/:userId`}
+        element={
+          <AuthorizedRoute>
+            <ProfilePage />
+          </AuthorizedRoute>
+        }
+      />
+      <Route
+        path={GATHERINGS_CREATE_PAGE_URL}
+        element={
           <AuthorizedRoute>
             <GatheringCreatePage />
           </AuthorizedRoute>
-        ),
-      },
-      {
-        path: `${GATHERINGS_PAGE_URL}/:gatheringId`,
-        element: <HomePage />,
-      },
-      {
-        path: `${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`,
-        element: <GatheringUnfixPage />,
-      },
-      {
-        // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
-        path: '/redirect',
-        element: <RedirectOnAuthentication />,
-      },
-      { path: REGISTER_PAGE_URL, element: <RegisterPage /> },
-      { path: USERS_EDIT_PAGE_URL, element: <ProfileEdit /> },
-      {
-        path: 'board-games/tip/create/:boardGameId/:boardGameTitle',
-        element: <CreateBoardGameTipPage />,
-      },
-    ],
-  },
-]);
+        }
+      />
+      <Route
+        path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
+        element={<HomePage />}
+      />
+      <Route path='/redirect' element={<RedirectOnAuthentication />} />
+    </Routes>
+  );
+};
+
+export default Router;

@@ -1,16 +1,23 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
+import AnimatedRoutes from '@/components/AnimatedRoutes';
+import ResponsiveLayoutWrapper from '@/components/Layout';
 
 import { ReactQueryClientProvider } from './ReactQueryClientProvider';
-import { router } from './Router';
+import Router from './Router';
 
-const App = () => {
-  return (
-    <ReactQueryClientProvider>
-      <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </ReactQueryClientProvider>
-  );
-};
+const App = () => (
+  <ReactQueryClientProvider>
+    <BrowserRouter>
+      <ResponsiveLayoutWrapper>
+        <AnimatedRoutes>
+          <Router />
+        </AnimatedRoutes>
+      </ResponsiveLayoutWrapper>
+    </BrowserRouter>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </ReactQueryClientProvider>
+);
 
 export default App;

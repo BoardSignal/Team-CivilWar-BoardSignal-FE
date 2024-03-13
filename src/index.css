@@ -180,3 +180,21 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .backdrop {
   @apply bg-gray-accent1 dark:bg-gray-accent7;
 }
+
+.fade-page-transition-enter {
+  opacity: 0;
+}
+
+.fade-page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
+
+.fade-page-transition-exit {
+  opacity: 1;
+}
+
+.fade-page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
