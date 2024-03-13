@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
+import { SUCCESS_GATHERING_CREATE_MODAL_MESSAGE } from '@/constants/messages/modal';
 
 import GatheringCreateForm from './components/GatheringCreateForm';
 
@@ -38,7 +39,7 @@ const GatheringCreatePage = () => {
         title='안내'
         buttonChildren='확인'
       >
-        모임 생성을 완료했어요.
+        {SUCCESS_GATHERING_CREATE_MODAL_MESSAGE}
       </Modal>
       <TabBar.Container>
         <TabBar.Left>

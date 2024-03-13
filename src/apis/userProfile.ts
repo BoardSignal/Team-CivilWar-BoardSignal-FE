@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { USERS_API_URL } from '@/constants/apiRoutes';
+import { PROFILES_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -30,5 +31,5 @@ const getUserProfile = (userId: string) =>
 export const useGetUserProfilesApi = (userId: string) =>
   useQuery({
     queryFn: () => getUserProfile(userId),
-    queryKey: ['profiles', userId],
+    queryKey: [PROFILES_QUERY_KEY, userId],
   });
