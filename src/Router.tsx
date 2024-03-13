@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
         path: '/redirect',
         element: <RedirectOnAuthentication />,
       },
-      { path: `${USERS_EDIT_PAGE_URL}/:userId`, element: <ProfileEdit /> },
+      { path: USERS_EDIT_PAGE_URL, element: <ProfileEdit /> },
     ],
   },
 ]);
