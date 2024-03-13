@@ -26,7 +26,7 @@ interface GuideItemProps {
 
 const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   <div className='flex gap-2'>
-    <div className='flex w-[70px] gap-0.5'>
+    <div className='flex w-[75px] gap-0.5'>
       <Icon id={iconId} size={12}></Icon>
       <span className='ml-1 w-20 text-[10px] font-bold'>{label}</span>
     </div>

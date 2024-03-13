@@ -26,7 +26,8 @@ const GATHERING_INTRO_DUMMY_DATA = {
     minAge: 28,
   },
   title: '정령섬 심화 격주로 하실 1~2분',
-  description: '예전보다 소개팅도 줄어들고~',
+  description:
+    '두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.',
   isLeader: false,
   imageUrl: DEFAULT_IMAGE_URL,
 };
@@ -50,13 +51,13 @@ const GatheringIntroduce = ({ imageUrl }: GatheringIntroduceProps) => {
         </TabBar.Right>
       </TabBar.Container>
 
-      <div>
+      <div className='flex grow flex-col overflow-y-hidden'>
         <TabMenu
           tabs={['모임 소개', '참가자 ()']}
           onSelectTab={handleTabSelect}
         />
         {activeTab === 0 && (
-          <div className='overflow-y-auto'>
+          <div className='grow overflow-y-auto'>
             {imageUrl && (
               <img
                 src={imageUrl}
