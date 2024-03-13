@@ -5,6 +5,7 @@ import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
+  GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
@@ -12,6 +13,7 @@ import {
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
 import GatheringCreatePage from './pages/GatheringCreate';
+import GatheringFixPage from './pages/GatheringFix';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
@@ -62,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: `${GATHERINGS_PAGE_URL}/:gatheringId`,
         element: <HomePage />,
+      },
+      {
+        path: `${GATHERINGS_FIX_PAGE_URL}/:gatheringId`,
+        element: <GatheringFixPage />,
       },
       {
         // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
