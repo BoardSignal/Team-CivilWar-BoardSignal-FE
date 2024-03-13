@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { array, boolean, mixed, object, string } from 'yup';
 
 import {
-  AGREE_TERMS_ERROR_MESSAGE,
   MAX_LENGTH_ERROR_MESSAGE,
   MIN_LENGTH_ERROR_MESSAGE,
   REQUIRED_ERROR_MESSAGE,
@@ -19,7 +18,7 @@ export const registerSchema = object({
   subwayLine: string().defined(),
   subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
   categories: array(string().defined()).required(),
-  isAgreeTerms: boolean().required().oneOf([true], AGREE_TERMS_ERROR_MESSAGE),
+  isAgreeTerms: boolean().required(),
   isAgreeMarketing: boolean().defined(),
 });
 

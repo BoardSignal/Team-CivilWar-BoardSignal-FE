@@ -3,7 +3,6 @@ export const REQUIRED_ERROR_MESSAGE = '필수 입력 항목이에요.';
 export const MIN_LENGTH_ERROR_MESSAGE = '자 이상 입력해야 해요.';
 export const TRIM_ERROR_MESSAGE = '앞뒤 공백 제외';
 export const MAX_LENGTH_ERROR_MESSAGE = '자까지 입력할 수 있어요.';
-export const AGREE_TERMS_ERROR_MESSAGE = '필수 동의 항목이에요.';
 
 // Error Alert Full Screen Message
 export const DEFAULT_ERROR_TITLE = '잠시 후 다시 시도해주세요 :(';
