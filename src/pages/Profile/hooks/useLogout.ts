@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import { useLogoutApi } from '@/apis/logout';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 export const useLogout = () => {
   const api = useLogoutApi();
@@ -9,7 +10,7 @@ export const useLogout = () => {
   return {
     logoutApi: async () => {
       await api();
-      localStorage.removeItem('accessToken');
+      localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN);
       navigate('/');
     },
   };

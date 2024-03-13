@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Notification } from '@/apis/notifications';
 import NotificationReviewThumbnail from '@/assets/notification-thumbnail-review.png';
 import Button from '@/components/Button';
+import { getRelativeTimeWithin } from '@/utils/time';
 
 const NotificationListItem = ({
   thumbnailUrl = NotificationReviewThumbnail,
@@ -23,7 +24,9 @@ const NotificationListItem = ({
       <div className='flex grow flex-col gap-1'>
         <div className='flex items-center justify-between'>
           <span className='text-sm text-gray-accent2'>{type}</span>
-          <span className='text-xs text-gray-accent3'>{createdAt}</span>
+          <span className='text-xs text-gray-accent3'>
+            {getRelativeTimeWithin(createdAt)}
+          </span>
         </div>
         <div className='text-gray-accent1'>{message}</div>
       </div>

@@ -14,3 +14,8 @@ export const ERROR_TOAST_MESSAGE_ON_SERVER_ERROR =
 
 //Error Token Expired
 export const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
+
+// Error Not LoggedIn User
+
+export const NOT_LOGGED_IN_USER_MESSAGE = '로그인이 필요한 서비스입니다.';
+export const NOT_SIGN_UP_USER_MESSAGE = '회원가입이 필요한 서비스입니다.';

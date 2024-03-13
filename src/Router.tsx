@@ -1,18 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import AuthorizedRoute from './components/AuthorizedRoute';
 import ResponsiveLayoutWrapper from './components/Layout';
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_PAGE_URL,
+  GATHERINGS_UNFIX_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
   REGISTER_PAGE_URL,
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
+import CreateBoardGameTipPage from './pages/CreateBoardGameTip';
 import GatheringCreatePage from './pages/GatheringCreate';
+import GatheringUnfixPage from './pages/GatheringUnfix';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
@@ -47,23 +51,35 @@ export const router = createBrowserRouter([
       },
       {
         path: NOTIFICATIONS_PAGE_URL,
-        element: <NotificationListPage />,
-      },
-      {
-        path: `${USERS_PAGE_URL}/me`,
-        element: <ProfilePage />,
+        element: (
+          <AuthorizedRoute>
+            <NotificationListPage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: `${USERS_PAGE_URL}/:userId`,
-        element: <ProfilePage />,
+        element: (
+          <AuthorizedRoute>
+            <ProfilePage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: GATHERINGS_CREATE_PAGE_URL,
-        element: <GatheringCreatePage />,
+        element: (
+          <AuthorizedRoute>
+            <GatheringCreatePage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: `${GATHERINGS_PAGE_URL}/:gatheringId`,
         element: <HomePage />,
+      },
+      {
+        path: `${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`,
+        element: <GatheringUnfixPage />,
       },
       {
         // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
@@ -71,6 +87,11 @@ export const router = createBrowserRouter([
         element: <RedirectOnAuthentication />,
       },
       { path: REGISTER_PAGE_URL, element: <RegisterPage /> },
+
+      {
+        path: 'board-games/tip/create/:boardGameId/:boardGameTitle',
+        element: <CreateBoardGameTipPage />,
+      },
     ],
   },
 ]);
