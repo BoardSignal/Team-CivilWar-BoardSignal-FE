@@ -1,5 +1,5 @@
 import { GNB } from '@/components/GNB';
-import usePostFCMToken from '@/hooks/usePostFCMToken';
+import usePostFCMToken from '@/hooks/useInitializeFCM';
 
 export const HomePage = () => {
   usePostFCMToken();

@@ -25,29 +25,34 @@ const firebaseConfig = {
 };
 
 const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
-const IS_LOGGED_IN = localStorage.getItem('accessToken');
+const isLoggedIn = localStorage.getItem('accessToken');
 
-const firebaseInitialized = firebase.apps.length
-  ? firebase.app()
-  : firebase.initializeApp(firebaseConfig);
+const firebaseInitialized = () => {
+  firebase.apps.length
+    ? firebase.app()
+    : firebase.initializeApp(firebaseConfig);
+};
 
 const usePostFCMToken = () => {
   const postFCMTokenApi = usePostFCMTokenApi();
 
   useEffect(() => {
-    firebaseInitialized;
+    if (!isLoggedIn) {
+      return;
+    }
+
+    const updateFCMToken = (issuedFCMToken: string) => {
+      const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
+      if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
+        postFCMTokenApi({ token: issuedFCMToken });
+        localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
+      }
+    };
+
+    firebaseInitialized();
 
     const messaging = firebase.messaging();
-
-    IS_LOGGED_IN &&
-      messaging.getToken({ vapidKey: VAPID_KEY }).then(issuedFCMToken => {
-        const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
-        if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
-          postFCMTokenApi({ token: issuedFCMToken });
-          localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
-        }
-      });
-
+    messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
     const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
       const title = payload.notification.title;
       const options = {
