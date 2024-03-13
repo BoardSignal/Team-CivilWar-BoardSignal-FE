@@ -57,4 +57,5 @@ export type IconName =
   | 'close-line'
   | 'logout-line'
   | 'delete-bin-line'
-  | 'ri-subway-fill';
+  | 'ri-subway-fill'
+  | 'calendar-line';
