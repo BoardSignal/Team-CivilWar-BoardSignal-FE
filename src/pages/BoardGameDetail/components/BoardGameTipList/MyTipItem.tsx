@@ -6,46 +6,51 @@ import type { Tip } from '@/apis/boardGameDetail';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
-import { SUCCESS_DELETE_TIP } from '@/constants/messages/modal';
+import { DELETE_TIP_MODAL_MESSAGE } from '@/constants/messages/modal';
 
 import { useDeleteBoardGameTip } from '../../hooks/useDeleteBoardGameTip';
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
-const MyTipItem = ({ tip }: { tip: Tip }) => {
-  const { boardGameId } = useParams();
+const MyTipItem = ({
+  tip,
+  onOpenModal,
+}: {
+  tip: Tip;
+  onOpenModal: () => void;
+  onCloseModal: () => void;
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!boardGameId) {
-    throw new Error('boardGameId is required');
-  }
+  const { boardGameId } = useParams() as { boardGameId: string };
   const { nickname, profileImageUrl, createdAt, content, likeCount, tipId } =
     tip;
-  const deleteBoardGameTip = useDeleteBoardGameTip(tipId, boardGameId);
 
-  const handleDeleteBoardGameTip = async () => {
-    handleOpenModal();
-    deleteBoardGameTip;
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+  const deleteBoardGameTip = useDeleteBoardGameTip(
+    tipId,
+    boardGameId,
+    onOpenModal,
+  );
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    deleteBoardGameTip();
+  };
+
   return (
     <>
       <Modal
-        variant='primary'
+        variant='danger'
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         title='안내'
         buttonChildren='확인'
       >
-        {SUCCESS_DELETE_TIP}
+        {DELETE_TIP_MODAL_MESSAGE}
       </Modal>
       <div className='flex gap-2 border-b border-gray-accent7 p-4'>
         <img
@@ -67,7 +72,7 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
             <Icon
               id='delete-bin-line'
               className='cursor-pointer text-gray-accent3'
-              onClick={handleDeleteBoardGameTip}
+              onClick={handleOpenModal}
             />
           </div>
         </div>

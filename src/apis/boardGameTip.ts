@@ -23,7 +23,7 @@ export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
 
 const deleteBoardGameTip = (tipId: number) =>
   api.delete({
-    url: `board-games/${tipId}`,
+    url: `${BOARD_GAMES_TIP_API_URL}/${tipId}`,
   });
 
 export const usePostBoardGameTipApi = () => {
