@@ -13,7 +13,7 @@ import {
   TRIM_ERROR_MESSAGE,
 } from '@/constants/messages/error';
 
-import useCreateBoardGameTip from '../../hooks/useCreateBoardGameTip';
+import useCreateBoardGameTip from './useCreateBoardGameTip';
 
 export type OnBoardGameTipCreate = () => void;
 
@@ -22,19 +22,19 @@ interface BoardGameTipCreateFormProps {
   boardGameId: string;
 }
 
+const createBoardGameTipSchema = object({
+  content: string()
+    .required(REQUIRED_ERROR_MESSAGE)
+    .trim()
+    .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
+    .max(500, `50${MAX_LENGTH_ERROR_MESSAGE}`),
+});
+
 const CreateBoardGameTipForm = ({
   onCreate,
   boardGameId,
 }: BoardGameTipCreateFormProps) => {
   const createBoardGameTip = useCreateBoardGameTip(onCreate, boardGameId);
-
-  const createBoardGameTipSchema = object({
-    content: string()
-      .required(REQUIRED_ERROR_MESSAGE)
-      .trim()
-      .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
-      .max(500, `50${MAX_LENGTH_ERROR_MESSAGE}`),
-  });
 
   const {
     register,

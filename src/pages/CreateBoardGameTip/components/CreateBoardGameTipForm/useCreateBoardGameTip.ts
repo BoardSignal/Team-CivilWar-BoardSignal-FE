@@ -1,7 +1,7 @@
 import { usePostBoardGameTipApi } from '@/apis/boardGameTip';
 import { showErrorToast } from '@/utils/showToast';
 
-import type { OnBoardGameTipCreate } from '../components/CreateBoardGameTipForm';
+import type { OnBoardGameTipCreate } from '.';
 
 const useCreateBoardGameTip = (
   onCreate: OnBoardGameTipCreate,
