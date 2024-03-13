@@ -50,11 +50,11 @@ export const useGetGatheringListApi = ({
   ...restParams
 }: GetGatheringListParams) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useSuspenseInfiniteQuery<GatheringListResponse>({
+    useSuspenseInfiniteQuery({
       queryKey: ['gatherings', restParams],
       queryFn: ({ pageParam = size }) =>
         getGatheringList({
-          size: pageParam as number,
+          size: pageParam,
           ...restParams,
         }),
       initialPageParam: size,
@@ -63,7 +63,7 @@ export const useGetGatheringListApi = ({
     });
 
   return {
-    data: data?.pages.flat()[data.pages.length - 1] || [],
+    data: data.pages.flat()[data.pages.length - 1] || [],
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

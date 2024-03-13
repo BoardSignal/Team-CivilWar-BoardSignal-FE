@@ -7,13 +7,13 @@ import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 const meta: Meta<typeof GatheringListPage> = {
   title: 'pages/GatheringListPage',
   tags: ['autodocs'],
+  component: GatheringListPage,
   decorators: [CommonPageLayoutDecorator],
   parameters: {
     msw: {
       handlers: [...gatheringListMocks],
     },
   },
-  component: GatheringListPage,
 };
 
 export default meta;

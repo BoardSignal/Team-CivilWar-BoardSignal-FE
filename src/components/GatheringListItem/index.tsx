@@ -4,6 +4,7 @@ import type { Gathering } from '@/apis/getGatheringList';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 import { getRelativeTime } from '@/utils/time';
 
 interface GatheringListItemProps {
@@ -41,7 +42,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
   const categoriesText = categories.join(' · ');
 
   return (
-    <Link to={`/gatherings/${gatheringId}`}>
+    <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}`}>
       <Button className='h-fit gap-4 border-b border-gray-accent7 p-4'>
         <img
           src={imageUrl || defaultThumbnailImage}
