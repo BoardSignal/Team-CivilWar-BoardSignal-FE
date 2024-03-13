@@ -8,7 +8,7 @@ export const MAX_LENGTH_ERROR_MESSAGE = '자까지 입력할 수 있어요.';
 // 알 수 없는 오류 시의 안내 메시지
 export const DEFAULT_ERROR_TITLE = '일시적인 오류가 발생했어요';
 export const DEFAULT_ERROR_MESSAGE =
-  '다시 시도해보세요. 계속 발생한다면 메인 페이지로 이동해주세요.';
+  '요청을 처리할 수 없었어요. 다시 시도해주세요.';
 
 // Not Found 시의 안내 메시지
 export const NOT_FOUND_ERROR_TITLE = '존재하지 않는 페이지에요';
