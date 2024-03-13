@@ -10,6 +10,7 @@ import {
   GATHERINGS_UNFIX_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
+  USERS_EDIT_PAGE_URL,
   USERS_PAGE_URL,
 } from './constants/pageRoutes';
 import BoardGameDetailPage from './pages/BoardGameDetail';
@@ -20,6 +21,7 @@ import { HomePage } from './pages/HomePage';
 import LoginPage from './pages/Login';
 import NotificationListPage from './pages/NotificationList';
 import ProfilePage from './pages/Profile';
+import ProfileEdit from './pages/ProfileEdit';
 import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
 
 export const router = createBrowserRouter([
@@ -84,6 +86,7 @@ export const router = createBrowserRouter([
         path: '/redirect',
         element: <RedirectOnAuthentication />,
       },
+      { path: USERS_EDIT_PAGE_URL, element: <ProfileEdit /> },
       {
         path: 'board-games/tip/create/:boardGameId/:boardGameTitle',
         element: <CreateBoardGameTipPage />,
