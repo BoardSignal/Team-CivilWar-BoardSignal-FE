@@ -41,12 +41,17 @@ const MyTipItem = ({
     deleteBoardGameTip();
   };
 
+  const handleDeleteModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Modal
         variant='danger'
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={handleDeleteModal}
+        onDelete={handleCloseModal}
         title='안내'
         buttonChildren='확인'
       >
