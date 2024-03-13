@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { ROOMS_API_URL } from '@/constants/apiRoutes';
+import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -41,7 +42,7 @@ const getGatheringDetail = (gatheringId: string) =>
 
 export const useGetGatheringDetailApi = (gatheringId: string) => {
   const { data } = useSuspenseQuery({
-    queryKey: ['gathering-detail', gatheringId],
+    queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
     queryFn: () => getGatheringDetail(gatheringId),
   });
 

@@ -6,6 +6,7 @@ import {
   KakaoMapSearchResult,
 } from '@/apis/types/KakaoMapSearch';
 import '@/apis/types/KakaoMapSearch.d.ts';
+import { KAKAO_MAP_SEARCH_SCRIPT_QUERY_KEY } from '@/constants/queryKey';
 
 const KAKAO_MAP_ACCESS_KEY =
   import.meta.env.STORYBOOK_KAKAO_MAP_ACCESS_KEY ||
@@ -82,7 +83,7 @@ export const getKakaoMapSearchScript = (accessKey: string) =>
  */
 export const useGetKakaoMapScript = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['kakao-map-search-script'],
+    queryKey: [KAKAO_MAP_SEARCH_SCRIPT_QUERY_KEY],
     queryFn: () => getKakaoMapSearchScript(KAKAO_MAP_ACCESS_KEY),
     staleTime: Infinity,
     gcTime: Infinity,

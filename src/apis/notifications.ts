@@ -1,6 +1,7 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { NOTIFICATIONS_API_URL } from '@/constants/apiRoutes';
+import { NOTIFICATIONS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -22,7 +23,7 @@ const getNotifications = () =>
 export const useGetNotificationsApi = () => {
   const { data } = useSuspenseQuery({
     queryFn: getNotifications,
-    queryKey: ['notifications'],
+    queryKey: [NOTIFICATIONS_QUERY_KEY],
     staleTime: 0,
     gcTime: 0,
   });

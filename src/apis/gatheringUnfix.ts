@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { ROOMS_UNFIX_API_URL } from '@/constants/apiRoutes';
+import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -25,7 +26,7 @@ export const useDeleteGatheringUnfixApi = (gatheringId: string) => {
     mutationFn: deletetGatheringUnfix,
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['gathering-detail', gatheringId],
+        queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
       }),
   });
 
