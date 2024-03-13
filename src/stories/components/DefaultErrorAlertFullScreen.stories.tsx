@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import ErrorAlertFullScreen from '@/components/ErrorAlertFullScreen';
+import DefaultErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/DefaultErrorAlertFullScreen';
 
 import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
 
-const meta: Meta<typeof ErrorAlertFullScreen> = {
-  title: 'components/ErrorAlertFullScreen',
+const meta: Meta<typeof DefaultErrorAlertFullScreen> = {
+  title: 'components/DefaultErrorAlertFullScreen',
   tags: ['autodocs'],
-  component: ErrorAlertFullScreen,
+  component: DefaultErrorAlertFullScreen,
   decorators: [CommonPageLayoutDecorator],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof ErrorAlertFullScreen>;
+type Story = StoryObj<typeof DefaultErrorAlertFullScreen>;
 
 export const Default: Story = {
   name: '기본',
