@@ -5,7 +5,7 @@ import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
 const textareaCSS = cva(
-  'h-[180px] w-full resize-none appearance-none overscroll-contain rounded-lg border border-gray-accent7 p-4 text-gray-accent1 outline-none',
+  'h-[180px] w-full resize-none appearance-none overscroll-contain rounded-lg border border-gray-accent7 bg-transparent p-4 text-gray-accent1 outline-none',
   {
     variants: {
       variant: {

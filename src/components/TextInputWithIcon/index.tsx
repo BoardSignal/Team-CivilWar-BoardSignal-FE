@@ -23,7 +23,7 @@ const TextInputWithIcon = ({ iconId, value, ...props }: TextInputProps) => {
       />
       <input
         className={cn(
-          'w-full rounded-lg border border-gray-accent7 p-4 pl-[44px] text-gray-accent2 placeholder-gray-accent4 focus:outline-gray-accent2',
+          'w-full rounded-lg border border-gray-accent7 bg-transparent p-4 pl-[44px] text-gray-accent2 placeholder-gray-accent4 focus:outline-gray-accent2',
           isDisabled &&
             'cursor-not-allowed bg-gray-accent7 placeholder-gray-accent3',
         )}

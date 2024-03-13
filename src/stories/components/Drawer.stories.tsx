@@ -28,10 +28,12 @@ export const DefaultTemplate: Story = {
     return (
       <Drawer {...args}>
         <Drawer.Trigger>
-          <button>Open Drawer</button>
+          <button className='text-gray-accent1'>Open Drawer</button>
         </Drawer.Trigger>
-        <Drawer.Title>Draw Title</Drawer.Title>
-        <Drawer.Content>Draw Content</Drawer.Content>
+        <Drawer.Title className='text-gray-accent1'>Draw Title</Drawer.Title>
+        <Drawer.Content className='text-gray-accent1'>
+          Draw Content
+        </Drawer.Content>
         <Drawer.Closer>
           <Button variant='primary'>확인</Button>
         </Drawer.Closer>

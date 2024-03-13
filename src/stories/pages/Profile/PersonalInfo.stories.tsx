@@ -12,4 +12,14 @@ export default meta;
 
 type Story = StoryObj<typeof PersonalInfo>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    personalInfo: {
+      nickname: 'evan',
+      signal: 10,
+      gender: '남성',
+      ageGroup: '20대',
+      profileImageUrl: null,
+    },
+  },
+};

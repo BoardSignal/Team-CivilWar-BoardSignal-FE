@@ -12,4 +12,8 @@ export default meta;
 
 type Story = StoryObj<typeof SignalTemperature>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    value: 36.5,
+  },
+};

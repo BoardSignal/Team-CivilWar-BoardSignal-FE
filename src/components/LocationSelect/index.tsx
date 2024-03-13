@@ -27,6 +27,7 @@ const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
     <>
       <TextInputWithIcon
         iconId='map-pin-fill'
+        readOnly
         value={value}
         onClick={openModal}
       />

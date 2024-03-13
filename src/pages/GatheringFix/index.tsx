@@ -13,8 +13,8 @@ const GatheringFixPage = () => {
           <span>모임</span>
         </TabBar.Left>
       </TabBar.Container>
-      <div className='flex h-full grow flex-col'>
-        <div className='px-4'>
+      <div className='flex h-full grow flex-col gap-8 px-4'>
+        <div className='-mb-4'>
           <Alert>모임이 확정된 시작 시각과 장소를 입력해주세요</Alert>
         </div>
         <Label title='시작 시각' isRequired={true}>

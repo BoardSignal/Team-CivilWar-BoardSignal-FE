@@ -7,8 +7,9 @@ import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
 import { DELETE_TIP_MODAL_MESSAGE } from '@/constants/messages/modal';
-
 import { useDeleteBoardGameTip } from '../../hooks/useDeleteBoardGameTip';
+import { getRelativeTimeWithin } from '@/utils/time';
+
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
@@ -68,18 +69,15 @@ const MyTipItem = ({
             <span className='grow text-sm font-bold text-gray-accent1'>
               {nickname}
             </span>
-            <span className='text-[10px] text-gray-accent3'>{createdAt}</span>
+          <span className='text-[10px] text-gray-accent3'>
+            {getRelativeTimeWithin(createdAt)}
           </span>
-          <p className='text-gray-accent1'>{content}</p>
-          <div className='flex items-center gap-1'>
-            <Icon id='thumb-up-line' size={16} className='text-gray-accent3' />
-            <span className='grow text-xs text-gray-accent1'>{likeCount}</span>
-            <Icon
-              id='delete-bin-line'
-              className='cursor-pointer text-gray-accent3'
-              onClick={handleOpenModal}
-            />
-          </div>
+        </span>
+        <p className='text-gray-accent1'>{content}</p>
+        <div className='flex items-center gap-1'>
+          <Icon id='thumb-up-line' size={16} className='text-gray-accent3' />
+          <span className='grow text-xs text-gray-accent1'>{likeCount}</span>
+          <Icon id='delete-bin-line' className='text-gray-accent3' />
         </div>
       </div>
     </>
