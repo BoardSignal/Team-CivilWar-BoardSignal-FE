@@ -1,6 +1,7 @@
 import type { Tip } from '@/apis/boardGameDetail';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
+import { getRelativeTimeWithin } from '@/utils/time';
 
 const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
@@ -19,7 +20,9 @@ const MyTipItem = ({ tip }: { tip: Tip }) => {
           <span className='grow text-sm font-bold text-gray-accent1'>
             {nickname}
           </span>
-          <span className='text-[10px] text-gray-accent3'>{createdAt}</span>
+          <span className='text-[10px] text-gray-accent3'>
+            {getRelativeTimeWithin(createdAt)}
+          </span>
         </span>
         <p className='text-gray-accent1'>{content}</p>
         <div className='flex items-center gap-1'>

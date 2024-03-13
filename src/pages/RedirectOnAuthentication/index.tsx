@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { REGISTER_PAGE_URL } from '@/constants/pageRoutes';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 const RedirectOnAuthentication = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ const RedirectOnAuthentication = () => {
     const isJoined = searchParams.get('is-joined');
 
     if (accessToken) {
-      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem(STORAGE_KEY_ACCESS_TOKEN, accessToken);
     }
 
     navigate(isJoined === 'true' ? '/' : `${REGISTER_PAGE_URL}`);

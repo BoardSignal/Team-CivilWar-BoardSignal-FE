@@ -6,7 +6,7 @@ export const MOCK_GET_AUTH_URL = `${API_BASE_URL}${AUTH_API_URL}`;
 
 export const mockGetAuthHandler = async () => {
   return HttpResponse.json({
-    id: 1,
+    id: 4,
     email: 'test@email.com',
     nickname: 'hannah',
     age: 24,

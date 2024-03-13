@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import type { Tip } from '@/apis/boardGameDetail';
 import Icon from '@/components/Icon';
 import { cn } from '@/utils/cn';
+import { getRelativeTimeWithin } from '@/utils/time';
 
 import { useBoardGameTipLike } from '../../hooks/useBoardGameTipLike';
 
@@ -41,7 +42,9 @@ const TipItem = ({ tip }: { tip: Tip }) => {
           <span className='text-sm font-bold text-gray-accent1'>
             {nickname}
           </span>
-          <span className='text-[10px] text-gray-accent3'>{createdAt}</span>
+          <span className='text-[10px] text-gray-accent3'>
+            {getRelativeTimeWithin(createdAt)}
+          </span>
         </div>
         <p className='text-gray-accent1'>{content}</p>
         <div

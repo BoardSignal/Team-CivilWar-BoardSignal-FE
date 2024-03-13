@@ -1,6 +1,7 @@
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 import { AUTH_API_URL } from '@/constants/apiRoutes';
+import { LOGGED_IN_USER_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -21,7 +22,7 @@ const getLoggedInUser = () =>
 
 export const useGetLoggedInUserApi = () => {
   const { data } = useSuspenseQuery({
-    queryKey: ['logged-in-user'],
+    queryKey: [LOGGED_IN_USER_QUERY_KEY],
     queryFn: getLoggedInUser,
   });
 
