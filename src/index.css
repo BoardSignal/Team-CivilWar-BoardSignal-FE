@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  #styleRoot {
     /* Figma 색상 팔레트 정의 필요 */
+    --base: black;
+    --base-reverse: white;
     --primary: #8b5cf6;
     --primary-darken: #5b21b6;
     --primary-lighten: #c4b5fd;
@@ -25,8 +27,21 @@
     --manner-accent-7: #333333;
   }
 
-  :root.dark {
-    /* 다크 모드 색상 팔레트 정의 필요 */
+  /* Storybook 환경에선 :root가 아닐 수도 있어요 */
+  #styleRoot.dark,
+  .dark #styleRoot {
+    background-color: black;
+    color: white;
+
+    --base: white;
+    --base-reverse: black;
+    --accent-1: #eeeeee;
+    --accent-2: #bbbbbb;
+    --accent-3: #888888;
+    --accent-4: #777777;
+    --accent-5: #555555;
+    --accent-6: #444444;
+    --accent-7: #2f2f2f;
   }
 
   /* 자동완성 autofill 배경색 제거 */
@@ -160,4 +175,8 @@
 
 input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+.backdrop {
+  @apply bg-gray-accent1 dark:bg-gray-accent7;
 }

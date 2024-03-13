@@ -85,13 +85,13 @@ const Drawer = ({ children, onClose }: PropsWithChildren<DrawerProps>) => {
           <div
             onClick={handleCloseDrawer}
             className={cn(
-              'h-full w-full bg-gray-accent1',
+              'backdrop h-full w-full',
               isOpen ? 'animate-opacity70' : 'animate-opacity0',
             )}
           ></div>
           <div
             className={cn(
-              'absolute flex min-h-64 w-full flex-col rounded-t-lg bg-white p-6',
+              'absolute flex min-h-64 w-full flex-col rounded-t-lg bg-gray-bg-base p-6',
               isOpen ? 'animate-moveUp' : 'animate-moveDown',
             )}
           >

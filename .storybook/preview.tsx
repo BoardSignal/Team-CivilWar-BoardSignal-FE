@@ -20,8 +20,11 @@ const preview: Preview = {
     withRouter,
     Story => (
       <ReactQueryClientProvider>
-        <div className='flex w-full min-w-[350px] max-w-[450px] items-center justify-center'>
-          <div className='grow p-8 w-full'>
+        <div
+          id='styleRoot'
+          className='flex w-full min-w-[350px] max-w-[450px] items-center justify-center'
+        >
+          <div className='w-full grow p-8'>
             <Story />
           </div>
         </div>
@@ -43,6 +46,14 @@ const preview: Preview = {
         path: '*',
       },
     }),
+  },
+  globalTypes: {
+    darkMode: {
+      defaultValue: true, // Enable dark mode by default on all stories
+    },
+    className: {
+      defaultValue: 'dark', // Set your custom dark mode class name
+    },
   },
 };
 

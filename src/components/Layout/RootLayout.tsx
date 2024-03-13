@@ -13,7 +13,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => (
   <div
     id={LAYOUT_ROOT_ID}
     className={clsx(
-      'relative flex h-full w-full shrink-0 flex-col shadow-xl',
+      'relative flex h-full w-full shrink-0 flex-col shadow-xl dark:border dark:border-gray-accent7 dark:shadow-none',
       'max-h-[950px] min-h-[600px] min-w-[350px] max-w-[450px]',
     )}
   >

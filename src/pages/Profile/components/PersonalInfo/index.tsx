@@ -5,7 +5,7 @@ interface PersonalInfo {
   signal: number;
   gender: string;
   ageGroup: string;
-  profileImageUrl: string;
+  profileImageUrl: string | null;
 }
 
 interface PersonalInfoProps {

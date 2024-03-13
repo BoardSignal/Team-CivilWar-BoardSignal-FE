@@ -3,6 +3,7 @@ import { setupWorker } from 'msw/browser';
 
 import boardGameDetailMocks from './boardGameDetail';
 import notificationsMocks from './notifications';
+import profilesMocks from './profiles';
 
 /**
  * mock service worker를 설정하는 함수에요.
@@ -19,6 +20,7 @@ export const enableAPIMocks = () => {
     globalDelay,
     ...notificationsMocks,
     ...boardGameDetailMocks,
+    ...profilesMocks,
   ];
   const worker = setupWorker(...handlers);
 
