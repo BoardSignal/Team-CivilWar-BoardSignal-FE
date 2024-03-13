@@ -19,6 +19,7 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import AuthorizedRoute from './components/AuthorizedRoute';
+import NotFoundErrorAlertFullScreen from './components/ErrorAlertFullScreen/NotFoundErorAlertFullScreen';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -82,6 +83,7 @@ const AnimtedRoutes = () => {
             element={<HomePage />}
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
+          <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
