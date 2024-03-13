@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import { getRelativeTime } from '@/utils/time';
+import { getRelativeTimeWithin } from '@/utils/time';
 
 import type { Gathering } from '.';
 
@@ -60,7 +60,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
               <div className='text-xs text-gray-accent2'>{categoriesText}</div>
             </div>
             <div className='flex justify-between text-xs text-gray-accent3'>
-              <div>{getRelativeTime(createdAt)}</div>
+              <div>{getRelativeTimeWithin(createdAt)}</div>
               <div className='flex items-center gap-1'>
                 <Icon id='user-line' size={12} />
                 <span>{headCount}</span>
