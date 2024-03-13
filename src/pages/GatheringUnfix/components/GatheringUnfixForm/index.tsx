@@ -1,20 +1,13 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { object, string } from 'yup';
 
 import Button from '@/components/Button';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import Label from '@/components/Label';
 import TextInput from '@/components/TextInput';
-import {
-  MAX_LENGTH_ERROR_MESSAGE,
-  MIN_LENGTH_ERROR_MESSAGE,
-  REQUIRED_ERROR_MESSAGE,
-  TRIM_ERROR_MESSAGE,
-} from '@/constants/messages/error';
 import { UNFIX_PLACEHOLDER_MESSAGE } from '@/constants/messages/placeholder';
 
 import useGatheringUnfix from '../../hooks/useGatheringUnfix';
+import { gatheringUnfixFormOptions } from './formSchema';
 
 export type OnGatheringUnfix = () => void;
 
@@ -31,32 +24,17 @@ const GatheringUnfixForm = ({
   gatheringId,
   onUnfix,
 }: GatheringUnfixFormProps) => {
-  const gatheringUnfixSchema = object({
-    reason: string()
-      .required(REQUIRED_ERROR_MESSAGE)
-      .trim()
-      .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
-      .max(50, `50${MAX_LENGTH_ERROR_MESSAGE}`),
-  });
-
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm({
-    mode: 'all',
-    defaultValues: { reason: '' },
-    resolver: yupResolver(gatheringUnfixSchema),
-  });
+  } = useForm(gatheringUnfixFormOptions);
 
-  const createGatheringUnfix = useGatheringUnfix(onUnfix, gatheringId);
+  const unfixGathering = useGatheringUnfix(onUnfix, gatheringId);
 
   const onSubmitUnfix = (data: GatheringUnfixFormValues) => {
-    createGatheringUnfix({
-      gatheringId,
-      reason: data.reason,
-    });
+    unfixGathering(data.reason);
   };
 
   return (
