@@ -1,5 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { BOARD_GAMES_WISH_API_URL } from '@/constants/apiRoutes';
+import { BOARD_GAME_DETAIL_QUERY_KEY } from '@/constants/queryKey';
+
 import { api } from './core';
 
 interface BoardGameWishResponse {
@@ -8,12 +11,12 @@ interface BoardGameWishResponse {
 
 const postBoardGameWish = (boardGameId: string) =>
   api.post<BoardGameWishResponse>({
-    url: `/board-games/wish/${boardGameId}`,
+    url: `${BOARD_GAMES_WISH_API_URL}/${boardGameId}`,
   });
 
 const deleteBoardGameWish = (boardGameId: string) =>
   api.delete<BoardGameWishResponse>({
-    url: `/board-games/wish/${boardGameId}`,
+    url: `${BOARD_GAMES_WISH_API_URL}/${boardGameId}`,
   });
 
 export const usePostBoardGameWishApi = (boardGameId: string) => {
@@ -22,7 +25,7 @@ export const usePostBoardGameWishApi = (boardGameId: string) => {
     mutationFn: () => postBoardGameWish(boardGameId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: [BOARD_GAME_DETAIL_QUERY_KEY, boardGameId],
       }),
   });
 
@@ -35,7 +38,7 @@ export const useDeleteBoardGameWishApi = (boardGameId: string) => {
     mutationFn: () => deleteBoardGameWish(boardGameId),
     onSuccess: () =>
       queryClient.invalidateQueries({
-        queryKey: ['boardGameDetail', boardGameId],
+        queryKey: [BOARD_GAME_DETAIL_QUERY_KEY, boardGameId],
       }),
   });
 

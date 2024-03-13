@@ -1,42 +1,46 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BOARD_GAMES_TIP_API_URL } from '@/constants/apiRoutes';
+import { BOARD_GAME_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
-interface CreateTipResponse {
+interface CreateBoardGameTipResponse {
   content: string;
 }
 
-export interface CreateTipRequest {
-  boardGameId: string;
-  content: string;
-}
-
-export const postBoardGameTip = ({ boardGameId, content }: CreateTipRequest) =>
-  api.post<CreateTipResponse>({
+const postBoardGameTip = (boardGameId: string, content: string) =>
+  api.post<CreateBoardGameTipResponse>({
     url: `${BOARD_GAMES_TIP_API_URL}/${boardGameId}`,
     data: {
       content,
     },
   });
 
-const deleteBoardGameTip = ({ tipId }: { tipId: number }) =>
+const deleteBoardGameTip = (tipId: number) =>
   api.delete({
-    url: `board-games/${tipId}`,
+    url: `${BOARD_GAMES_TIP_API_URL}/${tipId}`,
   });
 
-export const usePostBoardGameTipApi = () => {
+export const usePostBoardGameTipApi = (boardGameId: string) => {
   const { mutateAsync } = useMutation({
-    mutationFn: postBoardGameTip,
+    mutationFn: (content: string) => postBoardGameTip(boardGameId, content),
   });
 
   return mutateAsync;
 };
 
-export const useDeleteBoardGameTipApi = () => {
+export const useDeleteBoardGameTipApi = (
+  tipId: number,
+  boardGameId: string,
+) => {
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
-    mutationFn: deleteBoardGameTip,
+    mutationFn: () => deleteBoardGameTip(tipId),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: [BOARD_GAME_DETAIL_QUERY_KEY, boardGameId],
+      }),
   });
 
   return mutateAsync;

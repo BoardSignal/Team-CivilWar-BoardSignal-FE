@@ -1,7 +1,7 @@
 import {
   GatheringCreateRequest,
   usePostGatheringCreateApi,
-} from '@/apis/postGatheringCreate';
+} from '@/apis/gatheringCreate';
 import { showErrorToast } from '@/utils/showToast';
 
 import { OnGatheringCreate } from '.';
