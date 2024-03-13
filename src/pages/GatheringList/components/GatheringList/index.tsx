@@ -9,7 +9,8 @@ import {
 import GatheringListItem from '@/components/GatheringListItem';
 import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '@/components/Spinner/SpinnerListBottom';
-import { OPTIONS } from '@/constants/options';
+
+import { OPTIONS } from '../..';
 
 type GatheringListParams = Omit<GetGatheringListParams, 'size'>;
 
