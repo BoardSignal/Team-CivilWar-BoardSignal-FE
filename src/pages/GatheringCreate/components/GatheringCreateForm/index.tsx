@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { Controller, useForm } from 'react-hook-form';
 
-import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
+import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
 import FormErrorMessage from '@/components/FormErrorMessage';

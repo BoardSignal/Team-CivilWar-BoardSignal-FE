@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import AuthorizedRoute from './components/AuthorizedRoute';
 import ResponsiveLayoutWrapper from './components/Layout';
 import {
   BOARD_GAMES_PAGE_URL,
@@ -48,19 +49,27 @@ export const router = createBrowserRouter([
       },
       {
         path: NOTIFICATIONS_PAGE_URL,
-        element: <NotificationListPage />,
-      },
-      {
-        path: `${USERS_PAGE_URL}/me`,
-        element: <ProfilePage />,
+        element: (
+          <AuthorizedRoute>
+            <NotificationListPage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: `${USERS_PAGE_URL}/:userId`,
-        element: <ProfilePage />,
+        element: (
+          <AuthorizedRoute>
+            <ProfilePage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: GATHERINGS_CREATE_PAGE_URL,
-        element: <GatheringCreatePage />,
+        element: (
+          <AuthorizedRoute>
+            <GatheringCreatePage />
+          </AuthorizedRoute>
+        ),
       },
       {
         path: `${GATHERINGS_PAGE_URL}/:gatheringId`,
