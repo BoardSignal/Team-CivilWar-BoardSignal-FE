@@ -15,14 +15,17 @@ import SpinnerFullScreen from '../Spinner/SpinnerFullScreen';
 
 const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
 
-const RouterProtector = ({ children }: PropsWithChildren) => {
+//FIXME : setTimeout을 사용하지 않으면 toast에 딜레이가 생겨서 임시적으로 setTimeout을 사용하였습니다.
+const ErrorToast = (errorMessage: string) =>
+  setTimeout(() => {
+    showErrorToast(errorMessage);
+  }, 0);
+
+const AuthorizedRoute = ({ children }: PropsWithChildren) => {
   const { data, isLoading } = useGetIsJoinedUserApi(accessToken);
 
-  // Toast가 명확하게 보이지않아 setTimeout을 사용하여 실행시간을 조정하였습니다.
   if (accessToken === null) {
-    setTimeout(() => {
-      showErrorToast(NOT_LOGGED_IN_USER_MESSAGE);
-    }, 0);
+    ErrorToast(NOT_LOGGED_IN_USER_MESSAGE);
     return <Navigate to={LOGIN_PAGE_URL} />;
   }
 
@@ -30,15 +33,13 @@ const RouterProtector = ({ children }: PropsWithChildren) => {
     return <SpinnerFullScreen />;
   }
 
-  // TODO: data의 타입이 명확하게 추론되지 않아 ?. 연산자를 사용하였습니다.
+  // FIXME: data의 타입이 명확하게 추론되지 않아 ?. 연산자를 사용하였습니다.
   if (!data?.isJoined) {
-    setTimeout(() => {
-      showErrorToast(NOT_SIGN_UP_USER_MESSAGE);
-    }, 0);
+    ErrorToast(NOT_SIGN_UP_USER_MESSAGE);
     return <Navigate to={REGISTER_PAGE_URL} />;
   }
 
   return children;
 };
 
-export default RouterProtector;
+export default AuthorizedRoute;
