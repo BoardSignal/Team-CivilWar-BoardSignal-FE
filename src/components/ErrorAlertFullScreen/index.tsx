@@ -1,55 +1,43 @@
 import { MouseEventHandler } from 'react';
 
-import {
-  DEFAULT_ERROR_MESSAGE,
-  DEFAULT_ERROR_TITLE,
-} from '@/constants/messages/error';
+import NotFoundErrorAlertFullScreen from './NotFoundErorAlertFullScreen';
+import checkIsGetNotFound from './NotFoundErorAlertFullScreen/checkIsGetNotFound';
+import checkIsInvalidStatePage from './NotFoundErorAlertFullScreen/checkIsInvalidStatePage';
+import UnknownErrorAlertFullScreen from './UnknownErrorAlertFullScreen';
 
-import Button, { type ButtonProps } from '../Button';
-import Icon from '../Icon';
-
-export interface ErrorAlertProps {
-  error: unknown;
-  onReset: MouseEventHandler<HTMLButtonElement>;
-  isShowingErrorIcon?: boolean;
-  title?: string;
-  message?: string;
-  buttonText?: string;
+enum ErrorType {
+  UNKNOWN_ERROR,
+  GET_NOT_FOUND,
 }
 
-const ErrorIcon = () => (
-  <Icon id='error-warning-fill' className='h-auto w-full text-gray-accent6' />
-);
+const getErrorType = (error: unknown) => {
+  if (checkIsGetNotFound(error)) return ErrorType.GET_NOT_FOUND;
+  if (checkIsInvalidStatePage(error)) return ErrorType.GET_NOT_FOUND;
 
-const RefreshButton = ({ children, ...props }: ButtonProps) => (
-  <Button variant='outline' className='flex shrink-0 gap-2' {...props}>
-    <Icon id='refresh-line' />
-    {children}
-  </Button>
-);
+  return ErrorType.UNKNOWN_ERROR;
+};
+
+const errorAlertMapping = {
+  [ErrorType.UNKNOWN_ERROR]: UnknownErrorAlertFullScreen,
+  [ErrorType.GET_NOT_FOUND]: NotFoundErrorAlertFullScreen,
+};
+
+export interface ErrorAlertFullScreenProps {
+  error: unknown;
+  onReset: MouseEventHandler<HTMLButtonElement>;
+}
 
 /**
- * 전체 화면에 최적화된 오류 안내 화면이에요.
+ * 오류 유형에 따라 적절한 ErrorAlertFullScreen을 표시해요.
  */
 const ErrorAlertFullScreen = ({
+  error,
   onReset,
-  isShowingErrorIcon = true,
-  title = DEFAULT_ERROR_TITLE,
-  message = DEFAULT_ERROR_MESSAGE,
-  buttonText = '새로 고침하기',
-}: ErrorAlertProps) => (
-  <div className='flex h-full flex-col items-center justify-center'>
-    <div className='flex w-[50%] flex-col items-center gap-2'>
-      {isShowingErrorIcon && <ErrorIcon />}
-      <div className='shrink-0 break-keep text-center text-lg font-bold text-gray-accent1'>
-        {title}
-      </div>
-      <div className='shrink-0 break-keep text-center text-sm text-gray-accent2'>
-        {message}
-      </div>
-      <RefreshButton onClick={onReset}>{buttonText}</RefreshButton>
-    </div>
-  </div>
-);
+}: ErrorAlertFullScreenProps) => {
+  const errorType = getErrorType(error);
+  const AlertComponent = errorAlertMapping[errorType];
+
+  return <AlertComponent onReset={onReset} />;
+};
 
 export default ErrorAlertFullScreen;
