@@ -33,7 +33,16 @@ const firebaseInitialized = () => {
     : firebase.initializeApp(firebaseConfig);
 };
 
-const usePostFCMToken = () => {
+const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
+  const title = payload.notification.title;
+  const options = {
+    body: payload.notification.body,
+    icon: payload.notification.icon,
+  };
+  new Notification(title, options);
+};
+
+const useInitializeFCM = () => {
   const postFCMTokenApi = usePostFCMTokenApi();
 
   useEffect(() => {
@@ -53,17 +62,8 @@ const usePostFCMToken = () => {
 
     const messaging = firebase.messaging();
     messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
-    const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
-      const title = payload.notification.title;
-      const options = {
-        body: payload.notification.body,
-        icon: payload.notification.icon,
-      };
-      new Notification(title, options);
-    };
-
     messaging.onMessage(foregroundMessageHandler);
   }, [postFCMTokenApi]);
 };
 
-export default usePostFCMToken;
+export default useInitializeFCM;

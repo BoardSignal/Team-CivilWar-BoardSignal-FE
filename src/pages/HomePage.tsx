@@ -1,8 +1,8 @@
 import { GNB } from '@/components/GNB';
-import usePostFCMToken from '@/hooks/useInitializeFCM';
+import useInitializeFCM from '@/hooks/useInitializeFCM';
 
 export const HomePage = () => {
-  usePostFCMToken();
+  useInitializeFCM();
   return (
     <div className='flex h-screen flex-col'>
       <div className='grow'>
