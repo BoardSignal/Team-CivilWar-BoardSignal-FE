@@ -19,7 +19,7 @@ import {
   CATEGORY_SELECT_ALERT_MESSAGE,
 } from '@/constants/messages/alert';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
-import { TIMES } from '@/constants/options';
+import { TIME_OPTIONS } from '@/constants/options';
 
 import { gatheringCreateFormOptions } from './formSchema';
 import gatheringCreateRequestMapper, {
@@ -125,7 +125,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
           <Label title='시간대' isRequired>
             <Select
               variant={errors.time ? 'error' : 'default'}
-              options={TIMES}
+              options={TIME_OPTIONS}
               placeholder='시간대 선택'
               {...register('time')}
             />
