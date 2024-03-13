@@ -187,7 +187,7 @@ input[type='time']::-webkit-calendar-picker-indicator {
 
 .fade-page-transition-enter-active {
   opacity: 1;
-  transition: opacity 300ms linear;
+  transition: opacity 300ms ease;
 }
 
 .fade-page-transition-exit {
@@ -196,5 +196,14 @@ input[type='time']::-webkit-calendar-picker-indicator {
 
 .fade-page-transition-exit-active {
   opacity: 0;
-  transition: opacity 300ms linear;
+  transition: opacity 300ms ease;
+}
+
+.transition-group {
+  @apply absolute left-0 top-0 h-full w-full;
+}
+
+/* Page가 항상 div일 것으로 예상해요 */
+.transition-group > div {
+  @apply absolute left-0 top-0 h-full w-full;
 }
