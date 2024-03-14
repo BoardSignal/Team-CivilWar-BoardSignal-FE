@@ -1,7 +1,7 @@
 import {
   extractLineFromSubwayName,
   extractStationFromSubwayName,
-} from '@/utils/convertSubwayName';
+} from '@/utils/extractFromSubwayName';
 
 import { GatheringFixFormValues } from './formSchema';
 
