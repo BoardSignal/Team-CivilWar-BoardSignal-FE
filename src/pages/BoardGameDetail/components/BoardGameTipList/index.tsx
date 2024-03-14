@@ -1,9 +1,13 @@
+import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import Modal from '@/components/Modal';
 import Alert from '@/components/alert';
+import { SUCCESS_DELETE_TIP } from '@/constants/messages/modal';
 import { cn } from '@/utils/cn';
 
 import MyTipItem from './MyTipItem';
@@ -36,8 +40,27 @@ const BoardGameTipList = ({
   boardGameId,
   myTip,
 }: BoardGameTipsProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <>
+      <Modal
+        variant='primary'
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        title='안내'
+        buttonChildren='확인'
+      >
+        {SUCCESS_DELETE_TIP}
+      </Modal>
       <div
         className={cn(
           'flex items-center justify-between p-4',
@@ -51,7 +74,13 @@ const BoardGameTipList = ({
           <TipCreateButton boardGameId={boardGameId} name={name} />
         )}
       </div>
-      {myTip && <MyTipItem tip={myTip} />}
+      {myTip && (
+        <MyTipItem
+          tip={myTip}
+          onOpenModal={handleOpenModal}
+          onCloseModal={handleCloseModal}
+        />
+      )}
       {tips.map(tip => (
         <TipIListItem tip={tip} key={tip.tipId} />
       ))}

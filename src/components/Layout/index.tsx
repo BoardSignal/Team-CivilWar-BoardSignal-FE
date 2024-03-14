@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ export const LAYOUT_ROOT_ID = 'layoutRoot';
  * 화면의 나머지 빈 영역은 소개 내용으로 채워요.
  *
  */
-const ResponsiveLayoutWrapper = () => {
+const ResponsiveLayoutWrapper = ({ children }: PropsWithChildren) => {
   return (
     <div className='flex h-screen w-screen flex-row items-center justify-center gap-10'>
       <div className='hidden shrink sm:flex'>
@@ -26,6 +26,7 @@ const ResponsiveLayoutWrapper = () => {
         <ApiErrorBoundary>
           <Suspense fallback={<SpinnerFullScreen />}>
             <Outlet />
+            {children}
           </Suspense>
           <ToastRoot />
         </ApiErrorBoundary>

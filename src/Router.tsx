@@ -1,6 +1,8 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import ResponsiveLayoutWrapper from './components/Layout';
+import AuthorizedRoute from '@/components/AuthorizedRoute';
+import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotFoundErrorAlertFullScreen';
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
@@ -9,66 +11,84 @@ import {
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
   USERS_PAGE_URL,
-} from './constants/pageRoutes';
-import BoardGameDetailPage from './pages/BoardGameDetail';
-import GatheringCreatePage from './pages/GatheringCreate';
-import GatheringListPage from './pages/GatheringList';
-import { HomePage } from './pages/HomePage';
-import LoginPage from './pages/Login';
-import NotificationListPage from './pages/NotificationList';
-import ProfilePage from './pages/Profile';
-import RedirectOnAuthentication from './pages/RedirectOnAuthentication';
+} from '@/constants/pageRoutes';
+import BoardGameDetailPage from '@/pages/BoardGameDetail';
+import GatheringCreatePage from '@/pages/GatheringCreate';
+import { HomePage } from '@/pages/HomePage';
+import LoginPage from '@/pages/Login';
+import NotificationListPage from '@/pages/NotificationList';
+import ProfilePage from '@/pages/Profile';
+import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <ResponsiveLayoutWrapper />,
-    children: [
-      {
-        path: '',
-        element: <GatheringListPage />,
-      },
-      {
-        path: LOGIN_PAGE_URL,
-        element: <LoginPage />,
-      },
-      {
-        path: CHATS_PAGE_URL,
-        element: <HomePage />,
-      },
-      {
-        path: BOARD_GAMES_PAGE_URL,
-        element: <HomePage />,
-      },
-      {
-        path: `${BOARD_GAMES_PAGE_URL}/:boardGameId`,
-        element: <BoardGameDetailPage />,
-      },
-      {
-        path: NOTIFICATIONS_PAGE_URL,
-        element: <NotificationListPage />,
-      },
-      {
-        path: `${USERS_PAGE_URL}/me`,
-        element: <ProfilePage />,
-      },
-      {
-        path: `${USERS_PAGE_URL}/:userId`,
-        element: <ProfilePage />,
-      },
-      {
-        path: GATHERINGS_CREATE_PAGE_URL,
-        element: <GatheringCreatePage />,
-      },
-      {
-        path: `${GATHERINGS_PAGE_URL}/:gatheringId`,
-        element: <HomePage />,
-      },
-      {
-        // 해당 라우팅 주소는 백엔드와 협의된 내용으로 수정이 불가합니다.
-        path: '/redirect',
-        element: <RedirectOnAuthentication />,
-      },
-    ],
-  },
-]);
+import GatheringListPage from './pages/GatheringList';
+
+/**
+ * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
+ *
+ * FIXME: CSSTransition과 Route를 분리하고자 했는데, 분리하면 애니메이션이 동작하지 않아서
+ * 일단은 인라인하고 추후 리팩토링해볼게요..
+ */
+const AnimtedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <TransitionGroup className='transition-group'>
+      <CSSTransition
+        key={location.pathname}
+        classNames='fade-page-transition'
+        timeout={300}
+      >
+        <Routes location={location}>
+          <Route path='' element={<GatheringListPage />} />
+          <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
+          <Route path={CHATS_PAGE_URL} element={<HomePage />} />
+          <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
+          <Route
+            path={`${BOARD_GAMES_PAGE_URL}/:boardGameId`}
+            element={<BoardGameDetailPage />}
+          />
+          <Route
+            path={NOTIFICATIONS_PAGE_URL}
+            element={
+              <AuthorizedRoute>
+                <NotificationListPage />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path={`${USERS_PAGE_URL}/me`}
+            element={
+              <AuthorizedRoute>
+                <ProfilePage />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path={`${USERS_PAGE_URL}/:userId`}
+            element={
+              <AuthorizedRoute>
+                <ProfilePage />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path={GATHERINGS_CREATE_PAGE_URL}
+            element={
+              <AuthorizedRoute>
+                <GatheringCreatePage />
+              </AuthorizedRoute>
+            }
+          />
+          <Route
+            path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
+            element={<HomePage />}
+          />
+          <Route path='/redirect' element={<RedirectOnAuthentication />} />
+          <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
+        </Routes>
+      </CSSTransition>
+    </TransitionGroup>
+  );
+};
+
+export default AnimtedRoutes;

@@ -1,6 +1,9 @@
 import { QueryErrorResetBoundary } from '@tanstack/react-query';
 
-import ErrorBoundary, { ErrorBoundaryProps } from './ErrorBoundary';
+import ErrorAlertFullScreen from '../ErrorAlertFullScreen';
+import ErrorBoundary, { type ErrorBoundaryProps } from './ErrorBoundary';
+
+type ApiErrorBoundaryProps = Omit<ErrorBoundaryProps, 'fallback'>;
 
 /**
  * 하위 컴포넌트의 error 상태의 query의 상태를 reset 해요.
@@ -8,9 +11,8 @@ import ErrorBoundary, { ErrorBoundaryProps } from './ErrorBoundary';
 const ApiErrorBoundary = ({
   onCatch,
   onReset,
-  fallback: Fallback,
   children,
-}: ErrorBoundaryProps) => {
+}: ApiErrorBoundaryProps) => {
   return (
     <QueryErrorResetBoundary>
       {({ reset: resetErrorStateQueries }) => {
@@ -21,7 +23,7 @@ const ApiErrorBoundary = ({
 
         return (
           <ErrorBoundary
-            fallback={Fallback}
+            fallback={ErrorAlertFullScreen}
             onReset={handleReset}
             onCatch={onCatch}
           >

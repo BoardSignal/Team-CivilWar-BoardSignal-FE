@@ -14,17 +14,7 @@ import WishGameButton from './components/WishGameButton';
 import { useLogout } from './hooks/useLogout';
 
 const MyProfilePage = () => {
-  const { userId } = useParams();
-  if (!userId) {
-    throw new Error('invalid userId');
-  }
-
-  const { data, isPending, isError } = useGetUserProfilesApi(userId);
-  const { logoutApi } = useLogout();
-
-  if (isPending) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
-
+  const { userId } = useParams() as { userId: string };
   const {
     isProfileManager,
     mannerScore,
@@ -32,7 +22,8 @@ const MyProfilePage = () => {
     reviews,
     wishCount,
     ...personalInfo
-  } = data;
+  } = useGetUserProfilesApi(userId);
+  const { logoutApi } = useLogout();
 
   return (
     <div className='flex h-full flex-col'>

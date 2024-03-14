@@ -5,7 +5,7 @@ import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
-import { getRelativeTime } from '@/utils/time';
+import { getRelativeTimeWithin } from '@/utils/time';
 
 interface GatheringListItemProps {
   gathering: Gathering;
@@ -65,7 +65,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
             </div>
           </div>
           <div className='flex justify-between text-xs text-gray-accent3'>
-            <div>{getRelativeTime(createdAt)}</div>
+            <div>{getRelativeTimeWithin(createdAt)}</div>
             <div className='flex items-center gap-1'>
               <Icon id='user-line' size={12} />
               <span>{headCount}</span>
