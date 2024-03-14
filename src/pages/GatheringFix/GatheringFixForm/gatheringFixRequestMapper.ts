@@ -1,25 +1,17 @@
-import { GatheringFixFormValues } from '.';
+import {
+  translateSubwayToLine,
+  translateSubwayToStation,
+} from '@/utils/translateSubway';
 
-const translateSubwayToLine = (subwayStation: string) => {
-  const pattern = /\(([^)]+)\)/;
-  const match = subwayStation.match(pattern);
-
-  return match ? match[1] : '호선 없음';
-};
-
-const translateSubwayToStation = (subwayStation: string) => {
-  return subwayStation.split(' ')[0];
-};
+import { GatheringFixFormValues } from './formSchema';
 
 const translateTimeToDateObject = (time: string, date: string) => {
   const [timePeriod, clockTime] = time.split(' ');
   const [hour, minute] = clockTime.split(':').map(Number);
   const [year, month, day] = date.split('-').map(Number);
 
-  let modifiedHour = hour;
-  if (timePeriod === '오후') {
-    modifiedHour += 12;
-  }
+  const modifiedHour = timePeriod === '오후' ? hour : hour + 12;
+
   return new Date(year, month - 1, day, modifiedHour, minute);
 };
 

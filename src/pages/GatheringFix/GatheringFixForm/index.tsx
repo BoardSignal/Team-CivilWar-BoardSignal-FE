@@ -8,9 +8,8 @@ import LocationSelect from '@/components/LocationSelect';
 import Select from '@/components/Select';
 import SubwaySelect from '@/components/SubwaySelect';
 import Alert from '@/components/alert';
-import { TIME_PICKER_OPTIONS } from '@/constants/times';
 
-import { gatheringFixFormOptions } from './formSchema';
+import { GatheringFixFormValues, gatheringFixFormOptions } from './formSchema';
 import gatheringFixRequestMapper from './gatheringFixRequestMapper';
 import useCreateGathering from './useGatheringFix';
 
@@ -18,14 +17,35 @@ interface GatheringFixFormProps {
   onCreate: () => void;
 }
 
-export interface GatheringFixFormValues {
-  time: string;
-  date: string;
-  subwayStation: string;
-  place: string;
-}
-
 const TIME_PICKER_PLACEHOLDER = '시간 선택';
+
+const TIME_PICKER_OPTIONS = [
+  '오전 10:00',
+  '오전 10:30',
+  '오전 11:00',
+  '오전 11:30',
+  '오후 12:00',
+  '오후 12:30',
+  '오후 1:00',
+  '오후 1:30',
+  '오후 2:00',
+  '오후 2:30',
+  '오후 3:00',
+  '오후 3:30',
+  '오후 4:00',
+  '오후 4:30',
+  '오후 5:00',
+  '오후 5:30',
+  '오후 6:00',
+  '오후 6:30',
+  '오후 7:00',
+  '오후 7:30',
+  '오후 8:00',
+  '오후 8:30',
+  '오후 9:00',
+  '오후 9:30',
+  '오후 10:00',
+];
 
 const GatheringFixForm = ({ onCreate }: GatheringFixFormProps) => {
   const { gatheringId } = useParams() as { gatheringId: string };

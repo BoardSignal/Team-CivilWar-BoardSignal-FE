@@ -3,6 +3,13 @@ import { object, string } from 'yup';
 
 import { REQUIRED_ERROR_MESSAGE } from '@/constants/messages/error';
 
+export interface GatheringFixFormValues {
+  time: string;
+  date: string;
+  subwayStation: string;
+  place: string;
+}
+
 export const gatheringFixSchema = object({
   time: string().required(REQUIRED_ERROR_MESSAGE),
   date: string().required(REQUIRED_ERROR_MESSAGE),
