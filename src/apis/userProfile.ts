@@ -12,7 +12,7 @@ export interface UserProfileResponse {
   gender: string;
   ageGroup: string;
   profileImageUrl: string;
-  mannerScore: number;
+  signalTemperature: number;
   reviews: Review[];
   wishCount: number;
   isProfileManager: boolean;

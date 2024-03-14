@@ -17,7 +17,7 @@ const MyProfilePage = () => {
   const { userId } = useParams() as { userId: string };
   const {
     isProfileManager,
-    mannerScore,
+    signalTemperature,
     preferCategories,
     reviews,
     wishCount,
@@ -41,7 +41,7 @@ const MyProfilePage = () => {
         <PersonalInfo personalInfo={personalInfo} />
         {isProfileManager && <EditProfileButton userId={userId} />}
         <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
-          <SignalTemperature value={mannerScore} />
+          <SignalTemperature value={signalTemperature} />
           <MannerReview reviews={reviews} />
         </div>
         <PreferCategory categories={preferCategories} />
