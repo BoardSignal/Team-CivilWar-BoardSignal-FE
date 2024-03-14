@@ -1,11 +1,11 @@
 import {
-  translateSubwayToLine,
-  translateSubwayToStation,
-} from '@/utils/translateSubway';
+  extractLineFromSubwayName,
+  extractStationFromSubwayName,
+} from '@/utils/convertSubwayName';
 
 import { GatheringFixFormValues } from './formSchema';
 
-const translateTimeToDateObject = (time: string, date: string) => {
+const convertTimeToDate = (date: string, time: string) => {
   const [timePeriod, clockTime] = time.split(' ');
   const [hour, minute] = clockTime.split(':').map(Number);
   const [year, month, day] = date.split('-').map(Number);
@@ -19,9 +19,9 @@ const gatheringCreateRequestMapper = (data: GatheringFixFormValues) => {
   const { time, date, subwayStation, place } = data;
 
   const gathering = {
-    meetingTime: translateTimeToDateObject(time, date),
-    line: translateSubwayToLine(subwayStation),
-    station: translateSubwayToStation(subwayStation),
+    meetingTime: convertTimeToDate(date, time),
+    line: extractLineFromSubwayName(subwayStation),
+    station: extractStationFromSubwayName(subwayStation),
     meetingPlace: place,
   };
 
