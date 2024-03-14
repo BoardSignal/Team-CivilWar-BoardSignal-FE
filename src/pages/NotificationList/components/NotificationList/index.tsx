@@ -5,16 +5,19 @@ import NotificationListItem from './NotificationListItem';
 const EmptyNotificationList = () => <div>EMPTY!!</div>;
 
 const NotificationList = () => {
-  const notifications = useGetNotificationsApi();
+  const { notificationsInfos } = useGetNotificationsApi();
 
-  if (notifications.length === 0) {
+  if (notificationsInfos.length === 0) {
     return <EmptyNotificationList />;
   }
 
   return (
     <div className='flex flex-col'>
-      {notifications.map(notification => (
-        <NotificationListItem {...notification} />
+      {notificationsInfos.map(notification => (
+        <NotificationListItem
+          key={notification.notificationId}
+          {...notification}
+        />
       ))}
     </div>
   );
