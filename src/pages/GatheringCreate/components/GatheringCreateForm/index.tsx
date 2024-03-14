@@ -14,13 +14,16 @@ import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import Alert from '@/components/alert';
-import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
-import { AGE_RANGE_ALERT_MESSAGE } from '@/constants/messages/alert';
-import { TIMES } from '@/constants/times';
+import {
+  AGE_RANGE_ALERT_MESSAGE,
+  CATEGORY_SELECT_ALERT_MESSAGE,
+} from '@/constants/messages/alert';
+import { BOARDGAME_CATEGORIES } from '@/constants/options';
+import { TIME_OPTIONS } from '@/constants/options';
 
 import { gatheringCreateFormOptions } from './formSchema';
 import gatheringCreateRequestMapper, {
-  GatheringCreateFormValues,
+  type GatheringCreateFormValues,
 } from './gatheringCreateRequestMapper';
 import useCreateGathering from './useCreateGathering';
 
@@ -76,14 +79,14 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
             title='모임 제목'
             isRequired
             maxLength={50}
-            currentLength={watch('roomTitle')?.length}
+            currentLength={watch('title')?.length}
           >
             <TextInput
-              variant={errors.roomTitle ? 'error' : 'default'}
+              variant={errors.title ? 'error' : 'default'}
               maxLength={50}
-              {...register('roomTitle')}
+              {...register('title')}
             />
-            <FormErrorMessage message={errors.roomTitle?.message} />
+            <FormErrorMessage message={errors.title?.message} />
           </Label>
           <Label
             title='모임 설명'
@@ -122,7 +125,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
           <Label title='시간대' isRequired>
             <Select
               variant={errors.time ? 'error' : 'default'}
-              options={TIMES}
+              options={TIME_OPTIONS}
               placeholder='시간대 선택'
               {...register('time')}
             />
@@ -173,11 +176,13 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                   <MultipleSelect
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
+                    limit={3}
                     onChange={onChange}
                   />
                 );
               }}
             />
+            <Alert>{CATEGORY_SELECT_ALERT_MESSAGE}</Alert>
           </Label>
         </section>
       </div>

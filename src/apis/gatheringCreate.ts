@@ -5,7 +5,7 @@ import { ROOMS_API_URL } from '@/constants/apiRoutes';
 import { api } from './core';
 
 interface Gathering {
-  roomTitle: string;
+  title: string;
   description: string;
   minParticipants: number;
   maxParticipants: number;

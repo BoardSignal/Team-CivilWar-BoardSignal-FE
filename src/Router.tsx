@@ -20,13 +20,15 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
+import GatheringListPage from './pages/GatheringList';
+
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
  *
  * FIXME: CSSTransition과 Route를 분리하고자 했는데, 분리하면 애니메이션이 동작하지 않아서
  * 일단은 인라인하고 추후 리팩토링해볼게요..
  */
-const AnimtedRoutes = () => {
+const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
@@ -37,7 +39,7 @@ const AnimtedRoutes = () => {
         timeout={300}
       >
         <Routes location={location}>
-          <Route path='' element={<HomePage />} />
+          <Route path='' element={<GatheringListPage />} />
           <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
           <Route path={CHATS_PAGE_URL} element={<HomePage />} />
           <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
@@ -89,4 +91,4 @@ const AnimtedRoutes = () => {
   );
 };
 
-export default AnimtedRoutes;
+export default AnimatedRoutes;
