@@ -45,7 +45,6 @@ const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
 
 const updateFCMToken = (issuedFCMToken: string) => {
   const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
-  console.log(issuedFCMToken, savedFCMToken);
   if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
     axios.post(`${API_BASE_URL}${FCM_TOKEN_API_URL}`, {
       token: issuedFCMToken,
@@ -55,9 +54,8 @@ const updateFCMToken = (issuedFCMToken: string) => {
 };
 
 const useInitializeFCM = () => {
-  console.log(isLoggedIn);
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       return;
     }
 
