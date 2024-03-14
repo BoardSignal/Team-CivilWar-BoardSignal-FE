@@ -22,9 +22,9 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
-import ProfileEdit from './pages/ProfileEdit';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
+import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -37,8 +37,10 @@ const AnimatedRoutes = () => {
 
   return (
     <TransitionGroup className='transition-group'>
+      {/* FIXME: location.pathname으로 key를 사용하면 페이지가 exit 하지 않는 버그가 발생해 location.key를 사용해요 */}
+      {/* @see https://github.com/reactjs/react-transition-group/issues/817#issuecomment-1122997210 */}
       <CSSTransition
-        key={location.pathname}
+        key={location.key}
         classNames='fade-page-transition'
         timeout={300}
       >
