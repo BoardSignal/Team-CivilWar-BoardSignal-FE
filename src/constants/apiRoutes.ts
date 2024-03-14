@@ -32,5 +32,6 @@ export const ROOMS_SEARCH_API_URL = '/rooms/search';
 export const ROOMS_UNFIX_API_URL = '/rooms/unfix';
 
 export const NOTIFICATIONS_API_URL = '/notifications';
+export const FCM_TOKEN_API_URL = '/notifications/token';
 
 export const REVIEWS_API_URL = '/reviews';
