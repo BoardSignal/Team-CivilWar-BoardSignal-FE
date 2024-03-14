@@ -21,6 +21,7 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
+import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 
 /**
@@ -79,6 +80,10 @@ const AnimatedRoutes = () => {
                 <GatheringCreatePage />
               </AuthorizedRoute>
             }
+          />
+          <Route
+            path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+            element={<GatheringFixPage />}
           />
           <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
