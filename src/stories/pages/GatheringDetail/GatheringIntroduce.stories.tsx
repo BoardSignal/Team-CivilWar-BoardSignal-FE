@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import GatheringIntroduce from '@/pages/GatheringDetail/GatheringIntroduce/index';
+import GatheringIntroduce from '@/pages/GatheringDetail/components/GatheringIntroduce/index';
 import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
 const meta: Meta<typeof GatheringIntroduce> = {

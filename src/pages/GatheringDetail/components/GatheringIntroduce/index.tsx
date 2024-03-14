@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import TabBar from '@/components/TabBar';
 
-import GatheringDescription from './components/GatheringDescription';
-import GatheringGuide from './components/GatheringGuide';
-import TabMenu from './components/TabMenu';
+import GatheringDescription from '../GatheringDescription/GatheringDescription';
+import GatheringGuide from '../GatheringGuide';
+import TabMenu from '../TabMenu';
 
 interface GatheringIntroduceProps {
   imageUrl?: string | null;

@@ -18,16 +18,18 @@ import {
 } from '@/constants/pageRoutes';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
 import GatheringCreatePage from '@/pages/GatheringCreate';
+import GatheringDetailPage from '@/pages/GatheringDetail';
+import GatheringFixPage from '@/pages/GatheringFix';
+import GatheringListPage from '@/pages/GatheringList';
 import { HomePage } from '@/pages/HomePage';
 import LoginPage from '@/pages/Login';
 import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
+import ProfileEditPage from '@/pages/ProfileEdit';
+import ProfileEdit from '@/pages/ProfileEdit';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
-import GatheringFixPage from './pages/GatheringFix';
-import GatheringListPage from './pages/GatheringList';
-import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -128,7 +130,7 @@ const AnimatedRoutes = () => {
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <HomePage />
+                <GatheringDetailPage />
               </Suspense>
             }
           />
@@ -139,6 +141,10 @@ const AnimatedRoutes = () => {
                 <ProfileEdit />
               </Suspense>
             }
+          />
+          <Route
+            path={`${USERS_EDIT_PAGE_URL}/:userId`}
+            element={<ProfileEditPage />}
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
