@@ -7,6 +7,7 @@ import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
+  GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
@@ -20,6 +21,7 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
+import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 
 /**
@@ -78,6 +80,10 @@ const AnimatedRoutes = () => {
                 <GatheringCreatePage />
               </AuthorizedRoute>
             }
+          />
+          <Route
+            path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+            element={<GatheringFixPage />}
           />
           <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
