@@ -11,6 +11,7 @@ import {
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
+  USERS_EDIT_PAGE_URL,
   USERS_PAGE_URL,
 } from '@/constants/pageRoutes';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
@@ -21,6 +22,7 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
+import ProfileEdit from './pages/ProfileEdit';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 
@@ -58,14 +60,6 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={`${USERS_PAGE_URL}/me`}
-            element={
-              <AuthorizedRoute>
-                <ProfilePage />
-              </AuthorizedRoute>
-            }
-          />
-          <Route
             path={`${USERS_PAGE_URL}/:userId`}
             element={
               <AuthorizedRoute>
@@ -88,6 +82,10 @@ const AnimatedRoutes = () => {
           <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
             element={<HomePage />}
+          />
+          <Route
+            path={`${USERS_EDIT_PAGE_URL}/:userId`}
+            element={<ProfileEdit />}
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />

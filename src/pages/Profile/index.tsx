@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 
+import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
 import { useGetUserProfilesApi } from '@/apis/userProfile';
 import { GNB } from '@/components/GNB';
 import TabBar from '@/components/TabBar';
@@ -13,11 +14,15 @@ import SignalTemperature from './components/SignalTemperature';
 import WishGameButton from './components/WishGameButton';
 import { useLogout } from './hooks/useLogout';
 
-const MyProfilePage = () => {
-  const { userId } = useParams() as { userId: string };
+const ProfilePage = () => {
+  const { userId: pathUserId } = useParams() as { userId: string };
+  const { id } = useGetLoggedInUserApi();
+
+  const userId = pathUserId === 'me' ? String(id) : pathUserId;
+
   const {
     isProfileManager,
-    mannerScore,
+    signalTemperature,
     preferCategories,
     reviews,
     wishCount,
@@ -41,7 +46,7 @@ const MyProfilePage = () => {
         <PersonalInfo personalInfo={personalInfo} />
         {isProfileManager && <EditProfileButton userId={userId} />}
         <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
-          <SignalTemperature value={mannerScore} />
+          <SignalTemperature value={signalTemperature} />
           <MannerReview reviews={reviews} />
         </div>
         <PreferCategory categories={preferCategories} />
@@ -53,4 +58,4 @@ const MyProfilePage = () => {
   );
 };
 
-export default MyProfilePage;
+export default ProfilePage;
