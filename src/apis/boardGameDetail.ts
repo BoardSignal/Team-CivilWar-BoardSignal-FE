@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { BOARD_GAMES_API_URL } from '@/constants/apiRoutes';
 import { BOARD_GAME_DETAIL_QUERY_KEY } from '@/constants/queryKey';
@@ -37,8 +37,11 @@ const getBoardGameDetail = (boardGameId: string) =>
     url: `${BOARD_GAMES_API_URL}/${boardGameId}`,
   });
 
-export const useGetBoardGameDetailApi = (boardGameId: string) =>
-  useQuery({
+export const useGetBoardGameDetailApi = (boardGameId: string) => {
+  const { data } = useSuspenseQuery({
     queryFn: () => getBoardGameDetail(boardGameId),
     queryKey: [BOARD_GAME_DETAIL_QUERY_KEY, boardGameId],
   });
+
+  return data;
+};

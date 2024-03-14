@@ -1,13 +1,12 @@
 import { Component, ComponentType, PropsWithChildren } from 'react';
 
-import ErrorAlertFullScreen, {
-  type ErrorAlertProps,
-} from '../ErrorAlertFullScreen';
+import { type ErrorAlertFullScreenProps } from '../ErrorAlertFullScreen';
+import UnknownErrorAlertFullScreen from '../ErrorAlertFullScreen/UnknownErrorAlertFullScreen';
 
 export interface ErrorBoundaryProps extends PropsWithChildren {
   onReset?: () => void;
   onCatch?: (error: unknown) => void;
-  fallback?: ComponentType<ErrorAlertProps>;
+  fallback?: ComponentType<ErrorAlertFullScreenProps>;
 }
 
 interface State {
@@ -48,7 +47,8 @@ export default class ErrorBoundary extends Component<
 
   render() {
     const { error, isError } = this.state;
-    const { children, fallback: Fallback = ErrorAlertFullScreen } = this.props;
+    const { children, fallback: Fallback = UnknownErrorAlertFullScreen } =
+      this.props;
 
     if (!isError) {
       return children;
