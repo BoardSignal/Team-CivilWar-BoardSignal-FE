@@ -10,6 +10,7 @@ import {
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
+  USERS_EDIT_PAGE_URL,
   USERS_PAGE_URL,
 } from '@/constants/pageRoutes';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
@@ -19,6 +20,8 @@ import LoginPage from '@/pages/Login';
 import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
+
+import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -54,14 +57,6 @@ const AnimtedRoutes = () => {
             }
           />
           <Route
-            path={`${USERS_PAGE_URL}/me`}
-            element={
-              <AuthorizedRoute>
-                <ProfilePage />
-              </AuthorizedRoute>
-            }
-          />
-          <Route
             path={`${USERS_PAGE_URL}/:userId`}
             element={
               <AuthorizedRoute>
@@ -80,6 +75,10 @@ const AnimtedRoutes = () => {
           <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
             element={<HomePage />}
+          />
+          <Route
+            path={`${USERS_EDIT_PAGE_URL}/:userId`}
+            element={<ProfileEdit />}
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />

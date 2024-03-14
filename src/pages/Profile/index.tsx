@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 
+import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
 import { useGetUserProfilesApi } from '@/apis/userProfile';
 import { GNB } from '@/components/GNB';
 import TabBar from '@/components/TabBar';
@@ -13,8 +14,12 @@ import SignalTemperature from './components/SignalTemperature';
 import WishGameButton from './components/WishGameButton';
 import { useLogout } from './hooks/useLogout';
 
-const MyProfilePage = () => {
-  const { userId } = useParams() as { userId: string };
+const ProfilePage = () => {
+  const { userId: pathUserId } = useParams() as { userId: string };
+  const { id } = useGetLoggedInUserApi();
+
+  const userId = pathUserId === 'me' ? String(id) : pathUserId;
+
   const {
     isProfileManager,
     signalTemperature,
@@ -53,4 +58,4 @@ const MyProfilePage = () => {
   );
 };
 
-export default MyProfilePage;
+export default ProfilePage;
