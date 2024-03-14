@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
+import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/messaging';
 
-import { usePostFCMTokenApi } from '@/apis/FCMToken';
+import { API_BASE_URL, FCM_TOKEN_API_URL } from '@/constants/apiRoutes';
 import { STORAGE_KEY_FCM_TOKEN } from '@/constants/storageKeys';
 
 interface FirebaseMessagePayload {
@@ -25,9 +26,9 @@ const firebaseConfig = {
 };
 
 const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
-const isLoggedIn = localStorage.getItem('accessToken');
+const isLoggedIn = !!localStorage.getItem('accessToken');
 
-const firebaseInitialized = () => {
+const initializeFirebase = () => {
   firebase.apps.length
     ? firebase.app()
     : firebase.initializeApp(firebaseConfig);
@@ -42,28 +43,29 @@ const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
   new Notification(title, options);
 };
 
-const useInitializeFCM = () => {
-  const postFCMTokenApi = usePostFCMTokenApi();
+const updateFCMToken = (issuedFCMToken: string) => {
+  const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
+  console.log(issuedFCMToken, savedFCMToken);
+  if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
+    axios.post(`${API_BASE_URL}${FCM_TOKEN_API_URL}`, {
+      token: issuedFCMToken,
+    });
+    localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
+  }
+};
 
+const useInitializeFCM = () => {
+  console.log(isLoggedIn);
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       return;
     }
 
-    const updateFCMToken = (issuedFCMToken: string) => {
-      const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
-      if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
-        postFCMTokenApi({ token: issuedFCMToken });
-        localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
-      }
-    };
-
-    firebaseInitialized();
-
+    initializeFirebase();
     const messaging = firebase.messaging();
     messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
     messaging.onMessage(foregroundMessageHandler);
-  }, [postFCMTokenApi]);
+  }, []);
 };
 
 export default useInitializeFCM;
