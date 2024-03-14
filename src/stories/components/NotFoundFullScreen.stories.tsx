@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotFoundErorAlertFullScreen';
+import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotFoundErrorAlertFullScreen';
 
 import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
 

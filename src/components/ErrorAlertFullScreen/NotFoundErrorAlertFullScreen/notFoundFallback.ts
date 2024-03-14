@@ -2,7 +2,7 @@ import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   END_GAMES_PAGE_URL,
-} from './pageRoutes';
+} from '@/constants/pageRoutes';
 
 /**
  * Not Found Error가 발생한 URL을 기준으로 이동할 URL을 반환해요.

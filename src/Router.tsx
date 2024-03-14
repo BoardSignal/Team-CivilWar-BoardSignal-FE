@@ -1,6 +1,8 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import AuthorizedRoute from '@/components/AuthorizedRoute';
+import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotFoundErrorAlertFullScreen';
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
@@ -17,9 +19,6 @@ import LoginPage from '@/pages/Login';
 import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
-
-import AuthorizedRoute from './components/AuthorizedRoute';
-import NotFoundErrorAlertFullScreen from './components/ErrorAlertFullScreen/NotFoundErorAlertFullScreen';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.

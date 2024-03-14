@@ -6,13 +6,13 @@ import {
   NOT_FOUND_ERROR_MESSAGE,
   NOT_FOUND_ERROR_TITLE,
 } from '@/constants/messages/error';
-import {
-  getNotFoundFallbackButtonText,
-  getNotFoundFallbackUrl,
-} from '@/constants/notFoundFallback';
 
 import { AlertProps } from '../AlertProps';
 import DefaultErrorAlertFullScreen from '../DefaultErrorAlertFullScreen';
+import {
+  getNotFoundFallbackButtonText,
+  getNotFoundFallbackUrl,
+} from './notFoundFallback';
 
 const NotFoundErrorAlertFullScreen = ({ onReset }: AlertProps) => {
   const navigate = useNavigate();

@@ -1,8 +1,8 @@
 import { MouseEventHandler } from 'react';
 
-import NotFoundErrorAlertFullScreen from './NotFoundErorAlertFullScreen';
-import checkIsGetNotFound from './NotFoundErorAlertFullScreen/checkIsGetNotFound';
-import checkIsInvalidStatePage from './NotFoundErorAlertFullScreen/checkIsInvalidStatePage';
+import NotFoundErrorAlertFullScreen from './NotFoundErrorAlertFullScreen';
+import checkIsGetNotFound from './NotFoundErrorAlertFullScreen/checkIsGetNotFound';
+import checkIsInvalidStatePage from './NotFoundErrorAlertFullScreen/checkIsInvalidStatePage';
 import UnknownErrorAlertFullScreen from './UnknownErrorAlertFullScreen';
 
 enum ErrorType {
