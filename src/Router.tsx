@@ -28,7 +28,7 @@ import GatheringListPage from './pages/GatheringList';
  * FIXME: CSSTransition과 Route를 분리하고자 했는데, 분리하면 애니메이션이 동작하지 않아서
  * 일단은 인라인하고 추후 리팩토링해볼게요..
  */
-const AnimtedRoutes = () => {
+const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
@@ -91,4 +91,4 @@ const AnimtedRoutes = () => {
   );
 };
 
-export default AnimtedRoutes;
+export default AnimatedRoutes;

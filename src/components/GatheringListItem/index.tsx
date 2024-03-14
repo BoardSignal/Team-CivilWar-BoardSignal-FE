@@ -4,6 +4,7 @@ import type { Gathering } from '@/apis/getGatheringList';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import { BOARDGAME_CATEGORIES } from '@/constants/options';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 import { getRelativeTimeWithin } from '@/utils/time';
 
@@ -39,7 +40,10 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
     allowedGender,
     `${participantsRange}명`,
   ].join(' · ');
-  const categoriesText = categories.join(' · ');
+  const categoriesText =
+    categories.length < BOARDGAME_CATEGORIES.length
+      ? categories.join(' · ')
+      : '';
 
   return (
     <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}`}>
