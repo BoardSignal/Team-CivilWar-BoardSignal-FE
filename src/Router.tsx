@@ -7,6 +7,7 @@ import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
+  GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
@@ -22,6 +23,8 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import ProfileEdit from './pages/ProfileEdit';
+import GatheringFixPage from './pages/GatheringFix';
+import GatheringListPage from './pages/GatheringList';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -29,7 +32,7 @@ import ProfileEdit from './pages/ProfileEdit';
  * FIXME: CSSTransition과 Route를 분리하고자 했는데, 분리하면 애니메이션이 동작하지 않아서
  * 일단은 인라인하고 추후 리팩토링해볼게요..
  */
-const AnimtedRoutes = () => {
+const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
@@ -40,7 +43,7 @@ const AnimtedRoutes = () => {
         timeout={300}
       >
         <Routes location={location}>
-          <Route path='' element={<HomePage />} />
+          <Route path='' element={<GatheringListPage />} />
           <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
           <Route path={CHATS_PAGE_URL} element={<HomePage />} />
           <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
@@ -73,6 +76,10 @@ const AnimtedRoutes = () => {
             }
           />
           <Route
+            path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+            element={<GatheringFixPage />}
+          />
+          <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
             element={<HomePage />}
           />
@@ -88,4 +95,4 @@ const AnimtedRoutes = () => {
   );
 };
 
-export default AnimtedRoutes;
+export default AnimatedRoutes;

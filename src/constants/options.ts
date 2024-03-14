@@ -1,3 +1,10 @@
+export const TIME_OPTIONS = [
+  '평일 오전',
+  '평일 오후',
+  '주말 오전',
+  '주말 오후',
+];
+
 export const BOARDGAME_CATEGORIES = [
   '워게임',
   '가족게임',

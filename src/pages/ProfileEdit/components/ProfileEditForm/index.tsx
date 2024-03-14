@@ -6,7 +6,7 @@ import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import MultipleSelect from '@/components/MultipleSelect';
 import TextInput from '@/components/TextInput';
-import { BOARDGAME_CATEGORIES } from '@/constants/boardgameCategories';
+import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
 import { profileEditFormOptions } from './formSchema';
 import profileEditRequestMapper, {

@@ -1,5 +1,5 @@
 import {
-  GatheringCreateRequest,
+  type GatheringCreateRequest,
   usePostGatheringCreateApi,
 } from '@/apis/gatheringCreate';
 import { showErrorToast } from '@/utils/showToast';
