@@ -12,7 +12,7 @@ const DrawerContent = ({
   ...props
 }: PropsWithChildren<DrawerContentProps>) => {
   return (
-    <div {...props} className={cn('grow text-sm', className)}>
+    <div {...props} className={cn('grow pb-8 text-sm', className)}>
       {children}
     </div>
   );

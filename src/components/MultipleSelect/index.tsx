@@ -3,12 +3,14 @@ import OptionItemButton from './OptionItemButton';
 interface MultipleSelectProps {
   optionItems: string[];
   selectedItems: string[];
+  limit?: number;
   onChange: (updatedItems: string[]) => void;
 }
 
 const MultipleSelect = ({
   optionItems,
   selectedItems,
+  limit = optionItems.length,
   onChange,
 }: MultipleSelectProps) => {
   const handleToggleItemButton = (newSelectedItem: string) => {
@@ -17,6 +19,10 @@ const MultipleSelect = ({
         selectedItems.filter(selectedItem => selectedItem !== newSelectedItem),
       );
 
+      return;
+    }
+
+    if (selectedItems.length >= limit) {
       return;
     }
 

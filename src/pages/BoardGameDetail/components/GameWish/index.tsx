@@ -10,12 +10,9 @@ interface GameWishProps {
   wishCount: number;
   isWished: boolean;
 }
-const GameWish = ({ wishCount, isWished }: GameWishProps) => {
-  const { boardGameId } = useParams();
 
-  if (!boardGameId) {
-    throw new Error('boardGameId is required');
-  }
+const GameWish = ({ wishCount, isWished }: GameWishProps) => {
+  const { boardGameId } = useParams() as { boardGameId: string };
 
   const { postBoardGameWish, deleteBoardGameWish } =
     useBoardGameWish(boardGameId);

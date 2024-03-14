@@ -1,6 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 import { USERS_API_URL } from '@/constants/apiRoutes';
+import { PROFILES_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -27,8 +28,11 @@ const getUserProfile = (userId: string) =>
     url: `${USERS_API_URL}/${userId}`,
   });
 
-export const useGetUserProfilesApi = (userId: string) =>
-  useQuery({
+export const useGetUserProfilesApi = (userId: string) => {
+  const { data } = useSuspenseQuery({
     queryFn: () => getUserProfile(userId),
-    queryKey: ['profiles', userId],
+    queryKey: [PROFILES_QUERY_KEY, userId],
   });
+
+  return data;
+};

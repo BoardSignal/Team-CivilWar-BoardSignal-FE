@@ -32,7 +32,7 @@ const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
     <Button
       className={cn(
         'h-fit w-fit gap-1 rounded-full border px-4 py-2 text-xs',
-        searchParams.get(queryStringKey) && 'bg-gray-accent1 text-white',
+        searchParams.get(queryStringKey) && 'bg-gray-accent1 text-gray-bg-base',
       )}
       onClick={onClick}
     >
@@ -44,7 +44,9 @@ const OptionFilterButton = ({ option, onClick }: OptionFilterButtonProps) => {
         }
         size={16}
         className={
-          searchParams.get(queryStringKey) ? 'text-white' : 'text-gray-accent2'
+          searchParams.get(queryStringKey)
+            ? 'text-gray-bg-base'
+            : 'text-gray-accent2'
         }
       />
       <span>{getButtonText()}</span>

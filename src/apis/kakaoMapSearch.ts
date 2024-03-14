@@ -4,6 +4,10 @@ import {
   KakaoMapSearchAPIResponse,
   LocationItem,
 } from '@/apis/types/KakaoMapSearch';
+import {
+  INFINITE_QUERY_KEY,
+  KAKAO_MAP_SEARCH_QUERY_KEY,
+} from '@/constants/queryKey';
 
 import { useGetKakaoMapScript } from './kakaoMapScript';
 
@@ -35,7 +39,7 @@ export const useGetInfiniteKakaoMapSearchApi = (searchTerm: string) => {
     fetchStatus,
     fetchNextPage,
   } = useSuspenseInfiniteQuery({
-    queryKey: ['kakao-map-search', 'infinite', searchTerm],
+    queryKey: [KAKAO_MAP_SEARCH_QUERY_KEY, INFINITE_QUERY_KEY, searchTerm],
     queryFn: ({ pageParam }) => kakaoMapSearch(searchTerm, pageParam),
     initialPageParam: 1,
     // Next Page가 없는 경우 undefined를 반환해야 한다고 해요.
