@@ -180,3 +180,30 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .backdrop {
   @apply bg-gray-accent1 dark:bg-gray-accent7;
 }
+
+.fade-page-transition-enter {
+  opacity: 0;
+}
+
+.fade-page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+.fade-page-transition-exit {
+  opacity: 1;
+}
+
+.fade-page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.transition-group {
+  @apply absolute left-0 top-0 h-full w-full;
+}
+
+/* Page가 항상 div일 것으로 예상해요 */
+.transition-group > div {
+  @apply absolute left-0 top-0 h-full w-full;
+}
