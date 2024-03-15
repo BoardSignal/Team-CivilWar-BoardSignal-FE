@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
@@ -22,9 +24,10 @@ import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
-import ProfileEdit from './pages/ProfileEdit';
+import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
+import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -43,49 +46,99 @@ const AnimatedRoutes = () => {
         timeout={300}
       >
         <Routes location={location}>
-          <Route path='' element={<GatheringListPage />} />
-          <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
-          <Route path={CHATS_PAGE_URL} element={<HomePage />} />
-          <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
+          <Route
+            path=''
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <GatheringListPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={LOGIN_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <LoginPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={CHATS_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={BOARD_GAMES_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
           <Route
             path={`${BOARD_GAMES_PAGE_URL}/:boardGameId`}
-            element={<BoardGameDetailPage />}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <BoardGameDetailPage />
+              </Suspense>
+            }
           />
           <Route
             path={NOTIFICATIONS_PAGE_URL}
             element={
-              <AuthorizedRoute>
-                <NotificationListPage />
-              </AuthorizedRoute>
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <NotificationListPage />
+                </AuthorizedRoute>
+              </Suspense>
             }
           />
           <Route
             path={`${USERS_PAGE_URL}/:userId`}
             element={
-              <AuthorizedRoute>
-                <ProfilePage />
-              </AuthorizedRoute>
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <ProfilePage />
+                </AuthorizedRoute>
+              </Suspense>
             }
           />
           <Route
             path={GATHERINGS_CREATE_PAGE_URL}
             element={
-              <AuthorizedRoute>
-                <GatheringCreatePage />
-              </AuthorizedRoute>
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <GatheringCreatePage />
+                </AuthorizedRoute>
+              </Suspense>
             }
           />
           <Route
             path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
-            element={<GatheringFixPage />}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <GatheringFixPage />
+              </Suspense>
+            }
           />
           <Route
             path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
-            element={<HomePage />}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <HomePage />
+              </Suspense>
+            }
           />
           <Route
             path={`${USERS_EDIT_PAGE_URL}/:userId`}
-            element={<ProfileEdit />}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <ProfileEdit />
+              </Suspense>
+            }
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
