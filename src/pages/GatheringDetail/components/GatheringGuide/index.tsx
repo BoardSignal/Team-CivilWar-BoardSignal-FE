@@ -71,7 +71,7 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
       <GuideItem
         iconId='time-fill'
         label='시간대'
-        content={convertToKoreaTime(startTime ? startTime : time)}
+        content={startTime ? convertToKoreaTime(startTime) : time}
       />
       <GuideItem
         iconId='map-pin-fill'
