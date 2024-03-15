@@ -1,13 +1,18 @@
 import { useState } from 'react';
 
+import { useNavigate, useParams } from 'react-router-dom';
+
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import { SUCCESS_FIX_GATHERING_MODAL_MESSAGE } from '@/constants/messages/modal';
+import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 
 import GatheringFixForm from './GatheringFixForm';
 
 const GatheringFixPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { gatheringId } = useParams() as { gatheringId: string };
+  const navigate = useNavigate();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -15,6 +20,7 @@ const GatheringFixPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}`);
   };
 
   return (
