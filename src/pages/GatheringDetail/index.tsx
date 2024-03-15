@@ -51,7 +51,10 @@ const GatheringDetailPage = () => {
         onSelectTab={handleTabSelect}
       />
       {activeTab ? (
-        <GatheringParticipants participants={participantResponse} />
+        <GatheringParticipants
+          participants={participantResponse}
+          isLeader={isLeader}
+        />
       ) : (
         <GatheringIntroduce gatheringIntroduce={gatheringIntroduce} />
       )}

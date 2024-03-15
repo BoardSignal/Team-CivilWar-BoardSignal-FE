@@ -10,6 +10,11 @@ export const DELETE_GATHERING_MODAL_MESSAGE = '정말 모임을 삭제하시겠�
 export const SUCCESS_DELETE_GATHERING_MODAL_MESSAGE = '모임이 취소됐어요.';
 export const SUCCESS_FIX_GATHERING_MODAL_MESSAGE = '모임이 확정됐어요.';
 export const SUCCESS_UNFIX_GATHERING_MODAL_MESSAGE = '모임 확정이 취소됐어요.';
+
+export const KICK_PARTICIPANT_MODAL_MESSAGE = '정말 강퇴하시겠어요?';
+
+export const SUCCESS_KICK_PARTICIPANT_MODAL_MESSAGE = '강퇴했어요.';
+
 export const SUCCESS_CREATE_TIP = '공략이 작성됐어요.';
 export const SUCCESS_DELETE_TIP = '공략을 삭제했어요.';
 

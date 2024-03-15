@@ -18,6 +18,8 @@ interface ModalProps extends VariantProps<typeof modalTitleCSS> {
   isOpen: boolean;
   onClose: () => void;
   onDelete?: () => void;
+
+  onKick?: (arg0: string) => void;
   title: string;
   children: ReactNode;
   buttonChildren: string;
@@ -27,6 +29,7 @@ const Modal = ({
   isOpen,
   onClose,
   onDelete,
+  onKick,
   title,
   variant,
   children,
@@ -38,6 +41,11 @@ const Modal = ({
 
   const handleDelete = () => {
     onDelete && onDelete();
+    onClose();
+  };
+
+  const handleKick = (userId: string) => {
+    onKick && onKick(userId);
     onClose();
   };
 
@@ -55,7 +63,11 @@ const Modal = ({
           )}
           {variant === 'danger' && (
             <>
-              <Button variant='danger' onClick={handleDelete} className='mt-8'>
+              <Button
+                variant='danger'
+                onClick={handleDelete || handleKick}
+                className='mt-8'
+              >
                 {buttonChildren}
               </Button>
               <Button variant='outline' onClick={onClose} className='mt-2'>
