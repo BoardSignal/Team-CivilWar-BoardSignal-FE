@@ -15,7 +15,5 @@ export default meta;
 type Story = StoryObj<typeof GatheringIntroduce>;
 
 export const Default: Story = {
-  args: {
-    imageUrl: 'https://picsum.photos/200/200',
-  },
+  args: {},
 };
