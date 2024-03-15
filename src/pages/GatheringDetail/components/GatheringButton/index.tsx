@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
 import {
+  DELETE_GATHERING_MODAL_MESSAGE,
   OUT_GATHERING_MODAL_MESSAGE,
+  SUCCESS_DELETE_GATHERING_MODAL_MESSAGE,
   SUCCESS_GATHERING_JOIN_MODAL_MESSAGE,
   SUCCESS_OUT_GATHERING_MODAL_MESSAGE,
 } from '@/constants/messages/modal';
@@ -80,6 +82,7 @@ const UnFixedIsLeaderGatheringButton = ({
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gatheringDelete = useGathering();
+  const navigate = useNavigate();
 
   const handleOpenErrorModal = () => {
     setIsErrorModalOpen(true);
@@ -91,6 +94,7 @@ const UnFixedIsLeaderGatheringButton = ({
 
   const handleClosePrimaryModal = () => {
     setIsModalOpen(false);
+    navigate('/');
   };
 
   const handleOpenPrimaryModal = () => {
@@ -112,7 +116,7 @@ const UnFixedIsLeaderGatheringButton = ({
         title='안내'
         buttonChildren='확인'
       >
-        {OUT_GATHERING_MODAL_MESSAGE}
+        {DELETE_GATHERING_MODAL_MESSAGE}
       </Modal>
       <Modal
         variant='primary'
@@ -121,7 +125,7 @@ const UnFixedIsLeaderGatheringButton = ({
         title='안내'
         buttonChildren='확인'
       >
-        {SUCCESS_OUT_GATHERING_MODAL_MESSAGE}
+        {SUCCESS_DELETE_GATHERING_MODAL_MESSAGE}
       </Modal>
       <Link to={`${GATHERINGS_FIX_PAGE_URL}/${gatheringId}`}>
         <Button variant='primary'>모임 확정하기</Button>
