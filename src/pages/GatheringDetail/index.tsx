@@ -3,13 +3,17 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
-import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
+import { useGetIsJoinedUserApi } from '@/apis/getLoggedInUser';
+import SpinnerFullScreen from '@/components/Spinner/SpinnerFullScreen';
 import TabBar from '@/components/TabBar';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 import GatheringButton from './components/GatheringButton';
 import GatheringIntroduce from './components/GatheringIntroduce';
 import GatheringParticipants from './components/GatheringParticipants';
 import TabMenu from './components/TabMenu';
+
+const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
 
 const GatheringDetailPage = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -17,15 +21,20 @@ const GatheringDetailPage = () => {
   const gatheringDetail = useGetGatheringDetailApi(gatheringId);
   const { participantResponse, isLeader, isFix, ...gatheringIntroduce } =
     gatheringDetail;
-  const { id } = useGetLoggedInUserApi();
+
+  const { data, isLoading } = useGetIsJoinedUserApi(accessToken);
+
+  if (isLoading) {
+    return <SpinnerFullScreen />;
+  }
 
   const handleTabSelect = (index: number) => {
     setActiveTab(index);
   };
 
-  const isParticipation = participantResponse.some(
-    ({ userId }) => userId === id,
-  );
+  const isParticipation = data
+    ? participantResponse.some(({ userId }) => userId === data.id)
+    : false;
 
   return (
     <div className='flex h-full flex-col'>
