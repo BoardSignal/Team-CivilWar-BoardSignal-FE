@@ -25,6 +25,8 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
+import ChatListPage from './pages/ChatList';
+import ChatRoomPage from './pages/ChatRoom';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 import ProfileEdit from './pages/ProfileEdit';
