@@ -25,14 +25,15 @@ export interface GatheringDetailResponse {
   place: string | null;
   minAge: number;
   maxAge: number;
-  minParticipant: number;
-  maxParticipant: number;
+  minParticipants: number;
+  maxParticipants: number;
   imageUrl: string | null;
   isLeader: boolean;
   isFix: '확정' | '미확정';
   allowedGender: string;
   categories: string[];
   participantResponse: Participant[];
+  createdAt: string;
 }
 
 const getGatheringDetail = (gatheringId: string) =>
@@ -46,5 +47,41 @@ export const useGetGatheringDetailApi = (gatheringId: string) => {
     queryFn: () => getGatheringDetail(gatheringId),
   });
 
-  return data;
+  const {
+    id,
+    imageUrl,
+    title,
+    description,
+    time,
+    subwayLine,
+    subwayStation,
+    minAge,
+    maxAge,
+    allowedGender,
+    minParticipants,
+    maxParticipants,
+    categories,
+    participantResponse,
+    createdAt,
+  } = data;
+
+  return {
+    gathering: data,
+    gatheringListItem: {
+      id,
+      imageUrl,
+      title,
+      description,
+      time,
+      station: `${subwayStation}(${subwayLine})`,
+      minAge,
+      maxAge,
+      allowedGender,
+      minParticipants,
+      maxParticipants,
+      categories,
+      headCount: participantResponse.length,
+      createdAt,
+    },
+  };
 };
