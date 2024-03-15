@@ -36,5 +36,4 @@ const DUMMY_REVIEWSELECT: ReviewProps[] = [
   },
 ];
 
-// 스토리 정의
 export const Default: Story = { args: { reviews: DUMMY_REVIEWSELECT } };

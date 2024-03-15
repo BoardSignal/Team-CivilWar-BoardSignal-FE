@@ -5,15 +5,19 @@ import Icon from '@/components/Icon';
 interface ReviewProps {
   reviewScore: string;
   content: string;
-  onChange: (score: string) => void;
 }
 
 interface ReviewSelectProps {
   reviews: ReviewProps[];
   onChange: (index: number, score: string) => void;
+  userId: number;
 }
 
-const Review = ({ reviewScore, content, onChange }: ReviewProps) => {
+const Review = ({
+  reviewScore,
+  content,
+  onChange,
+}: ReviewProps & { onChange: (score: string) => void }) => {
   const [selected, setSelected] = useState(reviewScore);
 
   const handleClick = (score: string) => {
@@ -23,15 +27,13 @@ const Review = ({ reviewScore, content, onChange }: ReviewProps) => {
   };
 
   return (
-    <div className='flex justify-between'>
-      <div
-        className={`rounded-tl-0 ml-2 flex items-center rounded-bl-lg rounded-br-lg rounded-tr-lg bg-gray-accent7 p-2`}
-      >
+    <div className='flex justify-between px-4'>
+      <div className='rounded-tl-0 flex items-center rounded-bl-lg rounded-br-lg rounded-tr-lg bg-gray-accent7 p-2'>
         <span className='text-gray-accent1'>{content}</span>
       </div>
-      <div className='flex gap-2'>
+      <div className='flex gap-2 pb-2'>
         <div
-          className={`flex h-8 w-8 items-center justify-center rounded-full p-2 ${selected === '싫어요' ? 'bg-red-500' : 'bg-gray-accent5'}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-full ${selected === '싫어요' ? 'bg-red-500' : 'bg-gray-accent5'}`}
         >
           <Icon
             id='thumb-down-fill'
@@ -40,7 +42,7 @@ const Review = ({ reviewScore, content, onChange }: ReviewProps) => {
           />
         </div>
         <div
-          className={`flex h-8 w-8 items-center justify-center rounded-full p-2 ${selected === '좋아요' ? 'bg-green-500' : 'bg-gray-accent5'}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-full ${selected === '좋아요' ? 'bg-green-500' : 'bg-gray-accent5'}`}
         >
           <Icon
             id='thumb-up-fill'
