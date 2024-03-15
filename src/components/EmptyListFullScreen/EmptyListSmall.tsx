@@ -1,8 +1,11 @@
+import { cn } from '@/utils/cn';
+
 import Icon from '../Icon';
 
 interface EmptyListSmallProps {
   title: string;
   message: string;
+  className?: string;
 }
 
 /**
@@ -10,8 +13,13 @@ interface EmptyListSmallProps {
  *
  * 예시: 보드게임 상세 페이지의 공략 목록
  */
-const EmptyListSmall = ({ title, message }: EmptyListSmallProps) => (
-  <div className='mt-10 flex h-fit flex-col items-center justify-center border-b border-t border-gray-accent7 py-10'>
+const EmptyListSmall = ({ title, message, className }: EmptyListSmallProps) => (
+  <div
+    className={cn(
+      'flex h-fit flex-col items-center justify-center py-10',
+      className,
+    )}
+  >
     <div className='flex w-1/2 flex-col items-center gap-2'>
       <Icon id='inbox-2-fill' className='h-auto w-1/3 text-gray-accent6' />
       <div className='shrink-0 break-keep text-center font-bold text-gray-accent1'>
