@@ -1,12 +1,11 @@
 import { useKickParticipantsApi } from '@/apis/kickParticipants';
 import { showErrorToast } from '@/utils/showToast';
 
-export const useKickParticipants = (gatheringId: string) => {
+export const useKickParticipants = (gatheringId: number) => {
   const kickParticipantsApi = useKickParticipantsApi(gatheringId);
 
-  return async (userId: string, onOpenModal: () => void) => {
+  return async (userId: number, onOpenModal: () => void) => {
     const { data, isOk, isBadRequest } = await kickParticipantsApi(userId);
-    kickParticipantsApi;
     if (isBadRequest) {
       return showErrorToast(data.message);
     }
