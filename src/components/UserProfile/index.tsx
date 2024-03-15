@@ -9,7 +9,7 @@ import UserSignalTemperature from './UserSignalTemperature';
 
 export interface UserProfileProps {
   userProfile: ParticipantResponse;
-  isLeader: boolean;
+  isLeader?: boolean;
   onClick?: () => void;
 }
 

@@ -18,7 +18,6 @@ interface ModalProps extends VariantProps<typeof modalTitleCSS> {
   isOpen: boolean;
   onClose: () => void;
   onDelete?: () => void;
-
   onKick?: (arg0: string) => void;
   title: string;
   children: ReactNode;
