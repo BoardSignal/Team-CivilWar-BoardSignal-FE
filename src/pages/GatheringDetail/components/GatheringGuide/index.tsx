@@ -24,6 +24,20 @@ interface GuideItemProps {
   content: string;
 }
 
+const convertToKoreaTime = (startTime: string) => {
+  const date = new Date(startTime);
+  date.setHours(date.getHours() + 9);
+  const koreaTime = date.toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    hour12: true,
+  });
+
+  return koreaTime;
+};
+
 const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   <div className='flex gap-2'>
     <div className='flex w-[75px] gap-0.5'>
@@ -57,7 +71,7 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
       <GuideItem
         iconId='time-fill'
         label='시간대'
-        content={startTime ? startTime : time}
+        content={convertToKoreaTime(startTime ? startTime : time)}
       />
       <GuideItem
         iconId='map-pin-fill'
