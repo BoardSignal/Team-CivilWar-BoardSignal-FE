@@ -17,5 +17,6 @@ export const Default: Story = {
     title: '정령섬 심화 격주로 하실 1~2분',
     description:
       '두 명이서 하고 있습니다. 3~4인이 더 재밌어요. 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.',
+    createdAt: '2022-09-01T00:00:00.000Z',
   },
 };
