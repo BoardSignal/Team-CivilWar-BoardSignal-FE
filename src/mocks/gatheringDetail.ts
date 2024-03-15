@@ -9,13 +9,14 @@ export const mockGetGatheringDetailHandler = async () => {
     roomId: 1,
     title: '오후',
     description: '생성',
-    startTime: '주말 오후',
-    place: '영등포역 ',
+    time: '주말 오후',
+    subwayStation: '영등포역',
+    subwayLine: '1호선',
     minAge: 20,
     maxAge: 30,
     minParticipants: 4,
     maxParticipants: 6,
-    imageUrl: 'https://boardsignal-image.s3.ap-northeast-2.amazonaws.com/',
+    imageUrl: 'https://picsum.photos/200',
     isLeader: true,
     isFix: '확정',
     allowedGender: '혼성',
@@ -49,7 +50,7 @@ export const mockGetGatheringDetailHandler = async () => {
         mannerScore: 36.5,
       },
     ],
-    createdAt: '03-09T15:57:04',
+    createdAt: '2024-03-09T15:57:04',
   });
 };
 

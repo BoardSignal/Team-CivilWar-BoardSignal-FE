@@ -25,8 +25,6 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
-import ChatListPage from './pages/ChatList';
-import ChatRoomPage from './pages/ChatRoom';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -37,7 +35,7 @@ import ProfileEdit from './pages/ProfileEdit';
  * FIXME: CSSTransition과 Route를 분리하고자 했는데, 분리하면 애니메이션이 동작하지 않아서
  * 일단은 인라인하고 추후 리팩토링해볼게요..
  */
-const AnimatedRoutes = () => {
+export const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
@@ -48,22 +46,8 @@ const AnimatedRoutes = () => {
         timeout={300}
       >
         <Routes location={location}>
-          <Route
-            path=''
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <GatheringListPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={LOGIN_PAGE_URL}
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <LoginPage />
-              </Suspense>
-            }
-          />
+          <Route path='' element={<GatheringListPage />} />
+          <Route path={LOGIN_PAGE_URL} element={<LoginPage />} />
           <Route
             path={CHATS_PAGE_URL}
             element={
@@ -73,21 +57,10 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={`{CHATS_PAGE_URL}/:gatheringId`}
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <ChatRoomPage />
-              </Suspense>
-            }
+            path={`${CHATS_PAGE_URL}/:gatheringId`}
+            element={<ChatRoomPage />}
           />
-          <Route
-            path={BOARD_GAMES_PAGE_URL}
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <HomePage />
-              </Suspense>
-            }
-          />
+          <Route path={BOARD_GAMES_PAGE_URL} element={<HomePage />} />
           <Route
             path={`${BOARD_GAMES_PAGE_URL}/:boardGameId`}
             element={
@@ -157,5 +130,3 @@ const AnimatedRoutes = () => {
     </TransitionGroup>
   );
 };
-
-export default AnimatedRoutes;

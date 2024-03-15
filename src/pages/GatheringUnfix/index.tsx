@@ -20,9 +20,9 @@ const GatheringUnfixPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const currentUserId = useGetLoggedInUserId();
-  const { isFix, participantResponse: participants } = useGetGatheringDetailApi(
-    gatheringId as string,
-  );
+  const {
+    gathering: { isFix, participantResponse: participants },
+  } = useGetGatheringDetailApi(gatheringId as string);
 
   const handleOpenModal = () => setIsModalOpen(true);
 

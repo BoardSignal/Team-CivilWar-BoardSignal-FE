@@ -30,8 +30,15 @@ export const ROOMS_MY_END_GAMES_API_URL = '/rooms/my/end-games';
 export const ROOMS_OUT_API_URL = '/rooms/out';
 export const ROOMS_SEARCH_API_URL = '/rooms/search';
 export const ROOMS_UNFIX_API_URL = '/rooms/unfix';
+export const ROOMS_CHATS_API_URL = '/rooms/chats';
+export const ROOMS_CHATS_MY_GAMES_API_URL = '/rooms/my/games';
 
 export const NOTIFICATIONS_API_URL = '/notifications';
 export const FCM_TOKEN_API_URL = '/notifications/token';
 
 export const REVIEWS_API_URL = '/reviews';
+
+// WebSocket
+export const CONNECT_END_POINT = '/ws/chats';
+export const SUBSCRIBE_END_POINT = '/topic/chats';
+export const SEND_END_POINT = '/app/chats';

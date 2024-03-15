@@ -13,6 +13,41 @@ const MINUTES_PER_TIME_UNIT: MinutesPerTimeUnit[] = [
   { unit: 'minute', minutes: 1 },
 ];
 
+const validateTime = (time: string) => {
+  if (!new Date(time).getTime()) {
+    throw new Error('Invalid Date');
+  }
+};
+
+export const getShortTime = (time: string) => {
+  return new Intl.DateTimeFormat('ko-KR', {
+    timeStyle: 'short',
+  }).format(new Date(time));
+};
+
+export const getFullDate = (time: string) => {
+  return new Intl.DateTimeFormat('ko-KR').format(new Date(time));
+};
+
+export const isDifferentDay = (current: string, previous: string) => {
+  validateTime(current);
+  validateTime(previous);
+
+  if (getFullDate(current) === getFullDate(previous)) {
+    return false;
+  }
+
+  return true;
+};
+
+export const displayTimeUntilToday = (time: string) => {
+  validateTime(time);
+
+  return isDifferentDay(time, String(new Date()))
+    ? getFullDate(time)
+    : getShortTime(time);
+};
+
 const getMinutesDifferenceFromNow = (time: string) => {
   if (!new Date(time).getTime()) {
     throw new Error('Invalid Date');
