@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 import {
   GetGatheringListParams,
   useGetGatheringListApi,
-} from '@/apis/getGatheringList';
+} from '@/apis/gatheringList';
 import GatheringListItem from '@/components/GatheringListItem';
 import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '@/components/Spinner/SpinnerListBottom';
@@ -24,15 +24,11 @@ const GatheringList = () => {
     category: [],
   });
 
-  const {
-    data: { roomsInfos: gatherings },
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useGetGatheringListApi({
-    size: NUMBER_OF_GETTING_GATHERINGS,
-    ...queryParams,
-  });
+  const { gatherings, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useGetGatheringListApi({
+      size: NUMBER_OF_GETTING_GATHERINGS,
+      ...queryParams,
+    });
 
   const updateQueryParams = () => {
     const [station, time, category, gender] = OPTIONS.map(

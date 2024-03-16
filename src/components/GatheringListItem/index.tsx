@@ -1,18 +1,28 @@
+import { ComponentPropsWithoutRef } from 'react';
+
 import { Link } from 'react-router-dom';
 
-import type { Gathering } from '@/apis/getGatheringList';
+import type { Gathering } from '@/apis/gatheringList';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
+import { cn } from '@/utils/cn';
 import { getRelativeTimeWithin } from '@/utils/time';
 
-interface GatheringListItemProps {
+interface GatheringListItemProps extends ComponentPropsWithoutRef<'div'> {
   gathering: Gathering;
+  isButtonDisable?: boolean;
+  isFullDate?: boolean;
 }
 
-const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
+const GatheringListItem = ({
+  gathering,
+  isButtonDisable = false,
+  isFullDate = false,
+  className,
+}: GatheringListItemProps) => {
   const {
     id: gatheringId,
     imageUrl,
@@ -47,7 +57,13 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
 
   return (
     <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}`}>
-      <Button className='h-fit gap-4 border-b border-gray-accent7 p-4'>
+      <Button
+        className={cn(
+          'h-fit gap-4 border-b border-gray-accent7 p-4',
+          className,
+        )}
+        disabled={isButtonDisable}
+      >
         <img
           src={imageUrl ?? defaultThumbnailImage}
           alt={title}
@@ -69,7 +85,11 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
             </div>
           </div>
           <div className='flex justify-between text-xs text-gray-accent3'>
-            <div>{getRelativeTimeWithin(createdAt)}</div>
+            <div>
+              {isFullDate
+                ? getRelativeTimeWithin(createdAt, 0)
+                : getRelativeTimeWithin(createdAt)}
+            </div>
             <div className='flex items-center gap-1'>
               <Icon id='user-line' size={12} />
               <span>{headCount}</span>

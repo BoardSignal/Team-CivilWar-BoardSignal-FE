@@ -8,6 +8,7 @@ import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotF
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
+  END_GAMES_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
@@ -25,6 +26,7 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
+import EndGamesPage from './pages/EndGames';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -137,6 +139,14 @@ const AnimatedRoutes = () => {
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <ProfileEdit />
+              </Suspense>
+            }
+          />
+          <Route
+            path={END_GAMES_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <EndGamesPage />
               </Suspense>
             }
           />
