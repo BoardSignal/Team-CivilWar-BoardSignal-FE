@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import { Navigate } from 'react-router-dom';
 
-import { useGetIsJoinedUserApi } from '@/apis/getLoggedInUser';
+import { useGetIsJoinedUserApi } from '@/apis/loggedInUser';
 import {
   NOT_LOGGED_IN_USER_MESSAGE,
   NOT_SIGN_UP_USER_MESSAGE,

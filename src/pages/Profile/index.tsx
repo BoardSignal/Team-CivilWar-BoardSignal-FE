@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
+import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import { useGetUserProfilesApi } from '@/apis/userProfile';
 import { GNB } from '@/components/GNB';
 import TabBar from '@/components/TabBar';

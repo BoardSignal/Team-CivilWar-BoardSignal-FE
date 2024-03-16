@@ -6,3 +6,5 @@ export const PROFILES_QUERY_KEY = 'profiles';
 export const KAKAO_MAP_SEARCH_QUERY_KEY = 'kakao-map-search';
 export const KAKAO_MAP_SEARCH_SCRIPT_QUERY_KEY = 'kakao-map-search-script';
 export const INFINITE_QUERY_KEY = 'infinite';
+export const END_GAME_LIST_QUERY_KEY = 'end-game-list';
+export const GATHERINGS_QUERY_KEY = 'gatherings';
