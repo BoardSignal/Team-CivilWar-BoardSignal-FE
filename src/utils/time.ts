@@ -13,6 +13,23 @@ const MINUTES_PER_TIME_UNIT: MinutesPerTimeUnit[] = [
   { unit: 'minute', minutes: 1 },
 ];
 
+export const getRemainDay = (time: string) => {
+  if (!new Date(time).getTime()) {
+    throw new Error('Invalid Date');
+  }
+
+  const pastTime = new Date(
+    time.replace(/T\d{2}:\d{2}:\d{2}/, 'T00:00:00'),
+  ).getTime();
+  const currentTime = new Date(
+    new Date().toISOString().replace(/T\d{2}:\d{2}:\d{2}/, 'T00:00:00'),
+  ).getTime();
+
+  return Math.floor(
+    (currentTime - pastTime) / (MINUTES_PER_TIME_UNIT[3].minutes * 60000),
+  );
+};
+
 const getMinutesDifferenceFromNow = (time: string) => {
   if (!new Date(time).getTime()) {
     throw new Error('Invalid Date');
