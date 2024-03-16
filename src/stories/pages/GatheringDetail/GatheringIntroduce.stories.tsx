@@ -29,7 +29,7 @@ export const Default: Story = {
       maxAge: 30,
       minParticipants: 4,
       maxParticipants: 6,
-      imageUrl: 'https://boardsignal-image.s3.ap-northeast-2.amazonaws.com/',
+      imageUrl: 'https://via.placeholder.com/300',
       allowedGender: '혼성',
       categories: [
         '워게임',

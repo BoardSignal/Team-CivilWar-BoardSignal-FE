@@ -13,7 +13,7 @@ import {
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
-import { useKickParticipants } from '../../hooks/useKickParticipants';
+import { useKickParticipant } from '../../hooks/useKickParticipant';
 
 interface GatheringParticipantsProps {
   participants: ParticipantResponse[];
@@ -30,7 +30,7 @@ const GatheringParticipants = ({
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
 
-  const kickParticipants = useKickParticipants(Number(gatheringId));
+  const kickParticipants = useKickParticipant(Number(gatheringId));
 
   const handleOpenErrorModal = () => {
     setIsErrorModalOpen(true);
@@ -62,7 +62,10 @@ const GatheringParticipants = ({
       <section className='flex h-full grow flex-col overflow-y-auto'>
         <ul>
           {participants.map(participant => (
-            <li key={participant.userId}>
+            <li
+              key={participant.userId}
+              className='border-b border-gray-accent7'
+            >
               <Modal
                 variant='danger'
                 isOpen={isErrorModalOpen}
@@ -87,7 +90,6 @@ const GatheringParticipants = ({
                 isLeader={isLeader}
                 onClick={handleOpenErrorModal}
               />
-              <div className='border-b border-gray-accent7'></div>
             </li>
           ))}
         </ul>

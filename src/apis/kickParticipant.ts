@@ -4,7 +4,7 @@ import { ROOMS_KICK_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
-export const kickParticipants = (roomId: number, userId: number) =>
+export const kickParticipant = (roomId: number, userId: number) =>
   api.post({
     url: `${ROOMS_KICK_API_URL}`,
     data: {
@@ -13,9 +13,9 @@ export const kickParticipants = (roomId: number, userId: number) =>
     },
   });
 
-export const useKickParticipantsApi = (roomId: number) => {
+export const useKickParticipantApi = (roomId: number) => {
   const { mutateAsync } = useMutation({
-    mutationFn: (userId: number) => kickParticipants(roomId, userId),
+    mutationFn: (userId: number) => kickParticipant(roomId, userId),
   });
 
   return mutateAsync;

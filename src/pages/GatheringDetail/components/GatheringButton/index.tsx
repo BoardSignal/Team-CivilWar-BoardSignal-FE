@@ -28,7 +28,11 @@ interface GatheringButtonProps {
   isFix: '확정' | '미확정';
 }
 
-const NotParticipationButton = ({ gatheringId }: { gatheringId: string }) => {
+interface GatheringIdProps {
+  gatheringId: string;
+}
+
+const NotParticipationButton = ({ gatheringId }: GatheringIdProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gatheringParticipants = useGatheringParticipants();
   const queryClient = useQueryClient();
@@ -66,7 +70,7 @@ const NotParticipationButton = ({ gatheringId }: { gatheringId: string }) => {
   );
 };
 
-const FixedGatheringButton = ({ gatheringId }: { gatheringId: string }) => {
+const FixedGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   return (
     <Link to={`${GATHERINGS_UNFIX_PAGE_URL}/${gatheringId}`}>
       <Button variant='danger'>모임 확정 취소하기</Button>
@@ -74,11 +78,7 @@ const FixedGatheringButton = ({ gatheringId }: { gatheringId: string }) => {
   );
 };
 
-const UnFixedIsLeaderGatheringButton = ({
-  gatheringId,
-}: {
-  gatheringId: string;
-}) => {
+const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gatheringDelete = useGathering();
@@ -139,9 +139,7 @@ const UnFixedIsLeaderGatheringButton = ({
 
 const UnFixedIsParticipantGatheringButton = ({
   gatheringId,
-}: {
-  gatheringId: string;
-}) => {
+}: GatheringIdProps) => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const gatheringNonparticipants = useGatheringNonparticipants();

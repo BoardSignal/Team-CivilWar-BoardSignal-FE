@@ -5,7 +5,7 @@ interface GatheringDescriptionProps {
   description: string;
   createdAt: string;
 }
-
+const convertLimitDate = 14;
 const GatheringDescription = ({
   title,
   createdAt,
@@ -15,7 +15,7 @@ const GatheringDescription = ({
     <div className='flex flex-col'>
       <span className='text-xl font-bold'>{title}</span>
       <span className='mb-4 mt-1 text-[10px] text-gray-accent3 underline'>
-        {getRelativeTimeWithin(createdAt, 14)}
+        {getRelativeTimeWithin(createdAt, convertLimitDate)}
       </span>
       <p className='whitespace-normal text-sm text-gray-accent2'>
         {description}
