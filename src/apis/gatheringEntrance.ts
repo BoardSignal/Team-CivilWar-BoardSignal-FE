@@ -4,14 +4,14 @@ import { ROOMS_IN_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
-export const postGatheringParticipants = (roomId: string) =>
+export const postGatheringEntrance = (roomId: string) =>
   api.post({
     url: `${ROOMS_IN_API_URL}/${roomId}`,
   });
 
-export const usePostGatheringParticipantsApi = () => {
+export const usePostGatheringEntranceApi = () => {
   const { mutateAsync } = useMutation({
-    mutationFn: postGatheringParticipants,
+    mutationFn: postGatheringEntrance,
   });
 
   return mutateAsync;

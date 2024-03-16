@@ -13,7 +13,11 @@ export interface UserProfileProps {
   onClick?: () => void;
 }
 
-const UserProfile = ({ userProfile, isLeader, onClick }: UserProfileProps) => {
+const UserProfile = ({
+  userProfile,
+  isLeader: isLoggedInLeader,
+  onClick,
+}: UserProfileProps) => {
   const {
     nickname,
     profileImageUrl,
@@ -42,7 +46,7 @@ const UserProfile = ({ userProfile, isLeader, onClick }: UserProfileProps) => {
           </span>
           <span className='text-xs text-gray-accent2'>{ageGroup}</span>
         </div>
-        {isLeader && !isParticipantLeader && (
+        {isLoggedInLeader && !isParticipantLeader && (
           <Button variant='danger' className='w-fit p-4' onClick={onClick}>
             강퇴
           </Button>
