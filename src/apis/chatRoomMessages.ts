@@ -1,10 +1,11 @@
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { ROOMS_CHATS_API_URL } from '@/constants/apiRoutes';
+import { CHATS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
-export interface Message {
+export interface ChatMessage {
   userId: number;
   nickname: string;
   userImageUrl: string | null;
@@ -13,28 +14,25 @@ export interface Message {
   createAt: string;
 }
 
-interface ChatRoomMessagesResponse {
-  chatList: Message[];
+interface ChatMessagesResponse {
+  chatList: ChatMessage[];
   currentPageNumber: number;
   size: number;
   hasNext: boolean;
 }
 
-const getChatRoomMessages = (gatheringId: number, size: number, page: number) =>
-  api.get<ChatRoomMessagesResponse>({
-    url: `${ROOMS_CHATS_API_URL}/${gatheringId}`,
+const getChatMessagesByRoomId = (roomId: number, size: number, page: number) =>
+  api.get<ChatMessagesResponse>({
+    url: `${ROOMS_CHATS_API_URL}/${roomId}`,
     params: { size, page },
   });
 
-export const useGetChatRoomMessagesApi = (
-  gatheringId: number,
-  size: number,
-) => {
+export const useGetChatRoomMessagesApi = (roomId: number, size: number) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
-      queryKey: ['chats', gatheringId],
+      queryKey: [CHATS_QUERY_KEY, roomId],
       queryFn: ({ pageParam }) =>
-        getChatRoomMessages(gatheringId, size, pageParam),
+        getChatMessagesByRoomId(roomId, size, pageParam),
       initialPageParam: 0,
       getNextPageParam: ({ hasNext, currentPageNumber }) =>
         hasNext ? currentPageNumber + 1 : undefined,
@@ -42,10 +40,10 @@ export const useGetChatRoomMessagesApi = (
 
   return {
     messages: data.pages
-      .map(({ chatList }) => [...chatList])
+      .map(({ chatList }) => chatList)
       .flat()
       .reverse(),
-    recentChat: data.pages.flat()[0].chatList[0],
+    lastChatMessage: data.pages.flat()[0].chatList[0],
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

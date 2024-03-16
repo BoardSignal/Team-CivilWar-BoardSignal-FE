@@ -1,19 +1,19 @@
 import { ComponentPropsWithRef } from 'react';
 
-import type { Message } from '@/apis/chatRoomMessages';
+import type { ChatMessage } from '@/apis/chatRoomMessages';
 import defaultProfileImage from '@/assets/default-profile-image.png';
 import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import { cn } from '@/utils/cn';
 import { getFullDate, getShortTime } from '@/utils/time';
 
 interface ChatBubbleProps {
-  message: Message;
-  isContinued?: boolean;
+  message: ChatMessage;
+  isFirstMessage?: boolean;
 }
 
 interface BasicChatBubbleProps extends ComponentPropsWithRef<'div'> {
-  message: Message;
-  isCurrentUser?: boolean;
+  message: ChatMessage;
+  isMessageOwner?: boolean;
 }
 
 export const ChatDate = ({ date }: { date: string }) => (
@@ -24,7 +24,7 @@ export const ChatDate = ({ date }: { date: string }) => (
 
 const BasicChatBubble = ({
   message,
-  isCurrentUser = false,
+  isMessageOwner = false,
   className,
 }: BasicChatBubbleProps) => {
   const { content, createAt } = message;
@@ -33,7 +33,7 @@ const BasicChatBubble = ({
     <div
       className={cn(
         'mb-1 flex items-end gap-1',
-        isCurrentUser && 'flex-row-reverse',
+        isMessageOwner && 'flex-row-reverse',
         className,
       )}
     >
@@ -45,42 +45,49 @@ const BasicChatBubble = ({
   );
 };
 
-const OtherUserChatBubble = ({ message, isContinued }: ChatBubbleProps) => {
+const ChatBubbleWithAvatar = ({ message }: ChatBubbleProps) => {
   const { nickname, userImageUrl } = message;
 
   return (
-    <div>
-      {!isContinued ? (
-        <div className='mt-1 flex gap-2'>
-          <img
-            src={userImageUrl ?? defaultProfileImage}
-            alt={nickname}
-            className='size-10 rounded-full object-cover'
-          />
-          <div>
-            <div className='text-[10px] font-bold text-gray-accent2'>
-              {nickname}
-            </div>
-            <BasicChatBubble message={message} />
-          </div>
+    <div className='mt-1 flex gap-2'>
+      <img
+        src={userImageUrl ?? defaultProfileImage}
+        alt={nickname}
+        className='size-10 rounded-full object-cover'
+      />
+      <div>
+        <div className='text-[10px] font-bold text-gray-accent2'>
+          {nickname}
         </div>
-      ) : (
-        <BasicChatBubble message={message} className='ml-12' />
-      )}
+        <BasicChatBubble message={message} />
+      </div>
     </div>
   );
 };
 
-const ChatBubble = ({ message, isContinued = false }: ChatBubbleProps) => {
+const OtherUserChatBubble = ({ message, isFirstMessage }: ChatBubbleProps) => (
+  <div>
+    {isFirstMessage ? (
+      <ChatBubbleWithAvatar message={message} />
+    ) : (
+      <BasicChatBubble message={message} className='ml-12' />
+    )}
+  </div>
+);
+
+const ChatBubble = ({ message, isFirstMessage = false }: ChatBubbleProps) => {
   const { userId } = message;
   const currentUserId = useGetLoggedInUserId();
 
   return (
     <div>
       {currentUserId === userId ? (
-        <BasicChatBubble message={message} isCurrentUser />
+        <BasicChatBubble message={message} isMessageOwner />
       ) : (
-        <OtherUserChatBubble message={message} isContinued={isContinued} />
+        <OtherUserChatBubble
+          message={message}
+          isFirstMessage={isFirstMessage}
+        />
       )}
     </div>
   );

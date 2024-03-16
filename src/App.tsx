@@ -3,8 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import ResponsiveLayoutWrapper from '@/components/Layout';
 
-import { AnimatedRoutes } from './AnimatedRoutes';
 import { ReactQueryClientProvider } from './ReactQueryClientProvider';
+import AnimatedRoutes from './Router';
 
 const App = () => (
   <ReactQueryClientProvider>

@@ -5,9 +5,9 @@ import { useQueryClient } from '@tanstack/react-query';
 import SockJS from 'sockjs-client';
 
 import {
-  CONNECT_END_POINT,
-  SEND_END_POINT,
-  SUBSCRIBE_END_POINT,
+  CHAT_CONNECT_SOCKET_URL,
+  CHAT_SEND_SOCKET_URL,
+  CHAT_SUBSCRIBE_SOCKET_URL,
 } from '@/constants/apiRoutes';
 
 const useChatting = (gatheringId: number) => {
@@ -17,7 +17,7 @@ const useChatting = (gatheringId: number) => {
 
   const connect = () => {
     const socket = new SockJS(
-      `${import.meta.env.VITE_LOGIN_URL}${CONNECT_END_POINT}`,
+      `${import.meta.env.VITE_LOGIN_URL}${CHAT_CONNECT_SOCKET_URL}`,
     );
     client.current = Stomp.over(socket);
 
@@ -28,7 +28,7 @@ const useChatting = (gatheringId: number) => {
       },
       () => {
         client.current?.subscribe(
-          `${SUBSCRIBE_END_POINT}/${gatheringId}`,
+          `${CHAT_SUBSCRIBE_SOCKET_URL}/${gatheringId}`,
           () => {},
           {
             Authorization: `Bearer ${accessToken}`,
@@ -62,7 +62,7 @@ const useChatting = (gatheringId: number) => {
     }
 
     client.current?.publish({
-      destination: `${SEND_END_POINT}/${gatheringId}`,
+      destination: `${CHAT_SEND_SOCKET_URL}/${gatheringId}`,
       headers: {
         Authorization: `Bearer ${accessToken}`,
         RoomId: String(gatheringId),

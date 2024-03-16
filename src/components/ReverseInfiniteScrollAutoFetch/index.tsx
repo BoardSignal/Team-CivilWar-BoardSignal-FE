@@ -28,12 +28,9 @@ const ReverseInfiniteScrollAutoFetch = ({
 
     const scrollTop = containerRef.current.scrollHeight - scrollHeight;
 
-    console.log(scrollTop);
-
     containerRef.current.scrollTop = scrollTop;
     setScrollHeight(containerRef.current.scrollHeight);
-
-    console.log(containerRef.current.scrollHeight);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data.length]);
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {

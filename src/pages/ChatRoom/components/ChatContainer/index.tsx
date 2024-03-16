@@ -44,7 +44,7 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
             )}
             <ChatBubble
               message={message}
-              isContinued={messages[index - 1]?.userId === message.userId}
+              isFirstMessage={messages[index - 1]?.userId !== message.userId}
             />
           </div>
         );

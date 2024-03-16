@@ -25,8 +25,8 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
-import ChatListPage from './pages/ChatList';
 import ChatRoomPage from './pages/ChatRoom';
+import ChatRoomListPage from './pages/ChatRoomList';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -68,7 +68,7 @@ const AnimatedRoutes = () => {
             path={CHATS_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <ChatListPage />
+                <ChatRoomListPage />
               </Suspense>
             }
           />

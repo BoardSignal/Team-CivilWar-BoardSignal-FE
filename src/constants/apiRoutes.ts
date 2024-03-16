@@ -39,6 +39,6 @@ export const FCM_TOKEN_API_URL = '/notifications/token';
 export const REVIEWS_API_URL = '/reviews';
 
 // WebSocket
-export const CONNECT_END_POINT = '/ws/chats';
-export const SUBSCRIBE_END_POINT = '/topic/chats';
-export const SEND_END_POINT = '/app/chats';
+export const CHAT_CONNECT_SOCKET_URL = '/ws/chats';
+export const CHAT_SUBSCRIBE_SOCKET_URL = '/topic/chats';
+export const CHAT_SEND_SOCKET_URL = '/app/chats';

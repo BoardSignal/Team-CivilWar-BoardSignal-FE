@@ -1,21 +1,14 @@
-import { useGetChatListApi } from '@/apis/chatList';
+import { useGetChatRoomListApi } from '@/apis/chatRoomList';
 import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '@/components/Spinner/SpinnerListBottom';
 import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 
-import ChatListItem from './ChatListItem';
+import ChatRoomListItem from './ChatRoomListItem';
 
-export interface ChatRoom {
-  id: number;
-  imageUrl: string | null;
-  title: string;
-  headCount: number;
-}
-
-const ChatList = () => {
+const ChatRoomList = () => {
   const currentUserId = useGetLoggedInUserId();
   const { chatRooms, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useGetChatListApi(10, currentUserId);
+    useGetChatRoomListApi(10, currentUserId);
 
   return (
     <InfiniteScrollAutoFetcher
@@ -28,7 +21,7 @@ const ChatList = () => {
       <ul>
         {chatRooms?.map(chatRoom => (
           <li key={chatRoom.id}>
-            <ChatListItem chatRoom={chatRoom} />
+            <ChatRoomListItem chatRoom={chatRoom} />
           </li>
         ))}
       </ul>
@@ -36,4 +29,4 @@ const ChatList = () => {
   );
 };
 
-export default ChatList;
+export default ChatRoomList;

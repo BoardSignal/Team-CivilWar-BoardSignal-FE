@@ -36,17 +36,7 @@ export interface GatheringDetailResponse {
   createdAt: string;
 }
 
-const getGatheringDetail = (gatheringId: string) =>
-  api.get<GatheringDetailResponse>({
-    url: `${ROOMS_API_URL}/${gatheringId}`,
-  });
-
-export const useGetGatheringDetailApi = (gatheringId: string) => {
-  const { data } = useSuspenseQuery({
-    queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
-    queryFn: () => getGatheringDetail(gatheringId),
-  });
-
+const gatheringListItemResponseMapper = (data: GatheringDetailResponse) => {
   const {
     id,
     imageUrl,
@@ -66,22 +56,36 @@ export const useGetGatheringDetailApi = (gatheringId: string) => {
   } = data;
 
   return {
+    id,
+    imageUrl,
+    title,
+    description,
+    time,
+    station: `${subwayStation}(${subwayLine})`,
+    minAge,
+    maxAge,
+    allowedGender,
+    minParticipants,
+    maxParticipants,
+    categories,
+    headCount: participantResponse.length,
+    createdAt,
+  };
+};
+
+const getGatheringDetail = (gatheringId: string) =>
+  api.get<GatheringDetailResponse>({
+    url: `${ROOMS_API_URL}/${gatheringId}`,
+  });
+
+export const useGetGatheringDetailApi = (gatheringId: string) => {
+  const { data } = useSuspenseQuery({
+    queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
+    queryFn: () => getGatheringDetail(gatheringId),
+  });
+
+  return {
     gathering: data,
-    gatheringListItem: {
-      id,
-      imageUrl,
-      title,
-      description,
-      time,
-      station: `${subwayStation}(${subwayLine})`,
-      minAge,
-      maxAge,
-      allowedGender,
-      minParticipants,
-      maxParticipants,
-      categories,
-      headCount: participantResponse.length,
-      createdAt,
-    },
+    gatheringListItem: gatheringListItemResponseMapper(data),
   };
 };

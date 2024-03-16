@@ -9,9 +9,11 @@ import ChatContainer from './components/ChatContainer';
 import ChatInput from './components/ChatInput';
 
 const ChatRoomPage = () => {
-  const { gatheringId } = useParams();
-  const { sendMessage } = useChatting(parseInt(gatheringId as string));
-  const { gatheringListItem } = useGetGatheringDetailApi(gatheringId as string);
+  const { gatheringId } = useParams() as { gatheringId: string };
+  const gatheringIdInteger = parseInt(gatheringId);
+
+  const { sendMessage } = useChatting(gatheringIdInteger);
+  const { gatheringListItem } = useGetGatheringDetailApi(gatheringId);
 
   return (
     <div className='flex h-full flex-col'>
@@ -21,7 +23,7 @@ const ChatRoomPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <GatheringListItem gathering={gatheringListItem} />
-      <ChatContainer gatheringId={parseInt(gatheringId as string)} />
+      <ChatContainer gatheringId={gatheringIdInteger} />
       <ChatInput onSend={sendMessage} />
     </div>
   );
