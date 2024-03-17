@@ -32,9 +32,7 @@ const BoardGameList = () => {
       className='flex flex-col'
     >
       {boardGamesInfos.map(boardGame => (
-        <li key={boardGame.boardGameId}>
-          <BoardGameListItem boardGame={boardGame} />
-        </li>
+        <BoardGameListItem key={boardGame.boardGameId} boardGame={boardGame} />
       ))}
     </InfiniteScrollAutoFetcher>
   );

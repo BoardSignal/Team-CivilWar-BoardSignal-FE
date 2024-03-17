@@ -56,19 +56,20 @@ const BoardGameListItem = ({
           className='size-[100px] rounded-lg border border-gray-accent7 object-contain'
         />
         <div className='flex flex-col items-start gap-2'>
-          <div className='flex flex-col gap-1'>
+          <div className='flex flex-col items-start gap-1'>
             <span className='font-bold text-gray-accent1'>{name}</span>
             <div className='flex gap-1'>
-              {/* 카테고리가 여러 개 인 경우의 디자인이 없어서 gap: 4px로 지정했어요 */}
               {categories.map(category => (
                 <Chip key={category}>{category}</Chip>
               ))}
             </div>
           </div>
-          <div className='flex gap-1'>
+          <div className='flex flex-col gap-1'>
+            <div className='flex gap-1'>
+              <Description title='인원' value={participantsText} />
+              <Description title='소요시간' value={playTimeText} />
+            </div>
             <Description title='난이도' value={difficulty} />
-            <Description title='인원' value={participantsText} />
-            <Description title='소요시간' value={playTimeText} />
           </div>
           <div className='flex items-center gap-2 py-0.5'>
             <Icon

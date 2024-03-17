@@ -32,16 +32,28 @@ const boardGameList = [
   {
     boardGameId: 3,
     name: 'Board Game 3',
-    categories: ['가족게임'],
+    categories: ['커플인기', '더지니어스'],
     difficulty: '어려움',
     minParticipants: 2,
     maxParticipants: 8,
-    fromPlayTime: 45,
-    toPlayTime: 120,
+    fromPlayTime: 125,
+    toPlayTime: 140,
     wishCount: 80,
     imageUrl: 'https://picsum.photos/seed/3/200/300',
   },
 ];
+
+// 긴 Mock이 필요해서 반복해서 만들었어요
+const repeatedboardGameList = [
+  ...boardGameList,
+  ...boardGameList,
+  ...boardGameList,
+].map((item, idx) => ({
+  ...item,
+  boardGameId: idx + 1,
+  imageUrl: `https://picsum.photos/seed/${idx}/200/300`,
+  name: `Board Game ${idx}`,
+}));
 
 export const mockGetNotificationsHandler: HttpResponseResolver = async ({
   request,
@@ -53,7 +65,7 @@ export const mockGetNotificationsHandler: HttpResponseResolver = async ({
 
   // 필터링을 흉내내서 조금 복잡해요.
   return HttpResponse.json({
-    boardGamesInfos: boardGameList.filter(item => {
+    boardGamesInfos: repeatedboardGameList.filter(item => {
       if (difficulty && item.difficulty !== difficulty) {
         return false;
       }
