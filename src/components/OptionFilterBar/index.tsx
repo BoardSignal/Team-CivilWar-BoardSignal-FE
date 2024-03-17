@@ -20,9 +20,10 @@ export interface Option {
 
 interface OptionFilterBarProps {
   options: Option[];
+  resetUrl?: string;
 }
 
-const OptionFilterBar = ({ options }: OptionFilterBarProps) => {
+const OptionFilterBar = ({ options, resetUrl = '/' }: OptionFilterBarProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleToggleButton = (queryStringKey: string, optionItem: string) => {
@@ -36,7 +37,7 @@ const OptionFilterBar = ({ options }: OptionFilterBarProps) => {
   return (
     <section className='scroll-none flex shrink-0 items-center overflow-x-auto whitespace-nowrap border-b border-gray-accent7 px-4 py-2'>
       <div className='flex w-max items-center gap-2'>
-        <Link to='/'>
+        <Link to={resetUrl}>
           <Button className='flex h-fit w-fit rounded-full bg-gray-accent7 p-2'>
             <Icon id='close-line' size={16} className='text-gray-accent2' />
           </Button>

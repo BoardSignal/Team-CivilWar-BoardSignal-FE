@@ -25,6 +25,7 @@ import ProfilePage from '@/pages/Profile';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
+import BoardGameListPage from './pages/BoardGameList';
 import GatheringFixPage from './pages/GatheringFix';
 import GatheringListPage from './pages/GatheringList';
 import ProfileEdit from './pages/ProfileEdit';
@@ -74,7 +75,7 @@ const AnimatedRoutes = () => {
             path={BOARD_GAMES_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <HomePage />
+                <BoardGameListPage />
               </Suspense>
             }
           />
