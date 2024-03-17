@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
-import { BoardGameListItemResponseDTO } from '@/apis/boardGameList';
+import { BoardGameListItemResponse } from '@/apis/boardGameList';
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 import { BOARD_GAMES_PAGE_URL } from '@/constants/pageRoutes';
 
 type BoardGameListItemProps = {
-  boardGame: BoardGameListItemResponseDTO;
+  boardGame: BoardGameListItemResponse;
 };
 
 interface DescriptionProps {
