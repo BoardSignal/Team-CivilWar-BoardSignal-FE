@@ -20,7 +20,7 @@ import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { useGathering } from '../../hooks/useGatheringDelete';
 import { useGatheringEntrance } from '../../hooks/useGatheringEntrance';
-import { useGatheringNonparticipants } from '../../hooks/useGatheringNonparticipants';
+import { useGatheringLeave } from '../../hooks/useGatheringLeave';
 
 interface GatheringButtonProps {
   isParticipation: boolean;
@@ -32,7 +32,7 @@ interface GatheringIdProps {
   gatheringId: string;
 }
 
-const NotParticipationButton = ({ gatheringId }: GatheringIdProps) => {
+const EntranceGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   const [isEntranceModalOpen, setIsEntranceModalOpen] = useState(false);
   const gatheringEntrance = useGatheringEntrance();
   const queryClient = useQueryClient();
@@ -70,26 +70,19 @@ const NotParticipationButton = ({ gatheringId }: GatheringIdProps) => {
   );
 };
 
-const FixedGatheringButton = ({ gatheringId }: GatheringIdProps) => {
-  return (
-    <Link to={`${GATHERINGS_UNFIX_PAGE_URL}/${gatheringId}`}>
-      <Button variant='danger'>모임 확정 취소하기</Button>
-    </Link>
-  );
-};
-
-const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+const DeleteGatheringButton = ({ gatheringId }: GatheringIdProps) => {
+  const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] =
+    useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const gatheringDelete = useGathering();
   const navigate = useNavigate();
 
   const handleOpenDeleteConfirmModal = () => {
-    setIsDeleteModalOpen(true);
+    setIsDeleteConfirmModalOpen(true);
   };
 
   const handleCloseDeleteConfirmModal = () => {
-    setIsDeleteModalOpen(false);
+    setIsDeleteConfirmModalOpen(false);
   };
 
   const handleCloseIsSuccessModal = () => {
@@ -102,7 +95,7 @@ const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   };
 
   const handleDeleteGathering = () => {
-    setIsDeleteModalOpen(false);
+    setIsDeleteConfirmModalOpen(false);
     gatheringDelete(gatheringId, handleOpenIsSuccessModal);
   };
 
@@ -110,7 +103,7 @@ const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
     <>
       <Modal
         variant='danger'
-        isOpen={isDeleteModalOpen}
+        isOpen={isDeleteConfirmModalOpen}
         onClose={handleCloseDeleteConfirmModal}
         onDelete={handleDeleteGathering}
         title='안내'
@@ -127,9 +120,6 @@ const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
       >
         {SUCCESS_DELETE_GATHERING_MODAL_MESSAGE}
       </Modal>
-      <Link to={`${GATHERINGS_FIX_PAGE_URL}/${gatheringId}`}>
-        <Button variant='primary'>모임 확정하기</Button>
-      </Link>
       <Button variant='danger' onClick={handleOpenDeleteConfirmModal}>
         모임 삭제하기
       </Button>
@@ -137,20 +127,18 @@ const UnFixedIsLeaderGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   );
 };
 
-const UnFixedIsParticipantGatheringButton = ({
-  gatheringId,
-}: GatheringIdProps) => {
-  const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+const LeaveGatheringButton = ({ gatheringId }: GatheringIdProps) => {
+  const [isLeaveConfirmModalOpen, setIsLeaveConfirmModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const gatheringNonparticipants = useGatheringNonparticipants();
+  const gatheringLeave = useGatheringLeave();
   const queryClient = useQueryClient();
 
   const handleOpenLeaveConfirmModal = () => {
-    setIsLeaveModalOpen(true);
+    setIsLeaveConfirmModalOpen(true);
   };
 
   const handleCloseLeaveConfirmModal = () => {
-    setIsLeaveModalOpen(false);
+    setIsLeaveConfirmModalOpen(false);
   };
 
   const handleCloseIsSuccessModal = () => {
@@ -165,15 +153,15 @@ const UnFixedIsParticipantGatheringButton = ({
   };
 
   const handleLeaveGatheringModal = () => {
-    setIsLeaveModalOpen(false);
-    gatheringNonparticipants(gatheringId, handleOpenIsSuccessModal);
+    setIsLeaveConfirmModalOpen(false);
+    gatheringLeave(gatheringId, handleOpenIsSuccessModal);
   };
 
   return (
     <>
       <Modal
         variant='danger'
-        isOpen={isLeaveModalOpen}
+        isOpen={isLeaveConfirmModalOpen}
         onClose={handleCloseLeaveConfirmModal}
         onDelete={handleLeaveGatheringModal}
         title='안내'
@@ -197,6 +185,22 @@ const UnFixedIsParticipantGatheringButton = ({
   );
 };
 
+const UnFixGatheringButton = ({ gatheringId }: GatheringIdProps) => {
+  return (
+    <Link to={`${GATHERINGS_UNFIX_PAGE_URL}/${gatheringId}`}>
+      <Button variant='danger'>모임 확정 취소하기</Button>
+    </Link>
+  );
+};
+
+const FixGatheringButton = ({ gatheringId }: GatheringIdProps) => {
+  return (
+    <Link to={`${GATHERINGS_FIX_PAGE_URL}/${gatheringId}`}>
+      <Button variant='primary'>모임 확정하기</Button>
+    </Link>
+  );
+};
+
 const GatheringButton = ({
   isParticipation,
   isLeader,
@@ -207,13 +211,16 @@ const GatheringButton = ({
   return (
     <div className='flex flex-col gap-4 p-4'>
       {!isParticipation ? (
-        <NotParticipationButton gatheringId={gatheringId} />
+        <EntranceGatheringButton gatheringId={gatheringId} />
       ) : isFix === '확정' ? (
-        <FixedGatheringButton gatheringId={gatheringId} />
+        <UnFixGatheringButton gatheringId={gatheringId} />
       ) : isLeader ? (
-        <UnFixedIsLeaderGatheringButton gatheringId={gatheringId} />
+        <>
+          <FixGatheringButton gatheringId={gatheringId} />
+          <DeleteGatheringButton gatheringId={gatheringId} />
+        </>
       ) : (
-        <UnFixedIsParticipantGatheringButton gatheringId={gatheringId} />
+        <LeaveGatheringButton gatheringId={gatheringId} />
       )}
     </div>
   );

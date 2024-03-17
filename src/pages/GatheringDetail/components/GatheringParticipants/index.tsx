@@ -27,30 +27,30 @@ const GatheringParticipants = ({
   const { gatheringId } = useParams() as { gatheringId: string };
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const [isPrimaryModalOpen, setIsPrimaryModalOpen] = useState(false);
+  const [isKickConfirmModal, setIsKickConfirmModalOpen] = useState(false);
+  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false);
 
-  const kickParticipants = useKickParticipant(Number(gatheringId));
+  const kickParticipant = useKickParticipant(Number(gatheringId));
 
-  const handleOpenErrorModal = () => {
-    setIsErrorModalOpen(true);
+  const handleOpenConfirmModal = () => {
+    setIsKickConfirmModalOpen(true);
   };
 
-  const handleCloseErrorModal = () => {
-    setIsErrorModalOpen(false);
+  const handleCloseConfirmModal = () => {
+    setIsKickConfirmModalOpen(false);
   };
 
-  const handleKickErrorModal = (userId: number) => {
-    setIsErrorModalOpen(false);
-    kickParticipants(userId, handleOpenPrimaryModal);
+  const handleKick = (userId: number) => {
+    setIsKickConfirmModalOpen(false);
+    kickParticipant(userId, handleOpenPrimaryModal);
   };
 
   const handleOpenPrimaryModal = () => {
-    setIsPrimaryModalOpen(true);
+    setIsCheckModalOpen(true);
   };
 
   const handleClosePrimaryModal = () => {
-    setIsPrimaryModalOpen(false);
+    setIsCheckModalOpen(false);
     queryClient.invalidateQueries({
       queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
     });
@@ -61,37 +61,41 @@ const GatheringParticipants = ({
     <>
       <section className='flex h-full grow flex-col overflow-y-auto'>
         <ul>
-          {participants.map(participant => (
-            <li
-              key={participant.userId}
-              className='border-b border-gray-accent7'
-            >
-              <Modal
-                variant='danger'
-                isOpen={isErrorModalOpen}
-                onClose={handleCloseErrorModal}
-                onDelete={() => handleKickErrorModal(participant.userId)}
-                title='안내'
-                buttonChildren='확인'
+          {participants.map(participant => {
+            const handleKickParticipant = () => handleKick(participant.userId);
+
+            return (
+              <li
+                key={participant.userId}
+                className='border-b border-gray-accent7'
               >
-                {KICK_PARTICIPANT_MODAL_MESSAGE}
-              </Modal>
-              <Modal
-                variant='primary'
-                isOpen={isPrimaryModalOpen}
-                onClose={handleClosePrimaryModal}
-                title='안내'
-                buttonChildren='확인'
-              >
-                {SUCCESS_KICK_PARTICIPANT_MODAL_MESSAGE}
-              </Modal>
-              <UserProfile
-                userProfile={participant}
-                isLeader={isLeader}
-                onClick={handleOpenErrorModal}
-              />
-            </li>
-          ))}
+                <Modal
+                  variant='danger'
+                  isOpen={isKickConfirmModal}
+                  onClose={handleCloseConfirmModal}
+                  onDelete={handleKickParticipant}
+                  title='안내'
+                  buttonChildren='확인'
+                >
+                  {KICK_PARTICIPANT_MODAL_MESSAGE}
+                </Modal>
+                <Modal
+                  variant='primary'
+                  isOpen={isCheckModalOpen}
+                  onClose={handleClosePrimaryModal}
+                  title='안내'
+                  buttonChildren='확인'
+                >
+                  {SUCCESS_KICK_PARTICIPANT_MODAL_MESSAGE}
+                </Modal>
+                <UserProfile
+                  userProfile={participant}
+                  isLeader={isLeader}
+                  onClick={handleOpenConfirmModal}
+                />
+              </li>
+            );
+          })}
         </ul>
       </section>
     </>

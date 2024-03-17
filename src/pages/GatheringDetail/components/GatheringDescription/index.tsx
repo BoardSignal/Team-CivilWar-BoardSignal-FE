@@ -17,9 +17,7 @@ const GatheringDescription = ({
       <span className='mb-4 mt-1 text-[10px] text-gray-accent3 underline'>
         {getRelativeTimeWithin(createdAt, convertLimitDate)}
       </span>
-      <p className='whitespace-normal text-sm text-gray-accent2'>
-        {description}
-      </p>
+      <p className='whitespace-pre text-sm text-gray-accent2'>{description}</p>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import GatheringDescription from '../GatheringDescription/GatheringDescription';
+import GatheringDescription from '../GatheringDescription';
 import GatheringGuide from '../GatheringGuide';
 
 interface GatheringIntroduce {

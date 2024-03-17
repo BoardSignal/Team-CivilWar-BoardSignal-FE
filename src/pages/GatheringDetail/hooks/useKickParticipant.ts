@@ -2,10 +2,10 @@ import { useKickParticipantApi } from '@/apis/kickParticipant';
 import { showErrorToast } from '@/utils/showToast';
 
 export const useKickParticipant = (gatheringId: number) => {
-  const kickParticipantApi = useKickParticipantApi(gatheringId);
+  const postKickParticipantApi = useKickParticipantApi(gatheringId);
 
   return async (userId: number, onOpenModal: () => void) => {
-    const { data, isOk, isBadRequest } = await kickParticipantApi(userId);
+    const { data, isOk, isBadRequest } = await postKickParticipantApi(userId);
     if (isBadRequest) {
       return showErrorToast(data.message);
     }

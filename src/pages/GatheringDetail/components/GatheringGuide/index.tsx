@@ -42,9 +42,9 @@ const convertToKoreaTime = (startTime: string) => {
 
 const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   <div className='flex gap-2'>
-    <div className='flex w-20 items-center gap-1'>
+    <div className='flex w-fit items-center gap-1'>
       <Icon id={iconId} size={12}></Icon>
-      <span className='w-[60px] text-[10px] font-bold'>{label}</span>
+      <span className='w-20 text-[10px] font-bold'>{label}</span>
     </div>
     <span className='text-xs'>{content}</span>
   </div>
