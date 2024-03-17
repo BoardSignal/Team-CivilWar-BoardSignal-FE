@@ -32,7 +32,14 @@ interface GatheringIdProps {
   gatheringId: string;
 }
 
-const EntranceGatheringButton = ({ gatheringId }: GatheringIdProps) => {
+interface EntranceGatheringButtonProps extends GatheringIdProps {
+  isFix: '확정' | '미확정';
+}
+
+const EntranceGatheringButton = ({
+  gatheringId,
+  isFix,
+}: EntranceGatheringButtonProps) => {
   const [isEntranceModalOpen, setIsEntranceModalOpen] = useState(false);
   const gatheringEntrance = useGatheringEntrance();
   const queryClient = useQueryClient();
@@ -63,7 +70,10 @@ const EntranceGatheringButton = ({ gatheringId }: GatheringIdProps) => {
       >
         {SUCCESS_GATHERING_JOIN_MODAL_MESSAGE}
       </Modal>
-      <Button variant='primary' onClick={handleGatheringEntrance}>
+      <Button
+        variant={isFix === '확정' ? 'inactive' : 'primary'}
+        onClick={handleGatheringEntrance}
+      >
         입장하기
       </Button>
     </>
@@ -211,7 +221,7 @@ const GatheringButton = ({
   return (
     <div className='flex flex-col gap-4 p-4'>
       {!isParticipation ? (
-        <EntranceGatheringButton gatheringId={gatheringId} />
+        <EntranceGatheringButton gatheringId={gatheringId} isFix={isFix} />
       ) : isFix === '확정' ? (
         <UnFixGatheringButton gatheringId={gatheringId} />
       ) : isLeader ? (
