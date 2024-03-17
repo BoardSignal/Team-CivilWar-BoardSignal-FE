@@ -26,14 +26,10 @@ import LoginPage from '@/pages/Login';
 import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
 import ProfileEditPage from '@/pages/ProfileEdit';
-import ProfileEdit from '@/pages/ProfileEdit';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import BoardGameListPage from './pages/BoardGameList';
-import GatheringFixPage from './pages/GatheringFix';
-import GatheringListPage from './pages/GatheringList';
-import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -142,13 +138,9 @@ const AnimatedRoutes = () => {
             path={`${USERS_EDIT_PAGE_URL}/:userId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <ProfileEdit />
+                <ProfileEditPage />
               </Suspense>
             }
-          />
-          <Route
-            path={`${USERS_EDIT_PAGE_URL}/:userId`}
-            element={<ProfileEditPage />}
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
