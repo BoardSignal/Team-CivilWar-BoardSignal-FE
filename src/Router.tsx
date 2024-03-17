@@ -73,7 +73,7 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={`{CHATS_PAGE_URL}/:gatheringId`}
+            path={`${CHATS_PAGE_URL}/:gatheringId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <ChatRoomPage />
