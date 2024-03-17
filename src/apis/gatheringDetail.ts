@@ -5,6 +5,15 @@ import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
+export interface ParticipantResponse {
+  userId: number;
+  nickname: string;
+  ageGroup: string;
+  profileImageUrl: string;
+  isLeader: boolean;
+  signalTemperature: number;
+}
+
 export interface GatheringDetailResponse {
   roomId: number;
   title: string;
@@ -27,14 +36,42 @@ export interface GatheringDetailResponse {
   createdAt: string;
 }
 
-export interface ParticipantResponse {
-  userId: number;
-  nickname: string;
-  ageGroup: string;
-  profileImageUrl: string;
-  isLeader: boolean;
-  signalTemperature: number;
-}
+const gatheringListItemResponseMapper = (data: GatheringDetailResponse) => {
+  const {
+    roomId,
+    imageUrl,
+    title,
+    description,
+    time,
+    subwayLine,
+    subwayStation,
+    minAge,
+    maxAge,
+    allowedGender,
+    minParticipants,
+    maxParticipants,
+    categories,
+    participantResponse,
+    createdAt,
+  } = data;
+
+  return {
+    id: roomId,
+    imageUrl,
+    title,
+    description,
+    time,
+    station: `${subwayStation}(${subwayLine})`,
+    minAge,
+    maxAge,
+    allowedGender,
+    minParticipants,
+    maxParticipants,
+    categories,
+    headCount: participantResponse.length,
+    createdAt,
+  };
+};
 
 const getGatheringDetail = (gatheringId: string) =>
   api.get<GatheringDetailResponse>({
@@ -47,5 +84,8 @@ export const useGetGatheringDetailApi = (gatheringId: string) => {
     queryFn: () => getGatheringDetail(gatheringId),
   });
 
-  return data;
+  return {
+    gathering: data,
+    gatheringListItem: gatheringListItemResponseMapper(data),
+  };
 };

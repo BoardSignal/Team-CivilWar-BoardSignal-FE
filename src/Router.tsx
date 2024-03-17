@@ -21,7 +21,6 @@ import GatheringCreatePage from '@/pages/GatheringCreate';
 import GatheringDetailPage from '@/pages/GatheringDetail';
 import GatheringFixPage from '@/pages/GatheringFix';
 import GatheringListPage from '@/pages/GatheringList';
-import { HomePage } from '@/pages/HomePage';
 import LoginPage from '@/pages/Login';
 import NotificationListPage from '@/pages/NotificationList';
 import ProfilePage from '@/pages/Profile';
@@ -30,6 +29,8 @@ import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import BoardGameListPage from './pages/BoardGameList';
+import ChatRoomPage from './pages/ChatRoom';
+import ChatRoomListPage from './pages/ChatRoomList';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -68,7 +69,15 @@ const AnimatedRoutes = () => {
             path={CHATS_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <HomePage />
+                <ChatRoomListPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${CHATS_PAGE_URL}/:gatheringId`}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <ChatRoomPage />
               </Suspense>
             }
           />

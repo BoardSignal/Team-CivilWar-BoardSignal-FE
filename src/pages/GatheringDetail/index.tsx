@@ -19,8 +19,9 @@ const GatheringDetailPage = () => {
   const [activeTab, setActiveTab] = useState(0);
   const { gatheringId } = useParams() as { gatheringId: string };
   const gatheringDetail = useGetGatheringDetailApi(gatheringId);
-  const { participantResponse, isLeader, isFix, ...gatheringIntroduce } =
-    gatheringDetail;
+  const {
+    gathering: { participantResponse, isLeader, isFix, ...gatheringIntroduce },
+  } = gatheringDetail;
 
   const { data, isLoading } = useGetIsJoinedUserApi(accessToken);
 
