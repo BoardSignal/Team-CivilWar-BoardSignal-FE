@@ -4,7 +4,7 @@ import TabBar from '@/components/TabBar';
 import EndGameList from './components/EndGameList';
 
 const EndGamesPage = () => {
-  const { nickname, id: userId } = useGetLoggedInUserApi();
+  const { nickname, id } = useGetLoggedInUserApi();
 
   return (
     <div className='flex h-full flex-col'>
@@ -14,7 +14,7 @@ const EndGamesPage = () => {
           <TabBar.Title>{nickname}</TabBar.Title>
         </TabBar.Left>
       </TabBar.Container>
-      <EndGameList userId={userId} />
+      <EndGameList userId={id} />
     </div>
   );
 };
