@@ -1,36 +1,39 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Notification } from '@/apis/notifications';
-import NotificationReviewThumbnail from '@/assets/notification-thumbnail-review.png';
 import Button from '@/components/Button';
 import { getRelativeTimeWithin } from '@/utils/time';
 
-const NotificationListItem = ({
-  thumbnailUrl = NotificationReviewThumbnail,
-  type,
-  message,
-  link,
-  createdAt,
-}: Notification) => {
-  const navigate = useNavigate();
-
-  const navigateIfPossible = () => {
-    link && navigate(link);
+interface NotificationListItemProps {
+  notification: {
+    type: string;
+    message: string;
+    navigateUrl: string;
+    imageUrl: string | null;
+    createdAt: string;
   };
+}
 
+const NotificationListItem = ({
+  notification: { type, message, imageUrl, navigateUrl, createdAt },
+}: NotificationListItemProps) => {
   return (
-    <Button onClick={navigateIfPossible} className='flex h-fit gap-4 p-4'>
-      <img src={thumbnailUrl} alt='' className='mt-1 h-12 w-12 rounded-full' />
-      <div className='flex grow flex-col gap-1'>
-        <div className='flex items-center justify-between'>
-          <span className='text-sm text-gray-accent2'>{type}</span>
-          <span className='text-xs text-gray-accent3'>
-            {getRelativeTimeWithin(createdAt)}
-          </span>
+    <Link to={navigateUrl}>
+      <Button className='flex h-fit gap-4 rounded-none border-b border-gray-accent7 p-4'>
+        <img
+          src={imageUrl ?? ''}
+          className='mt-1 h-12 w-12 rounded-full object-cover'
+        />
+        <div className='flex grow flex-col items-start gap-1'>
+          <div className='flex w-full items-center justify-between'>
+            <span className='text-sm text-gray-accent2'>{type}</span>
+            <span className='text-xs text-gray-accent3'>
+              {getRelativeTimeWithin(createdAt)}
+            </span>
+          </div>
+          <div className='text-gray-accent1'>{message}</div>
         </div>
-        <div className='text-gray-accent1'>{message}</div>
-      </div>
-    </Button>
+      </Button>
+    </Link>
   );
 };
 
