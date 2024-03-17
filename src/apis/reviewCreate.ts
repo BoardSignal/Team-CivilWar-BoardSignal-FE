@@ -9,21 +9,21 @@ interface ReviewContent {
   reviewScore: string;
 }
 
-interface ReviewCreateResponse {
-  reviewIds: number[];
-}
-
-export interface ReviewCreateRequest {
+export interface ReviewCreate {
   reviews: {
     revieweeId: number;
     reviewContent: ReviewContent[];
   }[];
 }
 
-const postReviewCreate = ({ reviews }: ReviewCreateRequest) => {
-  return api.post<ReviewCreateResponse>({
-    url: REVIEWS_API_URL,
-    data: reviews,
+interface ReviewCreateRequest extends ReviewCreate {
+  gatheringId: string;
+}
+
+const postReviewCreate = ({ reviews, gatheringId }: ReviewCreateRequest) => {
+  return api.post({
+    url: `${REVIEWS_API_URL}/${gatheringId}`,
+    data: { reviews },
   });
 };
 

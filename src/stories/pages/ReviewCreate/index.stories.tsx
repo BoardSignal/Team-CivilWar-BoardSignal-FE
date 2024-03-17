@@ -1,23 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import ReviewCreate, {
-  Gathering,
-  ParticipantsInfos,
-} from '@/pages/ReviewCreate';
+import { EndGameDetailsResponse, ParticipantInfo } from '@/apis/endGameUser';
+import ReviewCreate from '@/pages/ReviewCreate';
 import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 
 const meta: Meta<typeof ReviewCreate> = {
   title: 'pages/ReviewCreate',
   tags: ['autodocs'],
-  decorators: [CommonPageLayoutDecorator],
   component: ReviewCreate,
+  decorators: [CommonPageLayoutDecorator],
 };
-
 export default meta;
 
-type Story = StoryObj<typeof ReviewCreate>;
-
-const DUMMY_PARTICIPANTS_INFOS: ParticipantsInfos[] = [
+const DUMMY_PARTICIPANTS_INFOS: ParticipantInfo[] = [
   {
     userId: 1,
     nickname: 'User 1',
@@ -60,29 +55,35 @@ const DUMMY_PARTICIPANTS_INFOS: ParticipantsInfos[] = [
   },
 ];
 
-const DUMMY_REVIEWCREATE: Gathering[] = [
+const DUMMY_REVIEWCREATE: EndGameDetailsResponse[] = [
   {
-    id: 1,
-    imageUrl: '',
+    id: 2,
     title: '정령섬 심화 격주로 하실 1~2분',
-    description:
-      '두 명이서 하고 있습니다.\n 3~4인이 더 재밌어요.\n 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.',
     station: '강남역',
-    time: '주말 오후',
+    meetingTime: '',
+    imageUrl: null,
     minAge: 23,
     maxAge: 29,
     allowedGender: '혼성',
     minParticipants: 3,
     maxParticipants: 4,
+    description: '',
+    time: '',
     categories: ['전략'],
     headCount: 2,
     createdAt: String(new Date()),
+    participantsInfos: [],
+    peopleCount: 3,
+    line: '',
+    meetingPlace: '',
   },
 ];
 
-export const Default: Story = {
+type Story = StoryObj<typeof ReviewCreate>;
+
+export const DefaultTemplate: Story = {
   args: {
-    gatherings: DUMMY_REVIEWCREATE,
+    gathering: DUMMY_REVIEWCREATE,
     participantsInfos: DUMMY_PARTICIPANTS_INFOS,
   },
 };

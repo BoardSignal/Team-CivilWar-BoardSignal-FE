@@ -1,63 +1,33 @@
 import { useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
+import { useGetEndGameDetailsApi } from '@/apis/endGameUser';
 import GatheringListItem from '@/components/GatheringList/GatheringListItem';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
+import { ROOMS_MY_END_GAMES_API_URL } from '@/constants/apiRoutes';
 import { SUCCESS_RIVIEW_MODAL_MESSAGE } from '@/constants/messages/modal';
 
 import ReviewForm from './components/ReviewForm';
 
-export interface Gathering {
-  id: number;
-  imageUrl: string;
-  title: string;
-  description: string;
-  station: string;
-  time: string;
-  minAge: number;
-  maxAge: number;
-  allowedGender: string;
-  minParticipants: number;
-  maxParticipants: number;
-  categories: string[];
-  headCount: number;
-  createdAt: string;
-}
-
-export interface ParticipantsInfos {
-  userId: number;
-  nickname: string;
-  ageGroup: string;
-  profileImageUrl?: string;
-  isLeader: boolean;
-  signalTemperature: number;
-}
-interface GatheringListProps {
-  gatherings: Gathering[];
-  participantsInfos: ParticipantsInfos[];
-}
-
-const ReviewCreate = ({
-  gatherings,
-  participantsInfos,
-}: GatheringListProps) => {
+const ReviewCreate = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userId, setUserId] = useState<number>(0);
+  const { gatheringId } = useParams() as { gatheringId: string };
+  const { participantsInfos, gathering } = useGetEndGameDetailsApi(gatheringId);
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate('/rooms/my/end-games');
+    navigate(ROOMS_MY_END_GAMES_API_URL);
   };
 
-  const handleReviewCreate = (userId: number) => {
+  const handleReviewCreate = () => {
     handleOpenModal();
-    setUserId(userId);
   };
 
   return (
@@ -76,13 +46,11 @@ const ReviewCreate = ({
           <TabBar.GoBackButton />
         </TabBar.Left>
       </TabBar.Container>
-      {gatherings.map(gathering => (
-        <GatheringListItem key={gathering.id} gathering={gathering} />
-      ))}
+      <GatheringListItem gathering={gathering} />
       <ReviewForm
-        participantsInfos={participantsInfos || []}
+        participantsInfos={participantsInfos}
         onReviewCreate={handleReviewCreate}
-        userId={userId}
+        gatheringId={gatheringId}
       />
     </div>
   );

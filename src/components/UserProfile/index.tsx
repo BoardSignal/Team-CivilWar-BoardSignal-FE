@@ -13,6 +13,8 @@ export interface UserProfileProps {
   onClick?: () => void;
 }
 
+const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
+
 const UserProfile = ({
   userProfile,
   isLeader: isLoggedInLeader,
@@ -32,7 +34,7 @@ const UserProfile = ({
       <div className='flex w-fit gap-2'>
         <Link to={`${USERS_PAGE_URL}/${userId}`}>
           <img
-            src={profileImageUrl}
+            src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
             alt='프로필사진'
             className='size-10 rounded-full object-cover'
           />

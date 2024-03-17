@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Icon from '@/components/Icon';
+import { cn } from '@/utils/cn';
 
 interface ReviewProps {
   reviewScore: string;
@@ -33,21 +34,33 @@ const Review = ({
       </div>
       <div className='flex gap-2 pb-2'>
         <div
-          className={`flex h-8 w-8 items-center justify-center rounded-full ${selected === '싫어요' ? 'bg-red-500' : 'bg-gray-accent5'}`}
+          className={cn(
+            'flex h-8 w-8 items-center justify-center rounded-full',
+            selected === '싫어요' ? 'bg-red-500' : 'bg-gray-accent5',
+          )}
         >
           <Icon
             id='thumb-down-fill'
             onClick={() => handleClick('싫어요')}
-            className={`text-lg ${selected === '싫어요' ? 'text-red-100' : 'text-gray-accent3'}`}
+            className={cn(
+              'cursor-pointer',
+              selected === '싫어요' ? 'text-red-100' : 'text-gray-accent3',
+            )}
           />
         </div>
         <div
-          className={`flex h-8 w-8 items-center justify-center rounded-full ${selected === '좋아요' ? 'bg-green-500' : 'bg-gray-accent5'}`}
+          className={cn(
+            'flex h-8 w-8 items-center justify-center rounded-full',
+            selected === '좋아요' ? 'bg-green-500' : 'bg-gray-accent5',
+          )}
         >
           <Icon
             id='thumb-up-fill'
             onClick={() => handleClick('좋아요')}
-            className={`text-xl ${selected === '좋아요' ? 'text-green-100' : 'text-gray-accent3'}`}
+            className={cn(
+              'cursor-pointer',
+              selected === '좋아요' ? 'text-green-100' : 'text-gray-accent3',
+            )}
           />
         </div>
       </div>

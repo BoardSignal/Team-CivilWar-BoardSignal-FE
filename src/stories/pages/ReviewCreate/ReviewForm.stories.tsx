@@ -8,8 +8,8 @@ import { CommonPageLayoutDecorator } from '@/stories/CommonPageLayoutDecorator';
 const meta: Meta<typeof ReviewForm> = {
   title: 'pages/ReviewCreate/ReviewForm',
   tags: ['autodocs'],
-  decorators: [CommonPageLayoutDecorator],
   component: ReviewForm,
+  decorators: [CommonPageLayoutDecorator],
 };
 
 export default meta;

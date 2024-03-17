@@ -20,7 +20,7 @@ interface ReviewProps {
 
 const DUMMY_REVIEWSELECT: ReviewProps[] = [
   {
-    content: '시간을 잘 지켜요',
+    content: '시간 약속을 잘 지켜요',
     reviewScore: '좋아요',
     onChange: () => {},
   },

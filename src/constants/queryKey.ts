@@ -11,3 +11,4 @@ export const CHATS_QUERY_KEY = 'chats';
 export const CHAT_LIST_QUERY_KEY = 'chat-list';
 export const END_GAME_LIST_QUERY_KEY = 'end-game-list';
 export const GATHERINGS_QUERY_KEY = 'gatherings';
+export const END_GAME_USER_QUERY_KEY = 'end-game-user';
