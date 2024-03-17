@@ -1,4 +1,4 @@
-import { useGetLoggedInUserApi } from '@/apis/getLoggedInUser';
+import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 
 const useGetLoggedInUserId = () => {
   const { id: currentUserId } = useGetLoggedInUserApi();

@@ -8,6 +8,7 @@ import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotF
 import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
+  END_GAMES_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
@@ -31,6 +32,7 @@ import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import BoardGameListPage from './pages/BoardGameList';
 import ChatRoomPage from './pages/ChatRoom';
 import ChatRoomListPage from './pages/ChatRoomList';
+import EndGamesPage from './pages/EndGames';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -148,6 +150,14 @@ const AnimatedRoutes = () => {
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <ProfileEditPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={END_GAMES_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <EndGamesPage />
               </Suspense>
             }
           />

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
-import { useGetIsJoinedUserApi } from '@/apis/getLoggedInUser';
+import { useGetIsJoinedUserApi } from '@/apis/loggedInUser';
 import SpinnerFullScreen from '@/components/Spinner/SpinnerFullScreen';
 import TabBar from '@/components/TabBar';
 import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';

@@ -19,6 +19,19 @@ const validateDateTime = (dateTime: string) => {
   }
 };
 
+export const getRemainDay = (dateTime: string) => {
+  validateDateTime(dateTime);
+
+  const pastTime = new Date(dateTime.split('T')[0]).getTime();
+  const currentTime = new Date(
+    new Date().toISOString().split('T')[0],
+  ).getTime();
+
+  return Math.floor(
+    (currentTime - pastTime) / (MINUTES_PER_TIME_UNIT[3].minutes * 60000),
+  );
+};
+
 export const formatToTime = (dateTime: string) =>
   new Intl.DateTimeFormat('ko-KR', {
     timeStyle: 'short',

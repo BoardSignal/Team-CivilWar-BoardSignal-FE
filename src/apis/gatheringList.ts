@@ -2,6 +2,7 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import qs from 'qs';
 
 import { ROOMS_FILTER_API_URL } from '@/constants/apiRoutes';
+import { GATHERINGS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
@@ -22,24 +23,32 @@ export interface Gathering {
   headCount: number;
 }
 
-interface GatheringListResponse {
+export interface GatheringListResponse {
   roomsInfos: Gathering[];
+  currentPageNumber: number;
   size: number;
   hasNext: boolean;
 }
+
 export interface GetGatheringListParams {
   size: number;
+  page?: number;
   station: string[];
   time: string[];
   category: string[];
   gender?: string;
 }
 
-const getGatheringList = ({ size, ...restParams }: GetGatheringListParams) =>
+const getGatheringList = ({
+  size,
+  page,
+  ...restParams
+}: GetGatheringListParams) =>
   api.get<GatheringListResponse>({
     url: ROOMS_FILTER_API_URL,
     params: {
       size,
+      page,
       ...restParams,
     },
     paramsSerializer: params => qs.stringify(params, { indices: false }),
@@ -51,19 +60,20 @@ export const useGetGatheringListApi = ({
 }: GetGatheringListParams) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
-      queryKey: ['gatherings', restParams],
-      queryFn: ({ pageParam = size }) =>
+      queryKey: [GATHERINGS_QUERY_KEY, restParams],
+      queryFn: ({ pageParam }) =>
         getGatheringList({
-          size: pageParam,
+          size,
           ...restParams,
+          page: pageParam,
         }),
-      initialPageParam: size,
-      getNextPageParam: ({ size: currentSize, hasNext }) =>
-        hasNext ? currentSize + size : undefined,
+      initialPageParam: 0,
+      getNextPageParam: ({ hasNext, currentPageNumber }) =>
+        hasNext ? currentPageNumber + 1 : undefined,
     });
 
   return {
-    data: data.pages.flat()[data.pages.length - 1] || [],
+    gatherings: data.pages.map(({ roomsInfos }) => [...roomsInfos]).flat(),
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
