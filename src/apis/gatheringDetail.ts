@@ -5,17 +5,17 @@ import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
-interface Participant {
+export interface ParticipantResponse {
   userId: number;
   nickname: string;
   ageGroup: string;
-  profileImageUrl: string | null;
+  profileImageUrl: string;
   isLeader: boolean;
-  mannerScore: number;
+  signalTemperature: number;
 }
 
 export interface GatheringDetailResponse {
-  id: number;
+  roomId: number;
   title: string;
   description: string;
   time: string;
@@ -32,13 +32,13 @@ export interface GatheringDetailResponse {
   isFix: '확정' | '미확정';
   allowedGender: string;
   categories: string[];
-  participantResponse: Participant[];
+  participantResponse: ParticipantResponse[];
   createdAt: string;
 }
 
 const gatheringListItemResponseMapper = (data: GatheringDetailResponse) => {
   const {
-    id,
+    roomId,
     imageUrl,
     title,
     description,
@@ -56,7 +56,7 @@ const gatheringListItemResponseMapper = (data: GatheringDetailResponse) => {
   } = data;
 
   return {
-    id,
+    id: roomId,
     imageUrl,
     title,
     description,

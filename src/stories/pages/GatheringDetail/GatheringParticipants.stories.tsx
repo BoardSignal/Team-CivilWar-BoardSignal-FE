@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import GatheringParticipants from '@/pages/GatheringDetail/GatheringParticipants';
+import GatheringParticipants from '@/pages/GatheringDetail/components/GatheringParticipants';
 
 const meta: Meta<typeof GatheringParticipants> = {
   title: 'Pages/GatheringDetail/GatheringParticipants',
