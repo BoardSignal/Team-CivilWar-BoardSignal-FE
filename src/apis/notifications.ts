@@ -1,6 +1,11 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 
 import { NOTIFICATIONS_MY_API_URL } from '@/constants/apiRoutes';
+import {
+  END_GAMES_REVIEWS_CREATE_PAGE_URL,
+  GATHERINGS_PAGE_URL,
+  USERS_ME_PAGE_URL,
+} from '@/constants/pageRoutes';
 import { NOTIFICATIONS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
@@ -9,10 +14,10 @@ export type NotificationType =
   | '지역매칭'
   | '강퇴'
   | '매칭 확정'
-  | '방 삭제'
+  | '삭제'
   | '리뷰';
 
-export interface NotificationItemResponseDTO {
+export interface NotificationItemResponse {
   notificationId: number;
   title: NotificationType;
   body: string;
@@ -21,16 +26,17 @@ export interface NotificationItemResponseDTO {
   createdAt: string;
 }
 
-interface NotificationResponseDTO {
-  notificationsInfos: NotificationItemResponseDTO[];
+interface NotificationResponse {
+  notificationsInfos: NotificationItemResponse[];
   currentPage: number;
   size: number;
   hasNext: boolean;
 }
 
-const getNotifications = () =>
-  api.get<NotificationResponseDTO>({
+const getNotifications = (size: number, page: number) =>
+  api.get<NotificationResponse>({
     url: NOTIFICATIONS_MY_API_URL,
+    params: { size, page },
   });
 
 /**
@@ -40,7 +46,7 @@ const notificationTitleMap = {
   지역매칭: '신규 모임',
   강퇴: '모임 추방',
   '매칭 확정': '모임 확정',
-  '방 삭제': '모임 취소',
+  삭제: '모임 취소',
 };
 
 /**
@@ -56,22 +62,67 @@ const getTextOfType = (type: NotificationType, roomId: number | null) => {
     : notificationTitleMap[type];
 };
 
-export const useGetNotificationsApi = () => {
-  const { data } = useSuspenseQuery({
-    queryFn: getNotifications,
-    queryKey: [NOTIFICATIONS_QUERY_KEY],
-  });
+/*
+  TODO: 각 Case 별 Test Case 만들기
 
-  // 기존 데이터에서 title
+  '리뷰 도착' => 본인 프로필 페이지로 이동
+  '리뷰 요청' => 해당 모임 리뷰 작성 페이지로 이동
+  ---
+  '신규 모임' => 해당 모임 상세 페이지로 이동
+  '모임 확정' => 해당 모임 상세 페이지로 이동
+  '모임 추방' => 무응답
+  '모임 취소' => 무응답
+*/
+const getUrlForType = (type: string, roomId: number | null) => {
+  switch (true) {
+    case type === '리뷰 도착':
+      return USERS_ME_PAGE_URL;
+    case type === '리뷰 요청':
+      return `${END_GAMES_REVIEWS_CREATE_PAGE_URL}/${roomId}`;
+    case !!roomId:
+      return `${GATHERINGS_PAGE_URL}/${roomId}`;
+    default:
+      return '';
+  }
+};
+
+/**
+ * NofiticationListItemResponse를 ListItemProp에 맞게 매핑해요.
+ */
+const notificationMapper = ({
+  title,
+  body,
+  roomId,
+  ...props
+}: NotificationItemResponse) => {
+  const type = getTextOfType(title, roomId);
+
   return {
-    ...data,
-    notificationsInfos: data.notificationsInfos.map(
-      ({ title, body, roomId, ...props }) => ({
-        ...props,
-        type: getTextOfType(title, roomId),
-        message: body,
-        roomId,
-      }),
-    ),
+    ...props,
+    type,
+    message: body,
+    navigateUrl: getUrlForType(type, roomId),
+  };
+};
+
+export const useGetNotificationsApi = (size: number = 20) => {
+  const { data, hasNextPage, fetchNextPage, fetchStatus } =
+    useSuspenseInfiniteQuery({
+      queryKey: [NOTIFICATIONS_QUERY_KEY],
+      queryFn: ({ pageParam }) => getNotifications(size, pageParam),
+      initialPageParam: 0,
+      getNextPageParam: ({ hasNext, currentPage }) =>
+        hasNext ? currentPage + 1 : undefined,
+    });
+
+  const allPagesMerged = data.pages
+    .map(({ notificationsInfos }) => notificationsInfos)
+    .flat();
+
+  return {
+    fetchStatus,
+    hasNextPage,
+    fetchNextPage,
+    notificationsInfos: allPagesMerged.map(notificationMapper),
   };
 };

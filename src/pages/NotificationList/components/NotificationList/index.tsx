@@ -1,5 +1,6 @@
 import { useGetNotificationsApi } from '@/apis/notifications';
 import EmptyListFullScreen from '@/components/EmptyListFullScreen';
+import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import {
   EMPTY_NOTIFICATION_MESSAGE,
   EMPTY_NOTIFICATION_TITLE,
@@ -8,7 +9,8 @@ import {
 import NotificationListItem from './NotificationListItem';
 
 const NotificationList = () => {
-  const { notificationsInfos } = useGetNotificationsApi();
+  const { notificationsInfos, fetchStatus, hasNextPage, fetchNextPage } =
+    useGetNotificationsApi();
 
   if (notificationsInfos.length === 0) {
     return (
@@ -20,11 +22,19 @@ const NotificationList = () => {
   }
 
   return (
-    <div className='flex flex-col'>
-      {notificationsInfos.map(({ notificationId, ...props }) => (
-        <NotificationListItem key={notificationId} {...props} />
+    <InfiniteScrollAutoFetcher
+      fetchStatus={fetchStatus}
+      hasNextPage={hasNextPage}
+      fetchNextPage={fetchNextPage}
+      className='flex flex-col'
+    >
+      {notificationsInfos.map(({ notificationId, ...notification }) => (
+        <NotificationListItem
+          key={notificationId}
+          notification={notification}
+        />
       ))}
-    </div>
+    </InfiniteScrollAutoFetcher>
   );
 };
 

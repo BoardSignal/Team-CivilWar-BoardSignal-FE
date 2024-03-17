@@ -1,27 +1,24 @@
 import { Link } from 'react-router-dom';
 
 import Button from '@/components/Button';
-import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 import { getRelativeTimeWithin } from '@/utils/time';
 
 interface NotificationListItemProps {
-  type: string;
-  message: string;
-  imageUrl: string | null;
-  roomId: number | null;
-  createdAt: string;
+  notification: {
+    type: string;
+    message: string;
+    navigateUrl: string;
+    imageUrl: string | null;
+    createdAt: string;
+  };
 }
 
 const NotificationListItem = ({
-  type,
-  message,
-  imageUrl,
-  roomId,
-  createdAt,
+  notification: { type, message, imageUrl, navigateUrl, createdAt },
 }: NotificationListItemProps) => {
   return (
-    <Link to={roomId ? `${GATHERINGS_PAGE_URL}/${roomId}` : ''}>
-      <Button className='flex h-fit gap-4 rounded-none p-4'>
+    <Link to={navigateUrl}>
+      <Button className='flex h-fit gap-4 rounded-none border-b border-gray-accent7 p-4'>
         <img
           src={imageUrl ?? ''}
           className='mt-1 h-12 w-12 rounded-full object-cover'

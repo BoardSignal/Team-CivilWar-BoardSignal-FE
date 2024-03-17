@@ -2,6 +2,7 @@ export const LOGIN_PAGE_URL = '/login';
 export const REGISTER_PAGE_URL = '/register';
 
 export const USERS_PAGE_URL = '/users';
+export const USERS_ME_PAGE_URL = '/users/me';
 export const USERS_EDIT_PAGE_URL = '/users/edit';
 export const USERS_WISH_PAGE_URL = '/users/wish';
 
