@@ -1,24 +1,42 @@
 import { useGetBoardGameListApi } from '@/apis/boardGameList';
+import EmptyListFullScreen from '@/components/EmptyListFullScreen';
+import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
+import {
+  EMPTY_BOARD_GAMES_MESSAGE,
+  EMPTY_BOARD_GAMES_TITLE,
+} from '@/constants/messages/emptyScreens';
 
 import { useBoardGameListQueryParams } from '../../hooks/useBoardGameListQueryParams';
 import BoardGameListItem from './BoardGameListItem';
 
 const BoardGameList = () => {
   const options = useBoardGameListQueryParams();
-  const data = useGetBoardGameListApi(options);
 
-  // TODO: EmptyListFullScreen 추가하기
+  const { boardGamesInfos, fetchStatus, hasNextPage, fetchNextPage } =
+    useGetBoardGameListApi(options);
+
+  if (boardGamesInfos.length === 0) {
+    return (
+      <EmptyListFullScreen
+        title={EMPTY_BOARD_GAMES_TITLE}
+        message={EMPTY_BOARD_GAMES_MESSAGE}
+      />
+    );
+  }
 
   return (
-    <div className='grow overflow-y-auto'>
-      <ul>
-        {data.map(boardGame => (
-          <li key={boardGame.boardGameId}>
-            <BoardGameListItem boardGame={boardGame} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <InfiniteScrollAutoFetcher
+      fetchStatus={fetchStatus}
+      hasNextPage={hasNextPage}
+      fetchNextPage={fetchNextPage}
+      className='flex flex-col'
+    >
+      {boardGamesInfos.map(boardGame => (
+        <li key={boardGame.boardGameId}>
+          <BoardGameListItem boardGame={boardGame} />
+        </li>
+      ))}
+    </InfiniteScrollAutoFetcher>
   );
 };
 

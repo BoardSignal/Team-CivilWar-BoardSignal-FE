@@ -19,9 +19,11 @@ export const BoardGameListPage = () => {
         </TabBar.Right>
       </TabBar.Container>
       <BoardGameListOptionFilterBar />
-      <Suspense fallback={<SpinnerFullScreen />}>
-        <BoardGameList />
-      </Suspense>
+      <div className='grow overflow-y-auto'>
+        <Suspense fallback={<SpinnerFullScreen />}>
+          <BoardGameList />
+        </Suspense>
+      </div>
       <GNB />
     </div>
   );
