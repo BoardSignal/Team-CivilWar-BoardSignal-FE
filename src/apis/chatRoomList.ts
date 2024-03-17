@@ -36,7 +36,7 @@ export const useGetChatRoomListApi = (size: number, userId: number) => {
     });
 
   return {
-    chatRooms: data.pages.map(({ roomsInfos }) => [...roomsInfos]).flat(),
+    chatRooms: data.pages.map(({ roomsInfos }) => roomsInfos).flat(),
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

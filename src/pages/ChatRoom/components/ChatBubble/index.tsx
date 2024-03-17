@@ -4,7 +4,7 @@ import type { ChatMessage } from '@/apis/chatRoomMessages';
 import defaultProfileImage from '@/assets/default-profile-image.png';
 import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import { cn } from '@/utils/cn';
-import { getFullDate, getShortTime } from '@/utils/time';
+import { formatToDate, formatToTime } from '@/utils/time';
 
 interface ChatBubbleProps {
   message: ChatMessage;
@@ -18,7 +18,7 @@ interface BasicChatBubbleProps extends ComponentPropsWithRef<'div'> {
 
 export const ChatDate = ({ date }: { date: string }) => (
   <div className='w-full py-4 text-center text-[10px] font-bold text-gray-accent2'>
-    {getFullDate(date)}
+    {formatToDate(date)}
   </div>
 );
 
@@ -40,7 +40,7 @@ const BasicChatBubble = ({
       <div className='w-max max-w-52 break-keep rounded-lg bg-gray-accent7 p-2 text-xs text-gray-accent1'>
         {content}
       </div>
-      <div className=' text-[10px]'>{getShortTime(createAt)}</div>
+      <div className=' text-[10px]'>{formatToTime(createAt)}</div>
     </div>
   );
 };

@@ -18,8 +18,6 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
     return <div className='grow'></div>;
   }
 
-  const [firstMessage] = messages.slice(0);
-
   return (
     <ReverseInfiniteScrollAutoFetch
       hasNextPage={hasNextPage}
@@ -27,14 +25,14 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
       className='flex grow flex-col overflow-y-auto p-4'
       data={messages}
     >
-      <div>
-        <ChatDate date={firstMessage.createAt} />
-        <ChatBubble message={firstMessage} />
-      </div>
-
       {messages.map((message, index) => {
         if (index === 0) {
-          return;
+          return (
+            <div>
+              <ChatDate date={message.createAt} />
+              <ChatBubble message={message} />
+            </div>
+          );
         }
 
         return (
