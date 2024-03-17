@@ -30,6 +30,10 @@ import ProfileEdit from '@/pages/ProfileEdit';
 import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
+import BoardGameListPage from './pages/BoardGameList';
+import GatheringFixPage from './pages/GatheringFix';
+import GatheringListPage from './pages/GatheringList';
+import ProfileEdit from './pages/ProfileEdit';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -76,7 +80,7 @@ const AnimatedRoutes = () => {
             path={BOARD_GAMES_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <HomePage />
+                <BoardGameListPage />
               </Suspense>
             }
           />

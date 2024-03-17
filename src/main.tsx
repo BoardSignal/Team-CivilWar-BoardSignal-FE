@@ -8,7 +8,7 @@ import activateColorTheme from './utils/activateColorTheme.ts';
 activateColorTheme();
 
 (async () => {
-  if (import.meta.env.DEV && import.meta.env.VITE_USE_MSW) {
+  if (import.meta.env.DEV && import.meta.env.VITE_USE_MSW === 'true') {
     await enableAPIMocks();
   }
 
