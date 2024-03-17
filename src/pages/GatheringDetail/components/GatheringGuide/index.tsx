@@ -24,11 +24,27 @@ interface GuideItemProps {
   content: string;
 }
 
+const convertToKoreaTime = (startTime: string) => {
+  const date = new Date(startTime);
+  date.setHours(date.getHours() + 9);
+  const koreaTime = date.toLocaleString('ko-KR', {
+    timeZone: 'Asia/Seoul',
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+
+  return koreaTime;
+};
+
 const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   <div className='flex gap-2'>
-    <div className='flex w-[75px] gap-0.5'>
+    <div className='flex w-fit items-center gap-1'>
       <Icon id={iconId} size={12}></Icon>
-      <span className='ml-1 w-20 text-[10px] font-bold'>{label}</span>
+      <span className='w-20 text-[10px] font-bold'>{label}</span>
     </div>
     <span className='text-xs'>{content}</span>
   </div>
@@ -48,8 +64,15 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
     minAge,
   } = gatheringGuide;
 
-  const ageGroup = `${minAge} ~ ${maxAge}세`;
-  const participantsGroup = `${minParticipants} ~ ${maxParticipants}명`;
+  const ageGroup =
+    minAge === maxAge ? `${minAge}세` : `${minAge} ~ ${maxAge}세`;
+
+  const participantsGroup =
+    minParticipants === maxParticipants
+      ? `${minParticipants}명`
+      : `${minParticipants} ~ ${maxParticipants}명`;
+
+  const gatheringPlace = place ? `${place} (${subwayStation})` : subwayStation;
 
   return (
     <div className='flex w-full flex-col gap-2 rounded-lg bg-gray-accent7 p-4'>
@@ -57,13 +80,9 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
       <GuideItem
         iconId='time-fill'
         label='시간대'
-        content={startTime ? startTime : time}
+        content={startTime ? convertToKoreaTime(startTime) : time}
       />
-      <GuideItem
-        iconId='map-pin-fill'
-        label='장소'
-        content={place ? `${place} (${subwayStation})` : subwayStation}
-      />
+      <GuideItem iconId='map-pin-fill' label='장소' content={gatheringPlace} />
       <GuideItem iconId='team-fill' label='인원' content={participantsGroup} />
       <GuideItem iconId='user-fill' label='나이대' content={ageGroup} />
       <GuideItem

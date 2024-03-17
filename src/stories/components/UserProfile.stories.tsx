@@ -18,6 +18,7 @@ const DUMMY_USERPROFILE = {
   ageGroup: '20대',
   signalTemperature: 36.6,
   isLeader: true,
+  userId: 1,
 };
 
 export const Default: Story = {

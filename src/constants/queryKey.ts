@@ -1,10 +1,13 @@
 export const LOGGED_IN_USER_QUERY_KEY = 'logged-in-user';
 export const GATHERING_DETAIL_QUERY_KEY = 'gathering-detail';
 export const BOARD_GAME_DETAIL_QUERY_KEY = 'board-game-detail';
+export const BOARD_GAME_LIST_QUERY_KEY = 'board-games';
 export const NOTIFICATIONS_QUERY_KEY = 'notifications';
 export const PROFILES_QUERY_KEY = 'profiles';
 export const KAKAO_MAP_SEARCH_QUERY_KEY = 'kakao-map-search';
 export const KAKAO_MAP_SEARCH_SCRIPT_QUERY_KEY = 'kakao-map-search-script';
 export const INFINITE_QUERY_KEY = 'infinite';
+export const CHATS_QUERY_KEY = 'chats';
+export const CHAT_LIST_QUERY_KEY = 'chat-list';
 export const END_GAME_LIST_QUERY_KEY = 'end-game-list';
 export const GATHERINGS_QUERY_KEY = 'gatherings';
