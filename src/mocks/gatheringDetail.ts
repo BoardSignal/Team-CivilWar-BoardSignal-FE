@@ -9,8 +9,9 @@ export const mockGetGatheringDetailHandler = async () => {
     roomId: 1,
     title: '오후',
     description: '생성',
-    startTime: '주말 오후',
-    place: '영등포역 ',
+    place: '영등포역',
+    subwayStation: '2호선',
+    time: '오후 2시',
     minAge: 20,
     maxAge: 30,
     minParticipants: 4,
@@ -37,7 +38,7 @@ export const mockGetGatheringDetailHandler = async () => {
         profileImageUrl:
           'https://ssl.pstatic.net/static/pwe/address/img_profile.png',
         isLeader: true,
-        mannerScore: 36.5,
+        signalTemperature: 36.5,
       },
       {
         userId: 1,
@@ -46,10 +47,10 @@ export const mockGetGatheringDetailHandler = async () => {
         profileImageUrl:
           'http://t1.kakaocdn.net/account_images/default_profile.jpeg.twg.thumb.R640x640',
         isLeader: false,
-        mannerScore: 36.5,
+        signalTemperature: 66.5,
       },
     ],
-    createdAt: '03-09T15:57:04',
+    createdAt: '2024-03-15T15:58:27.934Z',
   });
 };
 

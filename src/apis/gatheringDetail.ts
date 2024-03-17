@@ -5,17 +5,8 @@ import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
-interface Participant {
-  userId: number;
-  nickname: string;
-  ageGroup: string;
-  profileImageUrl: string | null;
-  isLeader: boolean;
-  mannerScore: number;
-}
-
 export interface GatheringDetailResponse {
-  id: number;
+  roomId: number;
   title: string;
   description: string;
   time: string;
@@ -25,14 +16,24 @@ export interface GatheringDetailResponse {
   place: string | null;
   minAge: number;
   maxAge: number;
-  minParticipant: number;
-  maxParticipant: number;
+  minParticipants: number;
+  maxParticipants: number;
   imageUrl: string | null;
   isLeader: boolean;
   isFix: '확정' | '미확정';
   allowedGender: string;
   categories: string[];
-  participantResponse: Participant[];
+  participantResponse: ParticipantResponse[];
+  createdAt: string;
+}
+
+export interface ParticipantResponse {
+  userId: number;
+  nickname: string;
+  ageGroup: string;
+  profileImageUrl: string;
+  isLeader: boolean;
+  signalTemperature: number;
 }
 
 const getGatheringDetail = (gatheringId: string) =>
