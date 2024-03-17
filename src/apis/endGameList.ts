@@ -4,10 +4,21 @@ import { ROOMS_MY_END_GAMES_API_URL } from '@/constants/apiRoutes';
 import { END_GAME_LIST_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
-import type { GatheringListResponse } from './gatheringList';
+import type { Gathering } from './gatheringList';
+
+interface EndGameResponse extends Gathering {
+  fixTime: string;
+}
+
+interface EndGameListResponse {
+  roomsInfos: EndGameResponse[];
+  currentPageNumber: number;
+  size: number;
+  hasNext: boolean;
+}
 
 const getEndGameList = (size: number, page: number) =>
-  api.get<GatheringListResponse>({
+  api.get<EndGameListResponse>({
     url: ROOMS_MY_END_GAMES_API_URL,
     params: { size, page },
   });

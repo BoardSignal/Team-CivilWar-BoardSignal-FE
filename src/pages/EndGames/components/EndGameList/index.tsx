@@ -28,7 +28,7 @@ const EndGameList = ({ userId }: EndGameListProps) => {
       <ul>
         {endGames.map(endGame => {
           const remainingReviewableDay =
-            REVIEW_PERIOD - getRemainDay(endGame.createdAt);
+            REVIEW_PERIOD - getRemainDay(endGame.fixTime);
 
           return (
             <li
