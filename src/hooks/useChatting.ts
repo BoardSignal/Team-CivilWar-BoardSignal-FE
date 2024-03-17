@@ -9,10 +9,12 @@ import {
   CHAT_SEND_SOCKET_URL,
   CHAT_SUBSCRIBE_SOCKET_URL,
 } from '@/constants/apiRoutes';
+import { CHATS_QUERY_KEY } from '@/constants/queryKey';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 const useChatting = (gatheringId: number) => {
   const client = useRef<CompatClient | null>(null);
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
   const queryClient = useQueryClient();
 
   const connect = () => {
@@ -74,7 +76,7 @@ const useChatting = (gatheringId: number) => {
     });
 
     queryClient.invalidateQueries({
-      queryKey: ['chats', gatheringId],
+      queryKey: [CHATS_QUERY_KEY, gatheringId],
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

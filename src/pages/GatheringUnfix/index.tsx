@@ -14,7 +14,9 @@ import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import GatheringUnfixForm from './components/GatheringUnfixForm';
 
 const GatheringUnfixPage = () => {
-  const { gatheringId } = useParams();
+  const { gatheringId } = useParams() as {
+    gatheringId: string;
+  };
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +24,7 @@ const GatheringUnfixPage = () => {
   const currentUserId = useGetLoggedInUserId();
   const {
     gathering: { isFix, participantResponse: participants },
-  } = useGetGatheringDetailApi(gatheringId as string);
+  } = useGetGatheringDetailApi(gatheringId);
 
   const handleOpenModal = () => setIsModalOpen(true);
 
@@ -63,10 +65,7 @@ const GatheringUnfixPage = () => {
       <div className='px-4'>
         <Alert variant='danger'>{UNFIX_GATHERING_ALERT_MESSAGE}</Alert>
       </div>
-      <GatheringUnfixForm
-        gatheringId={gatheringId as string}
-        onUnfix={handleOpenModal}
-      />
+      <GatheringUnfixForm gatheringId={gatheringId} onUnfix={handleOpenModal} />
     </div>
   );
 };

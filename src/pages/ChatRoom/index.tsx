@@ -12,7 +12,7 @@ const ChatRoomPage = () => {
   const { gatheringId: rawGatheringId } = useParams() as {
     gatheringId: string;
   };
-  const gatheringId = parseInt(rawGatheringId);
+  const gatheringId = parseInt(rawGatheringId, 10);
 
   const { sendMessage } = useChatting(gatheringId);
   const { gatheringListItem } = useGetGatheringDetailApi(

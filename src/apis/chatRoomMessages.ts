@@ -21,18 +21,25 @@ interface ChatMessagesResponse {
   hasNext: boolean;
 }
 
-const getChatMessagesByRoomId = (roomId: number, size: number, page: number) =>
+const getChatMessagesByGatheringId = (
+  gatheringId: number,
+  size: number,
+  page: number,
+) =>
   api.get<ChatMessagesResponse>({
-    url: `${ROOMS_CHATS_API_URL}/${roomId}`,
+    url: `${ROOMS_CHATS_API_URL}/${gatheringId}`,
     params: { size, page },
   });
 
-export const useGetChatRoomMessagesApi = (roomId: number, size: number) => {
+export const useGetChatRoomMessagesApi = (
+  gatheringId: number,
+  size: number,
+) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useSuspenseInfiniteQuery({
-      queryKey: [CHATS_QUERY_KEY, roomId],
+      queryKey: [CHATS_QUERY_KEY, gatheringId],
       queryFn: ({ pageParam }) =>
-        getChatMessagesByRoomId(roomId, size, pageParam),
+        getChatMessagesByGatheringId(gatheringId, size, pageParam),
       initialPageParam: 0,
       getNextPageParam: ({ hasNext, currentPageNumber }) =>
         hasNext ? currentPageNumber + 1 : undefined,
