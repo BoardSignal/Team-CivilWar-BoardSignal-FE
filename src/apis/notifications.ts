@@ -115,9 +115,9 @@ export const useGetNotificationsApi = (size: number = 20) => {
         hasNext ? currentPage + 1 : undefined,
     });
 
-  const allPagesMerged = data.pages
-    .map(({ notificationsInfos }) => notificationsInfos)
-    .flat();
+  const allPagesMerged = data.pages.flatMap(
+    ({ notificationsInfos }) => notificationsInfos,
+  );
 
   return {
     fetchStatus,
