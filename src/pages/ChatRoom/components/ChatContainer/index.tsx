@@ -29,17 +29,18 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
         if (index === 0) {
           return (
             <div>
-              <ChatDate date={message.createAt} />
-              <ChatBubble message={message} />
+              <ChatDate date={message.createdAt} />
+              <ChatBubble isFirstMessage message={message} />
             </div>
           );
         }
 
         return (
-          <div key={message.createAt}>
-            {isDifferentDay(message.createAt, messages[index - 1].createAt) && (
-              <ChatDate date={message.createAt} />
-            )}
+          <div key={message.createdAt}>
+            {isDifferentDay(
+              message.createdAt,
+              messages[index - 1].createdAt,
+            ) && <ChatDate date={message.createdAt} />}
             <ChatBubble
               message={message}
               isFirstMessage={messages[index - 1]?.userId !== message.userId}

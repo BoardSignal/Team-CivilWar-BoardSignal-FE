@@ -27,7 +27,7 @@ const BasicChatBubble = ({
   isMessageOwner = false,
   className,
 }: BasicChatBubbleProps) => {
-  const { content, createAt } = message;
+  const { content, createdAt } = message;
 
   return (
     <div
@@ -40,7 +40,7 @@ const BasicChatBubble = ({
       <div className='w-max max-w-52 break-keep rounded-lg bg-gray-accent7 p-2 text-xs text-gray-accent1'>
         {content}
       </div>
-      <div className=' text-[10px]'>{formatToTime(createAt)}</div>
+      <div className=' text-[10px]'>{formatToTime(createdAt)}</div>
     </div>
   );
 };

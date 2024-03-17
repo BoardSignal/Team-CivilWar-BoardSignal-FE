@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import type { ChatRoom } from '@/apis/chatRoomList';
-import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
+import Chip from '@/components/Chip';
 import { CHATS_PAGE_URL } from '@/constants/pageRoutes';
+import useChatting from '@/hooks/useChatting';
 import { formatToTimeUntilTodayThenDate } from '@/utils/time';
 
 interface ChatRoomListItemProps {
@@ -14,7 +15,7 @@ interface ChatRoomListItemProps {
 const ChatRoomListItem = ({ chatRoom }: ChatRoomListItemProps) => {
   const { id, imageUrl, title, headCount } = chatRoom;
 
-  const { lastChatMessage } = useGetChatRoomMessagesApi(id, 10);
+  const { lastChatMessage, uncheckedMessagesCount } = useChatting(id);
 
   return (
     <Link to={`${CHATS_PAGE_URL}/${id}`}>
@@ -36,8 +37,13 @@ const ChatRoomListItem = ({ chatRoom }: ChatRoomListItemProps) => {
               </div>
             </div>
             {lastChatMessage && (
-              <div className='shrink-0 text-[10px] text-gray-accent3'>
-                {formatToTimeUntilTodayThenDate(lastChatMessage.createAt)}
+              <div className='flex shrink-0 flex-col items-center gap-1 text-[10px] text-gray-accent3'>
+                <div>
+                  {formatToTimeUntilTodayThenDate(lastChatMessage.createdAt)}
+                </div>
+                {uncheckedMessagesCount !== 0 && (
+                  <Chip variant='fill'>{uncheckedMessagesCount}</Chip>
+                )}
               </div>
             )}
           </div>

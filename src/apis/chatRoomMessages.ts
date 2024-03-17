@@ -11,7 +11,8 @@ export interface ChatMessage {
   userImageUrl: string | null;
   content: string;
   type: string;
-  createAt: string;
+  createdAt: string;
+  isChecked: boolean;
 }
 
 interface ChatMessagesResponse {
@@ -45,12 +46,16 @@ export const useGetChatRoomMessagesApi = (
         hasNext ? currentPageNumber + 1 : undefined,
     });
 
+  const messages = data.pages
+    .map(({ chatList }) => chatList)
+    .flat()
+    .reverse();
+
   return {
-    messages: data.pages
-      .map(({ chatList }) => chatList)
-      .flat()
-      .reverse(),
-    lastChatMessage: data.pages.flat()[0].chatList[0],
+    messages,
+    lastChatMessage: messages[messages.length - 1],
+    uncheckedMessagesCount: messages.filter(({ isChecked }) => !isChecked)
+      .length,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

@@ -24,7 +24,8 @@ const DUMMY_CHAT = {
   userImageUrl: null,
   content: '안녕하세요! 진짜 해본적이 없는데도 괜찮을까요?',
   type: 'CHAT',
-  createAt: '2024-03-14T13:04:21.075',
+  createdAt: '2024-03-14T13:04:21.075',
+  isChecked: false,
 };
 
 export const DefaultTemplate: Story = {
