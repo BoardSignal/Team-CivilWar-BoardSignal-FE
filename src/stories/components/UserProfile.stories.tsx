@@ -7,7 +7,6 @@ const meta: Meta<typeof UserProfile> = {
   tags: ['autodocs'],
   component: UserProfile,
 };
-
 export default meta;
 
 type Story = StoryObj<typeof UserProfile>;

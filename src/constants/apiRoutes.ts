@@ -11,7 +11,6 @@ export const AUTH_REISSUE_API_URL = '/auth/reissue';
 export const KAKAO = '/kakao';
 
 export const USERS_API_URL = '/users';
-export const USERS_END_GAME_API_URL = '/users/end-game';
 export const USERS_MY_API_URL = '/users/my';
 export const USERS_REVIEW_API_URL = '/users/review';
 
@@ -31,6 +30,7 @@ export const ROOMS_SEARCH_API_URL = '/rooms/search';
 export const ROOMS_UNFIX_API_URL = '/rooms/unfix';
 export const ROOMS_CHATS_API_URL = '/rooms/chats';
 export const ROOMS_CHATS_MY_GAMES_API_URL = '/rooms/my/games';
+export const ROOMS_END_GAME_API_URL = '/rooms/end-game';
 
 export const NOTIFICATIONS_MY_API_URL = '/notifications/my';
 export const FCM_TOKEN_API_URL = '/notifications/token';

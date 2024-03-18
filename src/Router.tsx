@@ -9,6 +9,7 @@ import {
   BOARD_GAMES_PAGE_URL,
   CHATS_PAGE_URL,
   END_GAMES_PAGE_URL,
+  END_GAMES_REVIEWS_CREATE_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
@@ -33,6 +34,7 @@ import BoardGameListPage from './pages/BoardGameList';
 import ChatRoomPage from './pages/ChatRoom';
 import ChatRoomListPage from './pages/ChatRoomList';
 import EndGamesPage from './pages/EndGames';
+import ReviewCreate from './pages/ReviewCreate';
 
 /**
  * 페이지 트랜지션을 제공하기 위해 `createBrowserRouter` 대신 `Routes` 요소를 사용해요.
@@ -163,6 +165,10 @@ const AnimatedRoutes = () => {
           />
           <Route path='/redirect' element={<RedirectOnAuthentication />} />
           <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
+          <Route
+            path={`${END_GAMES_REVIEWS_CREATE_PAGE_URL}/:gatheringId`}
+            element={<ReviewCreate />}
+          />
         </Routes>
       </CSSTransition>
     </TransitionGroup>
