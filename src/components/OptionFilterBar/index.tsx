@@ -5,6 +5,7 @@ import Icon from '@/components/Icon';
 import Button from '../Button';
 import OptionDrawer from './OptionDrawer';
 import OptionFilterButton from './OptionFilterButton';
+import OptionSubwaySelect from './OptionSubwaySelect';
 
 interface Icon {
   fill: string;
@@ -42,8 +43,12 @@ const OptionFilterBar = ({ options, resetUrl = '/' }: OptionFilterBarProps) => {
             <Icon id='close-line' size={16} className='text-gray-accent2' />
           </Button>
         </Link>
-        {options.map(option =>
-          option.items.length === 1 ? (
+        {options.map(option => {
+          if (option.items.length === 0) {
+            return <OptionSubwaySelect option={option} />;
+          }
+
+          return option.items.length === 1 ? (
             <div key={option.name}>
               <OptionFilterButton
                 option={option}
@@ -54,8 +59,8 @@ const OptionFilterBar = ({ options, resetUrl = '/' }: OptionFilterBarProps) => {
             </div>
           ) : (
             <OptionDrawer key={option.name} option={option} />
-          ),
-        )}
+          );
+        })}
       </div>
     </section>
   );
