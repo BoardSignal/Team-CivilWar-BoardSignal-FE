@@ -9,7 +9,7 @@ export interface ParticipantResponse {
   userId: number;
   nickname: string;
   ageGroup: string;
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   isLeader: boolean;
   signalTemperature: number;
 }

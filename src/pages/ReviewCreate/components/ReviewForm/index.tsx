@@ -13,7 +13,7 @@ export interface ParticipantsInfos {
   userId: number;
   nickname: string;
   ageGroup: string;
-  profileImageUrl?: string | null;
+  profileImageUrl: string | null;
   isLeader: boolean;
   signalTemperature: number;
 }
