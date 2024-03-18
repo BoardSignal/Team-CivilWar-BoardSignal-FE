@@ -89,9 +89,14 @@ const GatheringFixForm = ({ onCreate }: GatheringFixFormProps) => {
               const { value, onChange } = field;
 
               return (
-                <Label title='모임 날짜' isRequired>
-                  <DatePicker value={value} onChange={onChange} />
-                </Label>
+                <>
+                  <Label title='모임 날짜' isRequired>
+                    <DatePicker value={value} onChange={onChange} />
+                  </Label>
+                  <Alert variant='danger'>
+                    날짜는 현재 시간 기준 7일 이내로 선택해야 합니다.
+                  </Alert>
+                </>
               );
             }}
           />

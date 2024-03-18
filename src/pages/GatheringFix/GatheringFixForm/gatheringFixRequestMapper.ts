@@ -10,7 +10,7 @@ const convertTimeToDate = (date: string, time: string) => {
   const [hour, minute] = clockTime.split(':').map(Number);
   const [year, month, day] = date.split('-').map(Number);
 
-  const modifiedHour = timePeriod === '오후' ? hour : hour + 12;
+  const modifiedHour = timePeriod === '오후' && hour !== 12 ? hour - 12 : hour;
 
   return new Date(year, month - 1, day, modifiedHour, minute);
 };
