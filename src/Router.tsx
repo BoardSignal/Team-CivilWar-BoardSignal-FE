@@ -186,47 +186,48 @@ const AnimatedRoutes = () => {
               </Suspense>
             }
           />
+
+          <Route
+            path={GATHERINGS_CREATE_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <GatheringCreatePage />
+                </AuthorizedRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <GatheringDetailPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <GatheringFixPage />
+                </AuthorizedRoute>
+              </Suspense>
+            }
+          />
+          <Route
+            path={`${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <GatheringUnfixPage />
+                </AuthorizedRoute>
+              </Suspense>
+            }
+          />
+          <Route path='/redirect' element={<RedirectOnAuthentication />} />
+          <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
         </Routes>
-        <Route
-          path={GATHERINGS_CREATE_PAGE_URL}
-          element={
-            <Suspense fallback={<SpinnerFullScreen />}>
-              <AuthorizedRoute>
-                <GatheringCreatePage />
-              </AuthorizedRoute>
-            </Suspense>
-          }
-        />
-        <Route
-          path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
-          element={
-            <Suspense fallback={<SpinnerFullScreen />}>
-              <GatheringDetailPage />
-            </Suspense>
-          }
-        />
-        <Route
-          path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
-          element={
-            <Suspense fallback={<SpinnerFullScreen />}>
-              <AuthorizedRoute>
-                <GatheringFixPage />
-              </AuthorizedRoute>
-            </Suspense>
-          }
-        />
-        <Route
-          path={`${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`}
-          element={
-            <Suspense fallback={<SpinnerFullScreen />}>
-              <AuthorizedRoute>
-                <GatheringUnfixPage />
-              </AuthorizedRoute>
-            </Suspense>
-          }
-        />
-        <Route path='/redirect' element={<RedirectOnAuthentication />} />
-        <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
       </CSSTransition>
     </TransitionGroup>
   );
