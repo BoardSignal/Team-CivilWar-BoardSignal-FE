@@ -1,9 +1,9 @@
 export const API_BASE_URL =
-  import.meta.env.VITE_BASE_URL || import.meta.env.STORYBOOK_BASE_URL;
+  import.meta.env.VITE_API_BASE_URL || import.meta.env.STORYBOOK_API_BASE_URL;
 
 export const AUTH_API_URL = '/auth';
 
-export const AUTH_LOGIN_KAKAO_URL = '/kakao';
+export const AUTH_LOGIN_KAKAO_URL = '/oauth2/authorization/kakao';
 
 export const AUTH_LOGOUT_API_URL = '/auth/logout';
 export const AUTH_REISSUE_API_URL = '/auth/reissue';

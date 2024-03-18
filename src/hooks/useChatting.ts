@@ -41,7 +41,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
 
   const connect = () => {
     const socket = new SockJS(
-      `${import.meta.env.VITE_LOGIN_URL}${CHAT_CONNECT_SOCKET_URL}`,
+      `${import.meta.env.VITE_BASE_URL}${CHAT_CONNECT_SOCKET_URL}`,
     );
     client.current = Stomp.over(socket);
 
