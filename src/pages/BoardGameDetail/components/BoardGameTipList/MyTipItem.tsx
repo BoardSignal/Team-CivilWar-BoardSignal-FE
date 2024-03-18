@@ -38,8 +38,8 @@ const MyTipItem = ({
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
     deleteBoardGameTip();
+    setIsModalOpen(false);
   };
 
   const handleDeleteModal = () => {

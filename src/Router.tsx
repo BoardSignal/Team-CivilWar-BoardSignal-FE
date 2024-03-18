@@ -121,7 +121,7 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={BOARD_GAMES_TIP_CREATE_PAGE_URL}
+            path={`${BOARD_GAMES_TIP_CREATE_PAGE_URL}/:boardGameId/:boardGameTitle`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <AuthorizedRoute>
