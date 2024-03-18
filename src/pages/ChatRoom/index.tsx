@@ -6,7 +6,7 @@ import TabBar from '@/components/TabBar';
 import useChatting from '@/hooks/useChatting';
 
 import ChatContainer from './components/ChatContainer';
-import ChatInput from './components/ChatInput';
+import ChatTextarea from './components/ChatTextarea';
 
 const ChatRoomPage = () => {
   const { gatheringId: rawGatheringId } = useParams() as {
@@ -28,7 +28,7 @@ const ChatRoomPage = () => {
       </TabBar.Container>
       <GatheringListItem gathering={gatheringListItem} />
       <ChatContainer gatheringId={gatheringId} />
-      <ChatInput onSend={sendMessage} />
+      <ChatTextarea onSend={sendMessage} />
     </div>
   );
 };
