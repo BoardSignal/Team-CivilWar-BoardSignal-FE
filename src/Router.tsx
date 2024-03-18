@@ -7,16 +7,20 @@ import AuthorizedRoute from '@/components/AuthorizedRoute';
 import NotFoundErrorAlertFullScreen from '@/components/ErrorAlertFullScreen/NotFoundErrorAlertFullScreen';
 import {
   BOARD_GAMES_PAGE_URL,
+  BOARD_GAMES_TIP_CREATE_PAGE_URL,
   CHATS_PAGE_URL,
   END_GAMES_PAGE_URL,
   END_GAMES_REVIEWS_CREATE_PAGE_URL,
   GATHERINGS_CREATE_PAGE_URL,
   GATHERINGS_FIX_PAGE_URL,
   GATHERINGS_PAGE_URL,
+  GATHERINGS_UNFIX_PAGE_URL,
   LOGIN_PAGE_URL,
   NOTIFICATIONS_PAGE_URL,
+  REGISTER_PAGE_URL,
   USERS_EDIT_PAGE_URL,
   USERS_PAGE_URL,
+  USERS_WISH_PAGE_URL,
 } from '@/constants/pageRoutes';
 import BoardGameDetailPage from '@/pages/BoardGameDetail';
 import GatheringCreatePage from '@/pages/GatheringCreate';
@@ -33,7 +37,10 @@ import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import BoardGameListPage from './pages/BoardGameList';
 import ChatRoomPage from './pages/ChatRoom';
 import ChatRoomListPage from './pages/ChatRoomList';
+import CreateBoardGameTipPage from './pages/CreateBoardGameTip';
 import EndGamesPage from './pages/EndGames';
+import GatheringUnfixPage from './pages/GatheringUnfix';
+import RegisterPage from './pages/Register';
 import ReviewCreate from './pages/ReviewCreate';
 
 /**
@@ -70,6 +77,14 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
+            path={REGISTER_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <RegisterPage />
+              </Suspense>
+            }
+          />
+          <Route
             path={CHATS_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
@@ -102,6 +117,16 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
+            path={BOARD_GAMES_TIP_CREATE_PAGE_URL}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <CreateBoardGameTipPage />
+                </AuthorizedRoute>
+              </Suspense>
+            }
+          />
+          <Route
             path={NOTIFICATIONS_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
@@ -122,36 +147,22 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={GATHERINGS_CREATE_PAGE_URL}
+            path={`${USERS_EDIT_PAGE_URL}/:userId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <AuthorizedRoute>
-                  <GatheringCreatePage />
+                  <ProfileEditPage />
                 </AuthorizedRoute>
               </Suspense>
             }
           />
           <Route
-            path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+            path={`${USERS_WISH_PAGE_URL}/:userId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <GatheringFixPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <GatheringDetailPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path={`${USERS_EDIT_PAGE_URL}/:userId`}
-            element={
-              <Suspense fallback={<SpinnerFullScreen />}>
-                <ProfileEditPage />
+                <AuthorizedRoute>
+                  <ProfileEditPage />
+                </AuthorizedRoute>
               </Suspense>
             }
           />
@@ -159,17 +170,63 @@ const AnimatedRoutes = () => {
             path={END_GAMES_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <EndGamesPage />
+                <AuthorizedRoute>
+                  <EndGamesPage />
+                </AuthorizedRoute>
               </Suspense>
             }
           />
-          <Route path='/redirect' element={<RedirectOnAuthentication />} />
-          <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
           <Route
             path={`${END_GAMES_REVIEWS_CREATE_PAGE_URL}/:gatheringId`}
-            element={<ReviewCreate />}
+            element={
+              <Suspense fallback={<SpinnerFullScreen />}>
+                <AuthorizedRoute>
+                  <ReviewCreate />
+                </AuthorizedRoute>
+              </Suspense>
+            }
           />
         </Routes>
+        <Route
+          path={GATHERINGS_CREATE_PAGE_URL}
+          element={
+            <Suspense fallback={<SpinnerFullScreen />}>
+              <AuthorizedRoute>
+                <GatheringCreatePage />
+              </AuthorizedRoute>
+            </Suspense>
+          }
+        />
+        <Route
+          path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
+          element={
+            <Suspense fallback={<SpinnerFullScreen />}>
+              <GatheringDetailPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path={`${GATHERINGS_FIX_PAGE_URL}/:gatheringId`}
+          element={
+            <Suspense fallback={<SpinnerFullScreen />}>
+              <AuthorizedRoute>
+                <GatheringFixPage />
+              </AuthorizedRoute>
+            </Suspense>
+          }
+        />
+        <Route
+          path={`${GATHERINGS_UNFIX_PAGE_URL}/:gatheringId`}
+          element={
+            <Suspense fallback={<SpinnerFullScreen />}>
+              <AuthorizedRoute>
+                <GatheringUnfixPage />
+              </AuthorizedRoute>
+            </Suspense>
+          }
+        />
+        <Route path='/redirect' element={<RedirectOnAuthentication />} />
+        <Route path='*' element={<NotFoundErrorAlertFullScreen />} />
       </CSSTransition>
     </TransitionGroup>
   );
