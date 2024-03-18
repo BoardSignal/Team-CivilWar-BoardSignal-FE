@@ -88,7 +88,9 @@ const AnimatedRoutes = () => {
             path={CHATS_PAGE_URL}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <ChatRoomListPage />
+                <AuthorizedRoute>
+                  <ChatRoomListPage />
+                </AuthorizedRoute>
               </Suspense>
             }
           />
@@ -96,7 +98,9 @@ const AnimatedRoutes = () => {
             path={`${CHATS_PAGE_URL}/:gatheringId`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
-                <ChatRoomPage />
+                <AuthorizedRoute>
+                  <ChatRoomPage />
+                </AuthorizedRoute>
               </Suspense>
             }
           />

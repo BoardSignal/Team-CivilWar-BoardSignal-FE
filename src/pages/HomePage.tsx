@@ -1,8 +1,6 @@
 import { GNB } from '@/components/GNB';
-import useInitializeFCM from '@/hooks/useInitializeFCM';
 
 export const HomePage = () => {
-  useInitializeFCM();
   return (
     <div className='flex h-full flex-col'>
       <div className='grow'>

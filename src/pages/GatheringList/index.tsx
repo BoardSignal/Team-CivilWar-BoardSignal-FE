@@ -3,6 +3,7 @@ import { GNB } from '@/components/GNB';
 import OptionFilterBar from '@/components/OptionFilterBar';
 import TabBar from '@/components/TabBar';
 import { BOARDGAME_CATEGORIES, TIME_OPTIONS } from '@/constants/options';
+import useInitializeFCM from '@/hooks/useInitializeFCM';
 
 import FloatingButton from './components/FloatingButton';
 import GatheringList from './components/GatheringList';
@@ -38,6 +39,8 @@ export const OPTIONS = [
 ];
 
 export const GatheringListPage = () => {
+  useInitializeFCM();
+
   return (
     <div className='flex h-full flex-col'>
       <TabBar.Container>
