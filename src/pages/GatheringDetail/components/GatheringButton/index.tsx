@@ -3,8 +3,11 @@ import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
+import { useGetIsJoinedUserApi } from '@/apis/loggedInUser';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
+import SpinnerFullScreen from '@/components/Spinner/SpinnerFullScreen';
 import {
   DELETE_GATHERING_MODAL_MESSAGE,
   OUT_GATHERING_MODAL_MESSAGE,
@@ -17,6 +20,7 @@ import {
   GATHERINGS_UNFIX_PAGE_URL,
 } from '@/constants/pageRoutes';
 import { GATHERING_DETAIL_QUERY_KEY } from '@/constants/queryKey';
+import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
 import { useGathering } from '../../hooks/useGatheringDelete';
 import { useGatheringEntrance } from '../../hooks/useGatheringEntrance';
@@ -36,6 +40,8 @@ interface EntranceGatheringButtonProps extends GatheringIdProps {
   isFix: '확정' | '미확정';
 }
 
+const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
+
 const EntranceGatheringButton = ({
   gatheringId,
   isFix,
@@ -43,7 +49,17 @@ const EntranceGatheringButton = ({
   const [isEntranceModalOpen, setIsEntranceModalOpen] = useState(false);
   const gatheringEntrance = useGatheringEntrance();
   const queryClient = useQueryClient();
+  const { gathering } = useGetGatheringDetailApi(gatheringId);
+  const { data, isLoading } = useGetIsJoinedUserApi(accessToken);
+  const { minAge, maxAge, allowedGender } = gathering;
 
+  if (isLoading) {
+    return <SpinnerFullScreen />;
+  }
+
+  // data가 undefined인경우가 캐치 되지않아 조건문을 포함했습니다.
+  const age = data ? data.age : null;
+  const gender = data ? data.gender : null;
   const handleOpenEntranceModal = () => {
     setIsEntranceModalOpen(true);
   };
@@ -59,6 +75,11 @@ const EntranceGatheringButton = ({
     gatheringEntrance(gatheringId, handleOpenEntranceModal);
   };
 
+  const isInaccessibleAge = age ? age < minAge && age > maxAge : true;
+  const isUnAllowedGender =
+    allowedGender !== '혼성' && allowedGender !== gender;
+  const isEntrance = isInaccessibleAge || isUnAllowedGender || isFix === '확정';
+
   return (
     <>
       <Modal
@@ -71,7 +92,7 @@ const EntranceGatheringButton = ({
         {SUCCESS_GATHERING_JOIN_MODAL_MESSAGE}
       </Modal>
       <Button
-        variant={isFix === '확정' ? 'inactive' : 'primary'}
+        variant={isEntrance ? 'inactive' : 'primary'}
         onClick={handleGatheringEntrance}
       >
         입장하기
