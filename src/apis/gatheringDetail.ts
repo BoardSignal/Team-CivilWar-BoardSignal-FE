@@ -30,7 +30,7 @@ export interface GatheringDetailResponse {
   imageUrl: string | null;
   isLeader: boolean;
   isFix: '확정' | '미확정';
-  allowedGender: string;
+  allowedGender: '남성' | '여성' | '혼성';
   categories: string[];
   participantResponse: ParticipantResponse[];
   createdAt: string;
