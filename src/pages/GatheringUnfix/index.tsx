@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
+import InvalidStatePageError from '@/components/ErrorAlertFullScreen/NotFoundErrorAlertFullScreen/InvalidStatePageError';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import Alert from '@/components/alert';
@@ -39,7 +40,7 @@ const GatheringUnfixPage = () => {
     );
 
     if (isFix === '미확정' || !isParticipant) {
-      throw new Error('Inaccessible page');
+      throw new InvalidStatePageError();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
