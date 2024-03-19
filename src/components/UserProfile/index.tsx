@@ -68,7 +68,7 @@ const UserProfile = ({
     queryClient.invalidateQueries({
       queryKey: [GATHERING_DETAIL_QUERY_KEY, gatheringId],
     });
-    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}`);
+    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/0`);
   };
 
   const handleKickParticipant = () => {

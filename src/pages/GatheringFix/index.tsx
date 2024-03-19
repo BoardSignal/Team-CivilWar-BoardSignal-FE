@@ -23,7 +23,7 @@ const GatheringFixPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}`);
+    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/0`);
   };
 
   return (
