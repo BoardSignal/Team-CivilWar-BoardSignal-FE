@@ -12,7 +12,7 @@ const UserSignalTemperature = ({ temperature }: UserSignalTemperatureProps) => {
   const { text, background } = getColorByTemperature(temperature);
 
   return (
-    <div className='flex flex-col items-end gap-1'>
+    <div className='relative flex flex-col items-end gap-1'>
       <div className='flex'>
         <div className='flex flex-col'>
           <span
@@ -38,8 +38,8 @@ const UserSignalTemperature = ({ temperature }: UserSignalTemperatureProps) => {
             시그널온도
           </span>
         </PopoverTrigger>
-        <PopoverContent className='relative right-[60px] z-20'>
-          <p className='tooltip before:left-[85%]'>
+        <PopoverContent className='absolute -right-8 z-20'>
+          <p className='tooltip text-gray-bg-base before:left-[85%]'>
             {SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE}
           </p>
         </PopoverContent>
