@@ -5,6 +5,7 @@ import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import MultipleSelect from '@/components/MultipleSelect';
+import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
@@ -24,7 +25,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { isValid, errors },
     control,
   } = useForm(profileEditFormOptions);
 
@@ -70,13 +71,18 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
             />
             <FormErrorMessage message={errors.nickname?.message} />
           </Label>
-          <Label title='지역 (가까운 지하철역)' isRequired>
-            <TextInput
-              variant={errors.subwayStation ? 'error' : 'default'}
-              {...register('subwayStation')}
+          <Label title='지역 (가까운 지하철역)'>
+            <Controller
+              name='station'
+              control={control}
+              render={({ field }) => {
+                const { value, onChange } = field;
+
+                return <SubwaySelect value={value} onChange={onChange} />;
+              }}
             />
+            <FormErrorMessage message={errors.station?.message} />
           </Label>
-          <FormErrorMessage message={errors.subwayStation?.message} />
           <Label title='게임 카테고리'>
             <Controller
               name='categories'
@@ -97,7 +103,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
         </section>
       </div>
       <div className='p-4'>
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant={isValid ? 'primary' : 'inactive'}>
           저장
         </Button>
       </div>

@@ -1,6 +1,11 @@
 export const extractLineFromSubwayName = (subwayStation: string) => {
+  if (subwayStation === '') {
+    return '';
+  }
+
   const pattern = /\(([^)]+)\)/;
   const match = subwayStation.match(pattern);
+
   if (!match) {
     throw new Error('invalid subway station');
   }
@@ -10,5 +15,9 @@ export const extractLineFromSubwayName = (subwayStation: string) => {
 };
 
 export const extractStationFromSubwayName = (subwayStation: string) => {
+  if (subwayStation === '') {
+    return '';
+  }
+
   return subwayStation.split(' ')[0];
 };

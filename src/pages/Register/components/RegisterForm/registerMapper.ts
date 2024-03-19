@@ -1,28 +1,26 @@
+import {
+  extractLineFromSubwayName,
+  extractStationFromSubwayName,
+} from '@/utils/extractFromSubwayName';
+
 export interface RegisterFormValue {
   profileImageUrl: File;
   nickname: string;
-  subwayLine: string;
-  subwayStation: string;
+  station: string;
   categories: string[];
   isAgreeTerms: boolean;
   isAgreeMarketing: boolean;
 }
 
 const registerRequestMapper = (data: RegisterFormValue) => {
-  const {
-    nickname: nickName,
-    subwayLine: line,
-    subwayStation: station,
-    categories,
-    profileImageUrl,
-  } = data;
+  const { nickname: nickName, station, categories, profileImageUrl } = data;
 
   return {
     profileImageUrl,
     userProfile: {
       nickName,
-      line,
-      station,
+      line: extractLineFromSubwayName(station),
+      station: extractStationFromSubwayName(station),
       categories,
     },
   };

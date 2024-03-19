@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react';
 
+import useAutoCloseOnGoBack from '@/hooks/useAutoCloseModal';
 import { cn } from '@/utils/cn';
 
 import LayoutRootPortal from '../Layout/LayoutRootPortal';
@@ -35,6 +36,8 @@ const Drawer = ({ children, onClose }: PropsWithChildren<DrawerProps>) => {
     setIsOpen(false);
     onClose && onClose();
   };
+
+  useAutoCloseOnGoBack(handleCloseDrawer);
 
   const [drawerTrigger, drawerTitle, drawerContent, drawerCloser] =
     useMemo(() => {

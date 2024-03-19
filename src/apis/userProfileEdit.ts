@@ -12,7 +12,7 @@ interface UserProfile {
 }
 
 interface ProfileEditResponse {
-  userId: number;
+  id: number;
 }
 
 export interface ProfileEditRequest {

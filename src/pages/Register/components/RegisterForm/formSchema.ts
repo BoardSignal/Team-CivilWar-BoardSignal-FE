@@ -15,18 +15,16 @@ export const registerSchema = object({
     .trim()
     .min(2, `${TRIM_ERROR_MESSAGE} 2${MIN_LENGTH_ERROR_MESSAGE}`)
     .max(10, `10${MAX_LENGTH_ERROR_MESSAGE}`),
-  subwayLine: string().defined(),
-  subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
+  station: string().defined(),
   categories: array(string().defined()).required(),
-  isAgreeTerms: boolean().required(),
+  isAgreeTerms: boolean().oneOf([true]).defined(),
   isAgreeMarketing: boolean().defined(),
 });
 
 export const registerDefaultValue = {
   profileImageUrl: new File([], ''),
   nickname: '',
-  subwayLine: '2호선',
-  subwayStation: '',
+  station: '',
   categories: [],
   isAgreeTerms: false,
   isAgreeMarketing: false,
