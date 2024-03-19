@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
+import Alert from '@/components/Alert';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
 import FormErrorMessage from '@/components/FormErrorMessage';
@@ -13,7 +14,6 @@ import Range from '@/components/Range';
 import Select from '@/components/Select';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
-import Alert from '@/components/alert';
 import {
   AGE_RANGE_ALERT_MESSAGE,
   CATEGORY_SELECT_ALERT_MESSAGE,
