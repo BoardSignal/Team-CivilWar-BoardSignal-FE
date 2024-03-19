@@ -46,14 +46,11 @@ export const useGetChatRoomMessagesApi = (
         hasNext ? currentPageNumber + 1 : undefined,
     });
 
-  const messages = data.pages
-    .map(({ chatList }) => chatList)
-    .flat()
-    .reverse();
+  const messages = data.pages.map(({ chatList }) => chatList).flat();
 
   return {
     messages,
-    lastChatMessage: messages[messages.length - 1],
+    lastChatMessage: messages[0],
     uncheckedMessagesCount: messages.filter(({ isChecked }) => !isChecked)
       .length,
     hasNextPage,

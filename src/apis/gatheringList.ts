@@ -73,7 +73,7 @@ export const useGetGatheringListApi = ({
     });
 
   return {
-    gatherings: data.pages.map(({ roomsInfos }) => [...roomsInfos]).flat(),
+    gatherings: data.pages.map(({ roomsInfos }) => roomsInfos).flat(),
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

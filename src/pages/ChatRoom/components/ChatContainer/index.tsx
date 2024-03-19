@@ -22,11 +22,11 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
     <ReverseInfiniteScrollAutoFetch
       hasNextPage={hasNextPage}
       fetchNextPage={fetchNextPage}
-      className='flex grow flex-col overflow-y-auto p-4'
-      data={messages}
+      className='flex grow flex-col-reverse overflow-y-scroll p-4'
+      fetchedData={messages}
     >
       {messages.map((message, index) => {
-        if (index === 0) {
+        if (index === messages.length - 1) {
           return (
             <div>
               <ChatDate date={message.createdAt} />
@@ -39,12 +39,18 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
           <div key={message.createdAt}>
             {isDifferentDay(
               message.createdAt,
-              messages[index - 1].createdAt,
-            ) && <ChatDate date={message.createdAt} />}
-            <ChatBubble
-              message={message}
-              isFirstMessage={messages[index - 1]?.userId !== message.userId}
-            />
+              messages[index + 1].createdAt,
+            ) ? (
+              <>
+                <ChatDate date={message.createdAt} />
+                <ChatBubble message={message} isFirstMessage />
+              </>
+            ) : (
+              <ChatBubble
+                message={message}
+                isFirstMessage={messages[index + 1]?.userId !== message.userId}
+              />
+            )}
           </div>
         );
       })}
