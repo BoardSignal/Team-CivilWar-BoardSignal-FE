@@ -183,7 +183,7 @@ const LeaveGatheringButton = ({ gatheringId }: GatheringIdProps) => {
     setIsSuccessModalOpen(true);
   };
 
-  const handleLeaveGatheringModal = () => {
+  const handleLeaveGatheringModal = async () => {
     setIsLeaveConfirmModalOpen(false);
     gatheringLeave(handleOpenIsSuccessModal);
   };

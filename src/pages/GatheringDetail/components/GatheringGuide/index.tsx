@@ -1,3 +1,5 @@
+import { format, parseISO } from 'date-fns';
+
 import Icon from '@/components/Icon';
 import { IconName } from '@/components/Icon/type';
 
@@ -24,22 +26,6 @@ interface GuideItemProps {
   content: string;
 }
 
-const convertToKoreaTime = (startTime: string) => {
-  const date = new Date(startTime);
-  date.setHours(date.getHours() + 9);
-  const koreaTime = date.toLocaleString('ko-KR', {
-    timeZone: 'Asia/Seoul',
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true,
-  });
-
-  return koreaTime;
-};
-
 const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   <div className='flex gap-2'>
     <div className='flex w-fit items-center gap-1'>
@@ -49,6 +35,14 @@ const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
     <span className='text-xs'>{content}</span>
   </div>
 );
+
+const convertTimeFormat = (time: string) => {
+  const date = parseISO(time);
+
+  const formattedDate = format(date, 'yyyy년MM월dd일 a hh:mm');
+
+  return formattedDate;
+};
 
 const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
   const {
@@ -80,7 +74,7 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
       <GuideItem
         iconId='time-fill'
         label='시간대'
-        content={startTime ? convertToKoreaTime(startTime) : time}
+        content={startTime ? convertTimeFormat(startTime) : time}
       />
       <GuideItem iconId='map-pin-fill' label='장소' content={gatheringPlace} />
       <GuideItem iconId='team-fill' label='인원' content={participantsGroup} />
