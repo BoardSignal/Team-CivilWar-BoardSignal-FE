@@ -1,7 +1,6 @@
-import { format, parseISO } from 'date-fns';
-
 import Icon from '@/components/Icon';
 import { IconName } from '@/components/Icon/type';
+import { formatToDateTime } from '@/utils/time';
 
 interface GatheringGuide {
   time: string;
@@ -36,14 +35,6 @@ const GuideItem = ({ iconId, label, content }: GuideItemProps) => (
   </div>
 );
 
-const convertTimeFormat = (time: string) => {
-  const date = parseISO(time);
-
-  const formattedDate = format(date, 'yyyy년MM월dd일 a hh:mm');
-
-  return formattedDate;
-};
-
 const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
   const {
     time,
@@ -74,7 +65,7 @@ const GatheringGuide = ({ gatheringGuide }: GatheringGuideProps) => {
       <GuideItem
         iconId='time-fill'
         label='시간대'
-        content={startTime ? convertTimeFormat(startTime) : time}
+        content={startTime ? formatToDateTime(startTime) : time}
       />
       <GuideItem iconId='map-pin-fill' label='장소' content={gatheringPlace} />
       <GuideItem iconId='team-fill' label='인원' content={participantsGroup} />

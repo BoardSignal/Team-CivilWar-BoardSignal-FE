@@ -116,3 +116,13 @@ export const getRelativeTimeWithin = (dateTime: string, limit?: number) => {
 
   return getRelativeTime(dateTime);
 };
+
+export const formatToDateTime = (
+  dateTime: string,
+  dateStyle: DateStyle = 'full',
+) =>
+  new Intl.DateTimeFormat('ko-KR', {
+    dateStyle,
+    timeStyle: 'short',
+    timeZone: 'Asia/Seoul',
+  }).format(new Date(dateTime));
