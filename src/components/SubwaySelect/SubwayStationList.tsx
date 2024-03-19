@@ -7,7 +7,7 @@ interface SubwayStationListProps {
 
 const SubwayStationList = ({ onSelect, stations }: SubwayStationListProps) => {
   return (
-    <div className='scroll-none h-full grow overflow-y-auto'>
+    <div className='scroll-none h-full grow overflow-y-auto overflow-x-hidden'>
       {stations.map(name => {
         const handleClick = () => {
           onSelect(name);

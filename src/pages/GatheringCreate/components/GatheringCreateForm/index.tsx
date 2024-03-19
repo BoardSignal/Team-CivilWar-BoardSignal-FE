@@ -64,7 +64,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
       onSubmit={handleSubmit(onSubmitGathering)}
       className='flex grow flex-col overflow-y-hidden'
     >
-      <div className='overflow-y-auto'>
+      <div className='overflow-y-auto overflow-x-hidden'>
         <Controller
           name='thumbnailImage'
           control={control}

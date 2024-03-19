@@ -22,7 +22,7 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
     <ReverseInfiniteScrollAutoFetch
       hasNextPage={hasNextPage}
       fetchNextPage={fetchNextPage}
-      className='flex grow flex-col overflow-y-auto p-4'
+      className='flex grow flex-col overflow-y-auto overflow-x-hidden p-4'
       data={messages}
     >
       {messages.map((message, index) => {

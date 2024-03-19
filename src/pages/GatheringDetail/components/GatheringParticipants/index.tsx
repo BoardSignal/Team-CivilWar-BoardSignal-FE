@@ -59,7 +59,7 @@ const GatheringParticipants = ({
 
   return (
     <>
-      <section className='flex h-full grow flex-col overflow-y-auto'>
+      <section className='flex h-full grow flex-col overflow-y-auto overflow-x-hidden'>
         <ul>
           {participants.map(participant => {
             const handleKickParticipant = () => handleKick(participant.userId);

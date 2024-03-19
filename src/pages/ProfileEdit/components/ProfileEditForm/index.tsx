@@ -40,7 +40,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
       onSubmit={handleSubmit(onSubmitProfileEdit)}
       className='flex grow flex-col overflow-y-hidden'
     >
-      <div className='grow overflow-y-auto'>
+      <div className='grow overflow-y-auto overflow-x-hidden'>
         <Controller
           name='profileImageUrl'
           control={control}

@@ -42,7 +42,7 @@ const ProfilePage = () => {
           <TabBar.SettingsButton />
         </TabBar.Right>
       </TabBar.Container>
-      <div className='grow overflow-y-auto'>
+      <div className='grow overflow-y-auto overflow-x-hidden'>
         <PersonalInfo personalInfo={personalInfo} />
         {isProfileManager && <EditProfileButton userId={userId} />}
         <div className='flex flex-col gap-2 border-b border-gray-accent7 p-4'>
