@@ -7,14 +7,6 @@ import 'firebase/messaging';
 import { API_BASE_URL, FCM_TOKEN_API_URL } from '@/constants/apiRoutes';
 import { STORAGE_KEY_FCM_TOKEN } from '@/constants/storageKeys';
 
-interface FirebaseMessagePayload {
-  notification: {
-    title: string;
-    body: string;
-    icon: string;
-  };
-}
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -32,15 +24,6 @@ const initializeFirebase = () => {
   firebase.apps.length
     ? firebase.app()
     : firebase.initializeApp(firebaseConfig);
-};
-
-const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
-  const title = payload.notification.title;
-  const options = {
-    body: payload.notification.body,
-    icon: payload.notification.icon,
-  };
-  new Notification(title, options);
 };
 
 const updateFCMToken = (issuedFCMToken: string) => {
@@ -62,7 +45,6 @@ const useInitializeFCM = () => {
     initializeFirebase();
     const messaging = firebase.messaging();
     messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
-    messaging.onMessage(foregroundMessageHandler);
   }, []);
 };
 
