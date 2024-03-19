@@ -47,7 +47,7 @@ const LocationListModal = ({ onClose, onSelect }: LocationListModalProps) => {
             placeholder='장소를 검색하세요...'
           />
         </div>
-        <div className='grow overflow-y-auto'>
+        <div className='grow overflow-y-auto overflow-x-hidden'>
           {searchWord && (
             <ApiErrorBoundary>
               <Suspense fallback={<SpinnerFullScreen />}>

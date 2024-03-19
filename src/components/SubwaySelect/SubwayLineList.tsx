@@ -15,7 +15,7 @@ const SubwayLineList = ({
   selectedLine,
 }: SubwayLineListProps) => {
   return (
-    <div className='scroll-none h-full overflow-y-auto border-r border-gray-accent7'>
+    <div className='scroll-none h-full overflow-y-auto overflow-x-hidden border-r border-gray-accent7'>
       {lines.map(({ name, color }) => (
         <Button
           key={name}

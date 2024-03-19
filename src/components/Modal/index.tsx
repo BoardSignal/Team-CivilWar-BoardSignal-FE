@@ -43,11 +43,11 @@ const Modal = ({
 
   return (
     <LayoutRootPortal>
-      <div className='backdrop absolute inset-0 z-[100] flex h-full items-center justify-center'>
+      <div className='backdrop absolute inset-0 h-full w-full opacity-70' />
+      <div className='absolute inset-0 z-[100] flex h-full items-center justify-center'>
         <div className='flex w-[66%] flex-col items-center rounded-lg bg-gray-bg-base p-8'>
           <label className={modalTitleCSS({ variant })}>{title}</label>
           <p className='text-m text-gray-accent2'>{children}</p>
-
           {variant === 'primary' && (
             <Button variant='primary' onClick={onClose} className='mt-8'>
               {buttonChildren}

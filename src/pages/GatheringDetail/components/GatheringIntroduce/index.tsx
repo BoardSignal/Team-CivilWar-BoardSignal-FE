@@ -33,7 +33,7 @@ const GatheringIntroduce = ({
     gatheringIntroduce;
 
   return (
-    <div className='flex h-full grow flex-col overflow-y-auto'>
+    <div className='flex h-full grow flex-col overflow-y-auto overflow-x-hidden'>
       <img
         src={imageUrl ?? DEFAULT_IMAGE_URL}
         alt='모임 이미지'

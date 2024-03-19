@@ -1,30 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import Alert from '@/components/alert';
 import { UNFIX_GATHERING_ALERT_MESSAGE } from '@/constants/messages/alert';
 import { SUCCESS_UNFIX_GATHERING_MODAL_MESSAGE } from '@/constants/messages/modal';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
-import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 
 import GatheringUnfixForm from './components/GatheringUnfixForm';
+import useBlockIfNotFixed from './hooks/useBlockIfNotFixed';
+import useBlockNonParticipant from './hooks/useBlockNonParticipant';
 
 const GatheringUnfixPage = () => {
   const { gatheringId } = useParams() as {
     gatheringId: string;
   };
 
+  useBlockNonParticipant(gatheringId);
+  useBlockIfNotFixed(gatheringId);
+
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const currentUserId = useGetLoggedInUserId();
-  const {
-    gathering: { isFix, participantResponse: participants },
-  } = useGetGatheringDetailApi(gatheringId);
 
   const handleOpenModal = () => setIsModalOpen(true);
 
@@ -32,17 +30,6 @@ const GatheringUnfixPage = () => {
     setIsModalOpen(false);
     navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}`);
   };
-
-  useEffect(() => {
-    const isParticipant = participants.some(
-      ({ userId }) => currentUserId === userId,
-    );
-
-    if (isFix === '미확정' || !isParticipant) {
-      throw new Error('Inaccessible page');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className='flex h-full flex-col'>

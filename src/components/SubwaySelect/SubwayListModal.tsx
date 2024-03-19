@@ -49,7 +49,7 @@ const SubwayListModal = ({ onClose, onSelect }: SubwayListModalProps) => {
           states={states}
           selectedState={selectedState}
         />
-        <div className='scroll-none flex grow overflow-y-auto'>
+        <div className='scroll-none flex grow overflow-y-auto overflow-x-hidden'>
           <SubwayLineList
             onSelect={handleLineSelect}
             selectedLine={selectedLine}

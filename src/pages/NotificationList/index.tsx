@@ -13,7 +13,7 @@ const NotificationListPage = () => {
       <TabBar.Container>
         <TabBar.Title>알림</TabBar.Title>
       </TabBar.Container>
-      <div className='grow overflow-y-auto'>
+      <div className='grow overflow-y-auto overflow-x-hidden'>
         <ApiErrorBoundary>
           <Suspense fallback={<SpinnerFullScreen />}>
             <NotificationList />
