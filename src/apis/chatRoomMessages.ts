@@ -5,12 +5,20 @@ import { CHATS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
+export type MessageType =
+  | 'FIX'
+  | 'UNFIX'
+  | 'PARTICIPANT'
+  | 'EXIT'
+  | 'CHAT'
+  | 'KICK';
+
 export interface ChatMessage {
   userId: number;
   nickname: string;
   userImageUrl: string | null;
   content: string;
-  type: string;
+  type: MessageType;
   createdAt: string;
   isChecked: boolean;
 }

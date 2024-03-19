@@ -4,7 +4,7 @@ import { CompatClient, IMessage, Stomp } from '@stomp/stompjs';
 import { useQueryClient } from '@tanstack/react-query';
 import SockJS from 'sockjs-client';
 
-import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
+import { type ChatMessage, type MessageType } from '@/apis/chatRoomMessages';
 import {
   CHAT_CONNECT_SOCKET_URL,
   CHAT_EXIT_SOCKET_URL,
@@ -14,11 +14,9 @@ import {
 import { CHATS_QUERY_KEY } from '@/constants/queryKey';
 import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
-interface MessageResponse {
+export interface MessageRequest {
   content: string;
-  createdAt: string;
-  type: string;
-  userId: number;
+  type: MessageType;
 }
 
 /**
@@ -29,12 +27,15 @@ interface MessageResponse {
  *
  */
 
-const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
+const useSendChatMessage = (
+  gatheringId: number,
+  isPublishExitMessage = false,
+  rawLastChatMessage: ChatMessage | undefined = undefined,
+) => {
   const client = useRef<CompatClient | null>(null);
-  const { lastChatMessage: rawLastChatMessage, uncheckedMessagesCount } =
-    useGetChatRoomMessagesApi(gatheringId, 20);
-  const [lastChatMessage, setLastChatMessage] =
-    useState<MessageResponse>(rawLastChatMessage);
+  const [lastChatMessage, setLastChatMessage] = useState<
+    ChatMessage | undefined
+  >(rawLastChatMessage);
 
   const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
   const queryClient = useQueryClient();
@@ -98,7 +99,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
     });
   };
 
-  const sendMessage = useCallback((content: string) => {
+  const sendMessage = useCallback(({ content, type }: MessageRequest) => {
     if (content.length <= 0) {
       return;
     }
@@ -111,7 +112,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
       },
       body: JSON.stringify({
         content,
-        type: 'CHAT',
+        type,
       }),
     });
 
@@ -129,7 +130,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { lastChatMessage, uncheckedMessagesCount, sendMessage };
+  return { lastChatMessage, sendMessage };
 };
 
-export default useChatting;
+export default useSendChatMessage;

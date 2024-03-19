@@ -41,7 +41,7 @@ const EntranceGatheringButton = ({
   isFix,
 }: EntranceGatheringButtonProps) => {
   const [isEntranceModalOpen, setIsEntranceModalOpen] = useState(false);
-  const gatheringEntrance = useGatheringEntrance();
+  const gatheringEntrance = useGatheringEntrance(gatheringId);
   const queryClient = useQueryClient();
 
   const handleOpenEntranceModal = () => {
@@ -56,7 +56,7 @@ const EntranceGatheringButton = ({
   };
 
   const handleGatheringEntrance = () => {
-    gatheringEntrance(gatheringId, handleOpenEntranceModal);
+    gatheringEntrance(handleOpenEntranceModal);
   };
 
   return (
@@ -140,7 +140,7 @@ const DeleteGatheringButton = ({ gatheringId }: GatheringIdProps) => {
 const LeaveGatheringButton = ({ gatheringId }: GatheringIdProps) => {
   const [isLeaveConfirmModalOpen, setIsLeaveConfirmModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-  const gatheringLeave = useGatheringLeave();
+  const gatheringLeave = useGatheringLeave(gatheringId);
   const queryClient = useQueryClient();
 
   const handleOpenLeaveConfirmModal = () => {
@@ -164,7 +164,7 @@ const LeaveGatheringButton = ({ gatheringId }: GatheringIdProps) => {
 
   const handleLeaveGatheringModal = () => {
     setIsLeaveConfirmModalOpen(false);
-    gatheringLeave(gatheringId, handleOpenIsSuccessModal);
+    gatheringLeave(handleOpenIsSuccessModal);
   };
 
   return (

@@ -4,3 +4,5 @@ export const EMPTY_NOTIFICATION_MESSAGE =
 
 export const EMPTY_BOARD_GAMES_TITLE = '앗! 조건에 맞는 게임이 없어요!';
 export const EMPTY_BOARD_GAMES_MESSAGE = '조건을 변경해서 검색해주세요';
+
+export const EMPTY_CHAT_ROOM_MESSAGE = '대화를 시작해보세요!';

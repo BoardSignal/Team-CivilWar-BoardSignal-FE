@@ -3,6 +3,7 @@ type MinutesPerTimeUnit = {
   unit: TimeUnits;
   minutes: number;
 };
+type DateStyle = 'full' | 'long' | 'medium' | 'short' | undefined;
 
 const MINUTES_PER_TIME_UNIT: MinutesPerTimeUnit[] = [
   { unit: 'year', minutes: 60 * 24 * 365 },
@@ -30,6 +31,21 @@ export const getRemainDay = (dateTime: string) => {
   return Math.floor(
     (currentTime - pastTime) / (MINUTES_PER_TIME_UNIT[3].minutes * 60000),
   );
+};
+
+export const formatToDateTime = (
+  dateTime: string,
+  dateStyle: DateStyle = 'full',
+) => {
+  validateDateTime(dateTime);
+
+  const timeZone = /Z/.test(dateTime) ? 'Etc/GMT' : 'Asia/Seoul';
+
+  new Intl.DateTimeFormat('ko-KR', {
+    dateStyle,
+    timeStyle: 'short',
+    timeZone,
+  }).format(new Date(dateTime));
 };
 
 export const formatToTime = (dateTime: string) =>

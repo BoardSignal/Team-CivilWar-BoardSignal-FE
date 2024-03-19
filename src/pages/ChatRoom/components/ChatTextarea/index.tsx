@@ -5,13 +5,14 @@ import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 
 import Icon from '@/components/Icon';
+import type { MessageRequest } from '@/hooks/useSendChatMessage';
 
 interface ChatMessageFormValue {
   message: string;
 }
 
 interface ChatTextareaProps {
-  onSend: (content: string) => void;
+  onSend: ({ content, type }: MessageRequest) => void;
 }
 
 const chatMessageFormOptions = {
@@ -29,7 +30,10 @@ const ChatTextarea = ({ onSend }: ChatTextareaProps) => {
     useForm<ChatMessageFormValue>(chatMessageFormOptions);
 
   const onSubmitMessage = handleSubmit((data: ChatMessageFormValue) => {
-    onSend(data.message);
+    onSend({
+      content: data.message,
+      type: 'CHAT',
+    });
     reset();
   });
 

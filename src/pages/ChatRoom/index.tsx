@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
 import GatheringListItem from '@/components/GatheringListItem';
 import TabBar from '@/components/TabBar';
-import useChatting from '@/hooks/useChatting';
+import useSendChatMessage from '@/hooks/useSendChatMessage';
 
 import ChatContainer from './components/ChatContainer';
 import ChatTextarea from './components/ChatTextarea';
@@ -14,7 +14,7 @@ const ChatRoomPage = () => {
   };
   const gatheringId = parseInt(rawGatheringId, 10);
 
-  const { sendMessage } = useChatting(gatheringId, true);
+  const { sendMessage } = useSendChatMessage(gatheringId, true);
   const { gatheringListItem } = useGetGatheringDetailApi(
     gatheringId.toString(),
   );

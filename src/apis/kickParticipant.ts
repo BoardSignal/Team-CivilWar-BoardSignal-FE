@@ -4,8 +4,12 @@ import { ROOMS_KICK_API_URL } from '@/constants/apiRoutes';
 
 import { api } from './core';
 
+interface KickParticipantResponse {
+  kickOutUserNickname: string;
+}
+
 export const postKickParticipant = (roomId: number, userId: number) =>
-  api.post({
+  api.post<KickParticipantResponse>({
     url: `${ROOMS_KICK_API_URL}`,
     data: {
       userId,

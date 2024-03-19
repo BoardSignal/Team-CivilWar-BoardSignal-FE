@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import authMocks from '@/mocks/auth';
-import ChatBubble from '@/pages/ChatRoom/components/ChatBubble';
+import ChatBubble from '@/pages/ChatRoom/components/ChatContainer/ChatBubble';
 
 const meta: Meta<typeof ChatBubble> = {
   title: 'pages/ChatRoom/ChatBubble',
@@ -23,7 +23,7 @@ const DUMMY_CHAT = {
   nickname: 'hannah',
   userImageUrl: null,
   content: '안녕하세요! 진짜 해본적이 없는데도 괜찮을까요?',
-  type: 'CHAT',
+  type: 'CHAT' as const,
   createdAt: '2024-03-14T13:04:21.075',
   isChecked: false,
 };

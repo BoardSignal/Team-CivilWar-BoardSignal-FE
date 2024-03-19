@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
+import Alert from '@/components/Alert';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
-import Alert from '@/components/alert';
 import { SUCCESS_DELETE_TIP } from '@/constants/messages/modal';
 import { cn } from '@/utils/cn';
 
