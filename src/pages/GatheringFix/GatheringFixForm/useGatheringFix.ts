@@ -26,7 +26,7 @@ const useCreateGathering = (onCreate: OnGatheringFix, gatheringId: string) => {
     const { meetingTime, meetingPlace } = request;
 
     sendMessage({
-      content: `${formatToDateTime(meetingTime.toISOString())} ${meetingPlace}(으)로 ${CHAT_FIX_GATHERING_ALERT_MESSAGE}`,
+      content: `${formatToDateTime(meetingTime)} ${meetingPlace}(으)로 ${CHAT_FIX_GATHERING_ALERT_MESSAGE}`,
       type: 'FIX',
     });
 
