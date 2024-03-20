@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
 import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
@@ -10,7 +11,7 @@ import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
-import { profileEditFormOptions } from './formSchema';
+import { profileEditSchema } from './formSchema';
 import profileEditRequestMapper, {
   ProfileEditFormValue,
 } from './profileEditMapper';
@@ -23,15 +24,36 @@ interface ProfileEditFormProps {
 }
 
 const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
+  const editProfile = useProfileEdit(onProfileEdit);
+  const {
+    name,
+    birth,
+    gender,
+    nickname,
+    subwayStation,
+    subwayLine,
+    categories,
+  } = useGetLoggedInUserApi();
+
+  const profileEditDefaultValue = {
+    profileImageUrl: new File([], ''),
+    nickname,
+    station: `${subwayStation} (${subwayLine})`,
+    categories,
+  };
+
+  const profileEditFormOptions = {
+    mode: 'all',
+    resolver: yupResolver(profileEditSchema),
+    defaultValues: profileEditDefaultValue,
+  } as const;
+
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
     control,
   } = useForm(profileEditFormOptions);
-
-  const editProfile = useProfileEdit(onProfileEdit);
-  const { name, birth, gender } = useGetLoggedInUserApi();
 
   const onSubmitProfileEdit = (data: ProfileEditFormValue) => {
     const request = profileEditRequestMapper(data);
@@ -109,7 +131,6 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
                     onChange={onChange}
-                    limit={3}
                   />
                 );
               }}

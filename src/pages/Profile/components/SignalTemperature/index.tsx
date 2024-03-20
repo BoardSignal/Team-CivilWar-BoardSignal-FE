@@ -22,9 +22,7 @@ const SignalTemperature = ({ value }: TemperatureProps) => {
           </span>
         </PopoverTrigger>
         <PopoverContent className='absolute -left-10 z-20'>
-          <p className='tooltip text-gray-bg-base'>
-            {SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE}
-          </p>
+          <p className='tooltip'>{SIGNAL_TEMPERATURE_EXPLAIN_MESSAGE}</p>
         </PopoverContent>
       </Popover>
       <div className='flex flex-col gap-1'>
