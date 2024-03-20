@@ -42,7 +42,7 @@ const getBoardGameList = (
   api.get<BoardGameListResponse>({
     url: BOARD_GAMES_PAGE_URL,
     params: {
-      options,
+      ...options,
       size,
       page,
     },
