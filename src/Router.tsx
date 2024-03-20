@@ -202,7 +202,7 @@ const AnimatedRoutes = () => {
             }
           />
           <Route
-            path={`${GATHERINGS_PAGE_URL}/:gatheringId`}
+            path={`${GATHERINGS_PAGE_URL}/:gatheringId/:tabIndex`}
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <GatheringDetailPage />

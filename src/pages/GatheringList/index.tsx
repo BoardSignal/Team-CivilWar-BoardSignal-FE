@@ -12,8 +12,8 @@ import GatheringList from './components/GatheringList';
 export const OPTIONS = [
   {
     name: '지역',
-    icon: 'map-pin',
-    items: ['강남역', '합정역', '신당역'],
+    icon: 'subway',
+    items: [],
     queryStringKey: 'station',
     selectLimit: 3,
   },

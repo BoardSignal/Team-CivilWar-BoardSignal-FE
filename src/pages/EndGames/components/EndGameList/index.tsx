@@ -23,7 +23,7 @@ const EndGameList = ({ userId }: EndGameListProps) => {
       fetchNextPage={fetchNextPage}
       fetchStatus={isFetchingNextPage ? 'fetching' : 'idle'}
       loaderElement={<SpinnerListBottom />}
-      className='grow overflow-y-auto'
+      className='grow overflow-y-auto overflow-x-hidden'
     >
       <ul>
         {endGames.map(endGame => {

@@ -5,6 +5,7 @@ import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import MultipleSelect from '@/components/MultipleSelect';
+import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import {
   AGREE_MARKETING_MESSAGE,
@@ -43,7 +44,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
       onSubmit={handleSubmit(onSubmitResister)}
       className='flex grow flex-col overflow-y-hidden'
     >
-      <div className='grow overflow-y-auto'>
+      <div className='grow overflow-y-auto overflow-x-hidden'>
         <Controller
           name='profileImageUrl'
           control={control}
@@ -73,13 +74,18 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
             />
             <FormErrorMessage message={errors.nickname?.message} />
           </Label>
-          <Label title='지역 (가까운 지하철역)' isRequired>
-            <TextInput
-              variant={errors.subwayStation ? 'error' : 'default'}
-              {...register('subwayStation')}
+          <Label title='지역 (가까운 지하철역)'>
+            <Controller
+              name='station'
+              control={control}
+              render={({ field }) => {
+                const { value, onChange } = field;
+
+                return <SubwaySelect value={value} onChange={onChange} />;
+              }}
             />
+            <FormErrorMessage message={errors.station?.message} />
           </Label>
-          <FormErrorMessage message={errors.subwayStation?.message} />
           <Label title='게임 카테고리'>
             <Controller
               name='categories'

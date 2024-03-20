@@ -9,9 +9,11 @@ import Checkbox from '@/components/Checkbox';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
+import LocationSelect from '@/components/LocationSelect';
 import MultipleSelect from '@/components/MultipleSelect';
 import Range from '@/components/Range';
 import Select from '@/components/Select';
+import SubwaySelect from '@/components/SubwaySelect';
 import Textarea from '@/components/TextArea';
 import TextInput from '@/components/TextInput';
 import {
@@ -64,7 +66,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
       onSubmit={handleSubmit(onSubmitGathering)}
       className='flex grow flex-col overflow-y-hidden'
     >
-      <div className='overflow-y-auto'>
+      <div className='overflow-y-auto overflow-x-hidden'>
         <Controller
           name='thumbnailImage'
           control={control}
@@ -131,9 +133,6 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
             />
             <FormErrorMessage message={errors.time?.message} />
           </Label>
-          <Label title='시작 시각'>
-            <TextInput {...register('startTime')} />
-          </Label>
           <Label title='나이대' isRequired>
             <Controller
               name='age'
@@ -156,14 +155,27 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
             <Alert>{AGE_RANGE_ALERT_MESSAGE}</Alert>
           </Label>
           <Label title='지역 (가까운 지하철역)' isRequired>
-            <TextInput
-              variant={errors.subwayStation ? 'error' : 'default'}
-              {...register('subwayStation')}
+            <Controller
+              name='station'
+              control={control}
+              render={({ field }) => {
+                const { value, onChange } = field;
+
+                return <SubwaySelect value={value} onChange={onChange} />;
+              }}
             />
-            <FormErrorMessage message={errors.subwayStation?.message} />
+            <FormErrorMessage message={errors.station?.message} />
           </Label>
           <Label title='장소'>
-            <TextInput {...register('place')} />
+            <Controller
+              name='place'
+              control={control}
+              render={({ field }) => {
+                const { value, onChange } = field;
+
+                return <LocationSelect value={value} onChange={onChange} />;
+              }}
+            />
           </Label>
           <Label title='게임 카테고리'>
             <Controller

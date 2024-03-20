@@ -19,7 +19,7 @@ export const BoardGameListPage = () => {
         </TabBar.Right>
       </TabBar.Container>
       <BoardGameListOptionFilterBar />
-      <div className='grow overflow-y-auto'>
+      <div className='grow overflow-y-auto overflow-x-hidden'>
         <Suspense fallback={<SpinnerFullScreen />}>
           <BoardGameList />
         </Suspense>

@@ -7,11 +7,14 @@ import TabBar from '@/components/TabBar';
 import { SUCCESS_FIX_GATHERING_MODAL_MESSAGE } from '@/constants/messages/modal';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 
+import useBlockNonParticipant from '../GatheringUnfix/hooks/useBlockNonParticipant';
 import GatheringFixForm from './GatheringFixForm';
 
 const GatheringFixPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { gatheringId } = useParams() as { gatheringId: string };
+  useBlockNonParticipant(gatheringId);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleOpenModal = () => {
@@ -20,7 +23,7 @@ const GatheringFixPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}`);
+    navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/0`);
   };
 
   return (

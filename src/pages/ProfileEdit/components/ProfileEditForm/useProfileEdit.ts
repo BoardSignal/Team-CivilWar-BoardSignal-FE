@@ -16,7 +16,7 @@ const useProfileEdit = (onProfileEdit: OnProfileEdit) => {
       return showErrorToast(data.message);
     }
 
-    onProfileEdit(data.userId);
+    onProfileEdit(data.id);
   };
 };
 

@@ -25,8 +25,7 @@ export const gatheringCreateSchema = object({
   time: string().required(REQUIRED_ERROR_MESSAGE),
   startTime: string().defined(),
   age: array(number().required()).required().length(2),
-  subwayLine: string().defined(),
-  subwayStation: string().required(REQUIRED_ERROR_MESSAGE),
+  station: string().required(REQUIRED_ERROR_MESSAGE),
   place: string().defined(),
   categories: array(string().defined()).required(),
 });
@@ -41,8 +40,7 @@ export const gatheringCreateDefaultValue = {
   startTime: '',
   // 사용자의 나이는 폼 컴포넌트에서 반영해요.
   age: [10, 40],
-  subwayLine: '',
-  subwayStation: '',
+  station: '',
   place: '',
   categories: [],
 };

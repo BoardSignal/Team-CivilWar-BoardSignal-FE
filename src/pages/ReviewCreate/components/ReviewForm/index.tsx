@@ -83,7 +83,7 @@ const ReviewForm = ({
 
   return (
     <div className='flex h-full flex-col overflow-hidden'>
-      <div className='flex-grow overflow-y-auto'>
+      <div className='flex-grow overflow-y-auto overflow-x-hidden'>
         {reviewList.map(({ revieweeId, reviewContent }) => {
           const userProfile = participantsInfos.find(
             info => info.userId === revieweeId,
@@ -94,7 +94,7 @@ const ReviewForm = ({
               key={revieweeId}
               className='flex grow flex-col overflow-hidden'
             >
-              <div className='bt-gray-accent7 grow gap-2 overflow-y-auto border-t pb-2'>
+              <div className='bt-gray-accent7 grow gap-2 overflow-y-auto overflow-x-hidden border-t pb-2'>
                 {userProfile && (
                   <UserProfile
                     userProfile={{

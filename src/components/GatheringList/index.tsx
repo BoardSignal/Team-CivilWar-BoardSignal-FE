@@ -23,7 +23,7 @@ interface GatheringListProps {
 
 const GatheringList = ({ gatherings }: GatheringListProps) => {
   return (
-    <section className='grow overflow-y-auto'>
+    <section className='grow overflow-y-auto overflow-x-hidden'>
       <ul>
         {gatherings.map(gathering => (
           <GatheringListItem key={gathering.id} gathering={gathering} />
