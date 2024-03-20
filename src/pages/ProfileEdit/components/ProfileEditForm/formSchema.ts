@@ -1,4 +1,3 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { array, mixed, object, string } from 'yup';
 
 import {
@@ -18,16 +17,3 @@ export const profileEditSchema = object({
   station: string().defined(),
   categories: array(string().defined()).required(),
 });
-
-export const profileEditDefaultValue = {
-  profileImageUrl: new File([], ''),
-  nickname: '',
-  station: '',
-  categories: [],
-};
-
-export const profileEditFormOptions = {
-  mode: 'all',
-  defaultValues: profileEditDefaultValue,
-  resolver: yupResolver(profileEditSchema),
-} as const;

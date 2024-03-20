@@ -1,5 +1,7 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
 
+import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Button from '@/components/Button';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
@@ -9,7 +11,7 @@ import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
-import { profileEditFormOptions } from './formSchema';
+import { profileEditSchema } from './formSchema';
 import profileEditRequestMapper, {
   ProfileEditFormValue,
 } from './profileEditMapper';
@@ -22,14 +24,36 @@ interface ProfileEditFormProps {
 }
 
 const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
+  const editProfile = useProfileEdit(onProfileEdit);
+  const {
+    name,
+    birth,
+    gender,
+    nickname,
+    subwayStation,
+    subwayLine,
+    categories,
+  } = useGetLoggedInUserApi();
+
+  const profileEditDefaultValue = {
+    profileImageUrl: new File([], ''),
+    nickname,
+    station: `${subwayStation} (${subwayLine})`,
+    categories,
+  };
+
+  const profileEditFormOptions = {
+    mode: 'all',
+    resolver: yupResolver(profileEditSchema),
+    defaultValues: profileEditDefaultValue,
+  } as const;
+
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
     control,
   } = useForm(profileEditFormOptions);
-
-  const editProfile = useProfileEdit(onProfileEdit);
 
   const onSubmitProfileEdit = (data: ProfileEditFormValue) => {
     const request = profileEditRequestMapper(data);
@@ -53,14 +77,26 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
         />
         <section className='flex flex-col gap-4 p-4'>
           <Label title='이름'>
-            <TextInput disabled={true} />
+            <TextInput
+              disabled={true}
+              value={name}
+              className='text-gray-accent3'
+            />
           </Label>
           <div className='flex gap-4'>
             <Label title='출생년도'>
-              <TextInput disabled={true} />
+              <TextInput
+                disabled={true}
+                value={birth}
+                className='text-gray-accent3'
+              />
             </Label>
             <Label title='성별'>
-              <TextInput disabled={true} />
+              <TextInput
+                disabled={true}
+                value={gender}
+                className='text-gray-accent3'
+              />
             </Label>
           </div>
           <Label title='닉네임' isRequired>

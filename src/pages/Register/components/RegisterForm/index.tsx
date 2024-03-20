@@ -1,5 +1,6 @@
 import { Controller, useForm } from 'react-hook-form';
 
+import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Button from '@/components/Button';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
@@ -33,7 +34,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   } = useForm(registerFormOptions);
 
   const registerUser = useRegister(onRegister);
-
+  const { name, birth, gender } = useGetLoggedInUserApi();
   const onSubmitResister = (data: RegisterFormValue) => {
     const request = registerRequestMapper(data);
     registerUser(request);
@@ -56,14 +57,26 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
         />
         <section className='flex flex-col gap-4 p-4'>
           <Label title='이름'>
-            <TextInput disabled={true} />
+            <TextInput
+              disabled={true}
+              value={name}
+              className='text-gray-accent3'
+            />
           </Label>
           <div className='flex gap-4'>
             <Label title='출생년도'>
-              <TextInput disabled={true} />
+              <TextInput
+                disabled={true}
+                value={birth}
+                className='text-gray-accent3'
+              />
             </Label>
             <Label title='성별'>
-              <TextInput disabled={true} />
+              <TextInput
+                disabled={true}
+                value={gender}
+                className='text-gray-accent3'
+              />
             </Label>
           </div>
           <Label title='닉네임' isRequired>
@@ -98,6 +111,7 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
                     onChange={onChange}
+                    limit={3}
                   />
                 );
               }}

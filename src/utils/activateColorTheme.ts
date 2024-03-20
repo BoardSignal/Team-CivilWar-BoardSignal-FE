@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { STORAGE_KEY_THEME } from '@/constants/storageKeys';
 
 const systemDarkCSS = '(prefers-color-scheme: dark)';
@@ -16,4 +18,19 @@ const activateColorTheme = () => {
   document.documentElement.classList[isDarkTheme() ? 'add' : 'remove']('dark');
 };
 
-export default activateColorTheme;
+/**
+ * dark mode를 활성화/비활성화하는 hook이에요.
+ */
+const useDarkMode = () => {
+  const [isDarkMode, setDarkMode] = useState(isDarkTheme());
+
+  const handleDarkModeToggle = () => {
+    const newTheme = isDarkMode ? 'light' : 'dark';
+    localStorage.setItem(STORAGE_KEY_THEME, newTheme);
+    setDarkMode(!isDarkMode);
+  };
+
+  return { isDarkMode, handleDarkModeToggle };
+};
+
+export { activateColorTheme, useDarkMode };

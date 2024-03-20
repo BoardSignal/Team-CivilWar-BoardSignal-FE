@@ -28,13 +28,13 @@ type TextInputProps = ComponentPropsWithoutRef<'input'> &
   VariantProps<typeof textInputCSS>;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ variant, ...props }, ref) => {
+  ({ variant, className, ...props }, ref) => {
     const { disabled: isDisabled } = props;
 
     return (
       <input
         ref={ref}
-        className={cn(textInputCSS({ variant, isDisabled }))}
+        className={cn(textInputCSS({ variant, isDisabled }), className)}
         {...props}
       />
     );

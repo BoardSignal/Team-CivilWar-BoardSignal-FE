@@ -25,3 +25,5 @@ export const TOKEN_EXPIRED_MESSAGE = '기한이 만료된 토큰입니다';
 
 export const NOT_LOGGED_IN_USER_MESSAGE = '로그인이 필요한 서비스입니다.';
 export const NOT_SIGN_UP_USER_MESSAGE = '회원가입이 필요한 서비스입니다.';
+
+export const IS_SIGN_UP_USER_MESSAGE = '이미 회원가입이 되어있는 사용자입니다.';

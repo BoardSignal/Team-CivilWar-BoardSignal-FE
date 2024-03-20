@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 
 import type { Gathering } from '.';
 
@@ -43,7 +44,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
 
   return (
     <li className='border-b border-gray-accent7'>
-      <Link to={`/gatherings/${gatheringId}`}>
+      <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}/0`}>
         <Button className='flex h-fit cursor-pointer gap-4 p-4'>
           <img
             src={imageUrl || defaultThumbnailImage}
