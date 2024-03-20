@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { CompatClient, IMessage, Stomp } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
 import { useQueryClient } from '@tanstack/react-query';
 import SockJS from 'sockjs-client';
 
@@ -32,7 +32,7 @@ const useSendChatMessage = (
   isPublishExitMessage = false,
   rawLastChatMessage: ChatMessage | undefined = undefined,
 ) => {
-  const client = useRef<CompatClient | null>(null);
+  const client = useRef<Client | null>(null);
   const [lastChatMessage, setLastChatMessage] = useState<
     ChatMessage | undefined
   >(rawLastChatMessage);
@@ -44,14 +44,10 @@ const useSendChatMessage = (
     const socket = new SockJS(
       `${import.meta.env.VITE_BASE_URL}${CHAT_CONNECT_SOCKET_URL}`,
     );
-    client.current = Stomp.over(socket);
 
-    client.current.connect(
-      {
-        Authorization: `Bearer ${accessToken}`,
-        RoomId: gatheringId,
-      },
-      () => {
+    client.current = new Client({
+      webSocketFactory: () => socket,
+      onConnect: () =>
         client.current?.subscribe(
           `${CHAT_SUBSCRIBE_SOCKET_URL}/${gatheringId}`,
           (message: IMessage) => {
@@ -65,15 +61,13 @@ const useSendChatMessage = (
             Authorization: `Bearer ${accessToken}`,
             RoomId: String(gatheringId),
           },
-        );
+        ),
+      onStompError: frame => {
+        throw new Error(`Broker reported error: ${frame.headers.message}`);
       },
-    );
+    });
 
-    client.current.onStompError = frame => {
-      throw new Error(`Broker reported error: ${frame.headers.message}`);
-    };
-
-    client.current.activate();
+    client.current?.activate();
   };
 
   const disconnect = () => {
@@ -93,10 +87,7 @@ const useSendChatMessage = (
       });
     }
 
-    client.current.disconnect({
-      Authorization: `Bearer ${accessToken}`,
-      RoomId: gatheringId.toString(),
-    });
+    client.current.deactivate();
   };
 
   const sendMessage = useCallback(({ content, type }: MessageRequest) => {
