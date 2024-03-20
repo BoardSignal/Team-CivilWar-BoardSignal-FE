@@ -33,6 +33,7 @@ const LocationSelect = ({ value, onChange }: LocationSelectProps) => {
       />
       {isModalOpen && (
         <LocationListModal
+          isOpen={isModalOpen}
           onClose={closeModal}
           onSelect={handleLocationSelect}
         />

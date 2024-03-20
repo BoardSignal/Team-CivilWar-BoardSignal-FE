@@ -9,6 +9,7 @@ import SubwayStationList from './SubwayStationList';
 import useSubwaySelect from './useSubwaySelect';
 
 interface SubwayListModalProps {
+  isOpen: boolean;
   onClose: () => void;
   onSelect: (value: string) => void;
 }
@@ -18,8 +19,12 @@ interface SubwayListModalProps {
  *
  * 목록을 길게 표시할 수 있도록 전체 화면으로 만들었어요.
  */
-const SubwayListModal = ({ onClose, onSelect }: SubwayListModalProps) => {
-  useAutoCloseOnGoBack(onClose);
+const SubwayListModal = ({
+  isOpen,
+  onClose,
+  onSelect,
+}: SubwayListModalProps) => {
+  useAutoCloseOnGoBack(isOpen, onClose);
 
   const {
     states,
