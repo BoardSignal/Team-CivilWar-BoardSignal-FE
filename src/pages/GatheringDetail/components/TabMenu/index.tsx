@@ -19,14 +19,11 @@ const TabMenu = ({ tabs }: TabMenuProps) => {
       {tabs.map((tab, index) => (
         <div
           key={index}
-          className={cn(
-            'h-[40px] w-full cursor-pointer border-t pt-2 text-center',
-            {
-              'border-b-[5px] border-b-primary text-primary':
-                tabIndex === String(index),
-              'text-gray-accent4': tabIndex !== String(index),
-            },
-          )}
+          className={cn('h-[40px] w-full cursor-pointer  pt-2 text-center', {
+            'border-b-[5px] border-b-primary text-primary':
+              tabIndex === String(index),
+            'text-gray-accent4': tabIndex !== String(index),
+          })}
           onClick={() =>
             navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/${index}`)
           }
