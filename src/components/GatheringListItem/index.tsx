@@ -59,7 +59,7 @@ const GatheringListItem = ({
     : getRelativeTimeWithin(createdAt);
 
   return (
-    <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}`}>
+    <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}/0`}>
       <Button
         className={cn(
           'h-fit gap-4 border-b border-gray-accent7 p-4',

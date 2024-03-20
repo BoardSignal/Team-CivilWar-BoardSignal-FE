@@ -16,7 +16,7 @@ export interface LoggedInUserResponse {
   subwayLine: string;
   subwayStation: string;
   categories: string[];
-  gender: string;
+  gender: '남성' | '여성';
   isJoined: boolean;
 }
 
