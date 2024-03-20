@@ -27,12 +27,12 @@ const EndGameList = ({ userId }: EndGameListProps) => {
     >
       <ul>
         {endGames.map(endGame => {
-          const remainingReviewableDay =
-            REVIEW_PERIOD - getRemainDay(endGame.fixTime);
+          const { id, fixTime } = endGame;
+          const remainingReviewableDay = REVIEW_PERIOD - getRemainDay(fixTime);
 
           return (
             <li
-              key={endGame.id}
+              key={id}
               className='flex flex-col gap-4 border-b border-gray-accent7 p-4'
             >
               <GatheringListItem
@@ -42,7 +42,7 @@ const EndGameList = ({ userId }: EndGameListProps) => {
                 className='border-b-0 p-0'
               />
               {remainingReviewableDay > 0 && (
-                <Link to={END_GAMES_REVIEWS_CREATE_PAGE_URL}>
+                <Link to={`${END_GAMES_REVIEWS_CREATE_PAGE_URL}/${id}`}>
                   <Button variant='primary'>{`모임 리뷰하기 (${remainingReviewableDay}일 남음)`}</Button>
                 </Link>
               )}
