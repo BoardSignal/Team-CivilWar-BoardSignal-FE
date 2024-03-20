@@ -6,9 +6,14 @@ import {
   GetGatheringListParams,
   useGetGatheringListApi,
 } from '@/apis/gatheringList';
+import EmptyListFullScreen from '@/components/EmptyListFullScreen';
 import GatheringListItem from '@/components/GatheringListItem';
 import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '@/components/Spinner/SpinnerListBottom';
+import {
+  EMPTY_GATHERING_LIST_MESSAGE,
+  EMPTY_GATHERING_LIST_TITLE,
+} from '@/constants/messages/emptyScreens';
 
 import { OPTIONS } from '../..';
 
@@ -53,6 +58,15 @@ const GatheringList = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => updateQueryParams(), [searchParams]);
+
+  if (gatherings.length === 0) {
+    return (
+      <EmptyListFullScreen
+        title={EMPTY_GATHERING_LIST_TITLE}
+        message={EMPTY_GATHERING_LIST_MESSAGE}
+      />
+    );
+  }
 
   return (
     <InfiniteScrollAutoFetcher

@@ -18,7 +18,7 @@ const EndGamesPage = () => {
               <img
                 src={profileImageUrl ?? defaultProfileImage}
                 alt='프로필'
-                className='size-6'
+                className='size-6 rounded-full'
               />
             </div>
           </TabBar.Title>
