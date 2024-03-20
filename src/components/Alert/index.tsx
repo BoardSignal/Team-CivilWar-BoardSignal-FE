@@ -1,6 +1,8 @@
-import { ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
+
+import { cn } from '@/utils/cn';
 
 const alertCSS = cva('mx-auto my-4 flex w-full rounded-md px-6 py-4 text-xs', {
   variants: {
@@ -15,13 +17,15 @@ const alertCSS = cva('mx-auto my-4 flex w-full rounded-md px-6 py-4 text-xs', {
   },
 });
 
-interface AlertProps extends VariantProps<typeof alertCSS> {
+interface AlertProps
+  extends VariantProps<typeof alertCSS>,
+    ComponentPropsWithoutRef<'div'> {
   children?: ReactNode;
 }
 
-const Alert = ({ children, variant, ...props }: AlertProps) => {
+const Alert = ({ children, variant, className, ...props }: AlertProps) => {
   return (
-    <div className={alertCSS({ variant })} {...props}>
+    <div className={cn(alertCSS({ variant }), className)} {...props}>
       <label className='whitespace-nowrap font-bold'>안내</label>
       <span className='ml-2'>{children}</span>
     </div>

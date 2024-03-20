@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
+import Alert from '@/components/Alert';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
-import Alert from '@/components/alert';
 import { UNFIX_GATHERING_ALERT_MESSAGE } from '@/constants/messages/alert';
 import { SUCCESS_UNFIX_GATHERING_MODAL_MESSAGE } from '@/constants/messages/modal';
 import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';

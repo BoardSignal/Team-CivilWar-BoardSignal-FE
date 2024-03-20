@@ -9,6 +9,7 @@ export const CHAT_FIX_GATHERING_ALERT_MESSAGE =
   '모임이 확정되었습니다. (취소는 모임 소개 페이지에서 가능합니다.)';
 export const CHAT_UNFIX_GATHERING_ALERT_MESSAGE = '님이 모임을 취소했습니다.';
 export const CHAT_OUT_GATHERING_ALERT_MESSAGE = '님이 나갔습니다.';
+export const CHAT_KICK_USER_ALERT_MESSAGE = '님이 강퇴 되었습니다.';
 export const CREATE_TIP_ALERT_MESSAGE =
   '게임 당 한 개의 공략을 작성할 수 있어요.';
 export const CATEGORY_SELECT_ALERT_MESSAGE =

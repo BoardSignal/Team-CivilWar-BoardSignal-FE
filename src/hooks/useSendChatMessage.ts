@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { CompatClient, IMessage, Stomp } from '@stomp/stompjs';
+import { Client, IMessage } from '@stomp/stompjs';
 import { useQueryClient } from '@tanstack/react-query';
 import SockJS from 'sockjs-client';
 
-import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
+import { type ChatMessage, type MessageType } from '@/apis/chatRoomMessages';
 import {
   CHAT_CONNECT_SOCKET_URL,
   CHAT_EXIT_SOCKET_URL,
@@ -14,11 +14,9 @@ import {
 import { CHATS_QUERY_KEY } from '@/constants/queryKey';
 import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 
-interface MessageResponse {
+export interface MessageRequest {
   content: string;
-  createdAt: string;
-  type: string;
-  userId: number;
+  type: MessageType;
 }
 
 /**
@@ -29,12 +27,15 @@ interface MessageResponse {
  *
  */
 
-const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
-  const client = useRef<CompatClient | null>(null);
-  const { lastChatMessage: rawLastChatMessage, uncheckedMessagesCount } =
-    useGetChatRoomMessagesApi(gatheringId, 20);
-  const [lastChatMessage, setLastChatMessage] =
-    useState<MessageResponse>(rawLastChatMessage);
+const useSendChatMessage = (
+  gatheringId: number,
+  isPublishExitMessage = false,
+  rawLastChatMessage: ChatMessage | undefined = undefined,
+) => {
+  const client = useRef<Client | null>(null);
+  const [lastChatMessage, setLastChatMessage] = useState<
+    ChatMessage | undefined
+  >(rawLastChatMessage);
 
   const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
   const queryClient = useQueryClient();
@@ -43,14 +44,10 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
     const socket = new SockJS(
       `${import.meta.env.VITE_BASE_URL}${CHAT_CONNECT_SOCKET_URL}`,
     );
-    client.current = Stomp.over(socket);
 
-    client.current.connect(
-      {
-        Authorization: `Bearer ${accessToken}`,
-        RoomId: gatheringId,
-      },
-      () => {
+    client.current = new Client({
+      webSocketFactory: () => socket,
+      onConnect: () =>
         client.current?.subscribe(
           `${CHAT_SUBSCRIBE_SOCKET_URL}/${gatheringId}`,
           (message: IMessage) => {
@@ -64,15 +61,13 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
             Authorization: `Bearer ${accessToken}`,
             RoomId: String(gatheringId),
           },
-        );
+        ),
+      onStompError: frame => {
+        throw new Error(`Broker reported error: ${frame.headers.message}`);
       },
-    );
+    });
 
-    client.current.onStompError = frame => {
-      throw new Error(`Broker reported error: ${frame.headers.message}`);
-    };
-
-    client.current.activate();
+    client.current?.activate();
   };
 
   const disconnect = () => {
@@ -92,13 +87,10 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
       });
     }
 
-    client.current.disconnect({
-      Authorization: `Bearer ${accessToken}`,
-      RoomId: gatheringId.toString(),
-    });
+    client.current.deactivate();
   };
 
-  const sendMessage = useCallback((content: string) => {
+  const sendMessage = useCallback(({ content, type }: MessageRequest) => {
     if (content.length <= 0) {
       return;
     }
@@ -111,7 +103,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
       },
       body: JSON.stringify({
         content,
-        type: 'CHAT',
+        type,
       }),
     });
 
@@ -129,7 +121,7 @@ const useChatting = (gatheringId: number, isPublishExitMessage = false) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { lastChatMessage, uncheckedMessagesCount, sendMessage };
+  return { lastChatMessage, sendMessage };
 };
 
-export default useChatting;
+export default useSendChatMessage;

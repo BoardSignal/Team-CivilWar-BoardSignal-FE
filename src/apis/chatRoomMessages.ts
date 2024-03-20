@@ -5,12 +5,20 @@ import { CHATS_QUERY_KEY } from '@/constants/queryKey';
 
 import { api } from './core';
 
+export type MessageType =
+  | 'FIX'
+  | 'UNFIX'
+  | 'PARTICIPANT'
+  | 'EXIT'
+  | 'CHAT'
+  | 'KICK';
+
 export interface ChatMessage {
   userId: number;
   nickname: string;
   userImageUrl: string | null;
   content: string;
-  type: string;
+  type: MessageType;
   createdAt: string;
   isChecked: boolean;
 }
@@ -46,14 +54,11 @@ export const useGetChatRoomMessagesApi = (
         hasNext ? currentPageNumber + 1 : undefined,
     });
 
-  const messages = data.pages
-    .map(({ chatList }) => chatList)
-    .flat()
-    .reverse();
+  const messages = data.pages.map(({ chatList }) => chatList).flat();
 
   return {
     messages,
-    lastChatMessage: messages[messages.length - 1],
+    lastChatMessage: messages[0],
     uncheckedMessagesCount: messages.filter(({ isChecked }) => !isChecked)
       .length,
     hasNextPage,

@@ -6,7 +6,7 @@ interface ReverseInfiniteScrollAutoFetchProps
   extends ComponentPropsWithoutRef<'div'> {
   hasNextPage: boolean;
   fetchNextPage: () => void;
-  data: unknown[];
+  fetchedData: unknown[];
 }
 
 const ReverseInfiniteScrollAutoFetch = ({
@@ -14,11 +14,10 @@ const ReverseInfiniteScrollAutoFetch = ({
   hasNextPage,
   fetchNextPage,
   className,
-  data,
+  fetchedData,
 }: ReverseInfiniteScrollAutoFetchProps) => {
-  const [scrollHeight, setScrollHeight] = useState(0);
+  const [previousScrollHeight, setPreviousScrollHeight] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-
   const observeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,15 +25,20 @@ const ReverseInfiniteScrollAutoFetch = ({
       return;
     }
 
-    const scrollTop = containerRef.current.scrollHeight - scrollHeight;
+    containerRef.current.scrollTop = previousScrollHeight;
+  }, [previousScrollHeight]);
 
-    containerRef.current.scrollTop = scrollTop;
-    setScrollHeight(containerRef.current.scrollHeight);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data.length]);
+  useEffect(() => {
+    if (!containerRef.current || containerRef.current.scrollTop < 0) {
+      return;
+    }
+
+    containerRef.current.scrollTop = 0;
+  }, [fetchedData]);
 
   const onIntersect: IntersectionObserverCallback = ([entry]) => {
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && containerRef.current) {
+      setPreviousScrollHeight(containerRef.current.scrollTop);
       fetchNextPage();
     }
   };
@@ -43,8 +47,8 @@ const ReverseInfiniteScrollAutoFetch = ({
 
   return (
     <div ref={containerRef} className={className}>
-      <div ref={observeRef}></div>
       {children}
+      <div ref={observeRef}></div>
     </div>
   );
 };

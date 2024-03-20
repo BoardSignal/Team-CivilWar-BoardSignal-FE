@@ -37,7 +37,7 @@ const BasicChatBubble = ({
         className,
       )}
     >
-      <div className='w-max max-w-52 break-keep rounded-lg bg-gray-accent7 p-2 text-xs text-gray-accent1'>
+      <div className='max-w-52 whitespace-pre-wrap rounded-lg bg-gray-accent7 p-2 text-xs text-gray-accent1'>
         {content}
       </div>
       <div className=' text-[10px]'>{formatToTime(createdAt)}</div>
