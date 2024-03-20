@@ -74,7 +74,7 @@ const GatheringListItem = ({
         />
         <div className='flex h-[100px] grow flex-col justify-between'>
           <div className='flex flex-col items-start gap-1'>
-            <div className='w-full truncate text-left'>{title}</div>
+            <div className='line-clamp-1 w-full text-left'>{title}</div>
             <div className='text-left text-xs text-gray-accent2'>
               {gatheringSummary}
             </div>
