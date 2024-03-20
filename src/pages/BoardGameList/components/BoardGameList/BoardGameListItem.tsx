@@ -57,7 +57,9 @@ const BoardGameListItem = ({
         />
         <div className='flex flex-col items-start gap-2'>
           <div className='flex flex-col items-start gap-1'>
-            <span className='font-bold text-gray-accent1'>{name}</span>
+            <span className='line-clamp-1 font-bold text-gray-accent1'>
+              {name}
+            </span>
             <div className='flex gap-1'>
               {categories.map(category => (
                 <Chip key={category}>{category}</Chip>

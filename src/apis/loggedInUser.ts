@@ -18,6 +18,7 @@ export interface LoggedInUserResponse {
   categories: string[];
   gender: '남성' | '여성';
   isJoined: boolean;
+  profileImageUrl: string;
 }
 
 const getLoggedInUser = () =>

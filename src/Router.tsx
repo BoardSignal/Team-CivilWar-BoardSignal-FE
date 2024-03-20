@@ -35,6 +35,7 @@ import RedirectOnAuthentication from '@/pages/RedirectOnAuthentication';
 
 import SpinnerFullScreen from './components/Spinner/SpinnerFullScreen';
 import BoardGameListPage from './pages/BoardGameList';
+import BoardGameWishListPage from './pages/BoardGameWishList';
 import ChatRoomPage from './pages/ChatRoom';
 import ChatRoomListPage from './pages/ChatRoomList';
 import CreateBoardGameTipPage from './pages/CreateBoardGameTip';
@@ -165,7 +166,7 @@ const AnimatedRoutes = () => {
             element={
               <Suspense fallback={<SpinnerFullScreen />}>
                 <AuthorizedRoute>
-                  <ProfileEditPage />
+                  <BoardGameWishListPage />
                 </AuthorizedRoute>
               </Suspense>
             }
