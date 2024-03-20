@@ -40,7 +40,7 @@ const ChatTextarea = ({ onSend }: ChatTextareaProps) => {
   const submitMessageOnEnterWithoutShift = (
     e: KeyboardEvent<HTMLTextAreaElement>,
   ) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (!e.nativeEvent.isComposing && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       onSubmitMessage();
     }
