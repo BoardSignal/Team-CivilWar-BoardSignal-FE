@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetEndGameDetailsApi } from '@/apis/endGameUser';
-import GatheringListItem from '@/components/GatheringList/GatheringListItem';
+import EndGameListItem from '@/components/EndGameListItem';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import { ROOMS_MY_END_GAMES_API_URL } from '@/constants/apiRoutes';
@@ -46,7 +46,7 @@ const ReviewCreate = () => {
           <TabBar.GoBackButton />
         </TabBar.Left>
       </TabBar.Container>
-      <GatheringListItem gathering={gathering} />
+      <EndGameListItem endGame={gathering} />
       <ReviewForm
         participantsInfos={participantsInfos}
         onReviewCreate={handleReviewCreate}

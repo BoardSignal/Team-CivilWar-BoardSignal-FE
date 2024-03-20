@@ -13,18 +13,14 @@ import { getRelativeTimeWithin } from '@/utils/time';
 
 interface GatheringListItemProps extends ComponentPropsWithoutRef<'div'> {
   gathering: Gathering;
-  isButtonDisabled?: boolean;
-  isFullDate?: boolean;
 }
 
 const GatheringListItem = ({
   gathering,
-  isButtonDisabled = false,
-  isFullDate = false,
   className,
 }: GatheringListItemProps) => {
   const {
-    id: gatheringId,
+    id,
     imageUrl,
     title,
     station,
@@ -54,18 +50,14 @@ const GatheringListItem = ({
     categories.length < BOARDGAME_CATEGORIES.length
       ? categories.join(' · ')
       : '';
-  const timeText = isFullDate
-    ? getRelativeTimeWithin(createdAt, 0)
-    : getRelativeTimeWithin(createdAt);
 
   return (
-    <Link to={`${GATHERINGS_PAGE_URL}/${gatheringId}/0`}>
+    <Link to={`${GATHERINGS_PAGE_URL}/${id}/0`}>
       <Button
         className={cn(
           'h-fit gap-4 border-b border-gray-accent7 p-4',
           className,
         )}
-        disabled={isButtonDisabled}
       >
         <img
           src={imageUrl ?? defaultThumbnailImage}
@@ -88,7 +80,7 @@ const GatheringListItem = ({
             </div>
           </div>
           <div className='flex justify-between text-xs text-gray-accent3'>
-            <div>{timeText}</div>
+            <div>{getRelativeTimeWithin(createdAt)}</div>
             <div className='flex items-center gap-1'>
               <Icon id='user-line' size={12} />
               <span>{headCount}</span>
