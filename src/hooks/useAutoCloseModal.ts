@@ -22,6 +22,7 @@ const useAutoCloseOnGoBack = (isOpen: boolean, onClose: () => void) => {
     return () => {
       window.removeEventListener('popstate', onClose);
     };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 };
 

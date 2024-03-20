@@ -16,3 +16,5 @@ export const EMPTY_END_GAME_LIST_MESSAGE =
 
 export const EMPTY_GATHERING_LIST_TITLE = '앗! 생성된 모임이 없어요!';
 export const EMPTY_GATHERING_LIST_MESSAGE = '새로운 모임을 생성해보세요';
+export const EMPTY_FILTERED_GATHERING_LIST_TITLE =
+  '앗! 조건에 맞는 모임이 없어요!';
