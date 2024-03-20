@@ -46,7 +46,7 @@ const GatheringListItem = ({ gathering }: GatheringListItemProps) => {
       <Link to={`/gatherings/${gatheringId}`}>
         <Button className='flex h-fit cursor-pointer gap-4 p-4'>
           <img
-            src={imageUrl || defaultThumbnailImage}
+            src={imageUrl ?? defaultThumbnailImage}
             alt={title}
             className='size-[100px] rounded-lg object-cover'
           />

@@ -1,5 +1,5 @@
 import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
-import DefaultProfileImage from '@/assets/default-profile-image.png';
+import defaultProfileImage from '@/assets/default-profile-image.png';
 import TabBar from '@/components/TabBar';
 
 import EndGameList from './components/EndGameList';
@@ -16,7 +16,7 @@ const EndGamesPage = () => {
             <div className='flex gap-1'>
               <span>{nickname}</span>
               <img
-                src={profileImageUrl ?? DefaultProfileImage}
+                src={profileImageUrl ?? defaultProfileImage}
                 alt='프로필'
                 className='size-6'
               />

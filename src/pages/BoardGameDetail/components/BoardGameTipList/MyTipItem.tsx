@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
+import defaultProfileImage from '@/assets/default-profile-image.png';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
@@ -10,8 +11,6 @@ import { DELETE_TIP_MODAL_MESSAGE } from '@/constants/messages/modal';
 import { getRelativeTimeWithin } from '@/utils/time';
 
 import { useDeleteBoardGameTip } from '../../hooks/useDeleteBoardGameTip';
-
-const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const MyTipItem = ({
   tip,
@@ -60,7 +59,7 @@ const MyTipItem = ({
       </Modal>
       <div className='flex gap-2 border-b border-gray-accent7 p-4'>
         <img
-          src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
+          src={profileImageUrl ?? defaultProfileImage}
           className='h-10 w-10 rounded-full object-cover'
         />
         <div className='flex w-full flex-col gap-2'>

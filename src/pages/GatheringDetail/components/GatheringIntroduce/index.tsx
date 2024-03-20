@@ -1,4 +1,5 @@
 import { ParticipantResponse } from '@/apis/gatheringDetail';
+import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import UserProfile from '@/components/UserProfile';
 
 import GatheringDescription from '../GatheringDescription';
@@ -28,8 +29,6 @@ interface GatheringIntroduceProps {
   gatheringLeaderInfo: ParticipantResponse;
 }
 
-const DEFAULT_IMAGE_URL = 'https://via.placeholder.com/300';
-
 const GatheringIntroduce = ({
   gatheringIntroduce,
   gatheringLeaderInfo,
@@ -41,7 +40,7 @@ const GatheringIntroduce = ({
     <div className='flex h-full grow flex-col overflow-y-auto overflow-x-hidden'>
       <UserProfile userProfile={gatheringLeaderInfo} isLeader={true} />
       <img
-        src={imageUrl ?? DEFAULT_IMAGE_URL}
+        src={imageUrl ?? defaultThumbnailImage}
         alt='모임 이미지'
         className='w-full object-cover'
       />

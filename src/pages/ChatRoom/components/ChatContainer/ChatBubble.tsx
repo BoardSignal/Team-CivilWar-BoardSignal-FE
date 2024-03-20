@@ -1,7 +1,10 @@
 import { ComponentPropsWithRef } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import type { ChatMessage } from '@/apis/chatRoomMessages';
 import defaultProfileImage from '@/assets/default-profile-image.png';
+import { USERS_PAGE_URL } from '@/constants/pageRoutes';
 import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import { cn } from '@/utils/cn';
 import { formatToDate, formatToTime } from '@/utils/time';
@@ -46,15 +49,17 @@ const BasicChatBubble = ({
 };
 
 const ChatBubbleWithAvatar = ({ message }: ChatBubbleProps) => {
-  const { nickname, userImageUrl } = message;
+  const { userId, nickname, userImageUrl } = message;
 
   return (
     <div className='mt-1 flex gap-2'>
-      <img
-        src={userImageUrl ?? defaultProfileImage}
-        alt={nickname}
-        className='size-10 rounded-full object-cover'
-      />
+      <Link to={`${USERS_PAGE_URL}/${userId}`}>
+        <img
+          src={userImageUrl ?? defaultProfileImage}
+          alt={nickname}
+          className='size-10 rounded-full object-cover'
+        />
+      </Link>
       <div>
         <div className='text-[10px] font-bold text-gray-accent2'>
           {nickname}
