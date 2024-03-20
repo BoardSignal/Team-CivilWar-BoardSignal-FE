@@ -45,7 +45,7 @@ const OptionFilterBar = ({ options, resetUrl = '/' }: OptionFilterBarProps) => {
         </Link>
         {options.map(option => {
           if (option.items.length === 0) {
-            return <OptionSubwaySelect option={option} />;
+            return <OptionSubwaySelect key={option.name} option={option} />;
           }
 
           return option.items.length === 1 ? (
