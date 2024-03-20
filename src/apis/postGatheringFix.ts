@@ -5,7 +5,7 @@ import { ROOMS_FIX_API_URL } from '@/constants/apiRoutes';
 import { api } from './core';
 
 export interface GatheringFixRequest {
-  meetingTime: Date;
+  meetingTime: string;
   line: string;
   station: string;
   meetingPlace: string;

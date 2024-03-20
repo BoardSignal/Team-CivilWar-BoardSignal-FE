@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
 import Alert from '@/components/Alert';
@@ -8,6 +8,7 @@ import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
 import { SUCCESS_DELETE_TIP } from '@/constants/messages/modal';
+import { BOARD_GAMES_TIP_CREATE_PAGE_URL } from '@/constants/pageRoutes';
 import { cn } from '@/utils/cn';
 
 import MyTipItem from './MyTipItem';
@@ -25,14 +26,23 @@ interface TipCreateButtonProps {
   name: string;
 }
 
-const TipCreateButton = ({ boardGameId, name }: TipCreateButtonProps) => (
-  <Link to={`board-games/${boardGameId}/${name}/tip/create`}>
-    <Button className='flex w-fit items-center gap-0.5 rounded-3xl bg-primary p-3 pl-2 text-white'>
+const TipCreateButton = ({ boardGameId, name }: TipCreateButtonProps) => {
+  const navigate = useNavigate();
+
+  const handleCreateTip = () => {
+    navigate(`${BOARD_GAMES_TIP_CREATE_PAGE_URL}/${boardGameId}/${name}`);
+  };
+
+  return (
+    <Button
+      className='flex w-fit items-center gap-0.5 rounded-3xl bg-primary p-3 pl-2 text-white'
+      onClick={handleCreateTip}
+    >
       <Icon id='add-line' size={16} />
       <span className='text-xs font-bold'>작성하기</span>
     </Button>
-  </Link>
-);
+  );
+};
 
 const BoardGameTipList = ({
   tips,

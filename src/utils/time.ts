@@ -41,7 +41,7 @@ export const formatToDateTime = (
 
   const timeZone = /Z/.test(dateTime) ? 'Etc/GMT' : 'Asia/Seoul';
 
-  new Intl.DateTimeFormat('ko-KR', {
+  return new Intl.DateTimeFormat('ko-KR', {
     dateStyle,
     timeStyle: 'short',
     timeZone,

@@ -4,15 +4,21 @@ import {
 } from '@/apis/boardGameTipLike';
 
 export const useBoardGameTipLike = (tipId: number, boardGameId: string) => {
-  const postApi = usePostBoardGameTipLikeApi(tipId, boardGameId);
-  const deleteApi = useDeleteBoardGameTipLikeApi(tipId, boardGameId);
+  const postBoardGameTipLikeApi = usePostBoardGameTipLikeApi(
+    tipId,
+    boardGameId,
+  );
+  const deleteBoardGameTipLikeApi = useDeleteBoardGameTipLikeApi(
+    tipId,
+    boardGameId,
+  );
 
   return {
     postBoardGameTipLike: async () => {
-      await postApi();
+      await postBoardGameTipLikeApi();
     },
     deleteBoardGameTipLike: async () => {
-      await deleteApi();
+      await deleteBoardGameTipLikeApi();
     },
   };
 };

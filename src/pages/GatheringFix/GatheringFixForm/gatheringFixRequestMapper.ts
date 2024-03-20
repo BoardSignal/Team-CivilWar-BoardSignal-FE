@@ -1,3 +1,5 @@
+import { format, parse } from 'date-fns';
+
 import {
   extractLineFromSubwayName,
   extractStationFromSubwayName,
@@ -10,9 +12,17 @@ const convertTimeToDate = (date: string, time: string) => {
   const [hour, minute] = clockTime.split(':').map(Number);
   const [year, month, day] = date.split('-').map(Number);
 
-  const modifiedHour = timePeriod === '오후' ? hour : hour + 12;
+  const modifyHour = timePeriod === '오후' && hour !== 12 ? hour + 12 : hour;
 
-  return new Date(year, month - 1, day, modifiedHour, minute);
+  const parsedDate = parse(
+    `${year}-${month}-${day} ${modifyHour}:${minute}`,
+    'yyyy-MM-dd HH:mm',
+    new Date(),
+  );
+
+  const isoString = format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss");
+
+  return isoString;
 };
 
 const gatheringCreateRequestMapper = (data: GatheringFixFormValues) => {
