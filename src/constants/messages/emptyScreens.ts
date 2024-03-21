@@ -5,6 +5,9 @@ export const EMPTY_NOTIFICATION_MESSAGE =
 export const EMPTY_BOARD_GAMES_TITLE = '앗! 조건에 맞는 게임이 없어요!';
 export const EMPTY_BOARD_GAMES_MESSAGE = '조건을 변경해서 검색해주세요';
 
+export const EMPTY_BOARD_GAME_WISH_TITLE = '앗! 찜한 게임이 없어요!';
+export const EMPTY_BOARD_GAME_WISH_MESSAGE = '관심 있는 보드 게임을 찜해보세요';
+
 export const EMPTY_CHAT_ROOM_LIST_TITLE = '앗! 참여 중인 모임이 없어요!';
 export const EMPTY_CHAT_ROOM_LIST_MESSAGE =
   '새로운 모임에 참여해 대화를 시작해보세요';

@@ -51,8 +51,8 @@ const ChatRoomListItem = ({ chatRoom }: ChatRoomListItemProps) => {
           />
           <div className='flex h-full grow items-start gap-8'>
             <div className='flex grow flex-col items-start gap-1'>
-              <div className='flex items-center gap-1 text-sm'>
-                <span>{title}</span>
+              <div className='flex items-center gap-1 text-start text-sm'>
+                <span className='line-clamp-1'>{title}</span>
                 <span className='text-xs text-gray-accent3'>{headCount}</span>
               </div>
               <div className='line-clamp-2 text-start text-xs text-gray-accent3'>

@@ -68,7 +68,10 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
             ) : (
               <ChatBubble
                 message={message}
-                isFirstMessage={messages[index + 1]?.userId !== userId}
+                isFirstMessage={
+                  messages[index + 1].type !== 'CHAT' ||
+                  messages[index + 1].userId !== userId
+                }
               />
             )}
           </div>

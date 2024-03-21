@@ -10,7 +10,7 @@ export const mockGetGatheringListHandler = async () => {
     roomsInfos: [
       {
         id: 25,
-        title: '정령섬 심화 격주로 하실 1~2분',
+        title: '정령섬 심화 격주로 하실 1~2분 모집합니다.',
         description:
           '두 명이서 하고 있습니다.\n 3~4인이 더 재밌어요.\n 확장 텍스트가 영문이라 읽을 수 있으시면 편해요.',
         station: '국제금융센터·부산은행',
