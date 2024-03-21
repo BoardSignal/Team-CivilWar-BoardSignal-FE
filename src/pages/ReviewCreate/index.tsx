@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetEndGameDetailsApi } from '@/apis/endGameUser';
-import GatheringListItem from '@/components/GatheringList/GatheringListItem';
+import GatheringListItem from '@/components/GatheringListItem';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import { ROOMS_MY_END_GAMES_API_URL } from '@/constants/apiRoutes';

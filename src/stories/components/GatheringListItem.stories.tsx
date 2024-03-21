@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import GatheringListItem from '@/components/GatheringListItem';
 
 const meta: Meta<typeof GatheringListItem> = {
-  title: 'components/GatheringList',
+  title: 'components/GatheringListItem',
   tags: ['autodocs'],
   component: GatheringListItem,
 };
