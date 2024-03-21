@@ -21,7 +21,6 @@ const MyTipItem = ({
   onCloseModal: () => void;
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const { boardGameId } = useParams() as { boardGameId: string };
   const { nickname, profileImageUrl, createdAt, content, likeCount, tipId } =
     tip;
@@ -36,12 +35,12 @@ const MyTipItem = ({
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
+  const handleDeleteBoardGameTip = async () => {
+    await deleteBoardGameTip();
     setIsModalOpen(false);
-    deleteBoardGameTip();
   };
 
-  const handleDeleteModal = () => {
+  const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
@@ -50,8 +49,8 @@ const MyTipItem = ({
       <Modal
         variant='danger'
         isOpen={isModalOpen}
-        onClose={handleDeleteModal}
-        onDelete={handleCloseModal}
+        onClose={handleCloseModal}
+        onDelete={handleDeleteBoardGameTip}
         title='안내'
         buttonChildren='확인'
       >

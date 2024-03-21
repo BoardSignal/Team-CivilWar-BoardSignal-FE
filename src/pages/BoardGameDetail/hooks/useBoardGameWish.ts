@@ -4,15 +4,15 @@ import {
 } from '@/apis/boardGameWish';
 
 export const useBoardGameWish = (boardGameId: string) => {
-  const postApi = usePostBoardGameWishApi(boardGameId);
-  const deleteApi = useDeleteBoardGameWishApi(boardGameId);
+  const postBoardGameWishApi = usePostBoardGameWishApi(boardGameId);
+  const deleteBoardGameWishApi = useDeleteBoardGameWishApi(boardGameId);
 
   return {
     postBoardGameWish: async () => {
-      await postApi();
+      await postBoardGameWishApi();
     },
     deleteBoardGameWish: async () => {
-      await deleteApi();
+      await deleteBoardGameWishApi();
     },
   };
 };

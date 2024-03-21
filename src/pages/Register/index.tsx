@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
+import { IS_SIGN_UP_USER_MESSAGE } from '@/constants/messages/error';
 import { SUCCESS_REGISTER_MODAL_MESSAGE } from '@/constants/messages/modal';
+import { showErrorToast } from '@/utils/showToast';
 
 import RegisterForm from './components/RegisterForm';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isJoined } = useGetLoggedInUserApi();
+
+  useEffect(() => {
+    if (isJoined) {
+      showErrorToast(IS_SIGN_UP_USER_MESSAGE);
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);

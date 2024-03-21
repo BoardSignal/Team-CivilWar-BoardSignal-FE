@@ -14,3 +14,8 @@ export const CREATE_TIP_ALERT_MESSAGE =
   '게임 당 한 개의 공략을 작성할 수 있어요.';
 export const CATEGORY_SELECT_ALERT_MESSAGE =
   '게임 카테고리는 3개까지 선택할 수 있어요.';
+
+export const GATHERING_FIX_ALERT_MESSAGE =
+  '모임이 확정된 시작시간과 장소를 입력해주세요.';
+
+export const GATHERING_FIX_DATE_ALERT_MESSAGE = `날짜는 현재 시간 기준 7일 이내로 선택할 수 있어요.`;

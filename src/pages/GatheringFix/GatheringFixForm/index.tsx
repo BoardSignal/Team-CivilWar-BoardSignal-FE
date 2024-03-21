@@ -8,6 +8,10 @@ import Label from '@/components/Label';
 import LocationSelect from '@/components/LocationSelect';
 import Select from '@/components/Select';
 import SubwaySelect from '@/components/SubwaySelect';
+import {
+  GATHERING_FIX_ALERT_MESSAGE,
+  GATHERING_FIX_DATE_ALERT_MESSAGE,
+} from '@/constants/messages/alert';
 
 import { GatheringFixFormValues, gatheringFixFormOptions } from './formSchema';
 import gatheringFixRequestMapper from './gatheringFixRequestMapper';
@@ -72,7 +76,7 @@ const GatheringFixForm = ({ onCreate }: GatheringFixFormProps) => {
       <section className='flex flex-col gap-4 p-4'>
         <div className='flex h-full grow flex-col gap-8 px-4'>
           <div className='-mb-4'>
-            <Alert>모임이 확정된 시작 시각과 장소를 입력해주세요</Alert>
+            <Alert>{GATHERING_FIX_ALERT_MESSAGE}</Alert>
           </div>
           <Label isRequired title='시작 시간'>
             <Select
@@ -89,9 +93,14 @@ const GatheringFixForm = ({ onCreate }: GatheringFixFormProps) => {
               const { value, onChange } = field;
 
               return (
-                <Label title='모임 날짜' isRequired>
-                  <DatePicker value={value} onChange={onChange} />
-                </Label>
+                <>
+                  <Label title='모임 날짜' isRequired>
+                    <DatePicker value={value} onChange={onChange} />
+                    <Alert variant='danger'>
+                      {GATHERING_FIX_DATE_ALERT_MESSAGE}
+                    </Alert>
+                  </Label>
+                </>
               );
             }}
           />

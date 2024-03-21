@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
 import { SUCCESS_GATHERING_CREATE_MODAL_MESSAGE } from '@/constants/messages/modal';
+import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 
 import GatheringCreateForm from './components/GatheringCreateForm';
 
@@ -22,7 +23,7 @@ const GatheringCreatePage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`/gatherings/${createdGatheringId}`);
+    navigate(`${GATHERINGS_PAGE_URL}/${createdGatheringId}/0`);
   };
 
   const handleCreateGathering = (gatheringId: number) => {

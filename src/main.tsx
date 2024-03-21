@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
 import { enableAPIMocks } from './mocks';
-import activateColorTheme from './utils/activateColorTheme.ts';
+import { activateColorTheme } from './utils/activateColorTheme.ts';
 
 activateColorTheme();
 

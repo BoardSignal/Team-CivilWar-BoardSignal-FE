@@ -5,15 +5,10 @@ import firebase from 'firebase/app';
 import 'firebase/messaging';
 
 import { API_BASE_URL, FCM_TOKEN_API_URL } from '@/constants/apiRoutes';
-import { STORAGE_KEY_FCM_TOKEN } from '@/constants/storageKeys';
-
-interface FirebaseMessagePayload {
-  notification: {
-    title: string;
-    body: string;
-    icon: string;
-  };
-}
+import {
+  STORAGE_KEY_ACCESS_TOKEN,
+  STORAGE_KEY_FCM_TOKEN,
+} from '@/constants/storageKeys';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -26,7 +21,8 @@ const firebaseConfig = {
 };
 
 const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
-const isLoggedIn = !!localStorage.getItem('accessToken');
+const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
+const isLoggedIn = !!accessToken;
 
 const initializeFirebase = () => {
   firebase.apps.length
@@ -34,21 +30,20 @@ const initializeFirebase = () => {
     : firebase.initializeApp(firebaseConfig);
 };
 
-const foregroundMessageHandler = (payload: FirebaseMessagePayload) => {
-  const title = payload.notification.title;
-  const options = {
-    body: payload.notification.body,
-    icon: payload.notification.icon,
-  };
-  new Notification(title, options);
-};
-
 const updateFCMToken = (issuedFCMToken: string) => {
   const savedFCMToken = localStorage.getItem(STORAGE_KEY_FCM_TOKEN);
   if (issuedFCMToken && savedFCMToken !== issuedFCMToken) {
-    axios.post(`${API_BASE_URL}${FCM_TOKEN_API_URL}`, {
-      token: issuedFCMToken,
-    });
+    axios.post(
+      `${API_BASE_URL}${FCM_TOKEN_API_URL}`,
+      {
+        token: issuedFCMToken,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}}`,
+        },
+      },
+    );
     localStorage.setItem(STORAGE_KEY_FCM_TOKEN, issuedFCMToken);
   }
 };
@@ -62,7 +57,6 @@ const useInitializeFCM = () => {
     initializeFirebase();
     const messaging = firebase.messaging();
     messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
-    messaging.onMessage(foregroundMessageHandler);
   }, []);
 };
 
