@@ -19,7 +19,7 @@ const RegisterPage = () => {
   useEffect(() => {
     if (isJoined) {
       showErrorToast(IS_SIGN_UP_USER_MESSAGE);
-      navigate('/');
+      navigate('/', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -30,7 +30,7 @@ const RegisterPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

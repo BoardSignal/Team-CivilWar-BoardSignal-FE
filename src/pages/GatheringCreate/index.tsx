@@ -23,7 +23,9 @@ const GatheringCreatePage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`${GATHERINGS_PAGE_URL}/${createdGatheringId}/0`);
+    navigate(`${GATHERINGS_PAGE_URL}/${createdGatheringId}/0`, {
+      replace: true,
+    });
   };
 
   const handleCreateGathering = (gatheringId: number) => {

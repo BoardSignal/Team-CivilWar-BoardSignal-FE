@@ -35,11 +35,15 @@ const GatheringDetailPage = () => {
     ? participantResponse.some(({ userId }) => userId === data.id)
     : false;
 
+  const goToGatheringListPage = () => {
+    navigate('/');
+  };
+
   return (
     <div className='flex h-full flex-col'>
       <TabBar.Container>
         <TabBar.Left>
-          <TabBar.GoBackButton />
+          <TabBar.GoBackButton onClick={goToGatheringListPage} />
         </TabBar.Left>
         <TabBar.Right>
           {isParticipation && (

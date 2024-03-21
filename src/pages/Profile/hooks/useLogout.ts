@@ -11,7 +11,7 @@ export const useLogout = () => {
     logoutApi: async () => {
       await api();
       localStorage.removeItem(STORAGE_KEY_ACCESS_TOKEN);
-      navigate('/');
+      navigate('/', { replace: true });
     },
   };
 };

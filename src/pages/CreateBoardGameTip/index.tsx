@@ -20,7 +20,7 @@ const CreateBoardGameTipPage = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`${BOARD_GAMES_PAGE_URL}/${boardGameId}`);
+    navigate(`${BOARD_GAMES_PAGE_URL}/${boardGameId}`, { replace: true });
   };
 
   const handleOpenModal = () => {
