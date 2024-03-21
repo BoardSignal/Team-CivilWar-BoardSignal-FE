@@ -23,7 +23,7 @@ const ReviewCreate = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(ROOMS_MY_END_GAMES_API_URL);
+    navigate(ROOMS_MY_END_GAMES_API_URL, { replace: true });
   };
 
   const handleReviewCreate = () => {

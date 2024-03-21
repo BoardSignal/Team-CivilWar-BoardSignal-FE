@@ -25,7 +25,9 @@ const TabMenu = ({ tabs }: TabMenuProps) => {
             'text-gray-accent4': tabIndex !== String(index),
           })}
           onClick={() =>
-            navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/${index}`)
+            navigate(`${GATHERINGS_PAGE_URL}/${gatheringId}/${index}`, {
+              replace: true,
+            })
           }
         >
           {tab}

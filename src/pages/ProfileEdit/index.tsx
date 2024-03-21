@@ -20,7 +20,7 @@ const ProfileEdit = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(`/users/${userId}`);
+    navigate(`/users/${userId}`, { replace: true });
   };
 
   const handleProfileEdit = (userId: number) => {

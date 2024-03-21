@@ -118,7 +118,7 @@ const DeleteGatheringButton = ({ gatheringId }: GatheringIdProps) => {
 
   const handleCloseIsSuccessModal = () => {
     setIsSuccessModalOpen(false);
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   const handleOpenIsSuccessModal = () => {
