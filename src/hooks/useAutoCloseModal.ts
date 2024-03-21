@@ -7,8 +7,12 @@ import { useEffect } from 'react';
  *
  * @see https://stackoverflow.com/a/34337617
  */
-const useAutoCloseOnGoBack = (onClose: () => void) => {
+const useAutoCloseOnGoBack = (isOpen: boolean, onClose: () => void) => {
   useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
     // popstate를 막을 수 없기 때문에 history.pushState를 미리 수행해야 돼요.
     // 이 때문에 원래 페이지와 동일한 url이 하나 더 history에 쌓이지만 어쩔 수 없어요.
     history.pushState(null, document.title, location.href);
@@ -18,7 +22,8 @@ const useAutoCloseOnGoBack = (onClose: () => void) => {
     return () => {
       window.removeEventListener('popstate', onClose);
     };
-  }, [onClose]);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 };
 
 export default useAutoCloseOnGoBack;

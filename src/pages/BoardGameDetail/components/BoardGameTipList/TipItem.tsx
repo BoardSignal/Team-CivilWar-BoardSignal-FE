@@ -1,13 +1,12 @@
 import { useParams } from 'react-router-dom';
 
 import type { Tip } from '@/apis/boardGameDetail';
+import defaultProfileImage from '@/assets/default-profile-image.png';
 import Icon from '@/components/Icon';
 import { cn } from '@/utils/cn';
 import { getRelativeTimeWithin } from '@/utils/time';
 
 import { useBoardGameTipLike } from '../../hooks/useBoardGameTipLike';
-
-const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const TipItem = ({ tip }: { tip: Tip }) => {
   const {
@@ -34,7 +33,7 @@ const TipItem = ({ tip }: { tip: Tip }) => {
   return (
     <div className='flex gap-2 border-b border-gray-accent7 p-4'>
       <img
-        src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
+        src={profileImageUrl ?? defaultProfileImage}
         className='h-10 w-10 rounded-full object-cover'
       />
       <div className='flex w-full flex-col gap-2'>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { BoardGameListItemResponse } from '@/apis/boardGameList';
+import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
 import Icon from '@/components/Icon';
@@ -21,8 +22,6 @@ const Description = ({ title, value }: DescriptionProps) => (
     <span className='text-xs text-gray-accent2'>{value}</span>
   </div>
 );
-
-const DEFAULT_BOARD_GAME_IMAGE_URL = 'https://picsum.photos/200/300';
 
 const BoardGameListItem = ({
   boardGame: {
@@ -52,7 +51,7 @@ const BoardGameListItem = ({
     <Link to={`${BOARD_GAMES_PAGE_URL}/${boardGameId}`}>
       <Button className='flex h-fit justify-start gap-4 rounded-none border-b border-gray-accent7 p-4'>
         <img
-          src={imageUrl ?? DEFAULT_BOARD_GAME_IMAGE_URL}
+          src={imageUrl ?? defaultThumbnailImage}
           className='size-[100px] rounded-lg border border-gray-accent7 object-contain'
         />
         <div className='flex flex-col items-start gap-2'>

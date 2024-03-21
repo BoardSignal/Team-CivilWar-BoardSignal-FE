@@ -13,8 +13,6 @@ import { getRelativeTimeWithin } from '@/utils/time';
 
 interface GatheringListItemProps extends ComponentPropsWithoutRef<'div'> {
   gathering: Gathering;
-  isButtonDisabled?: boolean;
-  isFullDate?: boolean;
 }
 
 const GatheringListItem = ({

@@ -37,7 +37,7 @@ const Drawer = ({ children, onClose }: PropsWithChildren<DrawerProps>) => {
     onClose && onClose();
   };
 
-  useAutoCloseOnGoBack(handleCloseDrawer);
+  useAutoCloseOnGoBack(isOpen, handleCloseDrawer);
 
   const [drawerTrigger, drawerTitle, drawerContent, drawerCloser] =
     useMemo(() => {

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 
+import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import { getRelativeTimeWithin } from '@/utils/time';
 
@@ -20,7 +21,7 @@ const NotificationListItem = ({
     <Link to={navigateUrl}>
       <Button className='flex h-fit gap-4 rounded-none border-b border-gray-accent7 p-4'>
         <img
-          src={imageUrl ?? ''}
+          src={imageUrl ?? defaultThumbnailImage}
           className='mt-1 h-12 w-12 rounded-full object-cover'
         />
         <div className='flex grow flex-col items-start gap-1'>

@@ -11,6 +11,7 @@ import SpinnerFullScreen from '../Spinner/SpinnerFullScreen.tsx';
 import LocationList from './LocationList.tsx';
 
 interface LocationListModalProps {
+  isOpen: boolean;
   onClose: () => void;
   onSelect: (value: string) => void;
 }
@@ -20,8 +21,12 @@ interface LocationListModalProps {
  *
  * 목록을 길게 표시할 수 있도록 전체 화면으로 만들었어요.
  */
-const LocationListModal = ({ onClose, onSelect }: LocationListModalProps) => {
-  useAutoCloseOnGoBack(onClose);
+const LocationListModal = ({
+  isOpen,
+  onClose,
+  onSelect,
+}: LocationListModalProps) => {
+  useAutoCloseOnGoBack(isOpen, onClose);
   const [searchWord, setSearchWord] = useState('');
 
   const updateSearchWord = async (e: KeyboardEvent<HTMLInputElement>) => {

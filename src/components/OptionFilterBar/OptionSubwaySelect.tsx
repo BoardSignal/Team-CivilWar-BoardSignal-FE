@@ -26,7 +26,11 @@ const OptionSubwaySelect = ({ option }: { option: Option }) => {
     <>
       <OptionFilterButton option={option} onClick={openModal} />
       {isModalOpen && (
-        <SubwayListModal onClose={closeModal} onSelect={handleSubwaySelect} />
+        <SubwayListModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onSelect={handleSubwaySelect}
+        />
       )}
     </>
   );

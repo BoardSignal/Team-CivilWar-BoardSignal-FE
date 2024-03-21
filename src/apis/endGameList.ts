@@ -6,8 +6,12 @@ import { END_GAME_LIST_QUERY_KEY } from '@/constants/queryKey';
 import { api } from './core';
 import type { Gathering } from './gatheringList';
 
-interface EndGameResponse extends Gathering {
+export interface EndGameResponse extends Gathering {
   fixTime: string;
+  fixLine: string;
+  fixStation: string;
+  fixPlace: string;
+  reviewCompleted: boolean;
 }
 
 interface EndGameListResponse {
@@ -34,7 +38,7 @@ export const useGetEndGameListApi = (size: number, userId: number) => {
     });
 
   return {
-    endGames: data.pages.map(({ roomsInfos }) => [...roomsInfos]).flat(),
+    endGames: data.pages.map(({ roomsInfos }) => roomsInfos).flat(),
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,

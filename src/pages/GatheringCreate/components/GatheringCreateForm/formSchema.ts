@@ -35,7 +35,7 @@ export const gatheringCreateDefaultValue = {
   title: '',
   description: '',
   isArrowedSameGender: false,
-  headcount: [1, 8],
+  headcount: [2, 8],
   time: '',
   startTime: '',
   // 사용자의 나이는 폼 컴포넌트에서 반영해요.
