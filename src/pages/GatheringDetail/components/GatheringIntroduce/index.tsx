@@ -28,8 +28,6 @@ interface GatheringIntroduceProps {
   gatheringLeaderInfo: ParticipantResponse;
 }
 
-const DEFAULT_IMAGE_URL = 'https://via.placeholder.com/300';
-
 const GatheringIntroduce = ({
   gatheringIntroduce,
   gatheringLeaderInfo,
@@ -39,12 +37,10 @@ const GatheringIntroduce = ({
 
   return (
     <div className='flex h-full grow flex-col overflow-y-auto overflow-x-hidden'>
+      {imageUrl && (
+        <img src={imageUrl} alt='모임 이미지' className='w-full object-cover' />
+      )}
       <UserProfile userProfile={gatheringLeaderInfo} isLeader={true} />
-      <img
-        src={imageUrl ?? DEFAULT_IMAGE_URL}
-        alt='모임 이미지'
-        className='w-full object-cover'
-      />
       <div className='flex flex-col gap-4 px-4 py-6'>
         <GatheringDescription
           title={title}
