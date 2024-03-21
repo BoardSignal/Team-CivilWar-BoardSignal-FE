@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'Noto Sans KR';
+    src: url('../assets/font/NotoSansKR-Regular.ttf');
+  }
+
+  * {
+    @apply font-sans;
+  }
+
   #styleRoot {
     /* Figma 색상 팔레트 정의 필요 */
     --base: black;

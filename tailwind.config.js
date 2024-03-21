@@ -40,6 +40,9 @@ export default {
         moveUp: 'moveUp ease 0.3s forwards',
         moveDown: 'moveDown ease-out 0.3s forwards',
       },
+      fontFamily: {
+        'sans': ['Noto Sans KR']
+      }
     },
   },
   plugins: [],
