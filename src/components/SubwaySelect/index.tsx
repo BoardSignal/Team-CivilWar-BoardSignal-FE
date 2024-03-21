@@ -27,7 +27,11 @@ const SubwaySelect = ({ value, onChange }: SubwaySelectProps) => {
         onClick={openModal}
       />
       {isModalOpen && (
-        <SubwayListModal onClose={closeModal} onSelect={handleSubwaySelect} />
+        <SubwayListModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          onSelect={handleSubwaySelect}
+        />
       )}
     </>
   );

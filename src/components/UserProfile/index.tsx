@@ -4,6 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { ParticipantResponse } from '@/apis/gatheringDetail';
+import defaultProfileImage from '@/assets/default-profile-image.png';
 import {
   KICK_PARTICIPANT_MODAL_MESSAGE,
   SUCCESS_KICK_PARTICIPANT_MODAL_MESSAGE,
@@ -21,8 +22,6 @@ export interface UserProfileProps {
   userProfile: ParticipantResponse;
   isLeader?: boolean;
 }
-
-const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
 
 const UserProfile = ({
   userProfile,
@@ -100,7 +99,7 @@ const UserProfile = ({
         <div className='flex w-fit gap-2'>
           <Link to={`${USERS_PAGE_URL}/${userId}`}>
             <img
-              src={profileImageUrl || DEFAULT_PROFILE_IMAGE_URL}
+              src={profileImageUrl ?? defaultProfileImage}
               alt='프로필사진'
               className='size-10 rounded-full object-cover'
             />

@@ -114,7 +114,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
 
                 return (
                   <Range
-                    min={1}
+                    min={2}
                     max={8}
                     step={1}
                     value={value}

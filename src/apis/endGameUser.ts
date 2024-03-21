@@ -31,10 +31,47 @@ export interface EndGameDetailsResponse {
   categories: string[];
   createdAt: string;
   headCount: number;
-  time: '';
-  description: '';
   participantsInfos: ParticipantInfo[];
 }
+
+interface EndGameDetailsWithoutParticipants
+  extends Omit<EndGameDetailsResponse, 'participantsInfos'> {}
+
+const endGameDetailMapper = (gathering: EndGameDetailsWithoutParticipants) => {
+  const {
+    id,
+    title,
+    station,
+    minAge,
+    maxAge,
+    allowedGender,
+    imageUrl,
+    minParticipants,
+    maxParticipants,
+    categories,
+    createdAt,
+    meetingTime,
+    meetingPlace,
+    headCount,
+  } = gathering;
+
+  return {
+    id,
+    title,
+    fixStation: station,
+    minAge,
+    maxAge,
+    allowedGender,
+    imageUrl,
+    minParticipants,
+    maxParticipants,
+    categories,
+    createdAt,
+    fixTime: meetingTime,
+    fixPlace: meetingPlace,
+    headCount,
+  };
+};
 
 const getEndGameDetails = (gatheringId: string) =>
   api.get<EndGameDetailsResponse>({
@@ -51,7 +88,6 @@ export const useGetEndGameDetailsApi = (gatheringId: string) => {
 
   return {
     participantsInfos,
-    gathering: { ...gathering, imageUrl: null },
-    gatheringId: gathering.id,
+    gathering: endGameDetailMapper(gathering),
   };
 };

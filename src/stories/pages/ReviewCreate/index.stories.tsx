@@ -67,15 +67,13 @@ const DUMMY_REVIEWCREATE: EndGameDetailsResponse[] = [
     allowedGender: '혼성',
     minParticipants: 3,
     maxParticipants: 4,
-    description: '',
-    time: '',
     categories: ['전략'],
     headCount: 2,
     createdAt: String(new Date()),
     participantsInfos: [],
     peopleCount: 3,
-    line: '',
-    meetingPlace: '',
+    line: '2호선',
+    meetingPlace: '보드게임카페 레드버튼 강남점',
   },
 ];
 

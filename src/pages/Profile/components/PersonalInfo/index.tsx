@@ -1,3 +1,4 @@
+import defaultProfileImage from '@/assets/default-profile-image.png';
 import Icon from '@/components/Icon';
 
 interface PersonalInfo {
@@ -12,8 +13,6 @@ interface PersonalInfoProps {
   personalInfo: PersonalInfo;
 }
 
-const DEFAULT_PROFILE_IMAGE_URL = 'https://picsum.photos/200/200';
-
 const PersonalInfo = ({ personalInfo }: PersonalInfoProps) => {
   const {
     nickname,
@@ -22,7 +21,7 @@ const PersonalInfo = ({ personalInfo }: PersonalInfoProps) => {
     ageGroup,
     profileImageUrl,
   } = personalInfo;
-  const userProfileImageUrl = profileImageUrl || DEFAULT_PROFILE_IMAGE_URL;
+  const userProfileImageUrl = profileImageUrl ?? defaultProfileImage;
 
   return (
     <div className='flex flex-col items-center gap-2 py-4'>
