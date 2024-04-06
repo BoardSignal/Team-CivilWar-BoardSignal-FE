@@ -75,7 +75,7 @@ const EntranceGatheringButton = ({
     gatheringEntrance(handleOpenEntranceModal);
   };
 
-  const isInaccessibleAge = age ? age < minAge && age > maxAge : true;
+  const isInaccessibleAge = age ? age < minAge || age > maxAge : true;
   const isUnAllowedGender =
     allowedGender !== '혼성' && allowedGender !== gender;
   const isEntrance = isInaccessibleAge || isUnAllowedGender || isFix === '확정';
