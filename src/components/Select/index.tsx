@@ -12,7 +12,7 @@ import { cn } from '@/utils/cn';
 import Icon from '../Icon';
 
 const selectCSS = cva(
-  'relative z-10 w-full cursor-pointer appearance-none rounded-lg border bg-transparent p-4 outline-none',
+  'relative w-full cursor-pointer appearance-none rounded-lg border bg-transparent p-4 outline-none',
   {
     variants: {
       variant: {
