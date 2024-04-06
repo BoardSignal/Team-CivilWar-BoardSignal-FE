@@ -1,6 +1,9 @@
+import { Suspense } from 'react';
+
 import tabBarLogo from '@/assets/tab-bar-logo.png';
 import { GNB } from '@/components/GNB';
 import OptionFilterBar from '@/components/OptionFilterBar';
+import SpinnerFullScreen from '@/components/Spinner/SpinnerFullScreen';
 import TabBar from '@/components/TabBar';
 import { BOARDGAME_CATEGORIES, TIME_OPTIONS } from '@/constants/options';
 import useInitializeFCM from '@/hooks/useInitializeFCM';
@@ -49,7 +52,12 @@ export const GatheringListPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <OptionFilterBar options={OPTIONS} />
-      <GatheringList />
+      <div className='grow overflow-y-auto overflow-x-hidden'>
+        <Suspense fallback={<SpinnerFullScreen />}>
+          <GatheringList />
+        </Suspense>
+      </div>
+
       <FloatingButton />
       <GNB />
     </div>
