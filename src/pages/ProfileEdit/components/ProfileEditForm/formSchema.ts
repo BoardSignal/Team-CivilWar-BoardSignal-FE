@@ -16,4 +16,6 @@ export const profileEditSchema = object({
     .max(10, `10${MAX_LENGTH_ERROR_MESSAGE}`),
   station: string().defined(),
   categories: array(string().defined()).required(),
+  gender: string().required(REQUIRED_ERROR_MESSAGE),
+  birth: string().required(REQUIRED_ERROR_MESSAGE),
 });

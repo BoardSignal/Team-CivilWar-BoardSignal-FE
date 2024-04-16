@@ -10,6 +10,8 @@ import {
 
 export const registerSchema = object({
   profileImageUrl: mixed<File>().required(),
+  birth: string().required(REQUIRED_ERROR_MESSAGE),
+  gender: string().required(REQUIRED_ERROR_MESSAGE),
   nickname: string()
     .required(REQUIRED_ERROR_MESSAGE)
     .trim()
@@ -23,6 +25,8 @@ export const registerSchema = object({
 
 export const registerDefaultValue = {
   profileImageUrl: new File([], ''),
+  birth: '',
+  gender: '',
   nickname: '',
   station: '',
   categories: [],

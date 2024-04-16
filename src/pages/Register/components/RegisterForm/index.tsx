@@ -1,11 +1,11 @@
 import { Controller, useForm } from 'react-hook-form';
 
-import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Button from '@/components/Button';
 import ChipSelect from '@/components/ChipSelect';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
+import Select from '@/components/Select';
 import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import {
@@ -25,16 +25,23 @@ interface RegisterFormProps {
   onRegister: OnRegister;
 }
 
+const BIRTH_YEAR_OPTIONS = Array.from({ length: 30 }, (_, idx) =>
+  String(idx + 1980),
+);
+const BIRTH_YEAR_PLACEHOLDER = '출생년도선택';
+const GENDER_OPTIONS = ['남성', '여성'];
+const GENDER_PLACEHOLDER = '성별 선택';
+
 const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     control,
+    watch,
   } = useForm(registerFormOptions);
 
   const registerUser = useRegister(onRegister);
-  const { name, birth, gender } = useGetLoggedInUserApi();
   const onSubmitResister = (data: RegisterFormValue) => {
     const request = registerRequestMapper(data);
     registerUser(request);
@@ -56,33 +63,38 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
           }}
         />
         <section className='flex flex-col gap-4 p-4'>
-          <Label title='이름'>
-            <TextInput
-              disabled={true}
-              value={name}
-              className='text-gray-accent3'
-            />
-          </Label>
-          <div className='flex gap-4'>
-            <Label title='출생년도'>
-              <TextInput
-                disabled={true}
-                value={birth}
-                className='text-gray-accent3'
-              />
-            </Label>
-            <Label title='성별'>
-              <TextInput
-                disabled={true}
-                value={gender}
-                className='text-gray-accent3'
-              />
-            </Label>
+          <div className='flex w-full gap-8'>
+            <div className='w-1/2'>
+              <Label title='출생년도' isRequired>
+                <Select
+                  options={BIRTH_YEAR_OPTIONS}
+                  placeholder={BIRTH_YEAR_PLACEHOLDER}
+                  variant={errors.birth ? 'error' : 'default'}
+                  {...register('birth')}
+                />
+                <FormErrorMessage message={errors.birth?.message} />
+              </Label>
+            </div>
+            <div className='w-2/5'>
+              <Label title='성별' isRequired>
+                <Select
+                  options={GENDER_OPTIONS}
+                  placeholder={GENDER_PLACEHOLDER}
+                  variant={errors.gender ? 'error' : 'default'}
+                  {...register('gender')}
+                />
+                <FormErrorMessage message={errors.gender?.message} />
+              </Label>
+            </div>
           </div>
-          <Label title='닉네임' isRequired>
+          <Label
+            title='닉네임'
+            isRequired
+            currentLength={watch('nickname')?.length}
+            maxLength={10}
+          >
             <TextInput
               variant={errors.nickname ? 'error' : 'default'}
-              maxLength={50}
               {...register('nickname')}
             />
             <FormErrorMessage message={errors.nickname?.message} />
