@@ -31,11 +31,11 @@ export interface GatheringListResponse {
 }
 
 export interface GetGatheringListParams {
-  size: number;
+  size?: number;
   page?: number;
-  station: string[];
-  time: string[];
-  category: string[];
+  station?: string[];
+  time?: string[];
+  category?: string[];
   searchKeyword?: string;
   gender?: string;
 }
@@ -56,7 +56,7 @@ const getGatheringList = ({
   });
 
 export const useGetGatheringListApi = ({
-  size,
+  size = 20,
   ...restParams
 }: GetGatheringListParams) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
