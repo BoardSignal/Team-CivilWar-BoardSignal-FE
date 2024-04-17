@@ -2,6 +2,7 @@ import tabBarLogo from '@/assets/tab-bar-logo.png';
 import { GNB } from '@/components/GNB';
 import OptionFilterBar from '@/components/OptionFilterBar';
 import TabBar from '@/components/TabBar';
+import { GATHERING_SEARCH_PLACEHOLDER_MESSAGE } from '@/constants/messages/placeholder';
 import { BOARDGAME_CATEGORIES, TIME_OPTIONS } from '@/constants/options';
 import useInitializeFCM from '@/hooks/useInitializeFCM';
 
@@ -47,6 +48,9 @@ export const GatheringListPage = () => {
         <TabBar.Left>
           <img src={tabBarLogo} alt='보드시그널' className='h-[30px]' />
         </TabBar.Left>
+        <TabBar.Right>
+          <TabBar.Search placeholder={GATHERING_SEARCH_PLACEHOLDER_MESSAGE} />
+        </TabBar.Right>
       </TabBar.Container>
       <OptionFilterBar options={OPTIONS} />
       <GatheringList />

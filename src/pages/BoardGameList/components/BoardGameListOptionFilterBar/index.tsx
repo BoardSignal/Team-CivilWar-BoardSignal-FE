@@ -3,7 +3,6 @@ import {
   BOARDGAME_CATEGORIES,
   DIFFICULTY_CATEGORIES,
 } from '@/constants/options';
-import { BOARD_GAMES_PAGE_URL } from '@/constants/pageRoutes';
 
 const OPTIONS = [
   {
@@ -39,7 +38,7 @@ const OPTIONS = [
 ];
 
 const BoardGameListOptionFilterBar = () => (
-  <OptionFilterBar options={OPTIONS} resetUrl={BOARD_GAMES_PAGE_URL} />
+  <OptionFilterBar options={OPTIONS} />
 );
 
 export default BoardGameListOptionFilterBar;

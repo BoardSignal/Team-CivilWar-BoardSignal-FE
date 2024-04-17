@@ -54,6 +54,7 @@ const GatheringList = () => {
       time,
       category,
       ...(gender.length !== 0 && { gender: gender[0] }),
+      searchKeyword: searchParams.get('searchKeyword') || undefined,
     });
   };
 

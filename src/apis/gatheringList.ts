@@ -36,6 +36,7 @@ export interface GetGatheringListParams {
   station: string[];
   time: string[];
   category: string[];
+  searchKeyword?: string;
   gender?: string;
 }
 
