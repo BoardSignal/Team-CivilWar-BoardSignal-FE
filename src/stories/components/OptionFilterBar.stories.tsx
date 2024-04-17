@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import OptionFilterBar from '@/components/OptionFilterBar';
-import { OPTIONS } from '@/pages/GatheringList';
+import { OPTIONS } from '@/pages/GatheringList/components/GatheringListOptionFilterBar';
 
 import { CommonPageLayoutDecorator } from '../CommonPageLayoutDecorator';
 
