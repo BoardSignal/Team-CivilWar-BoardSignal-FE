@@ -33,7 +33,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
     nickname,
     station: `${subwayStation} (${subwayLine})`,
     categories,
-    birth: String(birth),
+    birth: `${birth}`,
     gender,
   };
 
@@ -52,7 +52,11 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
   } = useForm(profileEditFormOptions);
 
   const onSubmitProfileEdit = (data: ProfileEditFormValue) => {
-    const request = profileEditRequestMapper(data);
+    const request = profileEditRequestMapper({
+      ...data,
+      birth: `${birth}`,
+      gender,
+    });
     editProfile(request);
   };
 
@@ -78,7 +82,6 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
                 disabled={true}
                 value={birth}
                 className='text-gray-accent3'
-                {...register('birth')}
               />
             </Label>
             <Label title='성별'>
@@ -86,7 +89,6 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
                 disabled={true}
                 value={gender}
                 className='text-gray-accent3'
-                {...register('gender')}
               />
             </Label>
           </div>

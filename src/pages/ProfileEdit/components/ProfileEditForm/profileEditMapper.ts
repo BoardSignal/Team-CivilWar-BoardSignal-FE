@@ -6,13 +6,16 @@ import {
 export interface ProfileEditFormValue {
   profileImageUrl: File;
   nickname: string;
-  gender: string;
-  birth: string;
   station: string;
   categories: string[];
 }
 
-const ProfileEditRequestMapper = (data: ProfileEditFormValue) => {
+export interface ProfileFormValue extends ProfileEditFormValue {
+  gender: string;
+  birth: string;
+}
+
+const ProfileEditRequestMapper = (data: ProfileFormValue) => {
   const {
     nickname: nickName,
     birth,
