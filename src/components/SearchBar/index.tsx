@@ -2,17 +2,21 @@ import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+import { SEARCH_PLACEHOLDER_MESSAGE } from '@/constants/messages/placeholder';
 import { cn } from '@/utils/cn';
 
 import Icon from '../Icon';
+
+const queryStringKey = 'searchKeyword';
 
 interface SearchBarProps {
   placeholder?: string;
 }
 
-const SearchBar = ({ placeholder = '' }: SearchBarProps) => {
+const SearchBar = ({
+  placeholder = SEARCH_PLACEHOLDER_MESSAGE,
+}: SearchBarProps) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const queryStringKey = 'searchKeyword';
   const [keyword, setKeyword] = useState(
     searchParams.get(queryStringKey) || '',
   );
