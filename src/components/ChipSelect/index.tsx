@@ -20,16 +20,16 @@ const ChipSelect = ({
   onChange,
 }: ChipSelectProps) => {
   const handleToggleItemButton = (newSelectedItem: string) => {
-    if (limit === 1) {
-      onChange([newSelectedItem]);
-
-      return;
-    }
-
     if (selectedItems.includes(newSelectedItem)) {
       onChange(
         selectedItems.filter(selectedItem => selectedItem !== newSelectedItem),
       );
+
+      return;
+    }
+
+    if (limit === 1) {
+      onChange([newSelectedItem]);
 
       return;
     }
