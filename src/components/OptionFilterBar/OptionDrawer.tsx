@@ -4,8 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 
 import type { Option } from '.';
 import Button from '../Button';
+import ChipSelect from '../ChipSelect';
 import Drawer from '../Drawer';
-import MultipleSelect from '../MultipleSelect';
 import OptionFilterButton from './OptionFilterButton';
 
 interface OptionDrawerProps {
@@ -44,7 +44,7 @@ const OptionDrawer = ({ option }: OptionDrawerProps) => {
       </Drawer.Trigger>
       <Drawer.Title>{name}</Drawer.Title>
       <Drawer.Content className='flex flex-col'>
-        <MultipleSelect
+        <ChipSelect
           optionItems={items}
           selectedItems={newSelectedItems}
           limit={selectLimit}

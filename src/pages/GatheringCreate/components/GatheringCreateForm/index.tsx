@@ -6,11 +6,11 @@ import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Alert from '@/components/Alert';
 import Button from '@/components/Button';
 import Checkbox from '@/components/Checkbox';
+import ChipSelect from '@/components/ChipSelect';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import LocationSelect from '@/components/LocationSelect';
-import MultipleSelect from '@/components/MultipleSelect';
 import Range from '@/components/Range';
 import Select from '@/components/Select';
 import SubwaySelect from '@/components/SubwaySelect';
@@ -185,7 +185,7 @@ const GatheringCreateForm = ({ onCreate }: GatheringCreateFormProps) => {
                 const { value, onChange } = field;
 
                 return (
-                  <MultipleSelect
+                  <ChipSelect
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
                     limit={3}
