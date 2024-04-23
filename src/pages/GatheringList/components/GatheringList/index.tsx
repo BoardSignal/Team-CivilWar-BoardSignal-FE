@@ -84,7 +84,6 @@ const GatheringList = () => {
       fetchNextPage={fetchNextPage}
       fetchStatus={isFetchingNextPage ? 'fetching' : 'idle'}
       loaderElement={<SpinnerListBottom />}
-      className='grow overflow-y-auto overflow-x-hidden'
     >
       <ul>
         {gatherings.map(gathering => (

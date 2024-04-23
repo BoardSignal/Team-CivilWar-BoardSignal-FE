@@ -31,7 +31,7 @@ const NotificationListItem = ({
               {getRelativeTimeWithin(createdAt)}
             </span>
           </div>
-          <div className='text-gray-accent1'>{message}</div>
+          <div className='text-start text-gray-accent1'>{message}</div>
         </div>
       </Button>
     </Link>

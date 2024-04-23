@@ -68,13 +68,15 @@ const EndGameListItem = ({ endGame }: EndGameListItemProps) => {
           </div>
         </div>
       </div>
-      {isReviewCompleted !== undefined && remainingReviewableDay > 0 && (
-        <Link to={`${END_GAMES_REVIEWS_CREATE_PAGE_URL}/${id}`}>
-          <Button
-            variant={isReviewCompleted ? 'inactive' : 'primary'}
-          >{`모임 리뷰하기 (${remainingReviewableDay}일 남음)`}</Button>
-        </Link>
-      )}
+      {isReviewCompleted !== undefined &&
+        remainingReviewableDay > 0 &&
+        (!isReviewCompleted ? (
+          <Link to={`${END_GAMES_REVIEWS_CREATE_PAGE_URL}/${id}`}>
+            <Button variant='primary'>{`모임 리뷰하기 (${remainingReviewableDay}일 남음)`}</Button>
+          </Link>
+        ) : (
+          <Button variant='inactive'>{`모임 리뷰하기 (${remainingReviewableDay}일 남음)`}</Button>
+        ))}
     </div>
   );
 };
