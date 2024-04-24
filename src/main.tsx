@@ -12,5 +12,11 @@ activateColorTheme();
     await enableAPIMocks();
   }
 
+  const KAKAO_APP_KEY =
+    import.meta.env.VITE_KAKAO_APP_KEY ||
+    import.meta.env.STORYBOOK_KAKAO_APP_KEY;
+
+  window.Kakao.init(KAKAO_APP_KEY);
+
   ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
 })();
