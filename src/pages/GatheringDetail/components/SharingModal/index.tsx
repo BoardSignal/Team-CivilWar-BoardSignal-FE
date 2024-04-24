@@ -2,8 +2,10 @@ import { GatheringDetailResponse } from '@/apis/gatheringDetail';
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Modal from '@/components/Modal';
+import { BOARD_SIGNAL_HOST } from '@/constants/boardSignal';
 import { LINK_COPY_SUCCESS_MESSAGE } from '@/constants/messages/boardSignal';
 import { DEFAULT_ERROR_MESSAGE } from '@/constants/messages/error';
+import { GATHERINGS_PAGE_URL } from '@/constants/pageRoutes';
 import { showErrorToast, showSuccessToast } from '@/utils/showToast';
 
 const KAKAO_SHARING_BUTTON_IMAGE =
@@ -16,9 +18,10 @@ interface SharingModalProp {
 }
 
 const SharingModal = ({ isOpen, onClose, gathering }: SharingModalProp) => {
+  const { roomId: id, title, description, imageUrl } = gathering;
+
   const handleClickKakaoSharingButton = () => {
-    const { imageUrl, title, description } = gathering;
-    const path = window.location.pathname.slice(1);
+    const path = `gatherings/${id}/0`;
 
     window.Kakao.Share.sendCustom({
       templateId: 107258,
@@ -32,7 +35,8 @@ const SharingModal = ({ isOpen, onClose, gathering }: SharingModalProp) => {
   };
 
   const handleClickLinkButton = () => {
-    const url = window.location.href;
+    const url = `${BOARD_SIGNAL_HOST}${GATHERINGS_PAGE_URL}/${id}/0`;
+
     navigator.clipboard
       .writeText(url)
       .then(() => showSuccessToast(LINK_COPY_SUCCESS_MESSAGE))
