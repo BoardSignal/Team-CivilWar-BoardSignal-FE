@@ -60,4 +60,6 @@ export type IconName =
   | 'subway-fill'
   | 'subway-line'
   | 'calendar-line'
-  | 'inbox-2-fill';
+  | 'inbox-2-fill'
+  | 'link'
+  | 'checkbox-circle-fill';

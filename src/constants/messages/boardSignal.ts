@@ -8,3 +8,5 @@ export const SLOGAN_MESSAGE2 = '사람들을 찾는 최적의 장소."';
 
 export const AGREE_TERMS_MESSAGE = '(필수) 보드시그널 약관 및 동의사항';
 export const AGREE_MARKETING_MESSAGE = '(선택) 마케팅 정보 수신 동의';
+
+export const LINK_COPY_SUCCESS_MESSAGE = '링크가 복사 됐어요!';
