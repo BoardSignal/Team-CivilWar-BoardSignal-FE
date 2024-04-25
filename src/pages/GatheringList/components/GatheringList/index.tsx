@@ -1,78 +1,25 @@
-import { useEffect, useState } from 'react';
-
-import { useSearchParams } from 'react-router-dom';
-
-import {
-  GetGatheringListParams,
-  useGetGatheringListApi,
-} from '@/apis/gatheringList';
+import { useGetGatheringListApi } from '@/apis/gatheringList';
 import EmptyListFullScreen from '@/components/EmptyListFullScreen';
 import GatheringListItem from '@/components/GatheringListItem';
 import InfiniteScrollAutoFetcher from '@/components/InfiniteScrollAutoFetcher';
 import SpinnerListBottom from '@/components/Spinner/SpinnerListBottom';
 import {
-  EMPTY_FILTERED_GATHERING_LIST_TITLE,
   EMPTY_GATHERING_LIST_MESSAGE,
   EMPTY_GATHERING_LIST_TITLE,
 } from '@/constants/messages/emptyScreens';
 
-import { OPTIONS } from '../..';
-
-type GatheringListParams = Omit<GetGatheringListParams, 'size'>;
-
-const NUMBER_OF_GETTING_GATHERINGS = 10;
+import { useGatheringListQueryParams } from '../../hooks/useGatheringListQueryParams';
 
 const GatheringList = () => {
-  const [searchParams] = useSearchParams();
-  const [queryParams, setQueryParams] = useState<GatheringListParams>({
-    station: [],
-    time: [],
-    category: [],
-  });
+  const options = useGatheringListQueryParams();
 
   const { gatherings, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useGetGatheringListApi({
-      size: NUMBER_OF_GETTING_GATHERINGS,
-      ...queryParams,
-    });
-
-  const updateQueryParams = () => {
-    const [station, time, category, gender] = OPTIONS.map(
-      ({ queryStringKey }) => {
-        if (queryStringKey === 'time') {
-          return searchParams
-            .getAll(queryStringKey)
-            .map(param => param.replace(' ', '_'));
-        }
-
-        return searchParams.getAll(queryStringKey);
-      },
-    );
-
-    setQueryParams({
-      station,
-      time,
-      category,
-      ...(gender.length !== 0 && { gender: gender[0] }),
-    });
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => updateQueryParams(), [searchParams]);
+    useGetGatheringListApi(options);
 
   if (gatherings.length === 0) {
-    if (!searchParams.toString()) {
-      return (
-        <EmptyListFullScreen
-          title={EMPTY_GATHERING_LIST_TITLE}
-          message={EMPTY_GATHERING_LIST_MESSAGE}
-        />
-      );
-    }
-
     return (
       <EmptyListFullScreen
-        title={EMPTY_FILTERED_GATHERING_LIST_TITLE}
+        title={EMPTY_GATHERING_LIST_TITLE}
         message={EMPTY_GATHERING_LIST_MESSAGE}
       />
     );

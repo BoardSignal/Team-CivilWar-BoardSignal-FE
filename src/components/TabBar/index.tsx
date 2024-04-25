@@ -3,6 +3,7 @@ import { Children, ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Icon from '../Icon';
+import SearchBar from '../SearchBar';
 
 /**
  * TabBar를 구성하는 요소에요.
@@ -48,6 +49,7 @@ const Title = ({ children }: PropsWithChildren) => (
 );
 
 type HTMLButtonProps = ComponentPropsWithoutRef<'button'>;
+type HTMLInputProps = ComponentPropsWithoutRef<'input'>;
 
 const GoBackButton = ({ onClick, ...props }: HTMLButtonProps) => {
   const navigate = useNavigate();
@@ -78,11 +80,7 @@ const SettingsButton = (props: HTMLButtonProps) => (
   </button>
 );
 
-const SearchButton = (props: HTMLButtonProps) => (
-  <button {...props}>
-    <Icon id='search-line' />
-  </button>
-);
+const Search = (props: HTMLInputProps) => <SearchBar {...props} />;
 
 const LogoutButton = (props: HTMLButtonProps) => (
   <button {...props}>
@@ -99,7 +97,7 @@ const TabBar = {
   ChatButton,
   ShareButton,
   SettingsButton,
-  SearchButton,
+  Search,
   LogoutButton,
 };
 

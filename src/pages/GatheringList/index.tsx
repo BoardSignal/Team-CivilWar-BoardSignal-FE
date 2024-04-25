@@ -1,45 +1,12 @@
-import { Suspense } from 'react';
-
 import tabBarLogo from '@/assets/tab-bar-logo.png';
 import { GNB } from '@/components/GNB';
-import OptionFilterBar from '@/components/OptionFilterBar';
-import SpinnerFullScreen from '@/components/Spinner/SpinnerFullScreen';
 import TabBar from '@/components/TabBar';
-import { BOARDGAME_CATEGORIES, TIME_OPTIONS } from '@/constants/options';
+import { GATHERING_SEARCH_PLACEHOLDER_MESSAGE } from '@/constants/messages/placeholder';
 import useInitializeFCM from '@/hooks/useInitializeFCM';
 
 import FloatingButton from './components/FloatingButton';
 import GatheringList from './components/GatheringList';
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const OPTIONS = [
-  {
-    name: '지역',
-    icon: 'subway',
-    items: [],
-    queryStringKey: 'station',
-    selectLimit: 3,
-  },
-  {
-    name: '시간',
-    icon: 'time',
-    items: TIME_OPTIONS,
-    queryStringKey: 'time',
-  },
-  {
-    name: '카테고리',
-    icon: 'gamepad',
-    items: BOARDGAME_CATEGORIES,
-    queryStringKey: 'category',
-  },
-  {
-    name: '성별',
-    icon: 'team',
-    items: ['남성', '여성'],
-    queryStringKey: 'gender',
-    selectLimit: 1,
-  },
-];
+import GatheringListOptionFilterBar from './components/GatheringListOptionFilterBar';
 
 export const GatheringListPage = () => {
   useInitializeFCM();
@@ -50,14 +17,12 @@ export const GatheringListPage = () => {
         <TabBar.Left>
           <img src={tabBarLogo} alt='보드시그널' className='h-[30px]' />
         </TabBar.Left>
+        <TabBar.Right>
+          <TabBar.Search placeholder={GATHERING_SEARCH_PLACEHOLDER_MESSAGE} />
+        </TabBar.Right>
       </TabBar.Container>
-      <OptionFilterBar options={OPTIONS} />
-      <div className='grow overflow-y-auto overflow-x-hidden'>
-        <Suspense fallback={<SpinnerFullScreen />}>
-          <GatheringList />
-        </Suspense>
-      </div>
-
+      <GatheringListOptionFilterBar />
+      <GatheringList />
       <FloatingButton />
       <GNB />
     </div>
