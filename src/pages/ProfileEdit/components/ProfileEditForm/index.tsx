@@ -3,10 +3,10 @@ import { Controller, useForm } from 'react-hook-form';
 
 import { useGetLoggedInUserApi } from '@/apis/loggedInUser';
 import Button from '@/components/Button';
+import ChipSelect from '@/components/ChipSelect';
 import FormErrorMessage from '@/components/FormErrorMessage';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
-import MultipleSelect from '@/components/MultipleSelect';
 import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
@@ -127,7 +127,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
                 const { value, onChange } = field;
 
                 return (
-                  <MultipleSelect
+                  <ChipSelect
                     optionItems={BOARDGAME_CATEGORIES}
                     selectedItems={value}
                     onChange={onChange}

@@ -2,17 +2,13 @@ import { cn } from '@/utils/cn';
 
 import Button from '../Button';
 
-interface OptionItemButtonProps {
+interface ChipButtonProps {
   optionItem: string;
   active: boolean;
   onClick: (selectedItem: string) => void;
 }
 
-const OptionItemButton = ({
-  optionItem,
-  active,
-  onClick,
-}: OptionItemButtonProps) => {
+const ChipButton = ({ optionItem, active, onClick }: ChipButtonProps) => {
   return (
     <Button
       className={cn(
@@ -26,4 +22,4 @@ const OptionItemButton = ({
   );
 };
 
-export default OptionItemButton;
+export default ChipButton;

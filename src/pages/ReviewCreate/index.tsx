@@ -6,8 +6,8 @@ import { useGetEndGameDetailsApi } from '@/apis/endGameUser';
 import EndGameListItem from '@/components/EndGameListItem';
 import Modal from '@/components/Modal';
 import TabBar from '@/components/TabBar';
-import { ROOMS_MY_END_GAMES_API_URL } from '@/constants/apiRoutes';
 import { SUCCESS_RIVIEW_MODAL_MESSAGE } from '@/constants/messages/modal';
+import { END_GAMES_PAGE_URL } from '@/constants/pageRoutes';
 
 import ReviewForm from './components/ReviewForm';
 
@@ -23,7 +23,7 @@ const ReviewCreate = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    navigate(ROOMS_MY_END_GAMES_API_URL, { replace: true });
+    navigate(END_GAMES_PAGE_URL, { replace: true });
   };
 
   const handleReviewCreate = () => {

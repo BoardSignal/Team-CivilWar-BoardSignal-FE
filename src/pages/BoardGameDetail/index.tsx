@@ -33,7 +33,7 @@ const BoardGameDetailPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <div className='flex h-full grow flex-col overflow-y-auto overflow-x-hidden'>
-        <img src={imageUrl} className='h-60' alt={name} />
+        <img src={imageUrl} className='h-60 object-contain' alt={name} />
         <div className='flex flex-col items-center gap-3 border-b border-gray-accent7 py-5'>
           <GameSummary name={name} categories={categories} />
           <GamePlayDetail gamePlayDetail={gamePlayDetail} />
