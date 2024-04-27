@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import axios from 'axios';
 import firebase from 'firebase/app';
 import 'firebase/messaging';
@@ -28,6 +26,8 @@ const initializeFirebase = () => {
   firebase.apps.length
     ? firebase.app()
     : firebase.initializeApp(firebaseConfig);
+  const messaging = firebase.messaging();
+  messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
 };
 
 const updateFCMToken = (issuedFCMToken: string) => {
@@ -49,15 +49,10 @@ const updateFCMToken = (issuedFCMToken: string) => {
 };
 
 const useInitializeFCM = () => {
-  useEffect(() => {
-    if (!isLoggedIn) {
-      return;
-    }
-
-    initializeFirebase();
-    const messaging = firebase.messaging();
-    messaging.getToken({ vapidKey: VAPID_KEY }).then(updateFCMToken);
-  }, []);
+  if (!isLoggedIn) {
+    return;
+  }
+  initializeFirebase();
 };
 
 export default useInitializeFCM;
