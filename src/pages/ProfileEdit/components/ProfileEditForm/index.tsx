@@ -33,7 +33,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
     nickname,
     station: `${subwayStation} (${subwayLine})`,
     categories,
-    birth: `${birth}`,
+    birth: String(birth),
     gender,
   };
 
@@ -54,7 +54,7 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
   const onSubmitProfileEdit = (data: ProfileEditFormValue) => {
     const request = profileEditRequestMapper({
       ...data,
-      birth: `${birth}`,
+      birth: String(birth),
       gender,
     });
     editProfile(request);
