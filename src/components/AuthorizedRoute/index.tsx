@@ -13,8 +13,6 @@ import { showErrorToast } from '@/utils/showToast';
 
 import SpinnerFullScreen from '../Spinner/SpinnerFullScreen';
 
-const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
-
 //FIXME : setTimeout을 사용하지 않으면 toast에 딜레이가 생겨서 임시적으로 setTimeout을 사용하였습니다.
 const ErrorToast = (errorMessage: string) =>
   setTimeout(() => {
@@ -22,6 +20,7 @@ const ErrorToast = (errorMessage: string) =>
   }, 0);
 
 const AuthorizedRoute = ({ children }: PropsWithChildren) => {
+  const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
   const { data, isLoading } = useGetIsJoinedUserApi(accessToken);
 
   if (accessToken === null) {
