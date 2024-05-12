@@ -10,13 +10,27 @@ export interface ProfileEditFormValue {
   categories: string[];
 }
 
-const ProfileEditRequestMapper = (data: ProfileEditFormValue) => {
-  const { nickname: nickName, station, categories, profileImageUrl } = data;
+export interface ProfileFormValue extends ProfileEditFormValue {
+  gender: string;
+  birth: string;
+}
+
+const ProfileEditRequestMapper = (data: ProfileFormValue) => {
+  const {
+    nickname: nickName,
+    birth,
+    gender,
+    station,
+    categories,
+    profileImageUrl,
+  } = data;
 
   return {
     profileImageUrl,
     userProfile: {
       nickName,
+      gender,
+      birth,
       line: extractLineFromSubwayName(station),
       station: extractStationFromSubwayName(station),
       categories,

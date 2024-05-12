@@ -25,21 +25,16 @@ interface ProfileEditFormProps {
 
 const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
   const editProfile = useProfileEdit(onProfileEdit);
-  const {
-    name,
-    birth,
-    gender,
-    nickname,
-    subwayStation,
-    subwayLine,
-    categories,
-  } = useGetLoggedInUserApi();
+  const { birth, gender, nickname, subwayStation, subwayLine, categories } =
+    useGetLoggedInUserApi();
 
   const profileEditDefaultValue = {
     profileImageUrl: new File([], ''),
     nickname,
     station: `${subwayStation} (${subwayLine})`,
     categories,
+    birth: String(birth),
+    gender,
   };
 
   const profileEditFormOptions = {
@@ -53,10 +48,15 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
     handleSubmit,
     formState: { isValid, errors },
     control,
+    watch,
   } = useForm(profileEditFormOptions);
 
   const onSubmitProfileEdit = (data: ProfileEditFormValue) => {
-    const request = profileEditRequestMapper(data);
+    const request = profileEditRequestMapper({
+      ...data,
+      birth: String(birth),
+      gender,
+    });
     editProfile(request);
   };
 
@@ -76,13 +76,6 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
           }}
         />
         <section className='flex flex-col gap-4 p-4'>
-          <Label title='이름'>
-            <TextInput
-              disabled={true}
-              value={name}
-              className='text-gray-accent3'
-            />
-          </Label>
           <div className='flex gap-4'>
             <Label title='출생년도'>
               <TextInput
@@ -99,10 +92,14 @@ const ProfileEditForm = ({ onProfileEdit }: ProfileEditFormProps) => {
               />
             </Label>
           </div>
-          <Label title='닉네임' isRequired>
+          <Label
+            maxLength={10}
+            title='닉네임'
+            isRequired
+            currentLength={watch('nickname')?.length}
+          >
             <TextInput
               variant={errors.nickname ? 'error' : 'default'}
-              maxLength={50}
               {...register('nickname')}
             />
             <FormErrorMessage message={errors.nickname?.message} />
