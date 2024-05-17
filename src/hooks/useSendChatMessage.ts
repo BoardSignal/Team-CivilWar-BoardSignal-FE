@@ -73,7 +73,6 @@ const useSendChatMessage = ({
 
     client.current = new Client({
       webSocketFactory: () => socket,
-      debug: str => console.log(str),
       onConnect: () => subscribe(),
       onStompError: frame => {
         throw new Error(`Broker reported error: ${frame.headers.message}`);
