@@ -5,7 +5,9 @@ import { showErrorToast } from '@/utils/showToast';
 
 export const useGatheringEntrance = (roomId: string) => {
   const postGatheringEntranceApi = usePostGatheringEntranceApi();
-  const { sendMessage } = useSendChatMessage(parseInt(roomId, 10));
+  const { sendMessage } = useSendChatMessage({
+    gatheringId: parseInt(roomId, 10),
+  });
 
   return async (onOpenModal: () => void) => {
     const { data, isOk, isBadRequest } = await postGatheringEntranceApi(roomId);
