@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import type { ChatRoom } from '@/apis/chatRoomList';
-import {
-  ChatMessage,
-  useGetChatRoomMessagesApi,
-} from '@/apis/chatRoomMessages';
+import type { ChatRoom, LastChatMessage } from '@/apis/chatRoomList';
 import defaultThumbnailImage from '@/assets/default-thumbnail-image.png';
 import Button from '@/components/Button';
 import Chip from '@/components/Chip';
@@ -17,24 +13,30 @@ interface ChatRoomListItemProps {
   chatRoom: ChatRoom;
 }
 
-const MAX_UNCHECKED_MESSAGE_NUMBER = 50;
-
 const ChatRoomListItem = ({ chatRoom }: ChatRoomListItemProps) => {
-  const { id, imageUrl, title, headCount } = chatRoom;
+  const { id, imageUrl, title, headCount, unreadChatCount, lastChatMessage } =
+    chatRoom;
 
-  const { lastChatMessage: rawLastChatMessage, uncheckedMessagesCount } =
-    useGetChatRoomMessagesApi(id, MAX_UNCHECKED_MESSAGE_NUMBER);
-  const { lastChatMessage } = useSendChatMessage(id, false, rawLastChatMessage);
+  const { lastMessage, unreadMessagesCount } = useSendChatMessage({
+    gatheringId: id,
+    rawLastChatMessage: lastChatMessage,
+    unreadChatCount,
+  });
 
-  const getLastChatMessageText = (lastChatMessage: ChatMessage | undefined) => {
+  const getLastChatMessageText = (lastChatMessage: LastChatMessage) => {
     if (!lastChatMessage) {
       return EMPTY_CHAT_ROOM_MESSAGE;
     }
 
-    const { nickname, type, content } = lastChatMessage;
+    const { messageType, content } = lastChatMessage;
+    console.log(lastChatMessage);
 
-    if (type === 'UNFIX' || type === 'PARTICIPANT' || type === 'EXIT') {
-      return `${nickname}${content}`;
+    if (
+      messageType === 'UNFIX' ||
+      messageType === 'PARTICIPANT' ||
+      messageType === 'EXIT'
+    ) {
+      return content.replace('님이', '참가자가');
     }
 
     return content;
@@ -56,20 +58,16 @@ const ChatRoomListItem = ({ chatRoom }: ChatRoomListItemProps) => {
                 <span className='text-xs text-gray-accent3'>{headCount}</span>
               </div>
               <div className='line-clamp-2 text-start text-xs text-gray-accent3'>
-                {getLastChatMessageText(lastChatMessage)}
+                {getLastChatMessageText(lastMessage as LastChatMessage)}
               </div>
             </div>
-            {lastChatMessage && (
+            {lastMessage && (
               <div className='flex shrink-0 flex-col items-center gap-1 text-[10px] text-gray-accent3'>
                 <div>
-                  {formatToTimeUntilTodayThenDate(lastChatMessage.createdAt)}
+                  {formatToTimeUntilTodayThenDate(lastMessage.createdAt)}
                 </div>
-                {uncheckedMessagesCount !== 0 && (
-                  <Chip variant='fill'>
-                    {uncheckedMessagesCount === MAX_UNCHECKED_MESSAGE_NUMBER
-                      ? `${MAX_UNCHECKED_MESSAGE_NUMBER}+`
-                      : uncheckedMessagesCount}
-                  </Chip>
+                {unreadMessagesCount !== 0 && (
+                  <Chip variant='fill'>{unreadMessagesCount}</Chip>
                 )}
               </div>
             )}
