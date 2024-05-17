@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 
+import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
 import GatheringListItem from '@/components/GatheringListItem';
 import TabBar from '@/components/TabBar';
@@ -14,7 +15,17 @@ const ChatRoomPage = () => {
   };
   const gatheringId = parseInt(rawGatheringId, 10);
 
-  const { sendMessage } = useSendChatMessage(gatheringId, true);
+  const {
+    messages: rawMessages,
+    hasNextPage,
+    fetchNextPage,
+  } = useGetChatRoomMessagesApi(gatheringId, 20);
+
+  const { messages, sendMessage } = useSendChatMessage({
+    rawMessages,
+    gatheringId,
+    isPublishExitMessage: true,
+  });
   const { gatheringListItem } = useGetGatheringDetailApi(
     gatheringId.toString(),
   );
@@ -27,7 +38,11 @@ const ChatRoomPage = () => {
         </TabBar.Left>
       </TabBar.Container>
       <GatheringListItem gathering={gatheringListItem} />
-      <ChatContainer gatheringId={gatheringId} />
+      <ChatContainer
+        messages={messages}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+      />
       <ChatTextarea onSend={sendMessage} />
     </div>
   );

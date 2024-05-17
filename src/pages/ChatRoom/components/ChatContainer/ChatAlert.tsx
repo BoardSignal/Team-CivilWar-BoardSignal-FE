@@ -18,8 +18,9 @@ const ChatAlert = ({ message }: ChatAlertProps) => {
 
   return (
     <Alert variant={variant[type]} className='my-1.5'>
-      {type !== 'FIX' && type !== 'KICK' && nickname}
-      {content}
+      {type !== 'FIX' && type !== 'KICK' && nickname
+        ? nickname + content
+        : content.replace('님이', '참가자가')}
     </Alert>
   );
 };

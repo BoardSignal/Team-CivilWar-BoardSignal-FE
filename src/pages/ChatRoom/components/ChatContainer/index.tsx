@@ -1,4 +1,6 @@
-import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
+import { Fragment } from 'react';
+
+import { ChatMessage } from '@/apis/chatRoomMessages';
 import ReverseInfiniteScrollAutoFetch from '@/components/ReverseInfiniteScrollAutoFetch';
 import { EMPTY_CHAT_ROOM_MESSAGE } from '@/constants/messages/emptyScreens';
 import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
@@ -8,14 +10,16 @@ import ChatAlert from './ChatAlert';
 import ChatBubble, { ChatDate } from './ChatBubble';
 
 interface ChatContainerProps {
-  gatheringId: number;
+  messages: ChatMessage[];
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
 }
 
-const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
-  const { messages, hasNextPage, fetchNextPage } = useGetChatRoomMessagesApi(
-    gatheringId,
-    20,
-  );
+const ChatContainer = ({
+  messages,
+  hasNextPage,
+  fetchNextPage,
+}: ChatContainerProps) => {
   const currentUserId = useGetLoggedInUserId();
 
   if (messages.length === 0) {
@@ -38,16 +42,16 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
 
         if (type !== 'CHAT') {
           return (
-            <>
+            <Fragment key={createdAt}>
               {index === messages.length - 1 ? (
-                <div key={createdAt}>
+                <div>
                   <ChatDate date={createdAt} />
                   <ChatAlert message={message} />
                 </div>
               ) : (
-                <ChatAlert key={createdAt} message={message} />
+                <ChatAlert message={message} />
               )}
-            </>
+            </Fragment>
           );
         }
 
