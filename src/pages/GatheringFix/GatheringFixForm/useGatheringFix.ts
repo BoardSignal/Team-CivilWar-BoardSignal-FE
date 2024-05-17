@@ -11,7 +11,9 @@ type OnGatheringFix = () => void;
 
 const useCreateGathering = (onCreate: OnGatheringFix, gatheringId: string) => {
   const gatheringCreateApi = usePostGatheringFix();
-  const { sendMessage } = useSendChatMessage(parseInt(gatheringId, 10));
+  const { sendMessage } = useSendChatMessage({
+    gatheringId: parseInt(gatheringId, 10),
+  });
 
   return async (request: GatheringFixRequest) => {
     const { data, isBadRequest } = await gatheringCreateApi({

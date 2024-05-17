@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import type { ChatMessage } from '@/apis/chatRoomMessages';
 import defaultProfileImage from '@/assets/default-profile-image.png';
 import { USERS_PAGE_URL } from '@/constants/pageRoutes';
-import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import { cn } from '@/utils/cn';
 import { formatToDate, formatToTime } from '@/utils/time';
 
 interface ChatBubbleProps {
+  currentUserId?: number;
   message: ChatMessage;
   isFirstMessage?: boolean;
 }
@@ -80,9 +80,12 @@ const OtherUserChatBubble = ({ message, isFirstMessage }: ChatBubbleProps) => (
   </div>
 );
 
-const ChatBubble = ({ message, isFirstMessage = false }: ChatBubbleProps) => {
+const ChatBubble = ({
+  currentUserId,
+  message,
+  isFirstMessage = false,
+}: ChatBubbleProps) => {
   const { userId } = message;
-  const currentUserId = useGetLoggedInUserId();
 
   return (
     <div>

@@ -1,20 +1,26 @@
-import { useGetChatRoomMessagesApi } from '@/apis/chatRoomMessages';
+import { Fragment } from 'react';
+
+import { ChatMessage } from '@/apis/chatRoomMessages';
 import ReverseInfiniteScrollAutoFetch from '@/components/ReverseInfiniteScrollAutoFetch';
 import { EMPTY_CHAT_ROOM_MESSAGE } from '@/constants/messages/emptyScreens';
+import useGetLoggedInUserId from '@/hooks/useGetLoggedInUserId';
 import { isDifferentDay } from '@/utils/time';
 
 import ChatAlert from './ChatAlert';
 import ChatBubble, { ChatDate } from './ChatBubble';
 
 interface ChatContainerProps {
-  gatheringId: number;
+  messages: ChatMessage[];
+  hasNextPage: boolean;
+  fetchNextPage: () => void;
 }
 
-const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
-  const { messages, hasNextPage, fetchNextPage } = useGetChatRoomMessagesApi(
-    gatheringId,
-    20,
-  );
+const ChatContainer = ({
+  messages,
+  hasNextPage,
+  fetchNextPage,
+}: ChatContainerProps) => {
+  const currentUserId = useGetLoggedInUserId();
 
   if (messages.length === 0) {
     return (
@@ -36,16 +42,16 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
 
         if (type !== 'CHAT') {
           return (
-            <>
+            <Fragment key={createdAt}>
               {index === messages.length - 1 ? (
-                <div key={createdAt}>
+                <div>
                   <ChatDate date={createdAt} />
                   <ChatAlert message={message} />
                 </div>
               ) : (
-                <ChatAlert key={createdAt} message={message} />
+                <ChatAlert message={message} />
               )}
-            </>
+            </Fragment>
           );
         }
 
@@ -53,7 +59,11 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
           return (
             <div key={createdAt}>
               <ChatDate date={createdAt} />
-              <ChatBubble isFirstMessage message={message} />
+              <ChatBubble
+                currentUserId={currentUserId}
+                isFirstMessage
+                message={message}
+              />
             </div>
           );
         }
@@ -63,10 +73,15 @@ const ChatContainer = ({ gatheringId }: ChatContainerProps) => {
             {isDifferentDay(createdAt, messages[index + 1].createdAt) ? (
               <div>
                 <ChatDate date={createdAt} />
-                <ChatBubble message={message} isFirstMessage />
+                <ChatBubble
+                  currentUserId={currentUserId}
+                  message={message}
+                  isFirstMessage
+                />
               </div>
             ) : (
               <ChatBubble
+                currentUserId={currentUserId}
                 message={message}
                 isFirstMessage={
                   messages[index + 1].type !== 'CHAT' ||

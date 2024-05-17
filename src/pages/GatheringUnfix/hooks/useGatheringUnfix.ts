@@ -7,7 +7,9 @@ import type { OnGatheringUnfix } from '../components/GatheringUnfixForm';
 
 const useGatheringUnfix = (onUnfix: OnGatheringUnfix, gatheringId: string) => {
   const gatheringUnfixApi = useDeleteGatheringUnfixApi(gatheringId);
-  const { sendMessage } = useSendChatMessage(parseInt(gatheringId, 10));
+  const { sendMessage } = useSendChatMessage({
+    gatheringId: parseInt(gatheringId, 10),
+  });
 
   return async (reason: string) => {
     const { data, isBadRequest } = await gatheringUnfixApi({

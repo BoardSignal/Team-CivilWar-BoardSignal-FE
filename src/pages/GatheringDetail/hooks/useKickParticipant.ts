@@ -5,7 +5,9 @@ import { showErrorToast } from '@/utils/showToast';
 
 export const useKickParticipant = (gatheringId: number) => {
   const postKickParticipantApi = useKickParticipantApi(gatheringId);
-  const { sendMessage } = useSendChatMessage(gatheringId);
+  const { sendMessage } = useSendChatMessage({
+    gatheringId,
+  });
 
   return async (userId: number, onOpenModal: () => void) => {
     const { data, isOk, isBadRequest } = await postKickParticipantApi(userId);

@@ -5,7 +5,9 @@ import { showErrorToast } from '@/utils/showToast';
 
 export const useGatheringLeave = (roomId: string) => {
   const postGatheringLeaveApi = usePostGatheringLeaveApi();
-  const { sendMessage } = useSendChatMessage(parseInt(roomId, 10));
+  const { sendMessage } = useSendChatMessage({
+    gatheringId: parseInt(roomId, 10),
+  });
 
   return async (onOpenModal: () => void) => {
     const { data, isOk, isBadRequest } = await postGatheringLeaveApi(roomId);

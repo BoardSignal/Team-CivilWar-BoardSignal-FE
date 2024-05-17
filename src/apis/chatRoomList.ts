@@ -3,13 +3,23 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { ROOMS_CHATS_MY_GAMES_API_URL } from '@/constants/apiRoutes';
 import { CHAT_LIST_QUERY_KEY } from '@/constants/queryKey';
 
+import { MessageType } from './chatRoomMessages';
 import { api } from './core';
+
+export interface LastChatMessage {
+  roomId: number;
+  content: string;
+  messageType: MessageType;
+  createdAt: string;
+}
 
 export interface ChatRoom {
   id: number;
   title: string;
   imageUrl: string | null;
   headCount: number;
+  unreadChatCount: number;
+  lastChatMessage: LastChatMessage;
 }
 
 interface ChatRoomListResponse {
