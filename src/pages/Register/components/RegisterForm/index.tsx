@@ -1,20 +1,26 @@
+import { useState } from 'react';
+
 import { Controller, useForm } from 'react-hook-form';
 
 import Button from '@/components/Button';
 import ChipSelect from '@/components/ChipSelect';
 import FormErrorMessage from '@/components/FormErrorMessage';
+import Icon from '@/components/Icon';
 import ImageUpload from '@/components/ImageUpload';
 import Label from '@/components/Label';
 import Select from '@/components/Select';
 import SubwaySelect from '@/components/SubwaySelect';
 import TextInput from '@/components/TextInput';
 import {
+  AGREE_MARKETING,
   AGREE_MARKETING_MESSAGE,
+  AGREE_TERMS,
   AGREE_TERMS_MESSAGE,
 } from '@/constants/messages/boardSignal';
 import { BOARDGAME_CATEGORIES } from '@/constants/options';
 
 import Agreement from './Agreement';
+import AgreementModal from './agreementModal';
 import { registerFormOptions } from './formSchema';
 import registerRequestMapper, { RegisterFormValue } from './registerMapper';
 import useRegister from './useRegister';
@@ -45,6 +51,25 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
   const onSubmitResister = (data: RegisterFormValue) => {
     const request = registerRequestMapper(data);
     registerUser(request);
+  };
+
+  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
+  const [isMarketingModalOpen, setIsMarketingModalOpen] = useState(false);
+
+  const handleOpenTermsModal = () => {
+    setIsTermsModalOpen(true);
+  };
+
+  const handleCloseTermsModal = () => {
+    setIsTermsModalOpen(false);
+  };
+
+  const handleOpenMarketingModal = () => {
+    setIsMarketingModalOpen(true);
+  };
+
+  const handleCloseMarketingModal = () => {
+    setIsMarketingModalOpen(false);
   };
 
   return (
@@ -135,9 +160,36 @@ const RegisterForm = ({ onRegister }: RegisterFormProps) => {
         <div>
           <Agreement {...register('isAgreeTerms')}>
             {AGREE_TERMS_MESSAGE}
+            <Icon
+              id='arrow-right-line'
+              className='ml-8 cursor-pointer'
+              onClick={handleOpenTermsModal}
+            />
+            <AgreementModal
+              variant='agreeTerms'
+              isOpen={isTermsModalOpen}
+              onClose={handleCloseTermsModal}
+              title='보드시그널 약관 및 동의사항'
+              buttonChildren='확인'
+              children={AGREE_TERMS}
+            />
           </Agreement>
+
           <Agreement {...register('isAgreeMarketing')}>
             {AGREE_MARKETING_MESSAGE}
+            <Icon
+              id='arrow-right-line'
+              className='ml-20 cursor-pointer'
+              onClick={handleOpenMarketingModal}
+            />
+            <AgreementModal
+              variant='agreeMarketing'
+              isOpen={isMarketingModalOpen}
+              onClose={handleCloseMarketingModal}
+              title='마케팅 정보 수신 동의사항'
+              buttonChildren='확인'
+              children={AGREE_MARKETING}
+            />
           </Agreement>
         </div>
         <Button type='submit' variant={isValid ? 'primary' : 'inactive'}>
