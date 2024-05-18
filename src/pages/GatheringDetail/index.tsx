@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useGetGatheringDetailApi } from '@/apis/gatheringDetail';
@@ -10,12 +12,15 @@ import { STORAGE_KEY_ACCESS_TOKEN } from '@/constants/storageKeys';
 import GatheringButton from './components/GatheringButton';
 import GatheringIntroduce from './components/GatheringIntroduce';
 import GatheringParticipants from './components/GatheringParticipants';
+import SharingModal from './components/SharingModal';
 import TabMenu from './components/TabMenu';
 
 const accessToken = localStorage.getItem(STORAGE_KEY_ACCESS_TOKEN);
 
 const GatheringDetailPage = () => {
   const navigate = useNavigate();
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
   const { gatheringId, tabIndex } = useParams() as {
     gatheringId: string;
     tabIndex: string;
@@ -51,7 +56,12 @@ const GatheringDetailPage = () => {
               onClick={() => navigate(`${CHATS_PAGE_URL}/${gatheringId}`)}
             />
           )}
-          <TabBar.ShareButton />
+          <TabBar.ShareButton onClick={() => setIsShareModalOpen(true)} />
+          <SharingModal
+            isOpen={isShareModalOpen}
+            onClose={() => setIsShareModalOpen(false)}
+            gathering={gatheringDetail.gathering}
+          />
         </TabBar.Right>
       </TabBar.Container>
       <TabMenu tabs={['모임 소개', `참가자 (${participantResponse.length})`]} />

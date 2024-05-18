@@ -75,7 +75,6 @@ const ProfilePage = () => {
             <TabBar.GoBackButton />
           </TabBar.Left>
           <TabBar.Right>
-            <TabBar.ShareButton />
             <TabBar.LogoutButton onClick={logoutApi} />
             <TabBar.SettingsButton onClick={handleOpenThemeModal} />
           </TabBar.Right>

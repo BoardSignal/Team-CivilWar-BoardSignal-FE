@@ -16,3 +16,10 @@ export const showErrorToast = (message: string) => {
     icon: <Icon id='error-warning-fill' className='size-4 text-red-500' />,
   });
 };
+
+export const showSuccessToast = (message: string) => {
+  toast.success(message, {
+    className: '!bg-gray-accent1 !text-gray-bg-base !text-sm',
+    icon: <Icon id='checkbox-circle-fill' className='size-4 text-green-500' />,
+  });
+};
